@@ -50,11 +50,16 @@
   <ItemGroup>
     <Compile Include="Helpers\CAction.cs" />
     <Compile Include="Helpers\Action.cs" />
+    <Compile Include="Helpers\EventType.cs" />
+    <Compile Include="Helpers\MissionType.cs" />
     <Compile Include="Helpers\Pont.cs" />
     <Compile Include="Helpers\Zone.cs" />
     <Compile Include="Helpers\Hardcoreness.cs" />
     <Compile Include="Helpers\Direction.cs" />
     <Compile Include="Helpers\Couleur.cs" />
+    <Compile Include="Jeu\Evenement.cs" />
+    <Compile Include="Jeu\EvenementMenace.cs" />
+    <Compile Include="Jeu\Mission.cs" />
     <Compile Include="Menaces\Menace.cs" />
     <Compile Include="Menaces\MenaceExterne.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
