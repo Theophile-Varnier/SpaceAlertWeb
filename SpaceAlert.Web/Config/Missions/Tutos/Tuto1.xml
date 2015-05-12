@@ -4,6 +4,14 @@
     <property name="Evenements">
       <list element-type="SpaceAlert.Model.Jeu.Evenement, SpaceAlert.Model">
         <ref object="Event1"/>
+        <ref object="Event2"/>
+        <ref object="Event3"/>
+        <ref object="Event4"/>
+        <ref object="Event5"/>
+        <ref object="Event6"/>
+        <ref object="Event7"/>
+        <ref object="Event8"/>
+        <ref object="Event9"/>
       </list>
     </property>
     <property name="NbTours" value="7"/>
@@ -11,5 +19,29 @@
 
   <object id="Event1" type="SpaceAlert.Model.Jeu.EvenementMenace, SpaceAlert.Model">
     <property name="Annonce" value="00:00:15"/>
+  </object>
+  <object id="Event2" type="SpaceAlert.Model.Jeu.EvenementMenace, SpaceAlert.Model">
+    <property name="Annonce" value="00:01:00"/>
+  </object>
+  <object id="Event3" type="SpaceAlert.Model.Jeu.EvenementMenace, SpaceAlert.Model">
+    <property name="Annonce" value="00:01:30"/>
+  </object>
+  <object id="Event4" type="SpaceAlert.Model.Jeu.EvenementMenace, SpaceAlert.Model">
+    <property name="Annonce" value="00:02:15"/>
+  </object>
+  <object id="Event5" type="SpaceAlert.Model.Jeu.EvenementMenace, SpaceAlert.Model">
+    <property name="Annonce" value="00:03:20"/>
+  </object>
+  <object id="Event6" type="SpaceAlert.Model.Jeu.EvenementMenace, SpaceAlert.Model">
+    <property name="Annonce" value="00:04:10"/>
+  </object>
+  <object id="Event7" type="SpaceAlert.Model.Jeu.EvenementMenace, SpaceAlert.Model">
+    <property name="Annonce" value="00:04:40"/>
+  </object>
+  <object id="Event8" type="SpaceAlert.Model.Jeu.EvenementMenace, SpaceAlert.Model">
+    <property name="Annonce" value="00:05:10"/>
+  </object>
+  <object id="Event9" type="SpaceAlert.Model.Jeu.EvenementMenace, SpaceAlert.Model">
+    <property name="Annonce" value="00:07:00"/>
   </object>
 </objects>
