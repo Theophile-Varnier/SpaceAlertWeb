@@ -1,18 +1,15 @@
-﻿using SpaceAlert.Model.Helpers;
-using System;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SpaceAlert.Model.Helpers;
 
 namespace SpaceAlert.Model.Plateau
 {
     public class InGameZone
     {
+        public Dictionary<Pont, Salle> Salles { get; set; }
+
         public int RampeIndice { get; set; }
 
         public int Degats { get; set; }
-
-        public Zone Zone { get; set; }
     }
 }

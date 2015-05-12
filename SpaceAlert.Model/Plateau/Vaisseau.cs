@@ -1,9 +1,6 @@
-﻿using SpaceAlert.Model.Helpers;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SpaceAlert.Model.Helpers;
 
 namespace SpaceAlert.Model.Plateau
 {
@@ -15,8 +12,13 @@ namespace SpaceAlert.Model.Plateau
 
         private bool Interceptors { get; set; }
 
-        private List<Salle> Salles { get; set; }
+        private Dictionary<Zone, InGameZone> Zones { get; set; }
 
         private IList<bool> RobotsActifs { get; set; }
+
+        public Salle Salle(Zone z, Pont p)
+        {
+            return Zones[z].Salles[p];
+        }
     }
 }

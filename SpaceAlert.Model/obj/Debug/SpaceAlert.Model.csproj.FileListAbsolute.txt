@@ -12,3 +12,16 @@ C:\Users\Théo\Documents\Programmation\C#\SpaceAlert\SpaceAlert.Model\bin\Debug\
 C:\Users\Théo\Documents\Programmation\C#\SpaceAlert\SpaceAlert.Model\obj\Debug\SpaceAlert.Model.csprojResolveAssemblyReference.cache
 C:\Users\Théo\Documents\Programmation\C#\SpaceAlert\SpaceAlert.Model\obj\Debug\SpaceAlert.Model.dll
 C:\Users\Théo\Documents\Programmation\C#\SpaceAlert\SpaceAlert.Model\obj\Debug\SpaceAlert.Model.pdb
+C:\Users\tvarnier\Downloads\SpaceAlertWeb\SpaceAlert.Model\bin\Debug\SpaceAlert.Model.dll
+C:\Users\tvarnier\Downloads\SpaceAlertWeb\SpaceAlert.Model\bin\Debug\SpaceAlert.Model.pdb
+C:\Users\tvarnier\Downloads\SpaceAlertWeb\SpaceAlert.Model\bin\Debug\Common.Logging.Core.dll
+C:\Users\tvarnier\Downloads\SpaceAlertWeb\SpaceAlert.Model\bin\Debug\Common.Logging.dll
+C:\Users\tvarnier\Downloads\SpaceAlertWeb\SpaceAlert.Model\bin\Debug\Spring.Core.dll
+C:\Users\tvarnier\Downloads\SpaceAlertWeb\SpaceAlert.Model\bin\Debug\Common.Logging.pdb
+C:\Users\tvarnier\Downloads\SpaceAlertWeb\SpaceAlert.Model\bin\Debug\Common.Logging.xml
+C:\Users\tvarnier\Downloads\SpaceAlertWeb\SpaceAlert.Model\bin\Debug\Common.Logging.Core.pdb
+C:\Users\tvarnier\Downloads\SpaceAlertWeb\SpaceAlert.Model\bin\Debug\Common.Logging.Core.xml
+C:\Users\tvarnier\Downloads\SpaceAlertWeb\SpaceAlert.Model\bin\Debug\Spring.Core.pdb
+C:\Users\tvarnier\Downloads\SpaceAlertWeb\SpaceAlert.Model\bin\Debug\Spring.Core.xml
+C:\Users\tvarnier\Downloads\SpaceAlertWeb\SpaceAlert.Model\obj\Debug\SpaceAlert.Model.dll
+C:\Users\tvarnier\Downloads\SpaceAlertWeb\SpaceAlert.Model\obj\Debug\SpaceAlert.Model.pdb
