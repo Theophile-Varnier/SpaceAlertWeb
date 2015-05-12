@@ -1,0 +1,21 @@
+﻿<objects xmlns="http://www.springframework.net">
+  <object id="ZoneBleue" type="SpaceAlert.Model.Plateau.InGameZone">
+    <property name="Degats" value="6"/>
+    <property name="Zone" value="BLEUE"/>
+  </object>
+  
+  <object id="BleueHaut" type="SpaceAlert.Model.Plateau.Salle">
+    <property name="Pont" value="HAUT"/>
+    <property name="ActionC" value="INTERCEPTEURS"/>
+    <property name="Zone">
+      <ref object="ZoneBleue"/>
+    </property>
+  </object>
+  <object id="BleueBas" type="SpaceAlert.Model.Plateau.Salle">
+    <property name="Pont" value="BAS"/>
+    <property name="ActionC" value="ROBOTS"/>
+    <property name="Zone">
+      <ref object="ZoneBleue"/>
+    </property>
+  </object>
+</objects>
