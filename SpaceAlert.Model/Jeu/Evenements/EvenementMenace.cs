@@ -1,5 +1,5 @@
-﻿using System;
-using SpaceAlert.Model.Helpers;
+﻿using SpaceAlert.Model.Helpers.Enums;
+using System;
 
 namespace SpaceAlert.Model.Jeu.Evenements
 {
@@ -8,12 +8,25 @@ namespace SpaceAlert.Model.Jeu.Evenements
     /// </summary>
     public class EvenementMenace: Evenement
     {
+        /// <summary>
+        /// Est-ce un rapport confirmé ?
+        /// Si non, la menace n'est pas jouée lorsqu'il y a moins de 5 joueurs
+        /// </summary>
         public bool Confirme { get; set; }
 
+        /// <summary>
+        /// La zone sur laquelle arrive la menace
+        /// </summary>
         public Zone Zone { get; set; }
 
+        /// <summary>
+        /// Le tour auquel la menace arrive
+        /// </summary>
         public int TourArrive { get; set; }
 
+        /// <summary>
+        /// Le type de menace
+        /// </summary>
         public TypeMenace Type { get; set; }
 
         public override void Resolve()

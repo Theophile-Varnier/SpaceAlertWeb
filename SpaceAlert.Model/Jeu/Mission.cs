@@ -1,6 +1,6 @@
-﻿using SpaceAlert.Model.Helpers;
-using System.Collections.Generic;
+﻿using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Jeu.Evenements;
+using System.Collections.Generic;
 
 namespace SpaceAlert.Model.Jeu
 {

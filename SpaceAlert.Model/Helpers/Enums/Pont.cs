@@ -1,9 +1,9 @@
 ﻿
-namespace SpaceAlert.Model.Helpers
+namespace SpaceAlert.Model.Helpers.Enums
 {
     public enum Pont
     {
         HAUT = 0,
-        BAS
+        BAS = 1
     }
 }

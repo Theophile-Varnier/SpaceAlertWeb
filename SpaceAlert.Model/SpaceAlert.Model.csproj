@@ -48,15 +48,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\CAction.cs" />
-    <Compile Include="Helpers\Action.cs" />
-    <Compile Include="Helpers\MissionType.cs" />
-    <Compile Include="Helpers\Pont.cs" />
-    <Compile Include="Helpers\TypeMenace.cs" />
-    <Compile Include="Helpers\Zone.cs" />
-    <Compile Include="Helpers\Hardcoreness.cs" />
-    <Compile Include="Helpers\Direction.cs" />
-    <Compile Include="Helpers\Couleur.cs" />
+    <Compile Include="Helpers\Enums\CAction.cs" />
+    <Compile Include="Helpers\Enums\Action.cs" />
+    <Compile Include="Helpers\Enums\MissionType.cs" />
+    <Compile Include="Helpers\Enums\Pont.cs" />
+    <Compile Include="Helpers\Enums\TypeMenace.cs" />
+    <Compile Include="Helpers\Enums\Zone.cs" />
+    <Compile Include="Helpers\Enums\Hardcoreness.cs" />
+    <Compile Include="Helpers\Enums\Direction.cs" />
+    <Compile Include="Helpers\Enums\Couleur.cs" />
+    <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Jeu\Evenements\CoupureDeCommunication.cs" />
     <Compile Include="Jeu\Evenements\DonneesEntrantes.cs" />
     <Compile Include="Jeu\Evenements\Evenement.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Jeu\Evenements\TransfertDeDonnees.cs" />
     <Compile Include="Menaces\Menace.cs" />
     <Compile Include="Menaces\MenaceExterne.cs" />
+    <Compile Include="Menaces\MenaceInterne.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Plateau\InGameZone.cs" />
     <Compile Include="Plateau\Salle.cs" />

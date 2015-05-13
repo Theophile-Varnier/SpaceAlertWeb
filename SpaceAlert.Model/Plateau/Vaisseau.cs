@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using SpaceAlert.Model.Helpers;
+using SpaceAlert.Model.Helpers.Enums;
+using System.Collections.Generic;
 
 namespace SpaceAlert.Model.Plateau
 {
@@ -43,6 +44,27 @@ namespace SpaceAlert.Model.Plateau
         public Salle Salle(Zone z, Pont p)
         {
             return Zones[z].Salles[p];
+        }
+
+        /// <summary>
+        /// Renvoie la salle dans laquelle un joueur arrive 
+        /// après un mouvement
+        /// </summary>
+        /// <param name="source">La salle d'origine</param>
+        /// <param name="direction">La direction du déplacement</param>
+        /// <returns>La salle suivante</returns>
+        public Salle SalleSuivante(Salle source, Direction direction)
+        {
+            int minZone = (int) Enum.GetValues(typeof (Zone)).Cast<Zone>().Max();
+            int maxZone = (int) Enum.GetValues(typeof (Zone)).Cast<Zone>().Min();
+
+            // Ascenseur
+            if ((int) direction == 0)
+            {
+                return Salle(source.Zone, (Pont)(1 - (int) source.Pont));
+            }
+            // Mouvement latéral
+            return Salle((Zone) Math.Min(Math.Max((int) source.Zone + (int) direction, minZone), maxZone), source.Pont);
         }
     }
 }

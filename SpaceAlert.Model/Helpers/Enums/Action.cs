@@ -1,5 +1,5 @@
 ﻿
-namespace SpaceAlert.Model.Helpers
+namespace SpaceAlert.Model.Helpers.Enums
 {
     public enum Action
     {

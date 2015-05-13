@@ -2,7 +2,7 @@
   <object id="ZoneBleue" type="SpaceAlert.Model.Plateau.InGameZone">
     <property name="Degats" value="0"/>
     <property name="Salles">
-      <dictionary key-type="SpaceAlert.Model.Helpers.Pont" value-type="SpaceAlert.Model.Plateau.Salle">
+      <dictionary key-type="SpaceAlert.Model.Helpers.Enums.Pont" value-type="SpaceAlert.Model.Plateau.Salle">
         <entry key="HAUT" value-ref="BleueHaut"/>
         <entry key="BAS" value-ref="BleueBas"/>
       </dictionary>
@@ -11,7 +11,7 @@
   <object id="ZoneBlanche" type="SpaceAlert.Model.Plateau.InGameZone">
     <property name="Degats" value="2"/>
     <property name="Salles">
-      <dictionary key-type="SpaceAlert.Model.Helpers.Pont" value-type="SpaceAlert.Model.Plateau.Salle">
+      <dictionary key-type="SpaceAlert.Model.Helpers.Enums.Pont" value-type="SpaceAlert.Model.Plateau.Salle">
         <entry key="HAUT" value-ref="BlancHaut"/>
         <entry key="BAS" value-ref="BlancBas"/>
       </dictionary>
@@ -20,7 +20,7 @@
   <object id="ZoneRouge" type="SpaceAlert.Model.Plateau.InGameZone">
     <property name="Degats" value="4"/>
     <property name="Salles">
-      <dictionary key-type="SpaceAlert.Model.Helpers.Pont" value-type="SpaceAlert.Model.Plateau.Salle">
+      <dictionary key-type="SpaceAlert.Model.Helpers.Enums.Pont" value-type="SpaceAlert.Model.Plateau.Salle">
         <entry key="HAUT" value-ref="RougeHaut"/>
         <entry key="BAS" value-ref="RougeBas"/>
       </dictionary>
@@ -32,6 +32,8 @@
     <property name="EnergieMax" value="2"/>
     <property name="CanonRange" value="3"/>
     <property name="CanonPower" value="4"/>
+    <property name="Zone" value="BLEUE"/>
+    <property name="Pont" value="HAUT"/>
     <property name="ActionC" value="INTERCEPTEURS"/>
   </object>
   <object id="BleueBas" type="SpaceAlert.Model.Plateau.Salle">
@@ -39,20 +41,26 @@
     <property name="EnergieMax" value="3"/>
     <property name="CanonRange" value="3"/>
     <property name="CanonPower" value="2"/>
+    <property name="Zone" value="BLEUE"/>
+    <property name="Pont" value="BAS"/>
     <property name="ActionC" value="ROBOTS"/>
   </object>
   <object id="BlancHaut" type="SpaceAlert.Model.Plateau.Salle">
     <property name="EnergieCourante" value="1"/>
-    <property name="EnergieMax" value="2"/>
+    <property name="EnergieMax" value="3"/>
     <property name="CanonRange" value="3"/>
     <property name="CanonPower" value="5"/>
+    <property name="Zone" value="BLANCHE"/>
+    <property name="Pont" value="HAUT"/>
     <property name="ActionC" value="MAINTENANCE"/>
   </object>
   <object id="BlancBas" type="SpaceAlert.Model.Plateau.Salle">
     <property name="EnergieCourante" value="3"/>
     <property name="EnergieMax" value="5"/>
-    <property name="CanonRange" value="1"/>
+    <property name="CanonRange" value="2"/>
     <property name="CanonPower" value="1"/>
+    <property name="Zone" value="BLANCHE"/>
+    <property name="Pont" value="BAS"/>
     <property name="ActionC" value="HUBLOT"/>
   </object>
   <object id="RougeHaut" type="SpaceAlert.Model.Plateau.Salle">
@@ -60,6 +68,8 @@
     <property name="EnergieMax" value="2"/>
     <property name="CanonRange" value="3"/>
     <property name="CanonPower" value="4"/>
+    <property name="Zone" value="ROUGE"/>
+    <property name="Pont" value="HAUT"/>
     <property name="ActionC" value="ROBOTS"/>
   </object>
   <object id="RougeBas" type="SpaceAlert.Model.Plateau.Salle">
@@ -67,6 +77,8 @@
     <property name="EnergieMax" value="3"/>
     <property name="CanonRange" value="3"/>
     <property name="CanonPower" value="2"/>
+    <property name="Zone" value="ROUGE"/>
+    <property name="Pont" value="BAS"/>
     <property name="ActionC" value="ROQUETTES"/>
   </object>
 </objects>

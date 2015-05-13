@@ -1,6 +1,5 @@
-﻿using System.Collections;
+﻿using SpaceAlert.Model.Helpers.Enums;
 using System.Collections.Generic;
-using SpaceAlert.Model.Helpers;
 
 namespace SpaceAlert.Model.Plateau
 {
