@@ -50,20 +50,20 @@
   <ItemGroup>
     <Compile Include="Helpers\CAction.cs" />
     <Compile Include="Helpers\Action.cs" />
-    <Compile Include="Helpers\EventType.cs" />
     <Compile Include="Helpers\MissionType.cs" />
     <Compile Include="Helpers\Pont.cs" />
+    <Compile Include="Helpers\TypeMenace.cs" />
     <Compile Include="Helpers\Zone.cs" />
     <Compile Include="Helpers\Hardcoreness.cs" />
     <Compile Include="Helpers\Direction.cs" />
     <Compile Include="Helpers\Couleur.cs" />
-    <Compile Include="Jeu\CoupureDeCommunication.cs" />
-    <Compile Include="Jeu\DonneesEntrantes.cs" />
-    <Compile Include="Jeu\Evenement.cs" />
-    <Compile Include="Jeu\EvenementMenace.cs" />
-    <Compile Include="Jeu\FinDePhase.cs" />
+    <Compile Include="Jeu\Evenements\CoupureDeCommunication.cs" />
+    <Compile Include="Jeu\Evenements\DonneesEntrantes.cs" />
+    <Compile Include="Jeu\Evenements\Evenement.cs" />
+    <Compile Include="Jeu\Evenements\EvenementMenace.cs" />
+    <Compile Include="Jeu\Evenements\FinDePhase.cs" />
     <Compile Include="Jeu\Mission.cs" />
-    <Compile Include="Jeu\TransfertDeDonnees.cs" />
+    <Compile Include="Jeu\Evenements\TransfertDeDonnees.cs" />
     <Compile Include="Menaces\Menace.cs" />
     <Compile Include="Menaces\MenaceExterne.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

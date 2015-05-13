@@ -1,11 +1,7 @@
-﻿using SpaceAlert.Model.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using SpaceAlert.Model.Helpers;
 
-namespace SpaceAlert.Model.Jeu
+namespace SpaceAlert.Model.Jeu.Evenements
 {
     /// <summary>
     /// Décrit un événement correspondant à l'arrivée d'une menace
@@ -17,6 +13,8 @@ namespace SpaceAlert.Model.Jeu
         public Zone Zone { get; set; }
 
         public int TourArrive { get; set; }
+
+        public TypeMenace Type { get; set; }
 
         public override void Resolve()
         {
