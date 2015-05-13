@@ -55,8 +55,8 @@ namespace SpaceAlert.Model.Plateau
         /// <returns>La salle suivante</returns>
         public Salle SalleSuivante(Salle source, Direction direction)
         {
-            int minZone = (int) Enum.GetValues(typeof (Zone)).Cast<Zone>().Max();
-            int maxZone = (int) Enum.GetValues(typeof (Zone)).Cast<Zone>().Min();
+            int minZone = (int) Enum.GetValues(typeof (Zone)).Cast<Zone>().Min();
+            int maxZone = (int) Enum.GetValues(typeof (Zone)).Cast<Zone>().Max();
 
             // Ascenseur
             if ((int) direction == 0)

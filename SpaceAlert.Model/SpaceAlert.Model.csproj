@@ -50,6 +50,8 @@
   <ItemGroup>
     <Compile Include="Helpers\Enums\CAction.cs" />
     <Compile Include="Helpers\Enums\Action.cs" />
+    <Compile Include="Helpers\Enums\EtatRobots.cs" />
+    <Compile Include="Helpers\Enums\TypeCase.cs" />
     <Compile Include="Helpers\Enums\MissionType.cs" />
     <Compile Include="Helpers\Enums\Pont.cs" />
     <Compile Include="Helpers\Enums\TypeMenace.cs" />
