@@ -57,9 +57,13 @@
     <Compile Include="Helpers\Hardcoreness.cs" />
     <Compile Include="Helpers\Direction.cs" />
     <Compile Include="Helpers\Couleur.cs" />
+    <Compile Include="Jeu\CoupureDeCommunication.cs" />
+    <Compile Include="Jeu\DonneesEntrantes.cs" />
     <Compile Include="Jeu\Evenement.cs" />
     <Compile Include="Jeu\EvenementMenace.cs" />
+    <Compile Include="Jeu\FinDePhase.cs" />
     <Compile Include="Jeu\Mission.cs" />
+    <Compile Include="Jeu\TransfertDeDonnees.cs" />
     <Compile Include="Menaces\Menace.cs" />
     <Compile Include="Menaces\MenaceExterne.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
