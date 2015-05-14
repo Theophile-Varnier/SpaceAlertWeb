@@ -1,0 +1,9 @@
+<objects xmlns="http://www.springframework.net">
+<object name="EnergyCloud" type="SpaceAlert.Model.Menaces.MenaceExterne">
+<property name="Name" value="Energy Cloud"/>
+<property name="Shield" value="3"/>
+<property name="CurrentHp" value="5"/>
+<property name="MaxHp" value="5"/>
+<property name="Speed" value="2"/>
+</object>
+</objects>

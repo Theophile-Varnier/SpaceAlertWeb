@@ -1,0 +1,9 @@
+<objects xmlns="http://www.springframework.net">
+<object name="PulseSatellite" type="SpaceAlert.Model.Menaces.MenaceExterne">
+<property name="Name" value="Pulse Satellite"/>
+<property name="Shield" value="2"/>
+<property name="CurrentHp" value="4"/>
+<property name="MaxHp" value="4"/>
+<property name="Speed" value="3"/>
+</object>
+</objects>

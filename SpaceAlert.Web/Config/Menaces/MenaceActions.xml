@@ -1,0 +1,7 @@
+﻿<objects xmlns="http://www.springframework.net">
+  <object name="Attack" type="Spring.Objects.Factory.Config.DelegateFactoryObject, Spring.Core">
+    <property name="DelegateType" value="System.Action&lt;SpaceAlert.Model.Menaces.Menace,SpaceAlert.Model.Plateau.Vaisseau, SpaceAlert.Model.Helpers.Enums.Zone&gt;" />
+    <property name="TargetType" value="SpaceAlert.Model.Helpers.MenaceActions" />
+    <property name="MethodName" value="Attack" />
+  </object>
+</objects>

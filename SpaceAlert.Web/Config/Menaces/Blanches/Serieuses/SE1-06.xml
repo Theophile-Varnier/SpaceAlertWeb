@@ -1,0 +1,9 @@
+<objects xmlns="http://www.springframework.net">
+<object name="InterstellarOctopus" type="SpaceAlert.Model.Menaces.MenaceExterne">
+<property name="Name" value="Interstellar Octopus"/>
+<property name="Shield" value="1"/>
+<property name="CurrentHp" value="8"/>
+<property name="MaxHp" value="8"/>
+<property name="Speed" value="2"/>
+</object>
+</objects>

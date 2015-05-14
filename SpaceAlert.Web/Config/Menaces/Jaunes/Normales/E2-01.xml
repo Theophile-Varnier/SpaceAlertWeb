@@ -1,0 +1,9 @@
+<objects xmlns="http://www.springframework.net">
+<object name="Kamikaze" type="SpaceAlert.Model.Menaces.MenaceExterne">
+<property name="Name" value="Kamikaze"/>
+<property name="Shield" value="2"/>
+<property name="CurrentHp" value="5"/>
+<property name="MaxHp" value="5"/>
+<property name="Speed" value="4"/>
+</object>
+</objects>

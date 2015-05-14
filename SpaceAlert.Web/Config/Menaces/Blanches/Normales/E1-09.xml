@@ -1,0 +1,9 @@
+<objects xmlns="http://www.springframework.net">
+<object name="Amoeba" type="SpaceAlert.Model.Menaces.MenaceExterne">
+<property name="Name" value="Amoeba"/>
+<property name="Shield" value="0"/>
+<property name="CurrentHp" value="8"/>
+<property name="MaxHp" value="8"/>
+<property name="Speed" value="2"/>
+</object>
+</objects>

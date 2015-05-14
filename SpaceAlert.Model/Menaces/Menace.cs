@@ -1,5 +1,6 @@
 ﻿using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Plateau;
+using System;
 using System.Collections.Generic;
 
 namespace SpaceAlert.Model.Menaces
@@ -9,12 +10,6 @@ namespace SpaceAlert.Model.Menaces
     /// </summary>
     public class Menace
     {
-        /// <summary>
-        /// Signature des actions effectuables par une menace
-        /// </summary>
-        /// <param name="target">La cible de l'action</param>
-        /// <param name="from">La zone d'où est effectuée l'attaque</param>
-        public delegate void MenaceAction(Vaisseau target, Zone from);
 
         /// <summary>
         /// Le nom de la menace
@@ -45,18 +40,18 @@ namespace SpaceAlert.Model.Menaces
         /// Liste des actions effectuées par la menace
         /// lorsqu'elle arrive sur une case X
         /// </summary>
-        public IList<MenaceAction> ActionsX { get; set; }
+        public IList<Action<Menace, Vaisseau, Zone>> ActionsX { get; set; }
 
         /// <summary>
         /// Liste des actions effectuées par la menace
         /// lorsqu'elle arrive sur une case Y
         /// </summary>
-        public IList<MenaceAction> ActionsY { get; set; }
+        public IList<Action<Menace, Vaisseau, Zone>> ActionsY { get; set; }
 
         /// <summary>
         /// Liste des actions effectuées par la menace
         /// lorsqu'elle arrive sur une case Z
         /// </summary>
-        public IList<MenaceAction> ActionsZ { get; set; }
+        public IList<Action<Menace, Vaisseau, Zone>> ActionsZ { get; set; }
     }
 }

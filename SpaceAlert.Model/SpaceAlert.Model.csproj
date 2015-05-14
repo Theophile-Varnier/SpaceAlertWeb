@@ -60,6 +60,7 @@
     <Compile Include="Helpers\Enums\Direction.cs" />
     <Compile Include="Helpers\Enums\Couleur.cs" />
     <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Helpers\MenaceActions.cs" />
     <Compile Include="Jeu\Evenements\CoupureDeCommunication.cs" />
     <Compile Include="Jeu\Evenements\DonneesEntrantes.cs" />
     <Compile Include="Jeu\Evenements\Evenement.cs" />

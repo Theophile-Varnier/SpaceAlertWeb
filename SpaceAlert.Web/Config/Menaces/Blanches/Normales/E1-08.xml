@@ -1,0 +1,9 @@
+<objects xmlns="http://www.springframework.net">
+<object name="ArmoredGrappler" type="SpaceAlert.Model.Menaces.MenaceExterne">
+<property name="Name" value="Armored Grappler"/>
+<property name="Shield" value="3"/>
+<property name="CurrentHp" value="4"/>
+<property name="MaxHp" value="4"/>
+<property name="Speed" value="2"/>
+</object>
+</objects>

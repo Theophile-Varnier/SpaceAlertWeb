@@ -1,0 +1,9 @@
+<objects xmlns="http://www.springframework.net">
+<object name="Maelstrom" type="SpaceAlert.Model.Menaces.MenaceExterne">
+<property name="Name" value="Maelstrom"/>
+<property name="Shield" value=""/>
+<property name="CurrentHp" value=""/>
+<property name="MaxHp" value=""/>
+<property name="Speed" value=""/>
+</object>
+</objects>

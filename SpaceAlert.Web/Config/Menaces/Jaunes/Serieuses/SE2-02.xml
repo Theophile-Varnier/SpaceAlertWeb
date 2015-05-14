@@ -1,0 +1,9 @@
+<objects xmlns="http://www.springframework.net">
+<object name="Juggernaut" type="SpaceAlert.Model.Menaces.MenaceExterne">
+<property name="Name" value="Juggernaut"/>
+<property name="Shield" value="3"/>
+<property name="CurrentHp" value="10"/>
+<property name="MaxHp" value="10"/>
+<property name="Speed" value="1"/>
+</object>
+</objects>

@@ -1,0 +1,9 @@
+<objects xmlns="http://www.springframework.net">
+<object name="Asteroid" type="SpaceAlert.Model.Menaces.MenaceExterne">
+<property name="Name" value="Asteroid"/>
+<property name="Shield" value="0"/>
+<property name="CurrentHp" value="9"/>
+<property name="MaxHp" value="9"/>
+<property name="Speed" value="3"/>
+</object>
+</objects>

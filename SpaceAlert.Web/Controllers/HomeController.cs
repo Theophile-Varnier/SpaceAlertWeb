@@ -1,7 +1,11 @@
-﻿using SpaceAlert.Model.Jeu;
+﻿using SpaceAlert.Model.Helpers.Enums;
+using SpaceAlert.Model.Jeu;
+using SpaceAlert.Model.Menaces;
 using SpaceAlert.Model.Plateau;
 using Spring.Context;
 using Spring.Context.Support;
+using System;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace SpaceAlert.Web.Controllers
@@ -13,6 +17,8 @@ namespace SpaceAlert.Web.Controllers
             IApplicationContext ctx = ContextRegistry.GetContext();
             Vaisseau vaisseau = (Vaisseau)ctx.GetObject("Vaisseau");
             Mission tuto = (Mission) ctx.GetObject("Tuto1");
+            Menace menace = (Menace)ctx.GetObject("PulseBall");
+            menace.ActionsX.First()(menace, vaisseau, Zone.ROUGE);
             return View();
         }
 

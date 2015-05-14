@@ -51,6 +51,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -127,6 +128,38 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Config\Menaces\Blanches\Normales\E1-01.xml" />
+    <Content Include="Config\Menaces\Blanches\Normales\E1-02.xml" />
+    <Content Include="Config\Menaces\Blanches\Normales\E1-03.xml" />
+    <Content Include="Config\Menaces\Blanches\Normales\E1-04.xml" />
+    <Content Include="Config\Menaces\Blanches\Normales\E1-05.xml" />
+    <Content Include="Config\Menaces\Blanches\Normales\E1-06.xml" />
+    <Content Include="Config\Menaces\Blanches\Normales\E1-07.xml" />
+    <Content Include="Config\Menaces\Blanches\Normales\E1-08.xml" />
+    <Content Include="Config\Menaces\Blanches\Normales\E1-09.xml" />
+    <Content Include="Config\Menaces\Blanches\Normales\E1-10.xml" />
+    <Content Include="Config\Menaces\Blanches\Serieuses\SE1-01.xml" />
+    <Content Include="Config\Menaces\Blanches\Serieuses\SE1-02.xml" />
+    <Content Include="Config\Menaces\Blanches\Serieuses\SE1-03.xml" />
+    <Content Include="Config\Menaces\Blanches\Serieuses\SE1-04.xml" />
+    <Content Include="Config\Menaces\Blanches\Serieuses\SE1-05.xml" />
+    <Content Include="Config\Menaces\Blanches\Serieuses\SE1-06.xml" />
+    <Content Include="Config\Menaces\Blanches\Serieuses\SE1-07.xml" />
+    <Content Include="Config\Menaces\Blanches\Serieuses\SE1-08.xml" />
+    <Content Include="Config\Menaces\Jaunes\Normales\E2-01.xml" />
+    <Content Include="Config\Menaces\Jaunes\Normales\E2-02.xml" />
+    <Content Include="Config\Menaces\Jaunes\Normales\E2-03.xml" />
+    <Content Include="Config\Menaces\Jaunes\Normales\E2-04.xml" />
+    <Content Include="Config\Menaces\Jaunes\Normales\E2-05.xml" />
+    <Content Include="Config\Menaces\Jaunes\Normales\E2-06.xml" />
+    <Content Include="Config\Menaces\Jaunes\Normales\E2-07.xml" />
+    <Content Include="Config\Menaces\Jaunes\Serieuses\SE2-01.xml" />
+    <Content Include="Config\Menaces\Jaunes\Serieuses\SE2-02.xml" />
+    <Content Include="Config\Menaces\Jaunes\Serieuses\SE2-03.xml" />
+    <Content Include="Config\Menaces\Jaunes\Serieuses\SE2-04.xml" />
+    <Content Include="Config\Menaces\Jaunes\Serieuses\SE2-05.xml" />
+    <Content Include="Config\Menaces\Jaunes\Serieuses\SE2-06.xml" />
+    <Content Include="Config\Menaces\MenaceActions.xml" />
     <Content Include="Config\Missions\Tutos\Tuto1.xml" />
     <Content Include="Config\vaisseau.xml" />
     <Content Include="Content\bootstrap.css" />
@@ -167,6 +200,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Config\Menaces\Rouges\Normales\" />
+    <Folder Include="Config\Menaces\Rouges\Serieuses\" />
     <Folder Include="Config\Missions\Doubles\" />
     <Folder Include="Config\Missions\Simples\" />
     <Folder Include="Models\" />
