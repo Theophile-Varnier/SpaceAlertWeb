@@ -10,7 +10,6 @@ namespace SpaceAlert.Model.Menaces
     /// </summary>
     public class Menace
     {
-
         /// <summary>
         /// Le nom de la menace
         /// </summary>
@@ -37,21 +36,51 @@ namespace SpaceAlert.Model.Menaces
         public int Speed { get; set; }
 
         /// <summary>
+        /// Les valeurs d'attaque (peu importe le type)
+        /// </summary>
+        public Dictionary<TypeCase, List<int>> AttackValues { get; set; }
+
+        /// <summary>
+        /// Les valeurs de bouclier (full ou incrémental)
+        /// </summary>
+        public Dictionary<TypeCase, int> ShieldValues { get; set; }
+
+        /// <summary>
+        /// Les valeurs de heal
+        /// </summary>
+        public Dictionary<TypeCase, int> HealValues { get; set; }
+
+        /// <summary>
+        /// Les valeurs de speed
+        /// </summary>
+        public Dictionary<TypeCase, int> SpeedValues { get; set; }
+
+        /// <summary>
+        /// Les valeurs de dégâts mininum
+        /// </summary>
+        public Dictionary<TypeCase, int> MinDamages { get; set; }
+
+        /// <summary>
+        /// Indique si la menace est ciblable par les canons
+        /// </summary>
+        public bool Targetable { get; set; }
+
+        /// <summary>
         /// Liste des actions effectuées par la menace
         /// lorsqu'elle arrive sur une case X
         /// </summary>
-        public IList<Action<Menace, Vaisseau, Zone>> ActionsX { get; set; }
+        public IList<Action<Menace, Vaisseau, TypeCase, Zone>> ActionsX { get; set; }
 
         /// <summary>
         /// Liste des actions effectuées par la menace
         /// lorsqu'elle arrive sur une case Y
         /// </summary>
-        public IList<Action<Menace, Vaisseau, Zone>> ActionsY { get; set; }
+        public IList<Action<Menace, Vaisseau, TypeCase, Zone>> ActionsY { get; set; }
 
         /// <summary>
         /// Liste des actions effectuées par la menace
         /// lorsqu'elle arrive sur une case Z
         /// </summary>
-        public IList<Action<Menace, Vaisseau, Zone>> ActionsZ { get; set; }
+        public IList<Action<Menace, Vaisseau, TypeCase, Zone>> ActionsZ { get; set; }
     }
 }

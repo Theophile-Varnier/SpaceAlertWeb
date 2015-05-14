@@ -1,9 +1,55 @@
 <objects xmlns="http://www.springframework.net">
-<object name="Man-Of-War" type="SpaceAlert.Model.Menaces.MenaceExterne">
-<property name="Name" value="Man-Of-War"/>
-<property name="Shield" value="2"/>
-<property name="CurrentHp" value="9"/>
-<property name="MaxHp" value="9"/>
-<property name="Speed" value="1"/>
-</object>
+  <object name="Man-Of-War" type="SpaceAlert.Model.Menaces.MenaceExterne">
+    <property name="Name" value="Man-Of-War"/>
+    <property name="Shield" value="2"/>
+    <property name="CurrentHp" value="9"/>
+    <property name="MaxHp" value="9"/>
+    <property name="Speed" value="1"/>
+    <property name="AttackValues">
+      <dictionary key-type="SpaceAlert.Model.Helpers.Enums.TypeCase">
+        <entry key="X">
+          <list element-type="int">
+            <value>2</value>
+          </list>
+        </entry>
+        <entry key="Y">
+          <list element-type="int">
+            <value>3</value>
+          </list>
+        </entry>
+        <entry key="Z">
+          <list element-type="int">
+            <value>5</value>
+          </list>
+        </entry>
+      </dictionary>
+    </property>
+    <property name="ShieldValues">
+      <dictionary key-type="SpaceAlert.Model.Helpers.Enums.TypeCase">
+        <entry key="Y" value="1" />
+      </dictionary>
+    </property>
+    <property name="SpeedValues">
+      <dictionary key-type="SpaceAlert.Model.Helpers.Enums.TypeCase">
+        <entry key="X" value="1" />
+      </dictionary>
+    </property>
+    <property name="ActionsX">
+      <list>
+        <ref object="Attack" />
+        <ref object="IncrSpeed" />
+      </list>
+    </property>
+    <property name="ActionsY">
+      <list>
+        <ref object="Attack" />
+        <ref object="IncrShield" />
+      </list>
+    </property>
+    <property name="ActionsZ">
+      <list>
+        <ref object="Attack" />
+      </list>
+    </property>
+  </object>
 </objects>

@@ -9,7 +9,7 @@
     </property>
   </object>
   <object id="ZoneBlanche" type="SpaceAlert.Model.Plateau.InGameZone">
-    <property name="Degats" value="2"/>
+    <property name="Degats" value="0"/>
     <property name="Salles">
       <dictionary key-type="SpaceAlert.Model.Helpers.Enums.Pont" value-type="SpaceAlert.Model.Plateau.Salle">
         <entry key="HAUT" value-ref="BlancHaut"/>
@@ -18,7 +18,7 @@
     </property>
   </object>
   <object id="ZoneRouge" type="SpaceAlert.Model.Plateau.InGameZone">
-    <property name="Degats" value="4"/>
+    <property name="Degats" value="0"/>
     <property name="Salles">
       <dictionary key-type="SpaceAlert.Model.Helpers.Enums.Pont" value-type="SpaceAlert.Model.Plateau.Salle">
         <entry key="HAUT" value-ref="RougeHaut"/>

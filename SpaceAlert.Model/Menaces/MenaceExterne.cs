@@ -1,4 +1,6 @@
-﻿
+﻿using SpaceAlert.Model.Helpers.Enums;
+using System.Collections.Generic;
+
 namespace SpaceAlert.Model.Menaces
 {
     /// <summary>
@@ -6,14 +8,11 @@ namespace SpaceAlert.Model.Menaces
     /// </summary>
     public class MenaceExterne : Menace
     {
-        /// <summary>
-        /// Indique si la menace est ciblable par les canons
-        /// </summary>
-        public bool Targetable { get; set; }
 
         /// <summary>
         /// Indique si la menace est ciblable par les roquettes
         /// </summary>
         public bool RocketTargetable { get; set; }
+
     }
 }

@@ -1,9 +1,43 @@
 <objects xmlns="http://www.springframework.net">
-<object name="Destroyer" type="SpaceAlert.Model.Menaces.MenaceExterne">
-<property name="Name" value="Destroyer"/>
-<property name="Shield" value="2"/>
-<property name="CurrentHp" value="5"/>
-<property name="MaxHp" value="5"/>
-<property name="Speed" value="2"/>
-</object>
+  <object name="Destroyer" type="SpaceAlert.Model.Menaces.MenaceExterne">
+    <property name="Name" value="Destroyer"/>
+    <property name="Shield" value="2"/>
+    <property name="CurrentHp" value="5"/>
+    <property name="MaxHp" value="5"/>
+    <property name="Speed" value="2"/>
+    <property name="AttackValues">
+      <dictionary key-type="SpaceAlert.Model.Helpers.Enums.TypeCase">
+        <entry key="X">
+          <list element-type="int">
+            <value>1</value>
+          </list>
+        </entry>
+        <entry key="Y">
+          <list element-type="int">
+            <value>2</value>
+          </list>
+        </entry>
+        <entry key="Z">
+          <list element-type="int">
+            <value>2</value>
+          </list>
+        </entry>
+      </dictionary>
+    </property>
+    <property name="ActionsX">
+      <list>
+        <ref object="Attack" />
+      </list>
+    </property>
+    <property name="ActionsY">
+      <list>
+        <ref object="Attack" />
+      </list>
+    </property>
+    <property name="ActionsZ">
+      <list>
+        <ref object="Attack" />
+      </list>
+    </property>
+  </object>
 </objects>

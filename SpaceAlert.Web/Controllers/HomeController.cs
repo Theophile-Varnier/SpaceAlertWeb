@@ -17,8 +17,8 @@ namespace SpaceAlert.Web.Controllers
             IApplicationContext ctx = ContextRegistry.GetContext();
             Vaisseau vaisseau = (Vaisseau)ctx.GetObject("Vaisseau");
             Mission tuto = (Mission) ctx.GetObject("Tuto1");
-            Menace menace = (Menace)ctx.GetObject("PulseBall");
-            menace.ActionsX.First()(menace, vaisseau, Zone.ROUGE);
+            Menace menace = (Menace)ctx.GetObject("ArmoredGrappler");
+            menace.ActionsX.First()(menace, vaisseau, TypeCase.X, Zone.ROUGE);
             return View();
         }
 

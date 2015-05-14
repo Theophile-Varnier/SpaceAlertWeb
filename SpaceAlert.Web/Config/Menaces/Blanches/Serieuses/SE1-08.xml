@@ -1,9 +1,23 @@
 <objects xmlns="http://www.springframework.net">
-<object name="Asteroid" type="SpaceAlert.Model.Menaces.MenaceExterne">
-<property name="Name" value="Asteroid"/>
-<property name="Shield" value="0"/>
-<property name="CurrentHp" value="9"/>
-<property name="MaxHp" value="9"/>
-<property name="Speed" value="3"/>
-</object>
+  <object name="Asteroid" type="SpaceAlert.Model.Menaces.MenaceExterne">
+    <property name="Name" value="Asteroid"/>
+    <property name="Shield" value="0"/>
+    <property name="CurrentHp" value="9"/>
+    <property name="MaxHp" value="9"/>
+    <property name="Speed" value="3"/>
+    <property name="AttackValues">
+      <dictionary key-type="SpaceAlert.Model.Helpers.Enums.TypeCase">
+        <entry key="Z">
+          <list element-type="int">
+            <value>1</value>
+          </list>
+        </entry>
+      </dictionary>
+    </property>
+    <property name="ActionsZ">
+      <list>
+        <ref object="InflictRemainingHitPoints" />
+      </list>
+    </property>
+  </object>
 </objects>
