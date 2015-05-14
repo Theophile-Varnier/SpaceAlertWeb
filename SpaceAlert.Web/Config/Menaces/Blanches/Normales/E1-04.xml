@@ -7,10 +7,6 @@
     <property name="Speed" value="2"/>
     <property name="AttackValues">
       <dictionary key-type="SpaceAlert.Model.Helpers.Enums.TypeCase">
-        <entry key="X">
-          <list element-type="int">
-          </list>
-        </entry>
         <entry key="Y">
           <list element-type="int">
             <value>0</value>
