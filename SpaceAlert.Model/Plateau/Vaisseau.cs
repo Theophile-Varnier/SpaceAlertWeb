@@ -11,6 +11,26 @@ namespace SpaceAlert.Model.Plateau
     public class Vaisseau
     {
         /// <summary>
+        /// Constructeur par copie
+        /// </summary>
+        /// <param name="source"></param>
+        public Vaisseau(Vaisseau source)
+        {
+            NbCapsules = source.NbCapsules;
+            NbRoquettes = source.NbRoquettes;
+            Interceptors = source.Interceptors;
+            Zones = new Dictionary<Zone, InGameZone>();
+            foreach (Zone z in source.Zones.Keys)
+            {
+                Zones.Add(z, new InGameZone(source.Zones[z]));
+            }
+            RobotsActifs = new List<bool>();
+            foreach (bool r in source.RobotsActifs)
+            {
+                RobotsActifs.Add(r);
+            }
+        }
+        /// <summary>
         /// Le nombre de capsules d'énergie restant
         /// </summary>
         public int NbCapsules { get; set; }

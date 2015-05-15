@@ -160,7 +160,7 @@ namespace SpaceAlert.Model.Helpers
         {
             foreach (Zone z in target.Zones.Keys)
             {
-                DrainShield(source, target, pallier, from);
+                DrainShield(source, target, pallier, z);
             }
         }
 
@@ -184,7 +184,7 @@ namespace SpaceAlert.Model.Helpers
         /// <param name="from"></param>
         private static void InflictDamages(Vaisseau target, int damageValue, Zone from)
         {
-            // dégats non absorbés par l'attaque
+            // dégats non absorbés par le bouclier
             int degatsRestants = damageValue - target.Zones[from].Salles[Pont.HAUT].EnergieCourante;
 
             if (degatsRestants > 0)

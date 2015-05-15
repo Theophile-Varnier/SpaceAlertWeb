@@ -8,6 +8,21 @@ namespace SpaceAlert.Model.Plateau
     public class Salle
     {
         /// <summary>
+        /// Constructeur par copie
+        /// </summary>
+        /// <param name="source"></param>
+        public Salle(Salle source)
+        {
+            Zone = source.Zone;
+            Pont = source.Pont;
+            ActionC = source.ActionC;
+            EnergieMax = source.EnergieMax;
+            EnergieCourante = source.EnergieCourante;
+            CanonPower = source.CanonPower;
+            CanonRange = source.CanonRange;
+        }
+
+        /// <summary>
         /// La zone à laquelle la salle appartient
         /// </summary>
         public Zone Zone { get; set; }
