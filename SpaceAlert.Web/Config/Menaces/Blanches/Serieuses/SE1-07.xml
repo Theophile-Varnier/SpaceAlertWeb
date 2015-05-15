@@ -1,10 +1,10 @@
 <objects xmlns="http://www.springframework.net">
   <object name="Maelstrom" type="SpaceAlert.Model.Menaces.MenaceExterne">
     <property name="Name" value="Maelstrom"/>
-    <property name="Shield" value=""/>
-    <property name="CurrentHp" value=""/>
-    <property name="MaxHp" value=""/>
-    <property name="Speed" value=""/>
+    <property name="Shield" value="0"/>
+    <property name="CurrentHp" value="4"/>
+    <property name="MaxHp" value="4"/>
+    <property name="Speed" value="2"/>
     <property name="AttackValues">
       <dictionary key-type="SpaceAlert.Model.Helpers.Enums.TypeCase">
         <entry key="Y">

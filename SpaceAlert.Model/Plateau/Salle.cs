@@ -8,6 +8,14 @@ namespace SpaceAlert.Model.Plateau
     public class Salle
     {
         /// <summary>
+        /// Constructeur par défaut
+        /// </summary>
+        public Salle()
+        {
+
+        }
+
+        /// <summary>
         /// Constructeur par copie
         /// </summary>
         /// <param name="source"></param>

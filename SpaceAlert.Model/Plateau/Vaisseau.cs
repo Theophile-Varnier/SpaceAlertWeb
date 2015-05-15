@@ -11,6 +11,13 @@ namespace SpaceAlert.Model.Plateau
     public class Vaisseau
     {
         /// <summary>
+        /// Constructeur par défaut
+        /// </summary>
+        public Vaisseau()
+        {
+
+        }
+        /// <summary>
         /// Constructeur par copie
         /// </summary>
         /// <param name="source"></param>

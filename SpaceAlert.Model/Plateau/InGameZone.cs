@@ -9,6 +9,14 @@ namespace SpaceAlert.Model.Plateau
     public class InGameZone
     {
         /// <summary>
+        /// Constructeur par défaut
+        /// </summary>
+        public InGameZone()
+        {
+
+        }
+
+        /// <summary>
         /// Constructeur par copie
         /// </summary>
         /// <param name="source"></param>
