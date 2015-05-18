@@ -20,17 +20,13 @@ namespace SpaceAlert.Services
             using (DbConnection conn = Command.GetConnexion())
             {
                 conn.Open();
-                using (DbTransaction tran = conn.BeginTransaction())
+                try
                 {
-                    try
-                    {
-                        membreDao.EnregistrerMembre(membre, conn, tran);
-                        tran.Commit();
-                    }
-                    catch (DaoException)
-                    {
-                        tran.Rollback();
-                    }
+                    membreDao.EnregistrerMembre(membre, conn);
+                }
+                finally
+                {
+                    conn.Close();
                 }
             }
         }

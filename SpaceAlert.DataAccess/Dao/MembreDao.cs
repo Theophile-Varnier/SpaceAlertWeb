@@ -11,8 +11,7 @@ namespace SpaceAlert.DataAccess.Dao
         /// </summary>
         /// <param name="membre">Le membre à ajouter</param>
         /// <param name="conn">La connection à utiliser</param>
-        /// <param name="tran">La transaction à utiliser</param>
-        public void EnregistrerMembre(Membre membre, DbConnection conn, DbTransaction tran)
+        public void EnregistrerMembre(Membre membre, DbConnection conn)
         {
             string cmd = "INSERT INTO MEMBRE(PSEUDO, MDP, EMAIL)" +
                 "VALUES(@pseudo, SHA2(@mdp, 256), @email)";
@@ -21,7 +20,7 @@ namespace SpaceAlert.DataAccess.Dao
                 a.AddWithValue("@pseudo", membre.Pseudo);
                 a.AddWithValue("@mdp", membre.MotDePasse);
                 a.AddWithValue("@email", membre.Email);
-            }, tran);
+            });
         }
 
         public override Membre RecordToDto(DbDataReader reader)

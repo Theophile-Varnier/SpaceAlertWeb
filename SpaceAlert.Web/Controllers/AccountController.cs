@@ -43,7 +43,9 @@ namespace SpaceAlert.Web.Controllers
         {
             AccountService service = new AccountService();
             service.Inscrire(AccountMapper.MapFromViewModel(model));
-            return View();
+            model.MotDePasse = null;
+            model.Confirmation = null;
+            return View(model);
         }
     }
 }
