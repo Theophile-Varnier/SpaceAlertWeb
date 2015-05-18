@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceAlert.Model", "SpaceAlert.Model\SpaceAlert.Model.csproj", "{F38F6E5A-BBE5-4005-AD1E-3CC008588445}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceAlert.Web", "SpaceAlert.Web\SpaceAlert.Web.csproj", "{E6C10F60-D59E-4E90-9902-392E1D07635C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceAlert.DataAccess", "SpaceAlert.DataAccess\SpaceAlert.DataAccess.csproj", "{200C3562-4217-440B-84E5-5FC581F04061}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceAlert.Services", "SpaceAlert.Services\SpaceAlert.Services.csproj", "{68E03BA3-4D55-4F1B-B69F-B88F3D3311F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{200C3562-4217-440B-84E5-5FC581F04061}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{200C3562-4217-440B-84E5-5FC581F04061}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{200C3562-4217-440B-84E5-5FC581F04061}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68E03BA3-4D55-4F1B-B69F-B88F3D3311F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68E03BA3-4D55-4F1B-B69F-B88F3D3311F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68E03BA3-4D55-4F1B-B69F-B88F3D3311F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68E03BA3-4D55-4F1B-B69F-B88F3D3311F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

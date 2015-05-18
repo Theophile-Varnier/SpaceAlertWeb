@@ -128,6 +128,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModel.cs" />
+    <Compile Include="Models\Mapping\AccountMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -217,13 +218,13 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SpaceAlert.DataAccess\SpaceAlert.DataAccess.csproj">
-      <Project>{200c3562-4217-440b-84e5-5fc581f04061}</Project>
-      <Name>SpaceAlert.DataAccess</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SpaceAlert.Model\SpaceAlert.Model.csproj">
       <Project>{f38f6e5a-bbe5-4005-ad1e-3cc008588445}</Project>
       <Name>SpaceAlert.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpaceAlert.Services\SpaceAlert.Services.csproj">
+      <Project>{68e03ba3-4d55-4f1b-b69f-b88f3d3311f7}</Project>
+      <Name>SpaceAlert.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
