@@ -46,8 +46,6 @@
     <Compile Include="Dao\BaseDao.cs" />
     <Compile Include="Exceptions\DaoException.cs" />
     <Compile Include="Dao\MembreDao.cs" />
-    <Compile Include="Exceptions\MembreNonExistantException.cs" />
-    <Compile Include="Exceptions\MotDePasseInvalideException.cs" />
     <Compile Include="Extensions\Command.cs" />
     <Compile Include="Extensions\DbDataReaderExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

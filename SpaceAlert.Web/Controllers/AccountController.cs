@@ -1,4 +1,6 @@
-﻿using SpaceAlert.Services;
+﻿using SpaceAlert.Model.Site;
+using SpaceAlert.Services;
+using SpaceAlert.Services.Exceptions;
 using SpaceAlert.Web.Models;
 using SpaceAlert.Web.Models.Mapping;
 using System.Collections.Generic;
@@ -33,9 +35,44 @@ namespace SpaceAlert.Web.Controllers
         [HttpPost]
         public ActionResult Connexion(AccountViewModel model)
         {
-
-            model.MotDePasse = null;
+            if (model.ErrorMessages == null)
+            {
+                model.ErrorMessages = new List<string>();
+            }
+            try
+            {
+                Membre membre = serviceProvider.AccountService.RecupererMembre(model.Pseudo, model.MotDePasse);
+                Session["pseudo"] = membre.Pseudo;
+                Session["idMembre"] = membre.Id;
+                Session["emailMembre"] = membre.Email;
+                return RedirectToAction("Index", "Game");
+            }
+            catch (MembreNonExistantException mnee)
+            {
+                model.ErrorMessages.Add(mnee.Message);
+            }
+            catch (MotDePasseInvalideException mdpie)
+            {
+                model.ErrorMessages.Add(mdpie.Message);
+            }
+            finally
+            {
+                model.MotDePasse = null;
+            }
             return View(model);
+        }
+
+        /// <summary>
+        /// Déconnecte la session en cours
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Deconnexion()
+        {
+            Session["pseudo"] = null;
+            Session["idMembre"] = null;
+            Session["emailMembre"] = null;
+            return RedirectToAction("Index", "Home");
         }
 
         /// <summary>

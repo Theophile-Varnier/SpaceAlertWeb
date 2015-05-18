@@ -53,6 +53,12 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -123,6 +129,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SpaceAlertStaticData.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -172,6 +179,37 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\Medias\0.png" />
+    <Content Include="Content\Medias\1.png" />
+    <Content Include="Content\Medias\2.png" />
+    <Content Include="Content\Medias\3.png" />
+    <Content Include="Content\Medias\4.png" />
+    <Content Include="Content\Medias\5.png" />
+    <Content Include="Content\Medias\Capture du 2013-12-11 18_49_51.png" />
+    <Content Include="Content\Medias\Capture du 2013-12-11 18_50_49.png" />
+    <Content Include="Content\Medias\Capture du 2013-12-11 18_51_11.png" />
+    <Content Include="Content\Medias\carte_mouvement.png" />
+    <Content Include="Content\Medias\cube.jpg" />
+    <Content Include="Content\Medias\cube.png" />
+    <Content Include="Content\Medias\game.png" />
+    <Content Include="Content\Medias\guss.jpg" />
+    <Content Include="Content\Medias\Guss\blueguss.png" />
+    <Content Include="Content\Medias\Guss\greenguss.png" />
+    <Content Include="Content\Medias\Guss\purpleguss.png" />
+    <Content Include="Content\Medias\Guss\redguss.png" />
+    <Content Include="Content\Medias\Guss\selectedblueguss.png" />
+    <Content Include="Content\Medias\Guss\selectedgreenguss.png" />
+    <Content Include="Content\Medias\Guss\selectedpurpleguss.png" />
+    <Content Include="Content\Medias\Guss\selectedredguss.png" />
+    <Content Include="Content\Medias\Guss\selectedyellowguss.png" />
+    <Content Include="Content\Medias\Guss\yellowguss.png" />
+    <Content Include="Content\Medias\plateau.jpg" />
+    <Content Include="Content\Medias\progra.png" />
+    <Content Include="Content\Medias\Pulse_Ball.jpg" />
+    <Content Include="Content\Medias\rampe.png" />
+    <Content Include="Content\Medias\SA_cover.jpg" />
+    <Content Include="Content\Medias\selectedcube.png" />
+    <Content Include="Content\Medias\space_alert_card.jpeg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -203,6 +241,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\Inscription.cshtml" />
     <Content Include="Views\Account\Connexion.cshtml" />
+    <Content Include="Views\Shared\SessionInfo.cshtml" />
+    <Content Include="Views\Game\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -256,6 +296,11 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

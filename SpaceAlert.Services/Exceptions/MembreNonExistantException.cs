@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpaceAlert.DataAccess.Exceptions
+namespace SpaceAlert.Services.Exceptions
 {
     public class MembreNonExistantException : Exception
     {

@@ -4,6 +4,7 @@ using SpaceAlert.DataAccess.Extensions;
 using SpaceAlert.DataAccess.Repositories;
 using SpaceAlert.Model.Site;
 using System.Data.Common;
+using SpaceAlert.Services.Exceptions;
 
 namespace SpaceAlert.Services
 {
@@ -29,6 +30,17 @@ namespace SpaceAlert.Services
         {
 
             return membreRepository.GetExistingMember(pseudo) != null;
+        }
+
+        /// <summary>
+        /// Tente de se connecter
+        /// </summary>
+        /// <param name="pseudo"></param>
+        /// <param name="motDePasse"></param>
+        /// <returns></returns>
+        public Membre RecupererMembre(string pseudo, string motDePasse)
+        {
+            return membreRepository.GetExistingMember(pseudo, motDePasse);
         }
     }
 }

@@ -62,7 +62,8 @@ namespace SpaceAlert.DataAccess.Dao
             {
                 Id = reader.GetInt64("ID"),
                 Pseudo = reader.GetString("PSEUDO"),
-                Email = reader.GetString("EMAIL")
+                Email = reader.GetString("EMAIL"),
+                MotDePasse = reader.GetString("MDP")
             };
         }
     }
