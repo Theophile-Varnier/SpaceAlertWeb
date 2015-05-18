@@ -14,5 +14,7 @@ namespace SpaceAlert.Web.Models
         public string MotDePasse { get; set; }
 
         public string Confirmation { get; set; }
+
+        public List<string> ErrorMessages { get; set; }
     }
 }

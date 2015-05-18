@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SpaceAlert.DataAccess.Dao
+namespace SpaceAlert.DataAccess.Exceptions
 {
     /// <summary>
     /// Dao Exception
@@ -12,10 +12,12 @@ namespace SpaceAlert.DataAccess.Dao
 
         }
         public DaoException(string message)
+            : base(message)
         {
 
         }
         public DaoException(string message, Exception innerException)
+            : base(message, innerException)
         {
 
         }

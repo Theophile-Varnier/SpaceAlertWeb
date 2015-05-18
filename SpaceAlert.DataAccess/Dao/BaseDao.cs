@@ -1,4 +1,5 @@
-﻿using SpaceAlert.DataAccess.Extensions;
+﻿using SpaceAlert.DataAccess.Exceptions;
+using SpaceAlert.DataAccess.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
