@@ -76,6 +76,7 @@
     <Compile Include="Plateau\InGameZone.cs" />
     <Compile Include="Plateau\Salle.cs" />
     <Compile Include="Plateau\Vaisseau.cs" />
+    <Compile Include="Site\Membre.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,5 +1,5 @@
 <objects xmlns="http://www.springframework.net">
-<object name="Marauder" type="SpaceAlert.Model.Menaces.MenaceExterne">
+<object id="Marauder" type="SpaceAlert.Model.Menaces.MenaceExterne">
 <property name="Name" value="Marauder"/>
 <property name="Shield" value="1"/>
 <property name="CurrentHp" value="6"/>

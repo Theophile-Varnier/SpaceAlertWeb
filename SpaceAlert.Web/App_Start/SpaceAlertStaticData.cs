@@ -10,22 +10,15 @@ namespace SpaceAlert.Web
     /// </summary>
     public static class SpaceAlertStaticData
     {
-        public static ListOfMenaces MenacesBlanches { get; set; }
-
-        public static ListOfMenaces MenacesJaunes { get; set; }
-
-        public static ListOfMenaces MenacesRouges { get; set; }
-
-        public static Vaisseau DefaultVaisseau { get; set; }
+        public static IApplicationContext AppContext { get; set; }
 
         /// <summary>
         /// Initialisation des constantes du jeu
         /// </summary>
         public static void Init()
         {
-            IApplicationContext ctx = ContextRegistry.GetContext();
-            DefaultVaisseau = (Vaisseau)ctx.GetObject("Vaisseau");
-            MenacesBlanches = (ListOfMenaces)ctx.GetObject("MenacesBlanches");
+            AppContext = ContextRegistry.GetContext();
         }
+
     }
 }

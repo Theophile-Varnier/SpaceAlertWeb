@@ -20,7 +20,7 @@ namespace SpaceAlert.DataAccess.Dao
         /// <param name="dto">L'objet à partir duquel on ajoute les paramètres</param>
         /// <param name="addParams">La méthode servant à ajouter les paramètres</param>
         /// <param name="conn">La connection à utiliser</param>
-        protected void ExecuteNonQuery(string cmdText, DbConnection conn, object dto = null, Action<Command, object> addParams = null, DbTransaction tran = null)
+        protected void ExecuteNonQuery(string cmdText, DbConnection conn, Action<Command> addParams = null, DbTransaction tran = null)
         {
             try
             {
@@ -39,7 +39,7 @@ namespace SpaceAlert.DataAccess.Dao
                     // Ajout des paramètres
                     if (addParams != null)
                     {
-                        addParams(cmd, dto);
+                        addParams(cmd);
                     }
 
                     // Exécution
@@ -67,7 +67,7 @@ namespace SpaceAlert.DataAccess.Dao
         /// <param name="dto">L'objet à partir duquel on ajoute les paramètres</param>
         /// <param name="addParams">La méthode servant à ajouter les paramètres</param>
         /// <returns></returns>
-        protected List<T> ExecuteReader(string cmdText, DbConnection conn, object dto = null, Action<Command, object> addParams = null, DbTransaction tran = null)
+        protected List<T> ExecuteReader(string cmdText, DbConnection conn, Action<Command> addParams = null, DbTransaction tran = null)
         {
             List<T> res = new List<T>();
             try
@@ -86,9 +86,9 @@ namespace SpaceAlert.DataAccess.Dao
                     cmd.Prepare();
 
                     // Ajout des paramètres
-                    if (addParams != null && dto != null)
+                    if (addParams != null)
                     {
-                        addParams(cmd, dto);
+                        addParams(cmd);
                     }
 
                     // Exécution
@@ -113,7 +113,7 @@ namespace SpaceAlert.DataAccess.Dao
         }
 
         /// <summary>
-        /// Bind un reader en objet
+        /// Convertit un reader en objet
         /// </summary>
         /// <param name="reader">Le reader duquel tirer les infos</param>
         /// <returns></returns>

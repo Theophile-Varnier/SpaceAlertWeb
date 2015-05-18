@@ -1,5 +1,5 @@
 <objects xmlns="http://www.springframework.net">
-<object name="Swarm" type="SpaceAlert.Model.Menaces.MenaceExterne">
+<object id="Swarm" type="SpaceAlert.Model.Menaces.MenaceExterne">
 <property name="Name" value="Swarm"/>
 <property name="Shield" value="0"/>
 <property name="CurrentHp" value="3"/>

@@ -1,5 +1,7 @@
-<objects xmlns="http://www.springframework.net">
-  <object name="Meteoroid" type="SpaceAlert.Model.Menaces.MenaceExterne">
+<objects xmlns="http://www.springframework.net"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.net http://www.springframework.net/schema/objects/spring-objects-1.1.xsd" >
+  <object id="Meteoroid" type="SpaceAlert.Model.Menaces.MenaceExterne" singleton="false">
     <property name="Name" value="Meteoroid"/>
     <property name="Shield" value="0"/>
     <property name="CurrentHp" value="5"/>

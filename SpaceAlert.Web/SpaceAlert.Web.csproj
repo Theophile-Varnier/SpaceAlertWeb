@@ -122,10 +122,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SpaceAlertStaticData.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -198,6 +200,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Account\Inscription.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -205,7 +208,6 @@
     <Folder Include="Config\Menaces\Rouges\Serieuses\" />
     <Folder Include="Config\Missions\Doubles\" />
     <Folder Include="Config\Missions\Simples\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -215,6 +217,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SpaceAlert.DataAccess\SpaceAlert.DataAccess.csproj">
+      <Project>{200c3562-4217-440b-84e5-5fc581f04061}</Project>
+      <Name>SpaceAlert.DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpaceAlert.Model\SpaceAlert.Model.csproj">
       <Project>{f38f6e5a-bbe5-4005-ad1e-3cc008588445}</Project>
       <Name>SpaceAlert.Model</Name>

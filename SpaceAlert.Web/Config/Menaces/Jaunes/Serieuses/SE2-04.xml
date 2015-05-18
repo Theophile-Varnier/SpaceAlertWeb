@@ -1,5 +1,5 @@
 <objects xmlns="http://www.springframework.net">
-<object name="NebulaCrab" type="SpaceAlert.Model.Menaces.MenaceExterne">
+<object id="NebulaCrab" type="SpaceAlert.Model.Menaces.MenaceExterne">
 <property name="Name" value="Nebula Crab"/>
 <property name="Shield" value="2"/>
 <property name="CurrentHp" value="7"/>

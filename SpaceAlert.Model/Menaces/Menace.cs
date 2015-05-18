@@ -11,6 +11,69 @@ namespace SpaceAlert.Model.Menaces
     public class Menace
     {
         /// <summary>
+        /// Constructeur par recopie
+        /// </summary>
+        /// <param name="source">La menace à copier</param>
+        //public Menace(Menace source) 
+        //{
+        //    Name = source.Name;
+        //    MaxHp = source.MaxHp;
+        //    CurrentHp = MaxHp;
+        //    Speed = source.Speed;
+        //    Targetable = source.Targetable;
+        //    AttackValues = new Dictionary<TypeCase,List<int>>();
+        //    foreach (TypeCase c in source.AttackValues.Keys)
+        //    {
+        //        AttackValues.Add(c, new List<int>());
+        //        foreach (int val in source.AttackValues[c])
+        //        {
+        //            AttackValues[c].Add(val);
+        //        }
+        //    }
+        //    ShieldValues = new Dictionary<TypeCase, int>();
+        //    foreach (TypeCase c in source.ShieldValues.Keys)
+        //    {
+        //        ShieldValues.Add(c, source.ShieldValues[c]);
+        //    }
+
+        //    SpeedValues = new Dictionary<TypeCase, int>();
+        //    foreach (TypeCase c in source.SpeedValues.Keys)
+        //    {
+        //        SpeedValues.Add(c, source.SpeedValues[c]);
+        //    }
+
+        //    HealValues = new Dictionary<TypeCase, int>();
+        //    foreach (TypeCase c in source.HealValues.Keys)
+        //    {
+        //        HealValues.Add(c, source.HealValues[c]);
+        //    }
+
+        //    MinDamages = new Dictionary<TypeCase, int>();
+        //    foreach (TypeCase c in source.MinDamages.Keys)
+        //    {
+        //        MinDamages.Add(c, source.MinDamages[c]);
+        //    }
+
+        //    ActionsX = new List<Action<Menace, Vaisseau, TypeCase, Zone>>();
+        //    foreach (var action in source.ActionsX)
+        //    {
+        //        ActionsX.Add(action);
+        //    }
+
+        //    ActionsY = new List<Action<Menace, Vaisseau, TypeCase, Zone>>();
+        //    foreach (var action in source.ActionsY)
+        //    {
+        //        ActionsY.Add(action);
+        //    }
+
+        //    ActionsZ = new List<Action<Menace, Vaisseau, TypeCase, Zone>>();
+        //    foreach (var action in source.ActionsZ)
+        //    {
+        //        ActionsZ.Add(action);
+        //    }
+        //}
+
+        /// <summary>
         /// Le nom de la menace
         /// </summary>
         public string Name { get; set; }

@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Inscription";
+}
+<div class="row">
+    <div class="col-xs-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h2 class="panel-title">Inscription</h2>
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm("Inscription", "Account", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <label for="pseudo">Pseudo</label>
+                        <input type="text" class="form-control" id="pseudo" />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" id="email" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="motdepasse">Mot de passe</label>
+                        <input type="text" class="form-control" id="motdepasse" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmation">Confirmation du mot de passe</label>
+                        <input type="text" class="form-control" id="confirmation" />
+                    </div>
+                    <div class="text-right">
+                        <button class="btn btn-primary" type="submit">Go!</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

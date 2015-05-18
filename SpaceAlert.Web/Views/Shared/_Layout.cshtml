@@ -24,10 +24,14 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Connexion", "Connexion", "Account")</li>
+                    <li>@Html.ActionLink("Inscription", "Inscription", "Account")</li>
+                </ul>
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container-fluid body-content">
         @RenderBody()
         <hr />
         <footer>

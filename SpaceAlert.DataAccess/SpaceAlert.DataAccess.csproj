@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Dao\BaseDao.cs" />
     <Compile Include="Dao\DaoException.cs" />
+    <Compile Include="Dao\MembreDao.cs" />
     <Compile Include="Extensions\Command.cs" />
     <Compile Include="Extensions\DbDataReaderExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -52,6 +53,12 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SpaceAlert.Model\SpaceAlert.Model.csproj">
+      <Project>{f38f6e5a-bbe5-4005-ad1e-3cc008588445}</Project>
+      <Name>SpaceAlert.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
