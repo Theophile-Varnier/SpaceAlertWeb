@@ -127,7 +127,7 @@ namespace SpaceAlert.DataAccess.Extensions
         /// <returns></returns>
         public static DbConnection GetConnexion()
         {
-            return new MySqlConnection(ConfigurationManager.AppSettings["DbConnectionString"]);
+            return new MySqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
         }
     }
 }

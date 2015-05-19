@@ -7,7 +7,7 @@ namespace SpaceAlert.DataAccess.Repositories
 {
     public class MembreRepository
     {
-        private MembreDao membreDao = new MembreDao();
+        private readonly MembreDao membreDao = new MembreDao();
 
         /// <summary>
         /// Enregistre un membre en base
@@ -64,6 +64,22 @@ namespace SpaceAlert.DataAccess.Repositories
                 try
                 {
                     return membreDao.GetMembreByPseudo(pseudo, conn);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public string GetExistingEmail(string email)
+        {
+            using (DbConnection conn = Command.GetConnexion())
+            {
+                conn.Open();
+                try
+                {
+                    return membreDao.GetEmailIfExists(email, conn);
                 }
                 finally
                 {

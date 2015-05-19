@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using SpaceAlert.Web.Helpers;
 
 namespace SpaceAlert.Web.Controllers
 {
@@ -6,6 +7,10 @@ namespace SpaceAlert.Web.Controllers
     {
         public ActionResult Index()
         {
+            if (Session.IsAuthenticated())
+            {
+                return RedirectToAction("Index", "Game");
+            }
             return View();
         }
 

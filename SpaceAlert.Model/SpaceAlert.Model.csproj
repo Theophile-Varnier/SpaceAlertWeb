@@ -52,7 +52,7 @@
     <Compile Include="Helpers\Enums\Action.cs" />
     <Compile Include="Helpers\Enums\EtatRobots.cs" />
     <Compile Include="Helpers\Enums\TypeCase.cs" />
-    <Compile Include="Helpers\Enums\MissionType.cs" />
+    <Compile Include="Helpers\Enums\TypeMission.cs" />
     <Compile Include="Helpers\Enums\Pont.cs" />
     <Compile Include="Helpers\Enums\TypeMenace.cs" />
     <Compile Include="Helpers\Enums\Zone.cs" />

@@ -1,7 +1,40 @@
-﻿
+﻿@using SpaceAlert.Web.Helpers
 @{
     ViewBag.Title = "Index";
+}
+@functions
+{
+
+    object getHtmlAttribute(string cssClass, bool disable)
+    {
+        if (disable)
+        {
+            return new {@class = cssClass, @disabled = ""};
+        }
+        return new {@class = cssClass};
+    }
+
 }
 
 <h2>Let's play</h2>
 
+<div class="row">
+    <div class="col-xs-4"></div>
+    @{
+        bool disable = false;
+        string tooltipCreation = "Créer une nouvelle partie";
+        const string tooltipRejoindre = "Rejoindre une partie déjà créée";
+        if (!Session.IsAuthenticated())
+        {
+            disable = true;
+            tooltipCreation = "Il faut être inscrit et connecté pour pouvoir créer une partie !";
+        }
+        <div class="col-xs-2" data-toggle="tooltip" data-placement="bottom" title="@tooltipCreation">
+            @Html.ActionLink("Créer une partie", "Create", "Game", new { area = "" }, getHtmlAttribute("btn btn-primary btn-block", disable))
+        </div>
+    <div class="col-xs-2" data-toggle="tooltip" data-placement="bottom" title="@tooltipRejoindre">
+        @Html.ActionLink("Rejoindre une partie", "Join", "Game", new { area = "" }, new { @class = "btn btn-primary btn-block" })
+    </div>
+        <div class="col-xs-4"></div>
+    }
+</div>

@@ -56,6 +56,13 @@ namespace SpaceAlert.DataAccess.Dao
             return res.Any() ? res.First() : null;
         }
 
+        public string GetEmailIfExists(string email, DbConnection conn)
+        {
+            string cmd = "SELECT EMAIL FROM MEMBRE WHERE EMAIL = @email";
+            List<Membre> res = ExecuteReader(cmd, conn, (c) => c.AddWithValue("@email", email));
+            return res.Any() ? res.First().Email : null;
+        }
+
         public override Membre RecordToDto(DbDataReader reader)
         {
             return new Membre
