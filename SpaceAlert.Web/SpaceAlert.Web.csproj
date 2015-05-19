@@ -138,6 +138,7 @@
     <Compile Include="Helpers\SessionExtensions.cs" />
     <Compile Include="Helpers\UriExtensions.cs" />
     <Compile Include="Models\AccountViewModel.cs" />
+    <Compile Include="Models\GameViewModel.cs" />
     <Compile Include="Models\Mapping\AccountMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -216,6 +217,7 @@
       <DependentUpon>Web.Template.config</DependentUpon>
     </Content>
     <Content Include="SpaceAlert.Web.wpp.targets" />
+    <Content Include="Views\Game\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

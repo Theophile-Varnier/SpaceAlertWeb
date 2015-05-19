@@ -17,7 +17,7 @@ namespace SpaceAlert.Model.Jeu
         /// <summary>
         /// Le type de mission
         /// </summary>
-        public MissionType TypeMission { get; set; }
+        public TypeMission TypeMission { get; set; }
 
         /// <summary>
         /// Les événements qui vont survenir durant la mission

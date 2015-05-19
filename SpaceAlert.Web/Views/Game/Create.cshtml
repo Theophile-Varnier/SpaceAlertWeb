@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Nouvelle Partie";
+}
+@using SpaceAlert.Model.Helpers.Enums
+@model SpaceAlert.Web.Models.GameViewModel
+
+<div class="row">
+    <div class="col-xs-4"></div>
+    <div class="col-xs-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h2 class="panel-title">Création de partie</h2>
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm("Create", "Game", FormMethod.Post, new { @id = "creationForm" }))
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TypeMission, "Type de mission")
+                        @Html.DropDownListFor(model => model.TypeMission, new SelectList(Enum.GetValues(typeof(TypeMission))), new { @class = "form-control", required = "" })
+                        @Html.ValidationMessageFor(model => model.TypeMission)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NbJoueurs, "Nombre de joueurs")
+                        @Html.DropDownListFor(model => model.NbJoueurs, new SelectList(new List<int> { 5, 4, 3, 2, 1 }), new { @class = "form-control", required = "" })
+                        @Html.ValidationMessageFor(model => model.NbJoueurs)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NbAndroids, "Nombre d'androids")
+                        @Html.DropDownListFor(model => model.NbAndroids, new SelectList(new List<int> { 0 }), new { @class = "form-control", required = "", disabled = "" })
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            @Html.CheckBoxFor(model => model.Blanches) Cartes Blanches
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            @Html.CheckBoxFor(model => model.Jaunes) Cartes Jaunes
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            @Html.CheckBoxFor(model => model.Rouges) Cartes Rouges
+                        </label>
+                    </div>
+                    <div class="col-xs-8">
+                    </div>
+                    <div class="text-right col-xs-4">
+                        <button class="btn btn-primary" type="submit">Go!</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
