@@ -194,12 +194,6 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -214,6 +208,14 @@
     <Content Include="Views\Game\Index.cshtml" />
     <Content Include="Views\Shared\ConnexionForm.cshtml" />
     <Content Include="Views\Shared\InscriptionForm.cshtml" />
+    <Content Include="Web.Template.config" />
+    <Content Include="Web.Template.Debug.config">
+      <DependentUpon>Web.Template.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Template.Release.config">
+      <DependentUpon>Web.Template.config</DependentUpon>
+    </Content>
+    <Content Include="SpaceAlert.Web.wpp.targets" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
