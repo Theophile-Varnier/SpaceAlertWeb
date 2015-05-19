@@ -1,4 +1,5 @@
-﻿@{
+﻿@using SpaceAlert.Web.Helpers
+@{
     ViewBag.Title = "Index";
 }
 
@@ -6,11 +7,23 @@
 
 <div class="row">
     <div class="col-xs-4"></div>
-    <div class="col-xs-2">
-        <button class="btn btn-primary">Créer une partie</button>
-    </div>
-    <div class="col-xs-2">
-        <button class="btn btn-primary">Rejoindre une partie</button>
-    </div>
-    <div class="col-xs-4"></div>
+    @{
+        string disabled = "";
+        string tooltipCreation = "Créer une nouvelle partie";
+        const string tooltipRejoindre = "Rejoindre une partie déjà créée";
+        if (Session.IsAuthenticated())
+        {
+            disabled = "disabled";
+            tooltipCreation = "Il faut être inscrit et connecté pour pouvoir créer une partie !";
+        }
+        <div class="col-xs-2" data-toggle="tooltip" data-placement="bottom" title="@tooltipCreation">
+            <button class="btn btn-primary btn-block" @disabled>
+                Créer une partie
+            </button>
+        </div>
+        <div class="col-xs-2">
+            <button class="btn btn-primary btn-block" data-toggle="tooltip" data-placement="bottom" title="@tooltipRejoindre">Rejoindre une partie</button>
+        </div>
+        <div class="col-xs-4"></div>
+    }
 </div>

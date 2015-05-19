@@ -16,7 +16,7 @@ namespace SpaceAlert.Web.Helpers
         /// <returns></returns>
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            return httpContext.Session != null && httpContext.Session.Get("pseudo") != null;
+            return httpContext.Session != null && httpContext.Session.IsAuthenticated();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace SpaceAlert.Web.Controllers
     {
         public ActionResult Index()
         {
-            if (Session.Get("pseudo") != null)
+            if (Session.IsAuthenticated())
             {
                 return RedirectToAction("Index", "Game");
             }

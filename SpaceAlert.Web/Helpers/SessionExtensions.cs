@@ -25,5 +25,10 @@ namespace SpaceAlert.Web.Helpers
             }
             return (string)session[attribute];
         }
+
+        public static bool IsAuthenticated(this HttpSessionStateBase session)
+        {
+            return session.Get("pseudo") != null;
+        }
     }
 }
