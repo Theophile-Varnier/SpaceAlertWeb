@@ -40,7 +40,16 @@ namespace SpaceAlert.Services
         /// <returns></returns>
         public Membre RecupererMembre(string pseudo, string motDePasse)
         {
-            return membreRepository.GetExistingMember(pseudo, motDePasse);
+            Membre res;
+            if (!Existe(pseudo))
+            {
+                throw new MembreNonExistantException(string.Format("Le pseudo {0} n'existe pas", pseudo));
+            }
+            if ((res = membreRepository.GetExistingMember(pseudo, motDePasse)) == null)
+            {
+                throw new MotDePasseInvalideException("Combinaison pseudo/mot de passe invalide");
+            }
+            return res;
         }
     }
 }
