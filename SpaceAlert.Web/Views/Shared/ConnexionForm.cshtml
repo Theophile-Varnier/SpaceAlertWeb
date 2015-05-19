@@ -1,0 +1,37 @@
+﻿@model SpaceAlert.Web.Models.AccountViewModel
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h2 class="panel-title">Connexion</h2>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm("Connexion", "Account", FormMethod.Post, new { @id = "connexionForm" }))
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.Pseudo, "Pseudo")
+                @Html.TextBoxFor(model => model.Pseudo, new { @class = "form-control", required = "" })
+                @Html.ValidationMessageFor(model => model.Pseudo)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MotDePasse, "Mot de passe")
+                @Html.PasswordFor(model => model.MotDePasse, new { @class = "form-control", required = "" })
+                @Html.ValidationMessageFor(model => model.MotDePasse)
+            </div>
+            <div class="col-xs-8">
+                @if (Model != null && Model.ErrorMessages != null)
+                {
+                    foreach (string message in Model.ErrorMessages)
+                    {
+                        <p class="text-danger">@message</p>
+                    }
+                }
+            </div>
+            <div class="text-right col-xs-4">
+                <button class="btn btn-primary" type="submit">Go!</button>
+            </div>
+        }
+    </div>
+</div>
+
+

@@ -1,9 +1,7 @@
-﻿using SpaceAlert.Model.Menaces;
-using SpaceAlert.Model.Plateau;
-using Spring.Context;
+﻿using Spring.Context;
 using Spring.Context.Support;
 
-namespace SpaceAlert.Web
+namespace SpaceAlert.Business
 {
     /// <summary>
     /// Contient des informations sur le jeu

@@ -1,16 +1,12 @@
-﻿using System;
-using SpaceAlert.DataAccess.Dao;
-using SpaceAlert.DataAccess.Extensions;
-using SpaceAlert.DataAccess.Repositories;
+﻿using SpaceAlert.DataAccess.Repositories;
 using SpaceAlert.Model.Site;
-using System.Data.Common;
 using SpaceAlert.Services.Exceptions;
 
 namespace SpaceAlert.Services
 {
     public class AccountService
     {
-        readonly MembreRepository membreRepository = new MembreRepository();
+        private readonly MembreRepository membreRepository = new MembreRepository();
 
         /// <summary>
         /// Inscription d'un membre
@@ -28,7 +24,6 @@ namespace SpaceAlert.Services
         /// <returns></returns>
         public bool Existe(string pseudo)
         {
-
             return membreRepository.GetExistingMember(pseudo) != null;
         }
 

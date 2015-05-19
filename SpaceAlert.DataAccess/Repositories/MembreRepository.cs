@@ -7,7 +7,7 @@ namespace SpaceAlert.DataAccess.Repositories
 {
     public class MembreRepository
     {
-        private MembreDao membreDao = new MembreDao();
+        private readonly MembreDao membreDao = new MembreDao();
 
         /// <summary>
         /// Enregistre un membre en base

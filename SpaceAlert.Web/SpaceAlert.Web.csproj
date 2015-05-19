@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <NuGetPackageImportStamp>7b4c6c45</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -127,52 +128,20 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\SpaceAlertStaticData.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CustomAuthorizeAttribute.cs" />
+    <Compile Include="Helpers\SessionExtensions.cs" />
+    <Compile Include="Helpers\UriExtensions.cs" />
     <Compile Include="Models\AccountViewModel.cs" />
     <Compile Include="Models\Mapping\AccountMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Config\Menaces\Blanches\Normales\E1-01.xml" />
-    <Content Include="Config\Menaces\Blanches\Normales\E1-02.xml" />
-    <Content Include="Config\Menaces\Blanches\Normales\E1-03.xml" />
-    <Content Include="Config\Menaces\Blanches\Normales\E1-04.xml" />
-    <Content Include="Config\Menaces\Blanches\Normales\E1-05.xml" />
-    <Content Include="Config\Menaces\Blanches\Normales\E1-06.xml" />
-    <Content Include="Config\Menaces\Blanches\Normales\E1-07.xml" />
-    <Content Include="Config\Menaces\Blanches\Normales\E1-08.xml" />
-    <Content Include="Config\Menaces\Blanches\Normales\E1-09.xml" />
-    <Content Include="Config\Menaces\Blanches\Normales\E1-10.xml" />
-    <Content Include="Config\Menaces\Blanches\Serieuses\SE1-01.xml" />
-    <Content Include="Config\Menaces\Blanches\Serieuses\SE1-02.xml" />
-    <Content Include="Config\Menaces\Blanches\Serieuses\SE1-03.xml" />
-    <Content Include="Config\Menaces\Blanches\Serieuses\SE1-04.xml" />
-    <Content Include="Config\Menaces\Blanches\Serieuses\SE1-05.xml" />
-    <Content Include="Config\Menaces\Blanches\Serieuses\SE1-06.xml" />
-    <Content Include="Config\Menaces\Blanches\Serieuses\SE1-07.xml" />
-    <Content Include="Config\Menaces\Blanches\Serieuses\SE1-08.xml" />
-    <Content Include="Config\Menaces\Jaunes\Normales\E2-01.xml" />
-    <Content Include="Config\Menaces\Jaunes\Normales\E2-02.xml" />
-    <Content Include="Config\Menaces\Jaunes\Normales\E2-03.xml" />
-    <Content Include="Config\Menaces\Jaunes\Normales\E2-04.xml" />
-    <Content Include="Config\Menaces\Jaunes\Normales\E2-05.xml" />
-    <Content Include="Config\Menaces\Jaunes\Normales\E2-06.xml" />
-    <Content Include="Config\Menaces\Jaunes\Normales\E2-07.xml" />
-    <Content Include="Config\Menaces\Jaunes\Serieuses\SE2-01.xml" />
-    <Content Include="Config\Menaces\Jaunes\Serieuses\SE2-02.xml" />
-    <Content Include="Config\Menaces\Jaunes\Serieuses\SE2-03.xml" />
-    <Content Include="Config\Menaces\Jaunes\Serieuses\SE2-04.xml" />
-    <Content Include="Config\Menaces\Jaunes\Serieuses\SE2-05.xml" />
-    <Content Include="Config\Menaces\Jaunes\Serieuses\SE2-06.xml" />
-    <Content Include="Config\Menaces\MenaceActions.xml" />
-    <Content Include="Config\Missions\Tutos\Tuto1.xml" />
-    <Content Include="Config\vaisseau.xml" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -243,13 +212,11 @@
     <Content Include="Views\Account\Connexion.cshtml" />
     <Content Include="Views\Shared\SessionInfo.cshtml" />
     <Content Include="Views\Game\Index.cshtml" />
+    <Content Include="Views\Shared\ConnexionForm.cshtml" />
+    <Content Include="Views\Shared\InscriptionForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Config\Menaces\Rouges\Normales\" />
-    <Folder Include="Config\Menaces\Rouges\Serieuses\" />
-    <Folder Include="Config\Missions\Doubles\" />
-    <Folder Include="Config\Missions\Simples\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -259,6 +226,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SpaceAlert.Business\SpaceAlert.Business.csproj">
+      <Project>{892997DA-2305-4FAD-BE02-20C35557FA3D}</Project>
+      <Name>SpaceAlert.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpaceAlert.Model\SpaceAlert.Model.csproj">
       <Project>{f38f6e5a-bbe5-4005-ad1e-3cc008588445}</Project>
       <Name>SpaceAlert.Model</Name>
@@ -300,6 +271,13 @@
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
     <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
     <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
