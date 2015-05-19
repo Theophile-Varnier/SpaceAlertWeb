@@ -138,6 +138,7 @@
     <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Helpers\SessionExtensions.cs" />
     <Compile Include="Helpers\UriExtensions.cs" />
+    <Compile Include="Models\AbstractViewModel.cs" />
     <Compile Include="Models\AccountViewModel.cs" />
     <Compile Include="Models\GameViewModel.cs" />
     <Compile Include="Models\Mapping\AccountMapper.cs" />
