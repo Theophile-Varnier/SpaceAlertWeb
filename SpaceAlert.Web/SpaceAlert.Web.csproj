@@ -135,6 +135,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CustomAuthorizeAttribute.cs" />
+    <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Helpers\SessionExtensions.cs" />
     <Compile Include="Helpers\UriExtensions.cs" />
     <Compile Include="Models\AccountViewModel.cs" />
@@ -180,6 +181,7 @@
     <Content Include="Content\Medias\SA_cover.jpg" />
     <Content Include="Content\Medias\selectedcube.png" />
     <Content Include="Content\Medias\space_alert_card.jpeg" />
+    <Content Include="Scripts\App\createGame.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

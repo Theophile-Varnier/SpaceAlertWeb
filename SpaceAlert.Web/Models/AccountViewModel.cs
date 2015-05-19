@@ -5,7 +5,7 @@ using System.Web;
 
 namespace SpaceAlert.Web.Models
 {
-    public class AccountViewModel
+    public class AccountViewModel : AbstractViewModel
     {
         public string Pseudo { get; set; }
 
@@ -15,6 +15,14 @@ namespace SpaceAlert.Web.Models
 
         public string Confirmation { get; set; }
 
-        public List<string> ErrorMessages { get; set; }
+        /// <summary>
+        /// Vérifie que le modèle est valide
+        /// </summary>
+        /// <returns></returns>
+        public override bool IsValid()
+        {
+            // On vérifie que la confirmation du mot de passe est bonne
+            return Confirmation == MotDePasse;
+        }
     }
 }

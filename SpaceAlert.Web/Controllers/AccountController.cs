@@ -146,8 +146,7 @@ namespace SpaceAlert.Web.Controllers
         {
             bool res = false;
 
-            // On vérifie que la confirmation du mot de passe est bonne
-            if (model.Confirmation != model.MotDePasse)
+            if (!model.IsValid())
             {
                 model.ErrorMessages.Add("Confirmation incorrecte.");
                 res = true;
