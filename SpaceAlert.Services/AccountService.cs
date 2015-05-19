@@ -27,6 +27,11 @@ namespace SpaceAlert.Services
             return membreRepository.GetExistingMember(pseudo) != null;
         }
 
+        public bool EmailDejaUtilise(string email)
+        {
+            return membreRepository.GetExistingEmail(email) != null;
+        }
+
         /// <summary>
         /// Tente de se connecter
         /// </summary>

@@ -153,6 +153,13 @@ namespace SpaceAlert.Web.Controllers
                 res = true;
             }
 
+            // On vérifie que l'adresse email n'est pas déjà utilisée
+            if (serviceProvider.AccountService.EmailDejaUtilise(model.Email))
+            {
+                model.ErrorMessages.Add("Cette adresse est déjà utilisée.");
+                res = true;
+            }
+
             // On vérifie que le pseudo n'est pas déjà utilisé
             if (serviceProvider.AccountService.Existe(model.Pseudo))
             {

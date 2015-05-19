@@ -71,5 +71,21 @@ namespace SpaceAlert.DataAccess.Repositories
                 }
             }
         }
+
+        public string GetExistingEmail(string email)
+        {
+            using (DbConnection conn = Command.GetConnexion())
+            {
+                conn.Open();
+                try
+                {
+                    return membreDao.GetEmailIfExists(email, conn);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
     }
 }
