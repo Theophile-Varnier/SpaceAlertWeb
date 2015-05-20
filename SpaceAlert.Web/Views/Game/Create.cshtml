@@ -31,7 +31,7 @@
                     </div>
                     <div class="checkbox">
                         <label>
-                            @Html.CheckBoxFor(model => model.Blanches) Cartes Blanches
+                            @Html.CheckBoxFor(model => model.Blanches, new { @checked = "checked" }) Cartes Blanches
                         </label>
                     </div>
                     <div class="checkbox">
@@ -44,9 +44,10 @@
                             @Html.CheckBoxFor(model => model.Rouges) Cartes Rouges
                         </label>
                     </div>
-                    <div class="col-xs-8">
+                    <div>
+                        @Html.Partial("ModelErrors", Model)
                     </div>
-                    <div class="text-right col-xs-4">
+                    <div class="text-right">
                         <button class="btn btn-primary" type="submit">Go!</button>
                     </div>
                 }

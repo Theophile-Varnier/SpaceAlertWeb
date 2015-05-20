@@ -43,10 +43,15 @@
     <Compile Include="AccountService.cs" />
     <Compile Include="Exceptions\MembreNonExistantException.cs" />
     <Compile Include="Exceptions\MotDePasseInvalideException.cs" />
+    <Compile Include="GameService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceProvider.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SpaceAlert.Business\SpaceAlert.Business.csproj">
+      <Project>{892997DA-2305-4FAD-BE02-20C35557FA3D}</Project>
+      <Name>SpaceAlert.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpaceAlert.DataAccess\SpaceAlert.DataAccess.csproj">
       <Project>{200c3562-4217-440b-84e5-5fc581f04061}</Project>
       <Name>SpaceAlert.DataAccess</Name>

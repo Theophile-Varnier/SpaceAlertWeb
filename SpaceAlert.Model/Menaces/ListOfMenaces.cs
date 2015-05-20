@@ -1,34 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SpaceAlert.Model.Helpers;
+using SpaceAlert.Model.Helpers.Enums;
 
 namespace SpaceAlert.Model.Menaces
 {
     /// <summary>
     /// Représente la liste des menaces pour une couleur
     /// </summary>
-    public class ListOfMenaces
+    public class ListOfMenaces : Dictionary<TypeMenace, List<Menace>>
     {
         /// <summary>
-        /// Les menaces externes normales
+        /// Récupère une menace aléatoire d'un type donné
+        /// Et la supprime de la liste
         /// </summary>
-        public List<Menace> ExternesNormales { get; set; }
+        /// <param name="from">Le type de la menace</param>
+        /// <returns>Une menace aléatoire du type demandé</returns>
+        public Menace GetNextRandom(TypeMenace from)
+        {
+            return ContainsKey(from) ? this[from].GetNextRandom() : null;
+        }
 
         /// <summary>
-        /// Les menaces externes sérieuses
+        /// Surcharge de l'opérateur +
         /// </summary>
-        public List<Menace> ExternesSerieuses { get; set; }
+        /// <param name="l1"></param>
+        /// <param name="l2"></param>
+        /// <returns></returns>
+        public static ListOfMenaces operator +(ListOfMenaces l1, ListOfMenaces l2)
+        {
+            ListOfMenaces res = new ListOfMenaces();
 
-        /// <summary>
-        /// Les menaces internes normales
-        /// </summary>
-        public List<Menace> InternesNormales { get; set; }
+            foreach (TypeMenace type in l1.Keys)
+            {
+                res[type] = new List<Menace>(l1[type]);
+            }
 
-        /// <summary>
-        /// Les menaces internes sérieuses
-        /// </summary>
-        public List<Menace> InternesSerieuses { get; set; }
+            foreach (TypeMenace type in l2.Keys)
+            {
+                if (res.ContainsKey(type))
+                {
+                    res[type].AddRange(l2[type]);
+                }
+                else
+                {
+                    res[type] = new List<Menace>(l2[type]);
+                }
+            }
+
+            return res;
+        }
     }
 }

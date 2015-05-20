@@ -29,16 +29,10 @@
                 @Html.PasswordFor(model => model.Confirmation, new { @class = "form-control", required = "" })
                 @Html.ValidationMessageFor(model => model.Confirmation)
             </div>
-            <div class="col-xs-8">
-                @if (Model != null && Model.ErrorMessages != null)
-                {
-                    foreach (string message in Model.ErrorMessages)
-                    {
-                        <p class="text-danger">@message</p>
-                    }
-                }
+            <div>
+                @Html.Partial("ModelErrors", Model)
             </div>
-            <div class="text-right col-xs-4">
+            <div class="text-right">
                 <button class="btn btn-primary" type="submit">Go!</button>
             </div>
         }

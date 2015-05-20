@@ -1,0 +1,9 @@
+﻿@model SpaceAlert.Web.Models.AbstractViewModel
+
+@if (Model != null && Model.ErrorMessages != null)
+{
+    foreach (string message in Model.ErrorMessages)
+    {
+        <p class="text-danger"><span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>&nbsp;@message</p>
+    }
+}

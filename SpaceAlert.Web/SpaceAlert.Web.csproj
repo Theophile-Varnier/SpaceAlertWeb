@@ -142,6 +142,7 @@
     <Compile Include="Models\AccountViewModel.cs" />
     <Compile Include="Models\GameViewModel.cs" />
     <Compile Include="Models\Mapping\AccountMapper.cs" />
+    <Compile Include="Models\Mapping\GameMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -221,6 +222,7 @@
     </Content>
     <Content Include="SpaceAlert.Web.wpp.targets" />
     <Content Include="Views\Game\Create.cshtml" />
+    <Content Include="Views\Shared\ModelErrors.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

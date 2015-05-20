@@ -1,8 +1,5 @@
-﻿using System;
+﻿using SpaceAlert.Model.Helpers.Enums;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using SpaceAlert.Model.Helpers.Enums;
 
 namespace SpaceAlert.Web.Models
 {
@@ -20,18 +17,34 @@ namespace SpaceAlert.Web.Models
 
         public bool Rouges { get; set; }
 
-        public override bool IsValid()
+        /// <summary>
+        /// Vérifie que le modèle est valide
+        /// </summary>
+        /// <returns></returns>
+        public override bool Validate()
         {
+            if (ErrorMessages != null)
+            {
+                ErrorMessages.Clear();
+            }
+            else
+            {
+                ErrorMessages = new List<string>();
+            }
+
             if (!Blanches && !Jaunes && !Rouges)
             {
+                ErrorMessages.Add("La mission doit contenir au moins un type de menaces");
                 return false;
             }
             if (NbJoueurs < 0 || NbJoueurs > 5)
             {
+                ErrorMessages.Add("Problème de configuration");
                 return false;
             }
             if (NbAndroids < 0 || NbAndroids > 4)
             {
+                ErrorMessages.Add("Problème de configuration");
                 return false;
             }
             return NbAndroids + NbJoueurs <= 5;

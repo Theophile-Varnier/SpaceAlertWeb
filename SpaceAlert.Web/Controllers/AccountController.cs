@@ -144,13 +144,7 @@ namespace SpaceAlert.Web.Controllers
         /// <returns></returns>
         private bool IsInvalid(AccountViewModel model)
         {
-            bool res = false;
-
-            if (!model.IsValid())
-            {
-                model.ErrorMessages.Add("Confirmation incorrecte.");
-                res = true;
-            }
+            bool res = !model.Validate();
 
             // On vérifie que l'adresse email n'est pas déjà utilisée
             if (serviceProvider.AccountService.EmailDejaUtilise(model.Email))
