@@ -223,6 +223,7 @@
     <Content Include="SpaceAlert.Web.wpp.targets" />
     <Content Include="Views\Game\Create.cshtml" />
     <Content Include="Views\Shared\ModelErrors.cshtml" />
+    <Content Include="Views\Game\WaitRoom.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

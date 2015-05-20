@@ -44,6 +44,13 @@ namespace SpaceAlert.Web.Controllers
             {
                 return View(model);
             }
+            //return RedirectToAction("WaitRoom", model);
+            return View("WaitRoom", model);
+        }
+
+        [HttpGet]
+        public ActionResult WaitRoom(GameViewModel model)
+        {
             return View(model);
         }
     }

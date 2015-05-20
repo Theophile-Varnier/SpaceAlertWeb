@@ -26,3 +26,7 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.no-padding {
+    padding: 0;
+}

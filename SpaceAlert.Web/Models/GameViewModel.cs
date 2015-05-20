@@ -1,4 +1,5 @@
 ﻿using SpaceAlert.Model.Helpers.Enums;
+using System;
 using System.Collections.Generic;
 
 namespace SpaceAlert.Web.Models
@@ -6,6 +7,8 @@ namespace SpaceAlert.Web.Models
     public class GameViewModel : AbstractViewModel
     {
         public TypeMission TypeMission { get; set; }
+
+        public Guid GameId { get; set; }
 
         public int NbJoueurs { get; set; }
 
