@@ -32,14 +32,14 @@ namespace SpaceAlert.Services
             {
                 res.MenacesDisponibles += SpaceAlertData.GetObject<ListOfMenaces>("MenacesBlanches");
             }
-            if (res.Partie.Difficulte.HasFlag(Couleur.JAUNE))
-            {
-                res.MenacesDisponibles += SpaceAlertData.GetObject<ListOfMenaces>("MenacesJaunes");
-            }
-            if (res.Partie.Difficulte.HasFlag(Couleur.ROUGE))
-            {
-                res.MenacesDisponibles += SpaceAlertData.GetObject<ListOfMenaces>("MenacesRouges");
-            }
+            //if (res.Partie.Difficulte.HasFlag(Couleur.JAUNE))
+            //{
+            //    res.MenacesDisponibles += SpaceAlertData.GetObject<ListOfMenaces>("MenacesJaunes");
+            //}
+            //if (res.Partie.Difficulte.HasFlag(Couleur.ROUGE))
+            //{
+            //    res.MenacesDisponibles += SpaceAlertData.GetObject<ListOfMenaces>("MenacesRouges");
+            //}
 
             // Initialisation de l'état du vaisseau
             res.Partie.Vaisseau = SpaceAlertData.GetObject<Vaisseau>("Vaisseau");
@@ -72,6 +72,16 @@ namespace SpaceAlert.Services
             game.Partie.Mission = InitialiserMission(game.Partie.TypeMission);
             game.Statut = StatutPartie.JEU;
             return game.Partie.Id;
+        }
+
+        /// <summary>
+        /// Récupère une partie en cours
+        /// </summary>
+        /// <param name="gameId">L'id de la partie</param>
+        /// <returns></returns>
+        public List<Game> RecupererGameEnCours()
+        {
+            return SpaceAlertData.GameEnAttente();
         }
     }
 }

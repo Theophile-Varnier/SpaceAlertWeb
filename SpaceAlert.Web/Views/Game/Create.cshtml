@@ -3,7 +3,7 @@
 }
 @using SpaceAlert.Model.Helpers.Enums
 @using SpaceAlert.Web.Helpers
-@model SpaceAlert.Web.Models.GameViewModel
+@model SpaceAlert.Web.Models.GameCreationViewModel
 
 <div class="row">
     <div class="col-xs-4"></div>
@@ -16,32 +16,32 @@
                 @using (Html.BeginForm("Create", "Game", FormMethod.Post, new { @id = "creationForm" }))
                 {
                     <div class="form-group">
-                        @Html.LabelFor(model => model.TypeMission, "Type de mission")
-                        @Html.DropDownListFor(model => model.TypeMission, new SelectList(Enum.GetValues(typeof(TypeMission))), new { @class = "form-control", required = "" })
-                        @Html.ValidationMessageFor(model => model.TypeMission)
+                        @Html.LabelFor(model => model.Game.TypeMission, "Type de mission")
+                        @Html.DropDownListFor(model => model.Game.TypeMission, new SelectList(Enum.GetValues(typeof(TypeMission))), new { @class = "form-control", required = "" })
+                        @Html.ValidationMessageFor(model => model.Game.TypeMission)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(model => model.NbJoueurs, "Nombre de joueurs")
-                        @Html.DropDownListFor(model => model.NbJoueurs, new SelectList(new List<int> { 5, 4, 3, 2, 1 }), new { @class = "form-control", required = "" })
-                        @Html.ValidationMessageFor(model => model.NbJoueurs)
+                        @Html.LabelFor(model => model.Game.NbJoueurs, "Nombre de joueurs")
+                        @Html.DropDownListFor(model => model.Game.NbJoueurs, new SelectList(new List<int> { 5, 4, 3, 2, 1 }), new { @class = "form-control", required = "" })
+                        @Html.ValidationMessageFor(model => model.Game.NbJoueurs)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(model => model.NbAndroids, "Nombre d'androids")
-                        @Html.DropDownListFor(model => model.NbAndroids, new SelectList(new List<int> { 0, 1, 2, 3, 4 }), HtmlHelpers.GetHtmlAttribute("form-control", Model == null || Model.NbJoueurs == 5))
+                        @Html.LabelFor(model => model.Game.NbAndroids, "Nombre d'androids")
+                        @Html.DropDownListFor(model => model.Game.NbAndroids, new SelectList(new List<int> { 0, 1, 2, 3, 4 }), HtmlHelpers.GetHtmlAttribute("form-control", Model == null || Model.Game.NbJoueurs == 5))
                     </div>
                     <div class="checkbox">
                         <label>
-                            @Html.CheckBoxFor(model => model.Blanches, new { @checked = "checked" }) Cartes Blanches
+                            @Html.CheckBoxFor(model => model.Game.Blanches, new { @checked = "checked" }) Cartes Blanches
                         </label>
                     </div>
                     <div class="checkbox">
                         <label>
-                            @Html.CheckBoxFor(model => model.Jaunes) Cartes Jaunes
+                            @Html.CheckBoxFor(model => model.Game.Jaunes) Cartes Jaunes
                         </label>
                     </div>
                     <div class="checkbox">
                         <label>
-                            @Html.CheckBoxFor(model => model.Rouges) Cartes Rouges
+                            @Html.CheckBoxFor(model => model.Game.Rouges) Cartes Rouges
                         </label>
                     </div>
                     <div>
@@ -51,6 +51,7 @@
                         <button class="btn btn-primary" type="button" id="falseSubmit">Go!</button>
                     </div>
                     @Html.HiddenFor(model => model.CreatedBy)
+                    @Html.HiddenFor(model => model.CreatorConnectionId)
                 }
             </div>
         </div>
@@ -76,4 +77,5 @@
 
 @section scripts{
     @Scripts.Render("~/Scripts/App/createGame.js")
+    @Scripts.Render("~/signalr/hubs")
 }

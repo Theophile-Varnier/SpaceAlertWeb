@@ -1,4 +1,5 @@
-﻿using SpaceAlert.Model.Jeu;
+﻿using SpaceAlert.Model.Helpers.Enums;
+using SpaceAlert.Model.Jeu;
 using Spring.Context;
 using Spring.Context.Support;
 using System;
@@ -33,6 +34,15 @@ namespace SpaceAlert.Business
         public static GameContext Game(Guid gameId)
         {
             return Games.FirstOrDefault(g => g.Partie.Id == gameId);
+        }
+
+        /// <summary>
+        /// Récupère la liste des parties en attente
+        /// </summary>
+        /// <returns></returns>
+        public static List<Game> GameEnAttente()
+        {
+            return Games.Where(c => c.Statut == StatutPartie.CREATION).Select(c => c.Partie).ToList();
         }
 
         /// <summary>

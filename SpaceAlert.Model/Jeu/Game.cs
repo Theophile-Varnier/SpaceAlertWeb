@@ -33,6 +33,8 @@ namespace SpaceAlert.Model.Jeu
 
         public Couleur Difficulte { get; set; }
 
-        public List<Joueur> Joueurs { get; set; } 
+        public List<Joueur> Joueurs { get; set; }
+
+        public DateTime DateCreation { get; set; }
     }
 }

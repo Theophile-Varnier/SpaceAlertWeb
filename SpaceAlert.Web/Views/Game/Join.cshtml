@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Rejoindre une partie";
+}
+@using SpaceAlert.Web.Models
+@model JoinGameViewModel
+<div class="page-header">
+    <h2>Rejoindre une partie</h2>
+</div>
+<div class="row">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-8">
+    <table class="table">
+        <tr>
+            <th>Type de mission</th>
+            <th>Date de création</th>
+            <th>B / J / R</th>
+        </tr>
+        @foreach (GameViewModel game in Model.AvailableGames)
+        {
+            <tr>
+                <td>@game.TypeMission</td>
+                <td>@game.DateCreation</td>
+                <td>
+                    @if (game.Blanches)
+                    {
+                        <span class="glyphicon glyphicon-ok text-success"></span>
+                    }
+                    else
+                    {
+                        <span class="glyphicon glyphicon-remove text-danger"></span>
+                    }
+                    @if (game.Jaunes)
+                    {
+                        <span class="glyphicon glyphicon-ok text-success"></span>
+                    }
+                    else
+                    {
+                        <span class="glyphicon glyphicon-remove text-danger"></span>
+                    }
+                    @if (game.Rouges)
+                    {
+                        <span class="glyphicon glyphicon-ok text-success"></span>
+                    }
+                    else
+                    {
+                        <span class="glyphicon glyphicon-remove text-danger"></span>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+</div>

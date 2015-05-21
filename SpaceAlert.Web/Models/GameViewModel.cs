@@ -8,10 +8,10 @@ namespace SpaceAlert.Web.Models
     {
         public TypeMission TypeMission { get; set; }
 
-        public string CreatedBy { get; set; }
-
         public Guid GameId { get; set; }
 
+        public DateTime DateCreation { get; set; }
+        
         public int NbJoueurs { get; set; }
 
         public int NbAndroids { get; set; }
@@ -21,6 +21,8 @@ namespace SpaceAlert.Web.Models
         public bool Jaunes { get; set; }
 
         public bool Rouges { get; set; }
+
+        public List<PlayerViewModel> Players { get; set; }
 
         /// <summary>
         /// Vérifie que le modèle est valide

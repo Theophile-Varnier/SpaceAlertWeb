@@ -1,8 +1,8 @@
-﻿@model SpaceAlert.Web.Models.GameViewModel
+﻿@using SpaceAlert.Web.Models
+@model GameViewModel
 @{
     ViewBag.Title = "WaitingRoom";
 }
-
 <div class="row">
     <div class="col-xs-12">
         <div class="col-xs-3 no-padding"></div>
@@ -55,6 +55,19 @@
                     </p>
                 </div>
             </div>
+        </div>
+        <div class="col-xs-9">
+            <table>
+                @if (Model != null && Model.Players != null)
+                {
+                    foreach (PlayerViewModel player in Model.Players)
+                    {
+                        <tr>
+                            <td>@player.Name</td>
+                        </tr>
+                    }
+                }
+            </table>
         </div>
     </div>
 </div>

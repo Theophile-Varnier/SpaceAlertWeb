@@ -1,4 +1,6 @@
-﻿using SpaceAlert.Model.Helpers.Enums;
+﻿using System;
+using System.Collections.Generic;
+using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Jeu;
 
 namespace SpaceAlert.Web.Models.Mapping
@@ -9,7 +11,8 @@ namespace SpaceAlert.Web.Models.Mapping
         {
             Game res = new Game
             {
-                TypeMission = model.TypeMission
+                TypeMission = model.TypeMission,
+                DateCreation = DateTime.Now
             };
             if (model.Blanches)
             {
@@ -23,7 +26,28 @@ namespace SpaceAlert.Web.Models.Mapping
             {
                 res.Difficulte |= Couleur.ROUGE;
             }
+
+            res.Joueurs = new List<Joueur>();
+            if (model.Players != null)
+            {
+                foreach (PlayerViewModel player in model.Players)
+                {
+                    res.Joueurs.Add(new Joueur { NomPersonnage = player.Name });
+                }
+            }
             return res;
+        }
+
+        public static GameViewModel MapToModel(Game source)
+        {
+            return new GameViewModel
+            {
+                DateCreation = source.DateCreation,
+                TypeMission = source.TypeMission,
+                Blanches = source.Difficulte.HasFlag(Couleur.BLANCHE),
+                Jaunes = source.Difficulte.HasFlag(Couleur.JAUNE),
+                Rouges = source.Difficulte.HasFlag(Couleur.ROUGE)
+            };
         }
     }
 }
