@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SpaceAlert.Business;
+﻿using SpaceAlert.Business;
 using SpaceAlert.Model.Helpers;
 using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Jeu;
 using SpaceAlert.Model.Menaces;
 using SpaceAlert.Model.Plateau;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SpaceAlert.Services
 {

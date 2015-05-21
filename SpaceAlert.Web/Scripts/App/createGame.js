@@ -11,4 +11,19 @@
             $("#NbAndroids").append("<option>" + i + "</option>");
         }
     });
+
+    $("#falseSubmit").on("click", function (e) {
+        $("#modalCharName").modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+    });
+
+    $("#falseForm").on('submit', function (e) {
+        e.preventDefault();
+        if ($("#createdByName").val() != "") {
+            $("#CreatedBy").val($("#createdByName").val());
+            $("#creationForm").submit();
+        }
+    });
 })

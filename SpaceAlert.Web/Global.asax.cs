@@ -1,7 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using SpaceAlert.Services;
+using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using SpaceAlert.Business;
 
 namespace SpaceAlert.Web
 {
@@ -13,7 +13,7 @@ namespace SpaceAlert.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            SpaceAlertData.Init();
+            ServiceProvider.Init();
         }
     }
 }

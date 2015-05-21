@@ -8,6 +8,8 @@ namespace SpaceAlert.Web.Models
     {
         public TypeMission TypeMission { get; set; }
 
+        public string CreatedBy { get; set; }
+
         public Guid GameId { get; set; }
 
         public int NbJoueurs { get; set; }

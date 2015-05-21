@@ -1,4 +1,7 @@
 ﻿
+
+using SpaceAlert.Business;
+
 namespace SpaceAlert.Services
 {
     /// <summary>
@@ -18,6 +21,14 @@ namespace SpaceAlert.Services
         public GameService GameService
         {
             get { return gameService ?? (gameService = new GameService()); }
+        }
+
+        /// <summary>
+        /// Initialise le contexte du jeu
+        /// </summary>
+        public static void Init()
+        {
+            SpaceAlertData.Init();
         }
     }
 }
