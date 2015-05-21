@@ -1,9 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SpaceAlert.Web.Models
 {
     public class JoinGameViewModel
     {
         public List<GameViewModel> AvailableGames { get; set; }
+
+        public Guid GameToJoin { get; set; }
+
+        public PlayerViewModel Player { get; set; }
     }
 }

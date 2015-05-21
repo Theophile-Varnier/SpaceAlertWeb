@@ -10,6 +10,18 @@ namespace SpaceAlert.Model.Menaces
     /// </summary>
     public class ListOfMenaces : Dictionary<TypeMenace, List<Menace>>
     {
+        public ListOfMenaces()
+            : base()
+        {
+
+        }
+
+        public ListOfMenaces(Dictionary<TypeMenace, List<Menace>> source)
+            : base(source)
+        {
+
+        }
+
         /// <summary>
         /// Récupère une menace aléatoire d'un type donné
         /// Et la supprime de la liste

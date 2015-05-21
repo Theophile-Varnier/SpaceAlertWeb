@@ -30,3 +30,7 @@ textarea {
 .no-padding {
     padding: 0;
 }
+
+.liste-parties tr td {
+    cursor: pointer;
+}
