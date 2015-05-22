@@ -83,5 +83,15 @@ namespace SpaceAlert.Services
         {
             return SpaceAlertData.GameEnAttente();
         }
+
+        /// <summary>
+        /// Récupère une game enregistrée
+        /// </summary>
+        /// <param name="gameId"></param>
+        /// <returns></returns>
+        public GameContext GetGame(Guid gameId)
+        {
+            return SpaceAlertData.Game(gameId);
+        }
     }
 }

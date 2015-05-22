@@ -1,4 +1,5 @@
-﻿@using SpaceAlert.Web.Models
+﻿@using System.Security
+@using SpaceAlert.Web.Models
 @model GameViewModel
 @{
     ViewBag.Title = "WaitingRoom";
@@ -71,3 +72,8 @@
         </div>
     </div>
 </div>
+
+@section scripts{
+    @Scripts.Render("~/Scripts/App/waitRoom.js")
+    @Scripts.Render("~/signalr/hubs")
+}

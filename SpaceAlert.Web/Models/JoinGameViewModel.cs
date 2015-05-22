@@ -9,6 +9,8 @@ namespace SpaceAlert.Web.Models
 
         public Guid GameToJoin { get; set; }
 
+        public string ConnectionId { get; set; }
+
         public PlayerViewModel Player { get; set; }
     }
 }

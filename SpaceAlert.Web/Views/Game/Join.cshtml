@@ -14,15 +14,17 @@
                 <tr>
                     <th>Type de mission</th>
                     <th>Date de création</th>
+                    <th>Nombres de joueurs</th>
                     <th>B / J / R</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (GameViewModel game in Model.AvailableGames)
                 {
-                    <tr>
+                    <tr class="game-detail">
                         <td>@game.TypeMission</td>
                         <td>@game.DateCreation</td>
+                        <td>@game.Players.Count/@game.NbJoueurs</td>
                         <td>
                             @if (game.Blanches)
                             {
@@ -49,14 +51,35 @@
                                 <span class="glyphicon glyphicon-remove text-danger"></span>
                             }
                         </td>
+                        <td class="hidden game-id">@game.GameId</td>
                     </tr>
                 }
             </tbody>
         </table>
-        @using (Html.BeginForm("Join"))
-        {
-            @Html.HiddenFor(m => m.GameToJoin)
-            @Html.HiddenFor(m => m.Player.Name)
-        }
+        <div class="modal fade" id="modalCharName" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        @using (Html.BeginForm("Join", "Game", FormMethod.Post, new { @id = "joinGameForm" }))
+                        {
+                            @Html.HiddenFor(m => m.GameToJoin)
+                            @Html.HiddenFor(m => m.ConnectionId)
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Player.Name, "Choisissez un personnage")
+                                @Html.TextBoxFor(m => m.Player.Name, new { @class = "form-control", required = "" })
+                            </div>
+                            <div class="text-right">
+                                <button class="btn btn-primary">Go !</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+@section scripts{
+    @Scripts.Render("~/Scripts/App/joinGame.js")
+    @Scripts.Render("~/signalr/hubs")
+}

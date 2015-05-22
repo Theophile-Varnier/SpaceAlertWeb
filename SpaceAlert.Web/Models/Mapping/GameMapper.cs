@@ -27,7 +27,7 @@ namespace SpaceAlert.Web.Models.Mapping
                 res.Difficulte |= Couleur.ROUGE;
             }
 
-            res.Joueurs = new List<Joueur>();
+            res.Joueurs = new List<Joueur>(model.NbJoueurs);
             if (model.Players != null)
             {
                 foreach (PlayerViewModel player in model.Players)
@@ -40,14 +40,26 @@ namespace SpaceAlert.Web.Models.Mapping
 
         public static GameViewModel MapToModel(Game source)
         {
-            return new GameViewModel
+            GameViewModel res = new GameViewModel
             {
                 DateCreation = source.DateCreation,
                 TypeMission = source.TypeMission,
+                GameId = source.Id,
                 Blanches = source.Difficulte.HasFlag(Couleur.BLANCHE),
                 Jaunes = source.Difficulte.HasFlag(Couleur.JAUNE),
+                NbJoueurs = source.Joueurs.Capacity,
+                Players = new List<PlayerViewModel>(),
                 Rouges = source.Difficulte.HasFlag(Couleur.ROUGE)
             };
+
+            foreach (Joueur joueur in source.Joueurs)
+            {
+                res.Players.Add(new PlayerViewModel
+                {
+                    Name = joueur.NomPersonnage
+                });
+            }
+            return res;
         }
     }
 }

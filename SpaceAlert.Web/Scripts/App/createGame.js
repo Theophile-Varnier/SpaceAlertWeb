@@ -1,6 +1,10 @@
 ﻿$(function () {
     var roomHub = $.connection.waitHub;
 
+    roomHub.client.addChatMessage = function(message) {
+        console.log(message);
+    };
+
     $("#NbJoueurs").on("change", function (e) {
         var selectedValue = parseInt($(e.target).val());
         if (selectedValue == 5) {

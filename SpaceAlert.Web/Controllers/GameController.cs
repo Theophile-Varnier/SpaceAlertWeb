@@ -13,7 +13,7 @@ namespace SpaceAlert.Web.Controllers
     {
         private ServiceProvider serviceProvider = new ServiceProvider();
 
-            // GET: Game
+        // GET: Game
         /// <summary>
         /// Page d'accueil des parties
         /// </summary>
@@ -89,6 +89,18 @@ namespace SpaceAlert.Web.Controllers
                 model.AvailableGames.Add(GameMapper.MapToModel(game));
             }
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Join(JoinGameViewModel model)
+        {
+            GameContext game = serviceProvider.GameService.GetGame(model.GameToJoin);
+            game.Partie.Joueurs.Add(new Joueur
+            {
+                NomPersonnage = model.Player.Name
+            });
+            WaitHub.JoinGame(model.Player.Name, model.ConnectionId, model.GameToJoin);
+            return View("WaitRoom", GameMapper.MapToModel(game.Partie));
         }
     }
 }

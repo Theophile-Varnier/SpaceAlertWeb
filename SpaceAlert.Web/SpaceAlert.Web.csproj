@@ -213,6 +213,8 @@
     <Content Include="Content\Medias\selectedcube.png" />
     <Content Include="Content\Medias\space_alert_card.jpeg" />
     <Content Include="Scripts\App\createGame.js" />
+    <Content Include="Scripts\App\joinGame.js" />
+    <Content Include="Scripts\App\waitRoom.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
