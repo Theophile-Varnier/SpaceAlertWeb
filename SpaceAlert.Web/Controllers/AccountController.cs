@@ -6,6 +6,7 @@ using SpaceAlert.Web.Models;
 using SpaceAlert.Web.Models.Mapping;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace SpaceAlert.Web.Controllers
 {
@@ -36,6 +37,8 @@ namespace SpaceAlert.Web.Controllers
         /// <param name="model"></param>
         /// <param name="returnUrl"></param>
         /// <returns></returns>
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult Connexion(AccountViewModel model, string returnUrl)
         {
@@ -49,7 +52,8 @@ namespace SpaceAlert.Web.Controllers
                 Membre membre = serviceProvider.AccountService.RecupererMembre(model.Pseudo, model.MotDePasse);
 
                 // Si oui on renseigne les informations dans la session actuelle
-                SetSession(membre);
+                // SetSession(membre);
+                FormsAuthentication.SetAuthCookie(model.Pseudo, false);
 
                 // Gestion de la redirection depuis une page qui nécessite une authentification
                 // Un peu crado mais pas trop le choix

@@ -51,5 +51,16 @@ namespace SpaceAlert.Services
             }
             return res;
         }
+
+        /// <summary>
+        /// Récupère un membre à l'aide de son pseudo
+        /// </summary>
+        /// <param name="pseudo"></param>
+        /// <returns></returns>
+        public Membre RecupererMembre(string pseudo)
+        {
+            Membre res;
+            return membreRepository.GetExistingMember(pseudo);
+        }
     }
 }

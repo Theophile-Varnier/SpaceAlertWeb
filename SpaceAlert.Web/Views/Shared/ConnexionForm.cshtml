@@ -7,6 +7,7 @@
     <div class="panel-body">
         @using (Html.BeginForm("Connexion", "Account", FormMethod.Post, new { @id = "connexionForm" }))
         {
+            @Html.AntiForgeryToken()
             <div class="form-group">
                 @Html.LabelFor(model => model.Pseudo, "Pseudo")
                 @Html.TextBoxFor(model => model.Pseudo, new { @class = "form-control", required = "" })

@@ -1,6 +1,6 @@
 ﻿@using SpaceAlert.Web.Helpers
 <ul class="nav navbar-nav navbar-right">
-    <li>@Html.ActionLink(Session.Get("pseudo"), "Index", "Account")</li>
+    <li>@Html.ActionLink(User.Identity.Name, "Index", "Account")</li>
     <li>@Html.ActionLink("(se déconnecter)", "Deconnexion", "Account")</li>
 </ul>
 
