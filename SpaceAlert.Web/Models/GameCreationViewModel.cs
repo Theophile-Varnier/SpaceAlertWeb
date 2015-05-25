@@ -5,7 +5,7 @@ namespace SpaceAlert.Web.Models
     {
         public string CreatedBy { get; set; }
 
-        public string CreatorConnectionId { get; set; }
+        public bool IsGameOwner { get; set; }
 
         public GameViewModel Game { get; set; }
     }

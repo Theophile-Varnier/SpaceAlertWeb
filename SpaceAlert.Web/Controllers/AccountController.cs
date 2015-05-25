@@ -15,7 +15,7 @@ namespace SpaceAlert.Web.Controllers
         private readonly ServiceProvider serviceProvider = new ServiceProvider();
 
         // GET: Account
-        [CustomAuthorize]
+        [Authorize]
         public ActionResult Index()
         {
             return View();
@@ -52,7 +52,6 @@ namespace SpaceAlert.Web.Controllers
                 Membre membre = serviceProvider.AccountService.RecupererMembre(model.Pseudo, model.MotDePasse);
 
                 // Si oui on renseigne les informations dans la session actuelle
-                // SetSession(membre);
                 FormsAuthentication.SetAuthCookie(model.Pseudo, false);
 
                 // Gestion de la redirection depuis une page qui nécessite une authentification
@@ -88,9 +87,7 @@ namespace SpaceAlert.Web.Controllers
         [HttpGet]
         public ActionResult Deconnexion()
         {
-            Session["pseudo"] = null;
-            Session["idMembre"] = null;
-            Session["emailMembre"] = null;
+            FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
 
@@ -126,19 +123,8 @@ namespace SpaceAlert.Web.Controllers
             // Si tout va bien on fait l'inscription
             Membre membre = AccountMapper.MapFromViewModel(model);
             serviceProvider.AccountService.Inscrire(membre);
-            SetSession(membre);
+            FormsAuthentication.SetAuthCookie(membre.Pseudo, false);
             return RedirectToAction("Index", "Game");
-        }
-
-        /// <summary>
-        /// Renseigne les informations de session d'un membre
-        /// </summary>
-        /// <param name="membre"></param>
-        private void SetSession(Membre membre)
-        {
-            Session["pseudo"] = membre.Pseudo;
-            Session["idMembre"] = membre.Id;
-            Session["emailMembre"] = membre.Email;
         }
 
         /// <summary>

@@ -11,7 +11,7 @@
         bool disable = false;
         string tooltipCreation = "Créer une nouvelle partie";
         const string tooltipRejoindre = "Rejoindre une partie déjà créée";
-        if (!Session.IsAuthenticated())
+        if (!Request.IsAuthenticated)
         {
             disable = true;
             tooltipCreation = "Il faut être inscrit et connecté pour pouvoir créer une partie !";

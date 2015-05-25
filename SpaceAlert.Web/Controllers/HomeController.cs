@@ -5,10 +5,9 @@ namespace SpaceAlert.Web.Controllers
 {
     public class HomeController : Controller
     {
-        [Authorize]
         public ActionResult Index()
         {
-            if (Session.IsAuthenticated())
+            if (Request.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Game");
             }

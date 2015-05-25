@@ -2,5 +2,5 @@
 **/obj/*
 
 *.suo
-*/Web.*.config
-!*/Web.Template.config
+**/Web.*.config
+!**/Web.Template.config

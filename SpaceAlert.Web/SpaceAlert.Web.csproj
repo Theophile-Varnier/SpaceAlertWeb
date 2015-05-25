@@ -165,6 +165,8 @@
     <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Helpers\SessionExtensions.cs" />
     <Compile Include="Helpers\UriExtensions.cs" />
+    <Compile Include="Hubs\HubUser.cs" />
+    <Compile Include="Hubs\UserAlreadyInGameException.cs" />
     <Compile Include="Models\AbstractViewModel.cs" />
     <Compile Include="Models\AccountViewModel.cs" />
     <Compile Include="Models\GameCreationViewModel.cs" />

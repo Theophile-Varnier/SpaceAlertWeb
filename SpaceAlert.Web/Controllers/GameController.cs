@@ -29,7 +29,7 @@ namespace SpaceAlert.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [CustomAuthorize]
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -41,7 +41,7 @@ namespace SpaceAlert.Web.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        [CustomAuthorize]
+        [Authorize]
         public ActionResult Create(GameCreationViewModel model)
         {
             if (!model.Game.Validate())
@@ -55,10 +55,15 @@ namespace SpaceAlert.Web.Controllers
                     Name = model.CreatedBy
                 }
             };
+
+            // On initialise la partie côté serveur
             Game game = GameMapper.MapFromModel(model.Game);
             GameContext context = serviceProvider.GameService.InitialiserGame(game);
-            WaitHub.JoinGame(model.CreatedBy, model.CreatorConnectionId, context.Partie.Id);
-            return View("WaitRoom", model.Game);
+
+            // On renvoie vers la salle d'attente
+            model.Game.GameId = context.Partie.Id;
+            model.IsGameOwner = true;
+            return View("WaitRoom", model);
         }
 
         /// <summary>
@@ -67,7 +72,7 @@ namespace SpaceAlert.Web.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult WaitRoom(GameViewModel model)
+        public ActionResult WaitRoom(GameCreationViewModel model)
         {
             return View(model);
         }
@@ -91,6 +96,11 @@ namespace SpaceAlert.Web.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Ajoute un joueur à une partie
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Join(JoinGameViewModel model)
         {
@@ -99,8 +109,13 @@ namespace SpaceAlert.Web.Controllers
             {
                 NomPersonnage = model.Player.Name
             });
-            WaitHub.JoinGame(model.Player.Name, model.ConnectionId, model.GameToJoin);
-            return View("WaitRoom", GameMapper.MapToModel(game.Partie));
+            GameCreationViewModel newModel = new GameCreationViewModel
+            {
+                CreatedBy = model.Player.Name,
+                Game = GameMapper.MapToModel(game.Partie),
+                IsGameOwner = false
+            };
+            return View("WaitRoom", newModel);
         }
     }
 }

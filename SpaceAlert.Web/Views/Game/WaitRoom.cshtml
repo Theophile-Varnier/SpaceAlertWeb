@@ -1,6 +1,6 @@
 ﻿@using System.Security
 @using SpaceAlert.Web.Models
-@model GameViewModel
+@model GameCreationViewModel
 @{
     ViewBag.Title = "WaitingRoom";
 }
@@ -17,12 +17,14 @@
                     <div class="panel-title">Paramètres de la partie</div>
                 </div>
                 <div class="panel-body">
-                    <p><strong>Type : </strong>@Model.TypeMission</p>
-                    <p><strong>Nombre de joueurs : </strong>@Model.NbJoueurs</p>
-                    <p><strong>Nombre d'androids : </strong>@Model.NbAndroids</p>
+                    @Html.HiddenFor(m => m.Game.GameId)
+                    @Html.HiddenFor(m => m.CreatedBy)
+                    <p><strong>Type : </strong>@Model.Game.TypeMission</p>
+                    <p><strong>Nombre de joueurs : </strong>@Model.Game.NbJoueurs</p>
+                    <p><strong>Nombre d'androids : </strong>@Model.Game.NbAndroids</p>
                     <p><strong>Menaces : </strong></p>
                     <p>
-                        @if (Model.Blanches)
+                        @if (Model.Game.Blanches)
                         {
                             <span class="glyphicon glyphicon-ok text-success"></span>
                         }
@@ -33,7 +35,7 @@
                         <span> Blanches</span>
                     </p>
                     <p>
-                        @if (Model.Jaunes)
+                        @if (Model.Game.Jaunes)
                         {
                             <span class="glyphicon glyphicon-ok text-success"></span>
                         }
@@ -44,7 +46,7 @@
                         <span> Jaunes</span>
                     </p>
                     <p>
-                        @if (Model.Rouges)
+                        @if (Model.Game.Rouges)
                         {
                             <span class="glyphicon glyphicon-ok text-success"></span>
                         }
@@ -58,15 +60,17 @@
             </div>
         </div>
         <div class="col-xs-9">
-            <table>
-                @if (Model != null && Model.Players != null)
+            <table id="playerList">
+                @if (Model != null && Model.Game.Players != null)
                 {
-                    foreach (PlayerViewModel player in Model.Players)
-                    {
+                    <tbody>
+                        @foreach (PlayerViewModel player in Model.Game.Players)
+                        {
                         <tr>
                             <td>@player.Name</td>
                         </tr>
-                    }
+                        }
+                    </tbody>
                 }
             </table>
         </div>
@@ -74,6 +78,6 @@
 </div>
 
 @section scripts{
-    @Scripts.Render("~/Scripts/App/waitRoom.js")
     @Scripts.Render("~/signalr/hubs")
+    @Scripts.Render("~/Scripts/App/waitRoom.js")
 }

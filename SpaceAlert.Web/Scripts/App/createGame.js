@@ -1,20 +1,15 @@
 ﻿$(function () {
-    var roomHub = $.connection.waitHub;
 
-    roomHub.client.addChatMessage = function(message) {
-        console.log(message);
-    };
-
-    $("#NbJoueurs").on("change", function (e) {
+    $("#Game_NbJoueurs").on("change", function (e) {
         var selectedValue = parseInt($(e.target).val());
         if (selectedValue == 5) {
-            $("#NbAndroids").attr("disabled", "");
+            $("#Game_NbAndroids").attr("disabled", "");
         } else {
-            $("#NbAndroids").removeAttr("disabled");
+            $("#Game_NbAndroids").removeAttr("disabled");
         }
-        $("#NbAndroids").empty();
+        $("#Game_NbAndroids").empty();
         for (var i = 0; i < 6 - selectedValue; i++) {
-            $("#NbAndroids").append("<option>" + i + "</option>");
+            $("#Game_NbAndroids").append("<option>" + i + "</option>");
         }
     });
 
@@ -24,14 +19,11 @@
             keyboard: false
         });
     });
-    $.connection.hub.start().done(function() {
-        $("#falseForm").on('submit', function(e) {
-            e.preventDefault();
-            if ($("#createdByName").val() != "") {
-                $("#CreatedBy").val($("#createdByName").val());
-                $("#CreatorConnectionId").val($.connection.hub.id);
-                    $("#creationForm").submit();
-            }
-        });
+    $("#falseForm").on('submit', function (e) {
+        e.preventDefault();
+        if ($("#createdByName").val() != "") {
+            $("#CreatedBy").val($("#createdByName").val());
+            $("#creationForm").submit();
+        }
     });
 })
