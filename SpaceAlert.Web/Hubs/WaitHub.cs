@@ -23,6 +23,16 @@ namespace SpaceAlert.Web.Hubs
         }
 
         /// <summary>
+        /// Démarre une partie
+        /// </summary>
+        /// <param name="gameId"></param>
+        /// <returns></returns>
+        public async Task Start(string gameId)
+        {
+            await Clients.Group(gameId).connectToGame();
+        }
+
+        /// <summary>
         /// Quand un joueur rejoint une partie
         /// </summary>
         /// <param name="charName"></param>

@@ -117,5 +117,11 @@ namespace SpaceAlert.Web.Controllers
             };
             return View("WaitRoom", newModel);
         }
+
+        [HttpGet]
+        public ActionResult Play(string gameId)
+        {
+            return View();
+        }
     }
 }

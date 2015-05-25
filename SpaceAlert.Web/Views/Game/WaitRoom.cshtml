@@ -19,8 +19,9 @@
                 <div class="panel-body">
                     @Html.HiddenFor(m => m.Game.GameId)
                     @Html.HiddenFor(m => m.CreatedBy)
+                    @Html.Hidden("RedirectTo", Url.Action("Play", "Game", new { gameId=@Model.Game.GameId }))
                     <p><strong>Type : </strong>@Model.Game.TypeMission</p>
-                    <p><strong>Nombre de joueurs : </strong>@Model.Game.NbJoueurs</p>
+                    <p><strong>Nombre de joueurs : </strong><span id="nbPlayers">@Model.Game.NbJoueurs</span></p>
                     <p><strong>Nombre d'androids : </strong>@Model.Game.NbAndroids</p>
                     <p><strong>Menaces : </strong></p>
                     <p>
@@ -59,7 +60,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-9">
+        <div class="col-xs-6">
             <table id="playerList">
                 @if (Model != null && Model.Game.Players != null)
                 {
@@ -73,6 +74,12 @@
                     </tbody>
                 }
             </table>
+            <div class="text-right">
+                @if (Model.IsGameOwner)
+                {
+                    <button class="btn btn-primary" id="startGame" disabled>Lancer la partie</button>
+                }
+            </div>
         </div>
     </div>
 </div>
