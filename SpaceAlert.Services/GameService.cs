@@ -94,9 +94,27 @@ namespace SpaceAlert.Services
             return SpaceAlertData.Game(gameId);
         }
 
-        public List<string> GetPlayersColors()
+        /// <summary>
+        /// Set une couleur et la retourne
+        /// </summary>
+        /// <param name="gameId">la partie concernée</param>
+        /// <param name="charName">Le nom du personnage à qui assigner la couleur</param>
+        /// <returns></returns>
+        public string ProchaineCouleur(Guid gameId, string charName)
         {
-            return SpaceAlertData.PlayerColors;
-        } 
+            GameContext game = SpaceAlertData.Game(gameId);
+            int index = SpaceAlertData.PlayerColors.IndexOf(game.Partie.Joueurs.First(j => j.NomPersonnage == charName).Couleur);
+            int current = index;
+            string color;
+            do
+            {
+                current++;
+                color = SpaceAlertData.PlayerColors[current % SpaceAlertData.PlayerColors.Count];
+            } while (current != index && game.Partie.Joueurs.Select(j => j.Couleur).Contains(color));
+
+            game.Partie.Joueurs.First(j => j.NomPersonnage == charName).Couleur = color;
+
+            return color;
+        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceAlert.Model", "SpaceAlert.Model\SpaceAlert.Model.csproj", "{F38F6E5A-BBE5-4005-AD1E-3CC008588445}"
 EndProject
@@ -12,6 +12,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceAlert.Services", "SpaceAlert.Services\SpaceAlert.Services.csproj", "{68E03BA3-4D55-4F1B-B69F-B88F3D3311F7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceAlert.Business", "SpaceAlert.Business\SpaceAlert.Business.csproj", "{892997DA-2305-4FAD-BE02-20C35557FA3D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EC0E661B-64F1-4990-B57D-1EA29C8FAE7E}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.md = Readme.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
