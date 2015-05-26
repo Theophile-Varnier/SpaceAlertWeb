@@ -93,5 +93,10 @@ namespace SpaceAlert.Services
         {
             return SpaceAlertData.Game(gameId);
         }
+
+        public List<string> GetPlayersColors()
+        {
+            return SpaceAlertData.PlayerColors;
+        } 
     }
 }

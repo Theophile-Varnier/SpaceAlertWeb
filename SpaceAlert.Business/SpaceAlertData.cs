@@ -17,6 +17,15 @@ namespace SpaceAlert.Business
 
         private static List<GameContext> Games;
 
+        public static List<string> PlayerColors = new List<string>
+        {
+            "blue",
+            "red",
+            "green",
+            "yellow",
+            "purple"
+        };
+
         /// <summary>
         /// Initialisation des constantes du jeu
         /// </summary>

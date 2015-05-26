@@ -1,4 +1,6 @@
-﻿using SpaceAlert.Model.Jeu;
+﻿using System.EnterpriseServices;
+using System.Linq;
+using SpaceAlert.Model.Jeu;
 using SpaceAlert.Services;
 using SpaceAlert.Web.Helpers;
 using SpaceAlert.Web.Hubs;
@@ -52,7 +54,8 @@ namespace SpaceAlert.Web.Controllers
             {
                 new PlayerViewModel
                 {
-                    Name = model.CreatedBy
+                    Name = model.CreatedBy,
+                    Color = GetNextFreeColor(model.Game)
                 }
             };
 
@@ -115,6 +118,10 @@ namespace SpaceAlert.Web.Controllers
                 Game = GameMapper.MapToModel(game.Partie),
                 IsGameOwner = false
             };
+            foreach (PlayerViewModel player in newModel.Game.Players)
+            {
+                player.Color = GetNextFreeColor(newModel.Game);
+            }
             return View("WaitRoom", newModel);
         }
 
@@ -122,6 +129,15 @@ namespace SpaceAlert.Web.Controllers
         public ActionResult Play(string gameId)
         {
             return View();
+        }
+
+        private string GetNextFreeColor(GameViewModel model)
+        {
+            if (model.Players == null)
+            {
+                return serviceProvider.GameService.GetPlayersColors().First();
+            }
+            return serviceProvider.GameService.GetPlayersColors().First(c => !model.Players.Select(p => p.Color).Contains(c));
         }
     }
 }

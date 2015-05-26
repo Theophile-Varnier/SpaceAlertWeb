@@ -62,13 +62,15 @@
             </div>
         </div>
         <div class="col-xs-6">
-            <table id="playerList">
+            <table class="table" id="playerList">
                 @if (Model != null && Model.Game.Players != null)
                 {
                     <tbody>
                         @foreach (PlayerViewModel player in Model.Game.Players)
                         {
-                            <tr>
+                            <tr data-color-toggle="@player.Name">
+                                <td></td>
+                                <td><span class="fa fa-spinner fa-pulse no-display"></span>&nbsp;<span class="colored-square @player.Color"></span></td>
                                 <td>@player.Name</td>
                             </tr>
                         }
