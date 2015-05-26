@@ -10,6 +10,8 @@ namespace SpaceAlert.Web.Hubs
 
         private static ConcurrentDictionary<string, HubUser> GameUsers = new ConcurrentDictionary<string, HubUser>();
 
+        private static ConcurrentDictionary<string, int> PlayersReady = new ConcurrentDictionary<string, int>();
+
         /// <summary>
         /// Inscrit un membre à un groupe
         /// </summary>
@@ -19,7 +21,18 @@ namespace SpaceAlert.Web.Hubs
         public async Task Join(string charName, string gameId)
         {
             await Groups.Add(Context.ConnectionId, gameId);
-            Clients.OthersInGroup(gameId).addChatMessage(charName);
+
+            GameUsers.AddOrUpdate(charName, new HubUser
+            {
+                GameId = gameId,
+                LastKnownConnectionId = Context.ConnectionId
+            }, (s, user) =>
+            {
+                user.LastKnownConnectionId = Context.ConnectionId;
+                return user;
+            });
+
+            Clients.OthersInGroup(gameId).addPlayer(charName);
         }
 
         /// <summary>
@@ -29,7 +42,22 @@ namespace SpaceAlert.Web.Hubs
         /// <returns></returns>
         public async Task Start(string gameId)
         {
-            await Clients.Group(gameId).connectToGame();
+            await Clients.OthersInGroup(gameId).enableConnectionToGame();
+            PlayerReady(gameId);
+        }
+
+        /// <summary>
+        /// Notifie les clients qu'un joueur est prêt
+        /// </summary>
+        /// <param name="gameId">l'id de la partie</param>
+        /// <returns></returns>
+        public async Task PlayerReady(string gameId)
+        {
+            lock (PlayersReady)
+            {
+                PlayersReady.AddOrUpdate(gameId, 1, (s, i) => i + 1);
+            }
+            await Clients.Group(gameId).addPlayerReady(PlayersReady[gameId]);
         }
 
         /// <summary>
@@ -43,24 +71,6 @@ namespace SpaceAlert.Web.Hubs
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<WaitHub>();
             string id = gameId.ToString();
-
-            if (GameUsers.ContainsKey(charName))
-            {
-                if (GameUsers[charName].GameId != gameId)
-                {
-                    throw new UserAlreadyInGameException();
-                }
-                await context.Groups.Remove(GameUsers[charName].LastKnownConnectionId, id);
-            }
-            GameUsers.AddOrUpdate(charName, _ => new HubUser
-            {
-                GameId = gameId,
-                LastKnownConnectionId = connectionId
-            }, (c, u) =>
-            {
-                u.LastKnownConnectionId = connectionId;
-                return u;
-            });
 
             await context.Groups.Add(connectionId, id);
 

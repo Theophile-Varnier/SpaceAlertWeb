@@ -1,10 +1,9 @@
-﻿using System;
-
+﻿
 namespace SpaceAlert.Web.Hubs
 {
     public class HubUser
     {
-        public Guid GameId { get; set; }
+        public string GameId { get; set; }
 
         public string LastKnownConnectionId { get; set; }
 
