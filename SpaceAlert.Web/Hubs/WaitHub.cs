@@ -61,6 +61,18 @@ namespace SpaceAlert.Web.Hubs
         }
 
         /// <summary>
+        /// Indique aux joueurs que l'un d'entre eux a changé de couleur (le salop)
+        /// </summary>
+        /// <param name="gameId"></param>
+        /// <param name="oldColor"></param>
+        /// <param name="newColor"></param>
+        /// <returns></returns>
+        public async Task NotifyColorChanged(string gameId, string oldColor, string newColor)
+        {
+            await Clients.Group(gameId).notifyColorChanged(oldColor, newColor);
+        }
+
+        /// <summary>
         /// Quand un joueur rejoint une partie
         /// </summary>
         /// <param name="charName"></param>

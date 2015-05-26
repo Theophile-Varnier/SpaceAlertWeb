@@ -40,6 +40,13 @@
         $("#startGame").removeAttr("disabled");
     };
 
+    roomHub.client.notifyColorChanged = function (oldColor, newColor) {
+        $("." + oldColor)
+            .addClass(newColor)
+            .removeClass(oldColor)
+            .prev().addClass("no-display");
+    };
+
     // Signalement d'un joueur prêt à jouer
     roomHub.client.addPlayerReady = function (nbPlayersReady) {
         $($(".modal-body .player-ready")[nbPlayersReady - 1]).addClass("text-success");
@@ -72,6 +79,14 @@
                 backdrop: "static",
                 keyboard: false
             });
+        });
+
+        $("tr[data-color-toggle='" + $("#CreatedBy").val() + "']").on("click", ".colored-square", function () {
+            var nextColor = getFirstFreeColor();
+            if (nextColor != "") {
+                $(this).prev().removeClass("no-display");
+                roomHub.server.notifyColorChanged($("#Game_GameId").val(), $(this).attr('class').split(/\s+/)[1], nextColor);
+            }
         });
     });
 })
