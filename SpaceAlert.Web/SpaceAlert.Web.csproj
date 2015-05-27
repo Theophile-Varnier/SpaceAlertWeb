@@ -254,6 +254,7 @@
     <Content Include="Content\Medias\selectedcube.png" />
     <Content Include="Content\Medias\space_alert_card.jpeg" />
     <Content Include="Scripts\App\createGame.js" />
+    <Content Include="Scripts\App\jeu.js" />
     <Content Include="Scripts\App\joinGame.js" />
     <Content Include="Scripts\App\waitRoom.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -307,6 +308,7 @@
     <Content Include="Views\Game\WaitRoom.cshtml" />
     <Content Include="Views\Game\Join.cshtml" />
     <Content Include="Views\Game\Play.cshtml" />
+    <Content Include="Views\Game\Vaisseau.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

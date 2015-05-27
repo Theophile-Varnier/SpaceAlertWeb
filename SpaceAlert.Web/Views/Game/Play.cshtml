@@ -17,7 +17,7 @@
     <div id="infoJeu">
         <div class="col-xs-2" id="recap"></div>
         <div class="col-xs-8" id="plateau">
-            @*<img src="~/Content/Medias/plateau.jpg" id="imgPlateau"/>*@
+            @Html.Partial("Vaisseau")
         </div>
         <div class="col-xs-2"></div>
     </div>
@@ -28,5 +28,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/signalR")
+    @Scripts.Render("~/Scripts/jquery-ui-1.11.4.js")
+    @Scripts.Render("~/Scripts/App/jeu.js")
 </body>
 </html>
