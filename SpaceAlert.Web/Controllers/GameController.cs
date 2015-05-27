@@ -1,14 +1,11 @@
-﻿using System.EnterpriseServices;
-using System.Linq;
-using SpaceAlert.Model.Jeu;
+﻿using SpaceAlert.Model.Jeu;
 using SpaceAlert.Services;
-using SpaceAlert.Web.Helpers;
-using SpaceAlert.Web.Hubs;
 using SpaceAlert.Web.Models;
-using System.Collections.Generic;
-using System.Web.Mvc;
 using SpaceAlert.Web.Models.Mapping;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace SpaceAlert.Web.Controllers
 {
@@ -93,7 +90,7 @@ namespace SpaceAlert.Web.Controllers
             {
                 AvailableGames = new List<GameViewModel>()
             };
-            List<Game> games = serviceProvider.GameService.RecupererGameEnCours();
+            List<Game> games = serviceProvider.GameService.RecupererGameEnAttente();
             foreach (Game game in games)
             {
                 model.AvailableGames.Add(GameMapper.MapToModel(game));
@@ -106,7 +103,7 @@ namespace SpaceAlert.Web.Controllers
         /// </summary>
         /// <param name="gameId"></param>
         /// <param name="charName"></param>
-        /// <returns></returns>
+        /// <returns>Le nom de la nouvelle couleur</returns>
         [HttpGet]
         public string ChangeColor(string gameId, string charName)
         {
@@ -142,6 +139,11 @@ namespace SpaceAlert.Web.Controllers
             return View("WaitRoom", newModel);
         }
 
+        /// <summary>
+        /// Page du jeu à proprement parler
+        /// </summary>
+        /// <param name="gameId"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Play(string gameId)
         {

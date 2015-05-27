@@ -96,5 +96,9 @@
                 roomHub.server.notifyColorChanged($("#Game_GameId").val(), currentElem.attr('class').split(/\s+/)[1], newColor);
             });
         });
+
+        $(window).on('hashchange',function(e) {
+            window.alert("Changement de page");
+        });
     });
 })

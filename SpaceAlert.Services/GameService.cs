@@ -75,13 +75,12 @@ namespace SpaceAlert.Services
         }
 
         /// <summary>
-        /// Récupère une partie en cours
+        /// Récupère toutes les parties en attente de joueurs
         /// </summary>
-        /// <param name="gameId">L'id de la partie</param>
         /// <returns></returns>
-        public List<Game> RecupererGameEnCours()
+        public List<Game> RecupererGameEnAttente()
         {
-            return SpaceAlertData.GameEnAttente();
+            return SpaceAlertData.GameEnAttente().Where(g => g.Joueurs.Count < g.Joueurs.Capacity).ToList();
         }
 
         /// <summary>

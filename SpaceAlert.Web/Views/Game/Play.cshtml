@@ -1,0 +1,32 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Play</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/Game.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div id="infoJeu">
+        <div class="col-xs-2" id="recap"></div>
+        <div class="col-xs-8" id="plateau">
+            @*<img src="~/Content/Medias/plateau.jpg" id="imgPlateau"/>*@
+        </div>
+        <div class="col-xs-2"></div>
+    </div>
+    <div id="playerInfo">
+        <div class="col-xs-6" id="playerDeck"></div>
+        <div class="col-xs-6" id="playerPlan"></div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/signalR")
+</body>
+</html>

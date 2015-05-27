@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Space Alert 1.0</title>
     @Styles.Render("~/Content/css")
+    @RenderSection("Style", required: false)
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
@@ -29,11 +30,12 @@
                 {
                     @Html.Partial("SessionInfo")
                 }
-                else { 
-                <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Connexion", "Connexion", "Account")</li>
-                    <li>@Html.ActionLink("Inscription", "Inscription", "Account")</li>
-                </ul>
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink("Connexion", "Connexion", "Account")</li>
+                        <li>@Html.ActionLink("Inscription", "Inscription", "Account")</li>
+                    </ul>
                 }
             </div>
         </div>

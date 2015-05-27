@@ -47,6 +47,7 @@ textarea {
     border-color: transparent;
     border-color: rgba(1, 1, 1, 0.5);*/
     display: inline-block;
+    cursor: pointer;
 }
 
 .blue {
