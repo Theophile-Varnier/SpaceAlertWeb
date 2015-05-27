@@ -28,7 +28,7 @@
 
     // Connexion d'un joueur à la partie
     roomHub.client.addPlayer = function (message) {
-        $("#playerList tbody").append("<tr data-color-toggle='" + message + "'><td></td><td><span class='colored-square " + getFirstFreeColor() + "'></span></td><td>" + message + "</td></tr>");
+        $("#playerList tbody").append("<tr data-color-toggle='" + message + "'><td></td><td><span class='fa fa-spinner fa-pulse no-display'></span>&nbsp;<span class='colored-square " + getFirstFreeColor() + "'></span></td><td>" + message + "</td></tr>");
         if (isGameOwner() && $("#playerList tbody tr").length == nbPlayers()) {
             $("#startGame").removeAttr("disabled");
         }
@@ -51,7 +51,7 @@
     roomHub.client.addPlayerReady = function (nbPlayersReady) {
         $($(".modal-body .player-ready")[nbPlayersReady - 1]).addClass("text-success");
         if ($(".player-ready").length == nbPlayers()) {
-
+            // lancement de la partie
         }
     };
 
@@ -81,12 +81,20 @@
             });
         });
 
+        // Permet à un joueur de changer de couleur
         $("tr[data-color-toggle='" + $("#CreatedBy").val() + "']").on("click", ".colored-square", function () {
-            var nextColor = getFirstFreeColor();
-            if (nextColor != "") {
-                $(this).prev().removeClass("no-display");
-                roomHub.server.notifyColorChanged($("#Game_GameId").val(), $(this).attr('class').split(/\s+/)[1], nextColor);
-            }
+            var currentElem = $(this);
+            // On affiche le zigwigwi de chargement
+            currentElem.prev().removeClass("no-display");
+            // On récupère la prochaine couleur disponible (s'il en existe une)
+            $.ajax({
+                url: "ChangeColor?gameId=" + $("#Game_GameId").val() + "&charName=" + $("#CreatedBy").val(),
+                method: "GET"
+            })
+            .done(function (newColor) {
+                // On indique à tout le monde qu'il y a eu un changement de couleur
+                roomHub.server.notifyColorChanged($("#Game_GameId").val(), currentElem.attr('class').split(/\s+/)[1], newColor);
+            });
         });
     });
 })

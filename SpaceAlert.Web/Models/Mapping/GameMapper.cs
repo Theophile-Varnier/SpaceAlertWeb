@@ -56,7 +56,8 @@ namespace SpaceAlert.Web.Models.Mapping
             {
                 res.Players.Add(new PlayerViewModel
                 {
-                    Name = joueur.NomPersonnage
+                    Name = joueur.NomPersonnage,
+                    Color = joueur.Couleur
                 });
             }
             return res;
