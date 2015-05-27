@@ -46,6 +46,10 @@
     <Reference Include="Common.Logging.Core">
       <HintPath>..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
+    <Reference Include="dotless.Core, Version=1.4.0.0, Culture=neutral, PublicKeyToken=96b446c9e63eae34, processorArchitecture=MSIL">
+      <HintPath>..\packages\dotless.1.4.0.0\lib\dotless.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
       <Private>True</Private>
@@ -90,6 +94,10 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Optimization.Less, Version=1.3.0.0, Culture=neutral, PublicKeyToken=9b7581e0240fe480, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Web.Optimization.Less.1.3.3\lib\net40\System.Web.Optimization.Less.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -175,6 +183,7 @@
     <Compile Include="Models\Mapping\AccountMapper.cs" />
     <Compile Include="Models\Mapping\GameMapper.cs" />
     <Compile Include="Models\PlayerViewModel.cs" />
+    <Compile Include="Models\GameShipViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Hubs\WaitHub.cs" />
     <Compile Include="Startup.cs" />
@@ -264,6 +273,7 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="Content\less\jeu.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -309,6 +319,7 @@
     <Content Include="Views\Game\Join.cshtml" />
     <Content Include="Views\Game\Play.cshtml" />
     <Content Include="Views\Game\Vaisseau.cshtml" />
+    <Content Include="Views\Game\Salle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

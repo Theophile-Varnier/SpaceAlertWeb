@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using SpaceAlert.Model.Site;
+﻿using SpaceAlert.Model.Site;
 
 namespace SpaceAlert.Web.Models.Mapping
 {

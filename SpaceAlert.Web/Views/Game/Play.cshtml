@@ -10,13 +10,13 @@
     <title>Play</title>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/font-awesome.css" rel="stylesheet" />
-    <link href="~/Content/Game.css" rel="stylesheet" />
+    @Styles.Render("~/Content/less")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
     <div id="infoJeu">
         <div class="col-xs-2" id="recap"></div>
-        <div class="col-xs-8" id="plateau">
+        <div class="col-xs-8 no-padding" id="plateau">
             @Html.Partial("Vaisseau")
         </div>
         <div class="col-xs-2"></div>

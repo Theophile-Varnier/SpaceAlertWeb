@@ -1,0 +1,97 @@
+﻿html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+}
+
+#infoJeu {
+    height: 75%;
+}
+
+    #infoJeu > div {
+        height: 100%;
+        border-bottom: 1px solid black;
+    }
+
+        #infoJeu > div:first-child {
+            border-right: 1px solid black;
+        }
+
+        #infoJeu > div:last-child {
+            border-left: 1px solid black;
+        }
+
+#playerInfo {
+    height: 25%;
+}
+
+    #playerInfo > div {
+        height: 100%;
+    }
+
+#playerDeck {
+    border-right: 1px solid black;
+}
+
+#plateau {
+    background-image: url("../Medias/plateau.jpg");
+    -ms-background-size: contain;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.draggable {
+    height: 100%;
+    width: auto;
+}
+
+#imgPlateau {
+    height: 100%;
+    width: auto;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.grid {
+    width: 100%;
+    height: 100%;
+
+    & .grid-row {
+        -ms-display: flex;
+        display: flex;
+        height: 30%;
+        width: 100%;
+
+        &:first-child, &:last-child {
+            height: 20%;
+        }
+
+        & .grid-cell {
+            display: inline-block;
+            height: 100%;
+            width: 25%;
+            border: 1px solid black;
+        }
+
+            & .grid-cell:first-child, & .grid-cell:last-child {
+                width: 12.5%;
+            }
+
+        & .salle > .ligne{
+            height: 50%;
+            width: 100%;
+            display: flex;
+
+            & div {
+                width: 25%;
+                height: 100%;
+                border: 1px solid black;
+            }
+        }
+    }
+}
