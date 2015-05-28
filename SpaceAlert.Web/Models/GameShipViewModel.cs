@@ -10,5 +10,8 @@ namespace SpaceAlert.Web.Models
         public Dictionary<InGameZone, int> Energies { get; set; }
 
         public PlayerViewModel Joueur { get; set; }
+
+        public List<SalleViewModel> Salles { get; set; } 
+
     }
 }

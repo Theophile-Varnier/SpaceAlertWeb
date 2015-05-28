@@ -1,4 +1,6 @@
-﻿<div class="grid">
+﻿@model SpaceAlert.Web.Models.GameShipViewModel
+
+<div class="grid">
     <div class="grid-row">
         <div class="grid-cell"></div>
         <div class="grid-cell"></div>
@@ -7,10 +9,10 @@
         <div class="grid-cell"></div>
     </div>
     <div class="grid-row">
-        <div class="grid-cell"></div>        
-        @Html.Partial("Salle")
-        @Html.Partial("Salle")      
-        @Html.Partial("Salle")
+        <div class="grid-cell"></div>
+        @Html.Partial("Salle", Model.Salles[0])
+        @Html.Partial("SalleInit")
+        @Html.Partial("Salle", Model.Salles[2])
         <div class="grid-cell"></div>
     </div>
     <div class="grid-row">

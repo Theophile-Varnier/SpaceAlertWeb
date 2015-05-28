@@ -147,7 +147,7 @@ namespace SpaceAlert.Web.Controllers
         [HttpGet]
         public ActionResult Play(string gameId)
         {
-            return View();
+            return View(ShipFactory.DefaultShip());
         }
     }
 }
