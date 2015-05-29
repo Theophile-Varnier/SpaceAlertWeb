@@ -10,29 +10,50 @@ body {
     height: 75%;
 }
 
-    #infoJeu > div {
-        height: 100%;
-        border-bottom: 1px solid black;
-    }
+#infoJeu > div {
+    height: 100%;
+    border-bottom: 1px solid black;
+}
 
-        #infoJeu > div:first-child {
-            border-right: 1px solid black;
-        }
+#infoJeu > div:first-child {
+    border-right: 1px solid black;
+}
 
-        #infoJeu > div:last-child {
-            border-left: 1px solid black;
-        }
+#infoJeu > div:last-child {
+    border-left: 1px solid black;
+}
 
 #playerInfo {
     height: 25%;
 }
 
-    #playerInfo > div {
-        height: 100%;
-    }
+#playerInfo > div {
+    height: 100%;
+}
 
 #playerDeck {
-    border-right: 1px solid black;
+    border-left: 1px solid black;
+}
+
+#playerPlan {
+    background-image: url("../Medias/progra.png");
+    -ms-background-size: contain;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    & .ligne {
+        width: 100%;
+        height: 50%;
+        display: flex;
+    }
+
+    & .ligne:first-child div {
+        width: 100/7%;
+        height: 100%;
+        display: inline-block;
+        border: 1px solid black;
+    }
 }
 
 #plateau {
@@ -78,11 +99,11 @@ body {
             border: 1px solid black;
         }
 
-            & .grid-cell:first-child, & .grid-cell:last-child {
-                width: 12.5%;
-            }
+        & .grid-cell:first-child, & .grid-cell:last-child {
+            width: 12.5%;
+        }
 
-        & .salle > .ligne{
+        & .salle > .ligne {
             height: 25%;
             width: 100%;
             display: flex;
@@ -90,7 +111,7 @@ body {
             & div {
                 width: 20%;
                 height: 100%;
-                //border: 1px solid black;
+                border: 1px solid black;
             }
         }
     }

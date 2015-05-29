@@ -22,8 +22,10 @@
         <div class="col-xs-2"></div>
     </div>
     <div id="playerInfo">
-        <div class="col-xs-6" id="playerDeck"></div>
-        <div class="col-xs-6" id="playerPlan"></div>
+        <div class="col-xs-6 no-padding" id="playerPlan">
+            @Html.Partial("PlayerPlan")
+        </div>
+        <div class="col-xs-6 no-padding" id="playerDeck"></div>
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

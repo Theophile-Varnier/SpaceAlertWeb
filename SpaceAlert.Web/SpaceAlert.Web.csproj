@@ -195,6 +195,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\Game.css" />
+    <Content Include="Content\Medias\progra.png" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -258,7 +259,6 @@
     <Content Include="Content\Medias\Guss\selectedyellowguss.png" />
     <Content Include="Content\Medias\Guss\yellowguss.png" />
     <Content Include="Content\Medias\plateau.jpg" />
-    <Content Include="Content\Medias\progra.png" />
     <Content Include="Content\Medias\Pulse_Ball.jpg" />
     <Content Include="Content\Medias\rampe.png" />
     <Content Include="Content\Medias\SA_cover.jpg" />
@@ -323,6 +323,7 @@
     <Content Include="Views\Game\Vaisseau.cshtml" />
     <Content Include="Views\Game\Salle.cshtml" />
     <Content Include="Views\Game\SalleInit.cshtml" />
+    <Content Include="Views\Game\PlayerPlan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

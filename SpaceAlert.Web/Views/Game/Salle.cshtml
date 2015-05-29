@@ -7,7 +7,12 @@
             {
                 if (Model.ContainersPos.ContainsKey(new Tuple<int, int>(i, j)))
                 {
-                    <div class="@Model.ContainersPos[new Tuple<int, int>(i, j)]-container"></div>
+                    <div class="@Model.ContainersPos[new Tuple<int, int>(i, j)]-container">
+                        @if (Model.ContainsChar)
+                        {
+                            <img data-character="@Model.ContainersPos[new Tuple<int, int>(i, j)]" class="draggable" src="~/Content/Medias/Guss/@Model.ContainersPos[new Tuple<int, int>(i, j)]guss.png" />
+                        }
+                    </div>
                 }
                 else
                 {

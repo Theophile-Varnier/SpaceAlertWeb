@@ -11,15 +11,15 @@
     <div class="grid-row">
         <div class="grid-cell"></div>
         @Html.Partial("Salle", Model.Salles[0])
-        @Html.Partial("SalleInit")
+        @Html.Partial("Salle", Model.Salles[1])
         @Html.Partial("Salle", Model.Salles[2])
         <div class="grid-cell"></div>
     </div>
     <div class="grid-row">
         <div class="grid-cell"></div>
-        <div class="grid-cell"></div>
-        <div class="grid-cell"></div>
-        <div class="grid-cell"></div>
+        @Html.Partial("Salle", Model.Salles[3])
+        @Html.Partial("Salle", Model.Salles[4])
+        @Html.Partial("Salle", Model.Salles[5])
         <div class="grid-cell"></div>
     </div>
     <div class="grid-row">
