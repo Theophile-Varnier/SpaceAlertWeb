@@ -22,4 +22,19 @@
             ui.draggable.appendTo(target);
         }
     });
+
+    $(".carte").on("mouseenter", "img", function (e) {
+        $(this).parent().children(".menu").removeClass("hidden");
+    });
+
+    $(".carte").on("mouseleave", function (e) {
+        if ($(this).children().children('.menu-open:checked').length == 0) {
+            $(this).children(".menu").addClass("hidden");
+        }
+    });
+
+    $("a.reverse-item").on("click", function () {
+        $(this).parent().parent().children("img").toggleClass("reverse");
+        $(this).parent().children('.menu-open').attr("checked", false);
+    });
 })

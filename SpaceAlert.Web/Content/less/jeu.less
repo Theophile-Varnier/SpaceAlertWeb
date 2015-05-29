@@ -1,4 +1,8 @@
-﻿html {
+﻿* {
+    user-select: none;
+}
+
+html {
     height: 100%;
 }
 
@@ -10,29 +14,30 @@ body {
     height: 75%;
 }
 
-#infoJeu > div {
-    height: 100%;
-    border-bottom: 1px solid black;
-}
+    #infoJeu > div {
+        height: 100%;
+        border-bottom: 1px solid black;
+    }
 
-#infoJeu > div:first-child {
-    border-right: 1px solid black;
-}
+        #infoJeu > div:first-child {
+            border-right: 1px solid black;
+        }
 
-#infoJeu > div:last-child {
-    border-left: 1px solid black;
-}
+        #infoJeu > div:last-child {
+            border-left: 1px solid black;
+        }
 
 #playerInfo {
     height: 25%;
 }
 
-#playerInfo > div {
-    height: 100%;
-}
+    #playerInfo > div {
+        height: 100%;
+    }
 
 #playerDeck {
     border-left: 1px solid black;
+    padding: 10px;
 }
 
 #playerPlan {
@@ -48,12 +53,12 @@ body {
         display: flex;
     }
 
-    & .ligne:first-child div {
-        width: 100/7%;
-        height: 100%;
-        display: inline-block;
-        border: 1px solid black;
-    }
+        & .ligne:first-child div {
+            width: 100/7%;
+            height: 100%;
+            display: inline-block;
+            border: 1px solid black;
+        }
 }
 
 #plateau {
@@ -99,9 +104,9 @@ body {
             border: 1px solid black;
         }
 
-        & .grid-cell:first-child, & .grid-cell:last-child {
-            width: 12.5%;
-        }
+            & .grid-cell:first-child, & .grid-cell:last-child {
+                width: 12.5%;
+            }
 
         & .salle > .ligne {
             height: 25%;
@@ -113,6 +118,23 @@ body {
                 height: 100%;
                 border: 1px solid black;
             }
+        }
+    }
+}
+
+.carte {
+    display: inline-block;
+    height: 100%;
+    width: 10%;
+    & img {
+        height: 100%;
+        width: auto;
+        -webkit-transition: 0.5s ease-in-out;
+        -moz-transition: 0.5s ease-in-out;
+        -o-transition: 0.5s ease-in-out;
+        vertical-align: top;
+        &.reverse {
+            transform: rotate(180deg);
         }
     }
 }
