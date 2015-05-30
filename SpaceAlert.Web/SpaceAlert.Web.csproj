@@ -195,7 +195,9 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\Game.css" />
+    <Content Include="Content\Medias\carte_dos.png" />
     <Content Include="Content\Medias\progra.png" />
+    <Content Include="Content\Medias\SA_cover.png" />
     <Content Include="Content\Menu.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />

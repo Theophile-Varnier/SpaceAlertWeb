@@ -1,10 +1,15 @@
 ﻿body {
     margin-top: 75px;
     padding-bottom: 20px;
-    /*background-image: url("Medias/SA_cover.jpg");
+    background-image: url("Medias/SA_cover.png");
     background-repeat: no-repeat;
-    background-size: cover;
+    background-position: bottom left;
+    /*background-size: cover;
     background-position-y: 50px;*/
+}
+
+html {
+    height: 100%;
 }
 
 /* Set padding to keep content from hitting the edges */

@@ -4,13 +4,13 @@
 }
 
 .menu-item, .menu-open-button {
-  background: #e91e63;
+  background-color: darkgreen;
+  color: black;
   border-radius: 100%;
   width: 50px;
   height: 50px;
   position: absolute;
   top: 20px;
-  color: white;
   text-align: center;
   line-height: 50px;
   -webkit-transform: translate3d(0, 0, 0);
@@ -26,7 +26,7 @@
 .hamburger {
   width: 25px;
   height: 3px;
-  background: white;
+  background: black;
   display: block;
   position: absolute;
   top: 50%;
@@ -65,19 +65,17 @@
           transform: translate3d(0, 0, 0) rotate(-45deg);
 }
 
-.menu {
-  position: relative;
-  left: calc(50% - 25px);
-  top: -100%;
+/*.menu {
+  position: absolute;
   padding-top: 20px;
   box-sizing: border-box;
   font-size: 20px;
   text-align: left;
-}
+}*/
 
 .menu-item:hover {
-  background: white;
-  color: #e91e63;
+  background: black;
+  color: darkgreen;
 }
 .menu-item:nth-child(3) {
   -webkit-transition-duration: 180ms;
