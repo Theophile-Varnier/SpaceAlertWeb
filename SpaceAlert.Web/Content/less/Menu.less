@@ -1,0 +1,140 @@
+﻿@nbItems: 4;
+@pi: 3.14159;
+@distance: 75px;
+
+.translate-3d(@x, @y, @z) {
+    transform: translate3d(@x, @y, @z);
+    -webkit-transform: translate3d(@x, @y, @z);
+}
+
+@keyframes first {
+    0% {
+        opacity: 0;
+    }
+
+    1% {
+        opacity: 1;
+        .translate-3d(0,0,0);
+    }
+
+    100% {
+        .translate-3d(-74.9999px, 0.11945px, 0);
+    }
+}
+
+@keyframes second {
+    0% {
+        opacity: 0;
+    }
+
+    1% {
+        opacity: 1;
+        .translate-3d(0, 0, 0);
+    }
+
+    100% {
+        .translate-3d(-37.63784px, -64.87213px, 0);
+    }
+}
+
+@keyframes third {
+    0% {
+        opacity: 0;
+    }
+
+    1% {
+        opacity: 1;
+        .translate-3d(0, 0, 0);
+    }
+
+    100% {
+        .translate-3d(37.32746px, -65.05122px, 0);
+    }
+}
+
+@keyframes fourth {
+    0% {
+        opacity: 0;
+    }
+
+    1% {
+        opacity: 1;
+        .translate-3d(0, 0, 0);
+    }
+
+    100% {
+        .translate-3d(74.99962px, -0.2389px, 0);
+    }
+}
+
+.menu-item {
+    transform: translate3d(0, 0, 0);
+    background-color: darkgreen;
+    color: black;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    text-align: center;
+    line-height: 50px;
+
+    &.chosen {
+        background: black;
+        color: darkgreen;
+    }
+
+    &.bad {
+        background-color: darkred;
+        &.chosen {
+            color: darkred;
+            background-color: black;
+        }
+    }
+}
+
+
+.menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+}
+
+.menu.open > .menu-item:nth-child(1) {
+    animation: first 180ms ease-out;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -webkit-transform: translate3d(-74.9999px, 0.11945px, 0);
+    transform: translate3d(-74.9999px, 0.11945px, 0);
+}
+
+.menu.open > .menu-item:nth-child(2) {
+    animation: second 180ms ease-out;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -webkit-transform: translate3d(-37.63784px, -64.87213px, 0);
+    transform: translate3d(-37.63784px, -64.87213px, 0);
+}
+
+.menu.open > .menu-item:nth-child(3) {
+    animation: third 180ms ease-out;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -webkit-transform: translate3d(37.32746px, -65.05122px, 0);
+    transform: translate3d(37.32746px, -65.05122px, 0);
+}
+
+.menu.open > .menu-item:nth-child(4) {
+    animation: fourth 180ms ease-out;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -webkit-transform: translate3d(74.99962px, -0.2389px, 0);
+    transform: translate3d(74.99962px, -0.2389px, 0);
+}

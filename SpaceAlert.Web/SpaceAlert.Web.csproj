@@ -199,6 +199,7 @@
     <Content Include="Content\Medias\progra.png" />
     <Content Include="Content\Medias\SA_cover.png" />
     <Content Include="Content\Menu.css" />
+    <Content Include="Content\octicons.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -235,6 +236,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\octicons.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\Medias\0.png" />
@@ -280,6 +282,14 @@
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Content\less\jeu.less" />
     <Content Include="Content\Sass\Menu.sass" />
+    <Content Include="Content\less\Menu.less" />
+    <Content Include="fonts\octicons-local.ttf" />
+    <Content Include="fonts\octicons.eot" />
+    <Content Include="fonts\octicons.ttf" />
+    <Content Include="fonts\octicons.woff" />
+    <Content Include="Content\less\octicons.less" />
+    <Content Include="Content\less\octicons.woff" />
+    <Content Include="Content\less\octicons.ttf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

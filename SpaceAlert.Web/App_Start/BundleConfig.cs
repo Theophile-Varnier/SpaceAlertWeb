@@ -31,7 +31,8 @@ namespace SpaceAlert.Web
                       "~/Content/font-awesome.css"));
 
             bundles.Add(new LessBundle("~/Content/less").Include(
-                      "~/Content/less/jeu.less"));
+                      "~/Content/less/jeu.less",
+                      "~/Content/less/Menu.less"));
         }
     }
 }
