@@ -124,6 +124,7 @@ body {
 .carte {
     display: inline-block;
     height: 100%;
+    width: 12.5%;
 
     & img {
         position: absolute;
@@ -134,11 +135,9 @@ body {
         vertical-align: top;
         height: ~"calc(100% - 30px)";
         width: auto;
+
         &.reverse {
             transform: rotate(180deg);
         }
-    }
-    & div {
-        width: 100%;
     }
 }

@@ -5,6 +5,15 @@
         addClasses: false
     });
 
+    $("html").on("mouseup", function () {
+        $('.menu').addClass("hidden");
+        $('.menu').removeClass("open");
+    });
+
+    $("html").on("contextmenu", function (e) {
+        e.preventDefault();
+    });
+
     $(".draggable").on("mouseenter", function () {
         var source = "../Content/Medias/Guss/selected" + $(this).attr("data-character") + "guss.png";
         $(this).attr("src", source);
@@ -23,6 +32,14 @@
         }
     });
 
+    $(".salle").on("mousedown", function (e) {
+        if (e.which == 3) {
+            $('.menu').attr('style', 'left:' + (e.pageX - 50) + 'px; top:' + (e.pageY - 50) + 'px;');
+            $('.menu').removeClass('hidden');
+            $('.menu').addClass("open");
+        }
+    });
+
     $(".carte").on("mouseenter", "img", function (e) {
         $(this).parent().children(".menu").removeClass("hidden");
     });
@@ -37,4 +54,22 @@
         $(this).parent().parent().children("img").toggleClass("reverse");
         $(this).parent().children('.menu-open').attr("checked", false);
     });
+
+    $(".menu-item").on("mouseenter", function () {
+        $(this).addClass("chosen");
+    });
+
+    $(".menu-item").on("mouseleave", function () {
+        $(this).removeClass("chosen");
+    })
+
+    var resizeCard = function () {
+        var imgWidth = $(".carte img")[0].scrollWidth;
+        var imgHeight = $(".carte img")[0].scrollHeight;
+        $('.carte').attr("style", "width:" + imgWidth + "px; height:" + imgHeight + "px;");
+    }
+    resizeCard();
+    $(window).resize(function () {
+        resizeCard();
+    })
 })
