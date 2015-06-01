@@ -27,8 +27,14 @@
             @Html.Partial("PlayerPlan")
         </div>
         <div class="col-xs-6 no-padding" id="playerDeck">
-            @Html.Partial("Carte")
-            @Html.Partial("Carte")
+            <div id="carteClones"></div>
+            <div id="cartes">
+                @Html.Partial("Carte")
+                @Html.Partial("Carte")
+                @Html.Partial("Carte")
+                @Html.Partial("Carte")
+                @Html.Partial("Carte")
+            </div>
         </div>
     </div>
     @Html.Partial("Menu")

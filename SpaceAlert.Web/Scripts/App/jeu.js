@@ -50,17 +50,59 @@
     $(".carte").draggable({
         container: "#playerInfo",
         revert: "invalid",
-        addClasses: false
+        addClasses: false,
+        start: function () {
+            $(".carte-container .carte").addClass("locked");
+            if ($(this).parent()[0].className.indexOf("carte-container") == -1) {
+                $("#cartes .carte:not(.ui-draggable-dragging)").each(function () {
+                    var original = $(this);
+                    generateCardClone(original);
+                });
+            }
+        },
+        stop: function () {
+            $(".carte").removeClass("locked");
+        }
     });
 
     $('.carte-container').droppable({
         hoverClass: "hovered",
         accept: ".carte",
         drop: function (e, ui) {
-            ui.draggable.addClass("posay");
+
+            // S'il y a déjà une carte à l'emplacement choisi
+            // On la renvoie dans la main du joueur
+            if ($(this).find('.carte').length > 0) {
+                var carte = $(this).find(".carte");
+                carte.removeClass("posay");
+                carte.attr("style", "position: relative;");
+                carte.appendTo("#cartes");
+
+                generateCardClone(carte);
+            }
+
+            // Pose la carte à l'emplacement choisi
             var targetwidth = $(this).width();
             var targetheight = $(this).height();
             ui.draggable.css("transform", "scale(" + targetwidth / ui.draggable.width() + "," + targetheight / ui.draggable.height() + ")");
+            ui.draggable.attr("style", "position: relative; width: 100%; height: 100%;");
+            ui.draggable.addClass("posay");
+            ui.draggable.appendTo($(this));
+
+            // On anime les cartes restantes de la main du joueur
+            $("#cartes .carte").each(function () {
+                var item = $(this);
+                var clone = item.data("clone");
+                if (clone) {
+                    clone.stop(true, false);
+
+                    var position = item.position();
+                    clone.animate({ left: position.left, top: position.top }, 400, "easeInQuart", function () {
+                        item.css("visibility", "visible");
+                        $(this).remove();
+                    });
+                }
+            });
         }
     });
 
@@ -68,19 +110,20 @@
         accept: ".carte",
         drop: function (e, ui) {
             ui.draggable.removeClass("posay");
-            ui.draggable.attr("style", "position: relative; top:0; left:0;");
+            ui.draggable.attr("style", "position: relative;");
             ui.draggable.css("transform", "scale(1)");
+            ui.draggable.appendTo("#cartes");
         }
     });
 
-    $(".carte-container").on("mouseenter", function (e) {
-        if ($(this).children(".carte").length > 0) {
+    $(".carte-container").on("mouseenter", function () {
+        if ($(this).children(".carte").length > 0 && $(this).children(".carte")[0].className.indexOf("locked") == -1) {
             $(this).children(".carte").removeClass("posay");
         }
     });
 
-    $(".carte-container").on("mouseleave", function (e) {
-        if ($(this).children(".carte").length > 0) {
+    $(".carte-container").on("mouseleave", function () {
+        if ($(this).children(".carte").length > 0 && $(this).children(".carte")[0].className.indexOf("locked") == -1) {
             $(this).children(".carte").addClass("posay");
         }
     });
@@ -91,16 +134,17 @@
 
     $(".menu-item").on("mouseleave", function () {
         $(this).removeClass("chosen");
-    })
+    });
 
-    var resizeCard = function () {
-        var imgWidth = $(".carte img")[0].scrollWidth;
-        var imgHeight = $(".carte img")[0].scrollHeight;
-        $('.carte, .flipper').attr("style", "width:" + imgWidth + "px; height:" + imgHeight + "px;");
-    }
+    var generateCardClone = function(carte) {
+        var tempClone = carte.clone();
+        carte.data("clone", tempClone);
+        carte.css("visibility", "hidden");
 
-    //resizeCard();
-    //$(window).resize(function () {
-    //    resizeCard();
-    //})
+        var position = carte.position();
+        tempClone.css("top", position.top)
+            .css("left", position.left);
+
+        $("#carteClones").append(tempClone);
+    };
 })
