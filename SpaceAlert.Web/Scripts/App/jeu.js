@@ -1,4 +1,6 @@
 ﻿$(function () {
+    var lastPosition;
+
     $(".draggable").draggable({
         containment: "#plateau",
         revert: "invalid",
@@ -82,12 +84,27 @@
             }
 
             // Pose la carte à l'emplacement choisi
-            var targetwidth = $(this).width();
-            var targetheight = $(this).height();
-            ui.draggable.css("transform", "scale(" + targetwidth / ui.draggable.width() + "," + targetheight / ui.draggable.height() + ")");
+
+            // On enregistre la dernière position pour une animation
+            lastPosition = ui.draggable.position();
+
             ui.draggable.attr("style", "position: relative; width: 100%; height: 100%;");
-            ui.draggable.addClass("posay");
+            ui.draggable.css("visibility", "hidden");
+            var tempClone = ui.draggable.clone();
+            tempClone.css("position", "absolute")
+                .css("top", lastPosition.top)
+                .css("left", lastPosition.left);
+
+            tempClone.appendTo($(this));
+
             ui.draggable.appendTo($(this));
+
+            var newPos = ui.draggable.position();
+            tempClone.animate({ left: newPos.left, top: newPos.top }, 300, "swing", function () {
+                ui.draggable.css("visibility", "visible");
+                tempClone.remove();
+                ui.draggable.addClass("posay");
+            });
 
             // On anime les cartes restantes de la main du joueur
             $("#cartes .carte").each(function () {
@@ -136,7 +153,7 @@
         $(this).removeClass("chosen");
     });
 
-    var generateCardClone = function(carte) {
+    var generateCardClone = function (carte) {
         var tempClone = carte.clone();
         carte.data("clone", tempClone);
         carte.css("visibility", "hidden");
