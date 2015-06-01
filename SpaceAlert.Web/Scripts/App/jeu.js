@@ -105,18 +105,24 @@
                 tempClone.remove();
                 ui.draggable.addClass("posay");
             });
-
+            var nbClones = $("#cartes .carte").length;
+            var i = 0;
             // On anime les cartes restantes de la main du joueur
             $("#cartes .carte").each(function () {
                 var item = $(this);
                 var clone = item.data("clone");
-                if (clone) {
+                if (!clone) {
+                    nbClones--;
+                } else {
                     clone.stop(true, false);
 
                     var position = item.position();
                     clone.animate({ left: position.left, top: position.top }, 400, "easeInQuart", function () {
-                        item.css("visibility", "visible");
-                        $(this).remove();
+                        i++;
+                        if (i === nbClones) {
+                            $("#cartes .carte").css("visibility", "visible");
+                            $("#carteClones").empty();
+                        }
                     });
                 }
             });
