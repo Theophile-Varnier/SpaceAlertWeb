@@ -16,9 +16,12 @@ TO DO
 	
 -	Ecran de jeu
 -	Déroulement de la partie
-	-	Déplacement des pièces
-	-	Cartes actions
+	-	~~Déplacement des pièces~~
+	-	~~Cartes actions~~
 	-	Gestion des événements
+		-	Apparition des menaces
+		-	Transferts de données
+		-	Données entrantes
 
 -	Résolution de la partie
 
