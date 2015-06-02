@@ -86,18 +86,19 @@
             // Pose la carte à l'emplacement choisi
 
             // On enregistre la dernière position pour une animation
-            lastPosition = ui.draggable.position();
+            lastPosition = ui.draggable.offset();
 
+            ui.draggable.appendTo($(this));
+            var tempClone = ui.draggable.clone();
             ui.draggable.attr("style", "position: relative; width: 100%; height: 100%;");
             ui.draggable.css("visibility", "hidden");
-            var tempClone = ui.draggable.clone();
             tempClone.css("position", "absolute")
-                .css("top", lastPosition.top)
+                .css("width", ui.draggable.width())
+                .css("height", ui.draggable.height())
+                .css("top", lastPosition.top - $(this).offset().top)
                 .css("left", lastPosition.left);
 
             tempClone.appendTo($(this));
-
-            ui.draggable.appendTo($(this));
 
             var newPos = ui.draggable.position();
             tempClone.animate({ left: newPos.left, top: newPos.top }, 300, "swing", function () {
