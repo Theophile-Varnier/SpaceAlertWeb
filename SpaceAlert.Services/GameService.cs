@@ -51,6 +51,66 @@ namespace SpaceAlert.Services
         }
 
         /// <summary>
+        /// Initialise une nouvelle partie
+        /// </summary>
+        /// <param name="typeMission">Le type de mission pour la partie</param>
+        /// <param name="nbJoueurs">Le nombre de joueurs attendus</param>
+        /// <param name="blanches">menaces blanches</param>
+        /// <param name="jaunes">menaces jaunes</param>
+        /// <param name="rouges">menaces rouges</param>
+        /// <param name="playerNames">Le nom des personnages des joueurs</param>
+        /// <returns></returns>
+        public Guid InitialiserGame(TypeMission typeMission, int nbJoueurs, bool blanches, bool jaunes, bool rouges, List<string> playerNames)
+        {
+            // Créé la partie
+            Game game = new Game
+            {
+                TypeMission = typeMission,
+                DateCreation = DateTime.Now,
+                Joueurs = new List<Joueur>(nbJoueurs)
+            };
+
+            // Ajoute les joueurs
+            foreach (string playerName in playerNames)
+            {
+                game.Joueurs.Add(new Joueur { NomPersonnage = playerName });
+            }
+
+            foreach (Joueur joueur in game.Joueurs)
+            {
+                ProchaineCouleur(game.Id, joueur.NomPersonnage);
+            }
+
+            // Initialise le contexte
+            GameContext res = new GameContext
+            {
+                Statut = StatutPartie.CREATION,
+                Partie = game,
+                MenacesDisponibles = new ListOfMenaces()
+            };
+
+            // Ajout des menaces
+            if (blanches)
+            {
+                game.Difficulte |= Couleur.BLANCHE;
+                res.MenacesDisponibles += SpaceAlertData.GetObject<ListOfMenaces>("MenacesBlanches");
+            }
+            if (jaunes)
+            {
+                game.Difficulte |= Couleur.JAUNE;
+                //res.MenacesDisponibles += SpaceAlertData.GetObject<ListOfMenaces>("MenacesJaunes");
+            }
+            if (rouges)
+            {
+                game.Difficulte |= Couleur.ROUGE;
+                //res.MenacesDisponibles += SpaceAlertData.GetObject<ListOfMenaces>("MenacesRouges");
+            }
+
+            SpaceAlertData.AddGame(res);
+            return game.Id;
+        }
+
+        /// <summary>
         /// Récupère une mission aléatoire d'un type défini
         /// </summary>
         /// <param name="type"></param>
@@ -91,6 +151,18 @@ namespace SpaceAlert.Services
         public GameContext GetGame(Guid gameId)
         {
             return SpaceAlertData.Game(gameId);
+        }
+
+        /// <summary>
+        /// Récupère la couleur actuelle d'un joueur dans une partie
+        /// </summary>
+        /// <param name="gameId"></param>
+        /// <param name="charName"></param>
+        /// <returns></returns>
+        public string PlayerColor(Guid gameId, string charName)
+        {
+            Joueur joueur = SpaceAlertData.Game(gameId).Partie.Joueurs.FirstOrDefault(j => j.NomPersonnage == charName);
+            return joueur != null ? joueur.Couleur : null;
         }
 
         /// <summary>

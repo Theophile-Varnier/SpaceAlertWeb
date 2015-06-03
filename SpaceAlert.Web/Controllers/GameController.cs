@@ -57,13 +57,12 @@ namespace SpaceAlert.Web.Controllers
             };
 
             // On initialise la partie côté serveur
-            Game game = GameMapper.MapFromModel(model.Game);
-            GameContext context = serviceProvider.GameService.InitialiserGame(game);
+            Guid gameId = serviceProvider.GameService.InitialiserGame(model.Game.TypeMission, model.Game.NbJoueurs, model.Game.Blanches, model.Game.Jaunes, model.Game.Rouges, new List<string> { model.CreatedBy });
 
-            model.Game.Players.First().Color = serviceProvider.GameService.ProchaineCouleur(game.Id, model.CreatedBy);
+            model.Game.Players.First().Color = serviceProvider.GameService.PlayerColor(gameId, model.CreatedBy);
 
             // On renvoie vers la salle d'attente
-            model.Game.GameId = context.Partie.Id;
+            model.Game.GameId = gameId;
             model.IsGameOwner = true;
             return View("WaitRoom", model);
         }
@@ -121,8 +120,10 @@ namespace SpaceAlert.Web.Controllers
             GameContext game = serviceProvider.GameService.GetGame(model.GameToJoin);
             if (game.Partie.Joueurs.Select(j => j.NomPersonnage).Contains(model.Player.Name))
             {
-                model.ErrorMessages = new List<string>();
-                model.ErrorMessages.Add("Ce nom de personnage est déjà utilisé");
+                model.ErrorMessages = new List<string>
+                {
+                    "Ce nom de personnage est déjà utilisé"
+                };
                 return View(model);
             }
             game.Partie.Joueurs.Add(new Joueur
