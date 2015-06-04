@@ -52,7 +52,7 @@ namespace SpaceAlert.Web.Controllers
                 Membre membre = serviceProvider.AccountService.RecupererMembre(model.Pseudo, model.MotDePasse);
 
                 // Si oui on renseigne les informations dans la session actuelle
-                FormsAuthentication.SetAuthCookie(model.Pseudo, false);
+                FormsAuthentication.SetAuthCookie(membre.Pseudo, false);
 
                 // Gestion de la redirection depuis une page qui nécessite une authentification
                 // Un peu crado mais pas trop le choix

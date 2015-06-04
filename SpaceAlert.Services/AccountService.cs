@@ -45,7 +45,8 @@ namespace SpaceAlert.Services
             {
                 throw new MembreNonExistantException(string.Format("Le pseudo {0} n'existe pas", pseudo));
             }
-            if ((res = membreRepository.GetExistingMember(pseudo, motDePasse)) == null)
+            res = membreRepository.GetExistingMember(pseudo, motDePasse);
+            if (res == null)
             {
                 throw new MotDePasseInvalideException("Combinaison pseudo/mot de passe invalide");
             }
@@ -59,7 +60,6 @@ namespace SpaceAlert.Services
         /// <returns></returns>
         public Membre RecupererMembre(string pseudo)
         {
-            Membre res;
             return membreRepository.GetExistingMember(pseudo);
         }
     }

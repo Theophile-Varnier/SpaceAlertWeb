@@ -57,7 +57,13 @@ namespace SpaceAlert.Web.Controllers
             };
 
             // On initialise la partie côté serveur
-            Guid gameId = serviceProvider.GameService.InitialiserGame(model.Game.TypeMission, model.Game.NbJoueurs, model.Game.Blanches, model.Game.Jaunes, model.Game.Rouges, new List<string> { model.CreatedBy });
+            Guid gameId = serviceProvider.GameService.InitialiserGame(
+                model.Game.TypeMission, 
+                model.Game.NbJoueurs, 
+                model.Game.Blanches, 
+                model.Game.Jaunes, 
+                model.Game.Rouges, 
+                new List<string> { model.CreatedBy });
 
             model.Game.Players.First().Color = serviceProvider.GameService.PlayerColor(gameId, model.CreatedBy);
 
