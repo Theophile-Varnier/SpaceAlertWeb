@@ -4,6 +4,8 @@
     background-image: url("Medias/SA_cover.png");
     background-repeat: no-repeat;
     background-position: bottom left;
+    background-color: black;
+    color: white;
     /*background-size: cover;
     background-position-y: 50px;*/
 }
@@ -77,4 +79,32 @@ textarea {
 
 .no-display {
     visibility: hidden;
+}
+
+.panel-primary {
+    border-color: darkgreen;
+}
+
+.panel-primary > .panel-heading {
+    background-color: darkgreen;
+    border-color: darkgreen;
+}
+
+.panel-primary > .panel-body {
+    background-color: black;
+}
+
+.btn-primary {
+    background-color: darkgreen;
+    border-color: darkgreen;
+}
+
+.btn-primary[disabled] {
+    background-color: #2e8b57;
+    border-color: darkgreen;
+}
+
+.btn-primary:hover {
+    background-color: #2e8b57;
+    border-color: darkgreen;
 }
