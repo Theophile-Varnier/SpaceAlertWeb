@@ -76,11 +76,6 @@ namespace SpaceAlert.Services
                 game.Joueurs.Add(new Joueur { NomPersonnage = playerName });
             }
 
-            foreach (Joueur joueur in game.Joueurs)
-            {
-                ProchaineCouleur(game.Id, joueur.NomPersonnage);
-            }
-
             // Initialise le contexte
             GameContext res = new GameContext
             {
@@ -107,6 +102,13 @@ namespace SpaceAlert.Services
             }
 
             SpaceAlertData.AddGame(res);
+
+            // Initialise les couleurs des joueurs
+            foreach (Joueur joueur in game.Joueurs)
+            {
+                ProchaineCouleur(game.Id, joueur.NomPersonnage);
+            }
+
             return game.Id;
         }
 

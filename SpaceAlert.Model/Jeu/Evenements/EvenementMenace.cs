@@ -1,4 +1,5 @@
 ﻿using SpaceAlert.Model.Helpers.Enums;
+using SpaceAlert.Model.Menaces;
 using System;
 
 namespace SpaceAlert.Model.Jeu.Evenements
@@ -28,6 +29,11 @@ namespace SpaceAlert.Model.Jeu.Evenements
         /// Le type de menace
         /// </summary>
         public TypeMenace Type { get; set; }
+
+        /// <summary>
+        /// La menace associée
+        /// </summary>
+        public Menace Menace { get; set; }
 
         public override void Resolve()
         {

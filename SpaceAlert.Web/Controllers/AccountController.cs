@@ -26,6 +26,7 @@ namespace SpaceAlert.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult Connexion()
         {
             return View();
@@ -96,6 +97,7 @@ namespace SpaceAlert.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult Inscription()
         {
             return View();
@@ -107,6 +109,7 @@ namespace SpaceAlert.Web.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Inscription(AccountViewModel model)
         {
             if (model.ErrorMessages == null)

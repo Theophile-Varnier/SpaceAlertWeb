@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace SpaceAlert.Web.Controllers
 {
+    [Authorize]
     public class GameController : Controller
     {
         private ServiceProvider serviceProvider = new ServiceProvider();
@@ -29,7 +30,6 @@ namespace SpaceAlert.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -41,7 +41,6 @@ namespace SpaceAlert.Web.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        [Authorize]
         public ActionResult Create(GameCreationViewModel model)
         {
             if (!model.Game.Validate())

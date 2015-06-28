@@ -19,5 +19,10 @@ namespace SpaceAlert.Model.Jeu
         /// La partie en question
         /// </summary>
         public Game Partie { get; set; }
+
+        /// <summary>
+        /// Le tour actuel
+        /// </summary>
+        public int TourEnCours { get; set; }
     }
 }

@@ -4,17 +4,13 @@
 @model SpaceAlert.Web.Models.AccountViewModel
 
 <div class="row vertical-middle">
-    <div class="col-xs-2"></div>
+    <div class="col-xs-3"></div>
     <div class="col-xs-2">
         @Html.Partial("ConnexionForm", @Model)
     </div>
-    <div class="col-xs-1 text-center">ou</div>
+    <div class="col-xs-2 text-center">ou</div>
     <div class="col-xs-2">
         @Html.Partial("InscriptionForm", @Model)
-    </div>
-    <div class="col-xs-1 text-center">ou</div>
-    <div class="col-xs-2">
-        @Html.ActionLink("Jouer sans s'inscrire", "Index", "Game", new { area = "" }, new { @class = "btn btn-primary" })
     </div>
     <div class="col-xs-2"></div>
 </div>

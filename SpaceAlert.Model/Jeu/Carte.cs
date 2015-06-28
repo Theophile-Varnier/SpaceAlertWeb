@@ -1,5 +1,4 @@
 ﻿using SpaceAlert.Model.Helpers.Enums;
-using Action = SpaceAlert.Model.Helpers.Enums.Action;
 
 namespace SpaceAlert.Model.Jeu
 {
