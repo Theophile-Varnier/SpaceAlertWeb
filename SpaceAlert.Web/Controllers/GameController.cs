@@ -2,6 +2,7 @@
 using SpaceAlert.Business.Exceptions;
 using SpaceAlert.Model.Jeu;
 using SpaceAlert.Model.Site;
+using SpaceAlert.Web.Helpers;
 using SpaceAlert.Web.Models;
 using SpaceAlert.Web.Models.Mapping;
 using System;
@@ -74,6 +75,7 @@ namespace SpaceAlert.Web.Controllers
             // On renvoie vers la salle d'attente
             model.Game.GameId = gameId;
             model.IsGameOwner = true;
+            Session["currentGameId"] = gameId;
             return View("WaitRoom", model);
         }
 
@@ -129,13 +131,14 @@ namespace SpaceAlert.Web.Controllers
         {
             try
             {
-                GameContext game = serviceProvider.GameService.AjouterJoueur(model.GameToJoin, ((Membre) Session["currentMember"]).Id, model.Player.Name);
+                GameContext game = serviceProvider.GameService.AjouterJoueur(model.GameToJoin, Session.CurrentMember().Id, model.Player.Name);
                 GameCreationViewModel newModel = new GameCreationViewModel
                 {
                     CreatedBy = model.Player.Name,
                     Game = GameMapper.MapToModel(game.Partie),
                     IsGameOwner = false
                 };
+                Session["currentGameId"] = game.Partie.Id;
                 return View("WaitRoom", newModel);
             }
             catch (NomDejaUtiliseException)
@@ -144,7 +147,15 @@ namespace SpaceAlert.Web.Controllers
                 {
                     "Ce nom de personnage est déjà utilisé"
                 };
-                return View(model);
+                return RedirectToAction("Join");
+            }
+            catch (PartiePleineException)
+            {
+                model.ErrorMessages = new List<string>
+                {
+                    "La partie est pleine, impossible de rejoindre la session."
+                };
+                return RedirectToAction("Join");
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using System.Web;
+using SpaceAlert.Model.Site;
 
 namespace SpaceAlert.Web.Helpers
 {
@@ -29,6 +30,11 @@ namespace SpaceAlert.Web.Helpers
         public static bool IsAuthenticated(this HttpSessionStateBase session)
         {
             return session.Get("pseudo") != null;
+        }
+
+        public static Membre CurrentMember(this HttpSessionStateBase session)
+        {
+            return (Membre) session["currentMember"];
         }
     }
 }

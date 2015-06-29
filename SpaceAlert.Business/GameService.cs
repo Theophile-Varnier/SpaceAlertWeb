@@ -185,8 +185,8 @@ namespace SpaceAlert.Business
             string color;
             do
             {
-                current++;
-                color = SpaceAlertData.PlayerColors[current % SpaceAlertData.PlayerColors.Count];
+                current = (current + 1) % SpaceAlertData.PlayerColors.Count;
+                color = SpaceAlertData.PlayerColors[current];
             } while (current != index && game.Partie.Joueurs.Select(j => j.Couleur).Contains(color));
 
             game.Partie.Joueurs.First(j => j.NomPersonnage == charName).Couleur = color;
@@ -204,6 +204,11 @@ namespace SpaceAlert.Business
         {
 
             GameContext game = SpaceAlertData.Game(gameId);
+
+            if (game.Partie.Joueurs.Count == game.Partie.Joueurs.Capacity)
+            {
+                throw new PartiePleineException();
+            }
 
             // On vérifie qu'un joueur ne porte pas déjà ce nom
             if (game.Partie.Joueurs.Any(j => j.NomPersonnage == charName))
