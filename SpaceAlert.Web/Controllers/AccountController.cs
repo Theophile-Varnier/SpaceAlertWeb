@@ -1,5 +1,5 @@
-﻿using SpaceAlert.Model.Site;
-using SpaceAlert.Services;
+﻿using SpaceAlert.Business;
+using SpaceAlert.Model.Site;
 using SpaceAlert.Services.Exceptions;
 using SpaceAlert.Web.Helpers;
 using SpaceAlert.Web.Models;
@@ -55,6 +55,8 @@ namespace SpaceAlert.Web.Controllers
                 // Si oui on renseigne les informations dans la session actuelle
                 FormsAuthentication.SetAuthCookie(membre.Pseudo, false);
 
+                Session["currentMember"] = membre;
+
                 // Gestion de la redirection depuis une page qui nécessite une authentification
                 // Un peu crado mais pas trop le choix
                 if (Request.UrlReferrer.GetParameter("ReturnUrl") != null)
@@ -89,6 +91,7 @@ namespace SpaceAlert.Web.Controllers
         public ActionResult Deconnexion()
         {
             FormsAuthentication.SignOut();
+            Session["currentMember"] = null;
             return RedirectToAction("Index", "Home");
         }
 

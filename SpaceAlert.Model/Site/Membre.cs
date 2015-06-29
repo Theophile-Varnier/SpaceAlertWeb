@@ -1,6 +1,9 @@
 ﻿
 namespace SpaceAlert.Model.Site
 {
+    /// <summary>
+    /// Membre du site
+    /// </summary>
     public class Membre
     {
         public long Id { get; set; }

@@ -40,12 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountService.cs" />
-    <Compile Include="Exceptions\MembreNonExistantException.cs" />
-    <Compile Include="Exceptions\MotDePasseInvalideException.cs" />
-    <Compile Include="GameService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SpaceAlert.Business\SpaceAlert.Business.csproj">

@@ -350,13 +350,13 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SpaceAlert.Business\SpaceAlert.Business.csproj">
+      <Project>{892997da-2305-4fad-be02-20c35557fa3d}</Project>
+      <Name>SpaceAlert.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpaceAlert.Model\SpaceAlert.Model.csproj">
       <Project>{f38f6e5a-bbe5-4005-ad1e-3cc008588445}</Project>
       <Name>SpaceAlert.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SpaceAlert.Services\SpaceAlert.Services.csproj">
-      <Project>{68e03ba3-4d55-4f1b-b69f-b88f3d3311f7}</Project>
-      <Name>SpaceAlert.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

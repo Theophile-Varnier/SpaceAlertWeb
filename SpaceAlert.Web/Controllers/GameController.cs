@@ -1,5 +1,7 @@
-﻿using SpaceAlert.Model.Jeu;
-using SpaceAlert.Services;
+﻿using SpaceAlert.Business;
+using SpaceAlert.Business.Exceptions;
+using SpaceAlert.Model.Jeu;
+using SpaceAlert.Model.Site;
 using SpaceAlert.Web.Models;
 using SpaceAlert.Web.Models.Mapping;
 using System;
@@ -57,12 +59,15 @@ namespace SpaceAlert.Web.Controllers
 
             // On initialise la partie côté serveur
             Guid gameId = serviceProvider.GameService.InitialiserGame(
-                model.Game.TypeMission, 
-                model.Game.NbJoueurs, 
-                model.Game.Blanches, 
-                model.Game.Jaunes, 
-                model.Game.Rouges, 
-                new List<string> { model.CreatedBy });
+                model.Game.TypeMission,
+                model.Game.NbJoueurs,
+                model.Game.Blanches,
+                model.Game.Jaunes,
+                model.Game.Rouges,
+                new Dictionary<long, string>
+                {
+                    { ((Membre)Session["currentMember"]).Id, model.CreatedBy }
+                });
 
             model.Game.Players.First().Color = serviceProvider.GameService.PlayerColor(gameId, model.CreatedBy);
 
@@ -122,8 +127,18 @@ namespace SpaceAlert.Web.Controllers
         [HttpPost]
         public ActionResult Join(JoinGameViewModel model)
         {
-            GameContext game = serviceProvider.GameService.GetGame(model.GameToJoin);
-            if (game.Partie.Joueurs.Select(j => j.NomPersonnage).Contains(model.Player.Name))
+            try
+            {
+                GameContext game = serviceProvider.GameService.AjouterJoueur(model.GameToJoin, ((Membre) Session["currentMember"]).Id, model.Player.Name);
+                GameCreationViewModel newModel = new GameCreationViewModel
+                {
+                    CreatedBy = model.Player.Name,
+                    Game = GameMapper.MapToModel(game.Partie),
+                    IsGameOwner = false
+                };
+                return View("WaitRoom", newModel);
+            }
+            catch (NomDejaUtiliseException)
             {
                 model.ErrorMessages = new List<string>
                 {
@@ -131,18 +146,6 @@ namespace SpaceAlert.Web.Controllers
                 };
                 return View(model);
             }
-            game.Partie.Joueurs.Add(new Joueur
-            {
-                NomPersonnage = model.Player.Name
-            });
-            serviceProvider.GameService.ProchaineCouleur(model.GameToJoin, model.Player.Name);
-            GameCreationViewModel newModel = new GameCreationViewModel
-            {
-                CreatedBy = model.Player.Name,
-                Game = GameMapper.MapToModel(game.Partie),
-                IsGameOwner = false
-            };
-            return View("WaitRoom", newModel);
         }
 
         /// <summary>
