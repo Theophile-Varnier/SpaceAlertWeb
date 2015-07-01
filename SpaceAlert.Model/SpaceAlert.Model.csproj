@@ -63,6 +63,7 @@
     <Compile Include="Helpers\Enums\Direction.cs" />
     <Compile Include="Helpers\Enums\Couleur.cs" />
     <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Helpers\JoueurAction.cs" />
     <Compile Include="Helpers\MenaceActions.cs" />
     <Compile Include="Jeu\ActionJoueur.cs" />
     <Compile Include="Jeu\Carte.cs" />
