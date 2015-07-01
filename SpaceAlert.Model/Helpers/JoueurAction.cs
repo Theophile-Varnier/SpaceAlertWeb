@@ -109,7 +109,7 @@ namespace SpaceAlert.Model.Helpers
         /// <param name="partie">La partie en cours</param>
         public static void Maintenance(Salle source, Game partie)
         {
-            partie.Vaisseau.MaintenanceEffectuee = true;
+            partie.MaintenanceEffectuee = true;
         }
     }
 }

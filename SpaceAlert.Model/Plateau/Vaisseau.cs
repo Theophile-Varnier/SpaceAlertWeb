@@ -27,11 +27,6 @@ namespace SpaceAlert.Model.Plateau
         public bool Interceptors { get; set; }
 
         /// <summary>
-        /// Indique si la maintenance a été effectuée pendant cette phase
-        /// </summary>
-        public bool MaintenanceEffectuee { get; set; }
-
-        /// <summary>
         /// L'état des différentes zones du vaisseau à chaque instant
         /// </summary>
         public Dictionary<Zone, InGameZone> Zones { get; set; }

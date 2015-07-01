@@ -23,7 +23,15 @@ namespace SpaceAlert.Model.Jeu
 
         public Guid Id { get; set; }
 
+        /// <summary>
+        /// Le vaisseau
+        /// </summary>
         public Vaisseau Vaisseau { get; set; }
+
+        /// <summary>
+        /// Indique si la maintenance a été effectuée pendant cette phase
+        /// </summary>
+        public bool MaintenanceEffectuee { get; set; }
 
         /// <summary>
         /// Les menaces en cours de résolution
