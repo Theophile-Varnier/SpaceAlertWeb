@@ -53,6 +53,7 @@
     <Compile Include="Helpers\Enums\NiveauMaitrise.cs" />
     <Compile Include="Helpers\Enums\StatutPartie.cs" />
     <Compile Include="Helpers\Enums\EtatRobots.cs" />
+    <Compile Include="Helpers\Enums\TypeAction.cs" />
     <Compile Include="Helpers\Enums\TypeCase.cs" />
     <Compile Include="Helpers\Enums\TypeMission.cs" />
     <Compile Include="Helpers\Enums\Pont.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Helpers\Enums\Couleur.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\MenaceActions.cs" />
+    <Compile Include="Jeu\ActionJoueur.cs" />
     <Compile Include="Jeu\Carte.cs" />
     <Compile Include="Jeu\Evenements\CoupureDeCommunication.cs" />
     <Compile Include="Jeu\Evenements\DonneesEntrantes.cs" />
@@ -71,6 +73,7 @@
     <Compile Include="Jeu\Evenements\FinDePhase.cs" />
     <Compile Include="Jeu\Game.cs" />
     <Compile Include="Jeu\GameContext.cs" />
+    <Compile Include="Jeu\InGameJoueur.cs" />
     <Compile Include="Jeu\Joueur.cs" />
     <Compile Include="Jeu\Mission.cs" />
     <Compile Include="Jeu\Evenements\TransfertDeDonnees.cs" />
