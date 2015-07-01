@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using SpaceAlert.Model.Helpers.Enums;
+﻿using SpaceAlert.Model.Helpers.Enums;
+using SpaceAlert.Model.Menaces;
 using SpaceAlert.Model.Plateau;
+using System;
+using System.Collections.Generic;
 
 namespace SpaceAlert.Model.Jeu
 {
@@ -25,16 +26,43 @@ namespace SpaceAlert.Model.Jeu
         public Vaisseau Vaisseau { get; set; }
 
         /// <summary>
+        /// Les menaces en cours de résolution
+        /// </summary>
+        public Dictionary<Zone, List<InGameMenace>> Menaces { get; set; }
+
+        /// <summary>
+        /// Les menaces détruites au cours de la partie
+        /// </summary>
+        public List<Menace> MenacesDetruites { get; set; }
+
+        /// <summary>
+        /// Les menaces auxquelles le vaisseau a survécu
+        /// </summary>
+        public List<Menace> MenacesSurvecues { get; set; } 
+
+        /// <summary>
         /// Le type de mission
         /// </summary>
         public TypeMission TypeMission { get; set; }
 
+        /// <summary>
+        /// La mission
+        /// </summary>
         public Mission Mission { get; set; }
 
+        /// <summary>
+        /// La difficulté dela partie
+        /// </summary>
         public Couleur Difficulte { get; set; }
 
+        /// <summary>
+        /// Les joueurs
+        /// </summary>
         public List<Joueur> Joueurs { get; set; }
 
+        /// <summary>
+        /// La date de création de la partie
+        /// </summary>
         public DateTime DateCreation { get; set; }
     }
 }

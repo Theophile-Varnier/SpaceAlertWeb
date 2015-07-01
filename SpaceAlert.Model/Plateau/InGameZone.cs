@@ -8,28 +8,7 @@ namespace SpaceAlert.Model.Plateau
     /// </summary>
     public class InGameZone
     {
-        /// <summary>
-        /// Constructeur par défaut
-        /// </summary>
-        public InGameZone()
-        {
 
-        }
-
-        /// <summary>
-        /// Constructeur par copie
-        /// </summary>
-        /// <param name="source"></param>
-        public InGameZone(InGameZone source)
-        {
-            Degats = source.Degats;
-            RampeIndice = source.RampeIndice;
-            Salles = new Dictionary<Pont, Salle>();
-            foreach (Pont p in source.Salles.Keys)
-            {
-                Salles.Add(p, new Salle(source.Salles[p]));
-            }
-        }
         /// <summary>
         /// Les deux salles de la zone
         /// </summary>

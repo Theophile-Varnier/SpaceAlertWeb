@@ -11,7 +11,6 @@ namespace SpaceAlert.Model.Menaces
     public class ListOfMenaces : Dictionary<TypeMenace, List<Menace>>
     {
         public ListOfMenaces()
-            : base()
         {
 
         }

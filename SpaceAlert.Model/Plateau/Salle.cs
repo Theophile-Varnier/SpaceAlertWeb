@@ -1,4 +1,7 @@
 ﻿using SpaceAlert.Model.Helpers.Enums;
+using SpaceAlert.Model.Jeu;
+using System;
+using System.Collections.Generic;
 
 namespace SpaceAlert.Model.Plateau
 {
@@ -7,29 +10,6 @@ namespace SpaceAlert.Model.Plateau
     /// </summary>
     public class Salle
     {
-        /// <summary>
-        /// Constructeur par défaut
-        /// </summary>
-        public Salle()
-        {
-
-        }
-
-        /// <summary>
-        /// Constructeur par copie
-        /// </summary>
-        /// <param name="source"></param>
-        public Salle(Salle source)
-        {
-            Zone = source.Zone;
-            Pont = source.Pont;
-            ActionC = source.ActionC;
-            EnergieMax = source.EnergieMax;
-            EnergieCourante = source.EnergieCourante;
-            CanonPower = source.CanonPower;
-            CanonRange = source.CanonRange;
-        }
-
         /// <summary>
         /// La zone à laquelle la salle appartient
         /// </summary>
@@ -56,13 +36,13 @@ namespace SpaceAlert.Model.Plateau
         public int EnergieCourante { get; set; }
 
         /// <summary>
-        /// La puissance du canon de la salle
+        /// Le canon de la salle (pas le plus beau hein, le vrai canon)
         /// </summary>
-        public int CanonPower { get; set; }
+        public Canon Canon { get; set; }
 
         /// <summary>
-        /// La portée du canon de la salle
+        /// Les actions disponibles dans la salle
         /// </summary>
-        public int CanonRange { get; set; }
+        public Dictionary<TypeAction, Action<Salle, Game>> Actions { get; set; }
     }
 }

@@ -7,7 +7,7 @@ namespace SpaceAlert.Model.Jeu
     /// </summary>
     public class Carte
     {
-        public Action Action { get; set; }
+        public TypeAction TypeAction { get; set; }
 
         public Direction Mouvement { get; set; }
     }

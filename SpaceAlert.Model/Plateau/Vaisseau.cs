@@ -10,33 +10,7 @@ namespace SpaceAlert.Model.Plateau
     /// </summary>
     public class Vaisseau
     {
-        /// <summary>
-        /// Constructeur par défaut
-        /// </summary>
-        public Vaisseau()
-        {
 
-        }
-        /// <summary>
-        /// Constructeur par copie
-        /// </summary>
-        /// <param name="source"></param>
-        public Vaisseau(Vaisseau source)
-        {
-            NbCapsules = source.NbCapsules;
-            NbRoquettes = source.NbRoquettes;
-            Interceptors = source.Interceptors;
-            Zones = new Dictionary<Zone, InGameZone>();
-            foreach (Zone z in source.Zones.Keys)
-            {
-                Zones.Add(z, new InGameZone(source.Zones[z]));
-            }
-            RobotsActifs = new List<bool>();
-            foreach (bool r in source.RobotsActifs)
-            {
-                RobotsActifs.Add(r);
-            }
-        }
         /// <summary>
         /// Le nombre de capsules d'énergie restant
         /// </summary>
@@ -51,6 +25,11 @@ namespace SpaceAlert.Model.Plateau
         /// Indique si les intercepteurs sont utilisés par un joueur
         /// </summary>
         public bool Interceptors { get; set; }
+
+        /// <summary>
+        /// Indique si la maintenance a été effectuée pendant cette phase
+        /// </summary>
+        public bool MaintenanceEffectuee { get; set; }
 
         /// <summary>
         /// L'état des différentes zones du vaisseau à chaque instant

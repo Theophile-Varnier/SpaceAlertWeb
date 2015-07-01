@@ -10,7 +10,7 @@ namespace SpaceAlert.Model.Jeu
         /// <summary>
         /// Le type de l'action
         /// </summary>
-        public TypeAction TypeAction { get; set; }
+        public GenreAction GenreAction { get; set; }
 
         /// <summary>
         /// La valeur de l'action

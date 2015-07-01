@@ -33,8 +33,7 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
   <object id="BleueHaut" type="SpaceAlert.Model.Plateau.Salle" singleton="false">
     <property name="EnergieCourante" value="1"/>
     <property name="EnergieMax" value="2"/>
-    <property name="CanonRange" value="3"/>
-    <property name="CanonPower" value="4"/>
+    <property name="Canon" ref="CanonHaut"/>
     <property name="Zone" value="BLEUE"/>
     <property name="Pont" value="HAUT"/>
     <property name="ActionC" value="INTERCEPTEURS"/>
@@ -42,8 +41,7 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
   <object id="BleueBas" type="SpaceAlert.Model.Plateau.Salle" singleton="false">
     <property name="EnergieCourante" value="2"/>
     <property name="EnergieMax" value="3"/>
-    <property name="CanonRange" value="3"/>
-    <property name="CanonPower" value="2"/>
+    <property name="Canon" ref="CanonBas"/>
     <property name="Zone" value="BLEUE"/>
     <property name="Pont" value="BAS"/>
     <property name="ActionC" value="ROBOTS"/>
@@ -51,8 +49,7 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
   <object id="BlancHaut" type="SpaceAlert.Model.Plateau.Salle" singleton="false">
     <property name="EnergieCourante" value="1"/>
     <property name="EnergieMax" value="3"/>
-    <property name="CanonRange" value="3"/>
-    <property name="CanonPower" value="5"/>
+    <property name="Canon" ref="CanonCentral"/>
     <property name="Zone" value="BLANCHE"/>
     <property name="Pont" value="HAUT"/>
     <property name="ActionC" value="MAINTENANCE"/>
@@ -60,8 +57,7 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
   <object id="BlancBas" type="SpaceAlert.Model.Plateau.Salle" singleton="false">
     <property name="EnergieCourante" value="3"/>
     <property name="EnergieMax" value="5"/>
-    <property name="CanonRange" value="2"/>
-    <property name="CanonPower" value="1"/>
+    <property name="Canon" ref="CanonImpulsion"/>
     <property name="Zone" value="BLANCHE"/>
     <property name="Pont" value="BAS"/>
     <property name="ActionC" value="HUBLOT"/>
@@ -69,8 +65,7 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
   <object id="RougeHaut" type="SpaceAlert.Model.Plateau.Salle" singleton="false">
     <property name="EnergieCourante" value="1"/>
     <property name="EnergieMax" value="2"/>
-    <property name="CanonRange" value="3"/>
-    <property name="CanonPower" value="4"/>
+    <property name="Canon" ref="CanonHaut"/>
     <property name="Zone" value="ROUGE"/>
     <property name="Pont" value="HAUT"/>
     <property name="ActionC" value="ROBOTS"/>
@@ -78,10 +73,37 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
   <object id="RougeBas" type="SpaceAlert.Model.Plateau.Salle" singleton="false">
     <property name="EnergieCourante" value="2"/>
     <property name="EnergieMax" value="3"/>
-    <property name="CanonRange" value="3"/>
-    <property name="CanonPower" value="2"/>
+    <property name="Canon" ref="CanonBas"/>
     <property name="Zone" value="ROUGE"/>
     <property name="Pont" value="BAS"/>
     <property name="ActionC" value="ROQUETTES"/>
+  </object>
+
+  <object id="CanonHaut" type="SpaceAlert.Model.Jeu.Canon" singleton="false">
+    <property name="Power" value="4"/>
+    <property name="Range" value="3"/>
+    <property name="spray" value="False"/>
+    <property name="consumeEnergy" value="True"/>
+  </object>
+
+  <object id="CanonBas" type="SpaceAlert.Model.Jeu.Canon" singleton="false">
+    <property name="Power" value="2"/>
+    <property name="Range" value="3"/>
+    <property name="spray" value="False"/>
+    <property name="consumeEnergy" value="False"/>
+  </object>
+
+  <object id="CanonCentral" type="SpaceAlert.Model.Jeu.Canon" singleton="false">
+    <property name="Power" value="5"/>
+    <property name="Range" value="3"/>
+    <property name="spray" value="False"/>
+    <property name="consumeEnergy" value="True"/>
+  </object>
+
+  <object id="CanonImpulsion" type="SpaceAlert.Model.Jeu.Canon" singleton="false">
+    <property name="Power" value="1"/>
+    <property name="Range" value="2"/>
+    <property name="spray" value="True"/>
+    <property name="consumeEnergy" value="True"/>
   </object>
 </objects>
