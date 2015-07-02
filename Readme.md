@@ -30,6 +30,9 @@ Nice to Have
 
 -	Editeur de maps
 -	Profil (icône, ...)
+-	Editeur de missions
+	-	Evénements
+	-	Trucs accessibles
 
 Extension (v2 ?)
 --------------
