@@ -39,10 +39,5 @@ namespace SpaceAlert.Model.Plateau
         /// Le canon de la salle (pas le plus beau hein, le vrai canon)
         /// </summary>
         public Canon Canon { get; set; }
-
-        /// <summary>
-        /// Les actions disponibles dans la salle
-        /// </summary>
-        public Dictionary<TypeAction, Action<Salle, Game>> Actions { get; set; }
     }
 }

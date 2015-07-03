@@ -7,10 +7,19 @@ namespace SpaceAlert.Model.Jeu
     /// </summary>
     public class InGameMenace
     {
+        /// <summary>
+        /// La menace associée
+        /// </summary>
         public Menace Menace { get; set; }
 
+        /// <summary>
+        /// La position actuelle de la menace
+        /// </summary>
         public int Position { get; set; }
 
+        /// <summary>
+        /// Le tour d'arrivée de la menace
+        /// </summary>
         public int TourArrive { get; set; }
 
         /// <summary>

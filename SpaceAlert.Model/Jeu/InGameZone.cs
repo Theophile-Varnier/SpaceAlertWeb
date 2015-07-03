@@ -1,7 +1,8 @@
-﻿using SpaceAlert.Model.Helpers.Enums;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using SpaceAlert.Model.Helpers.Enums;
+using SpaceAlert.Model.Plateau;
 
-namespace SpaceAlert.Model.Plateau
+namespace SpaceAlert.Model.Jeu
 {
     /// <summary>
     /// Décrit l'état d'une zone du vaisseau en Jeu

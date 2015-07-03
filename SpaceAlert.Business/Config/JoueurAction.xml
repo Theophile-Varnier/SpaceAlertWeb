@@ -1,0 +1,37 @@
+﻿<objects xmlns="http://www.springframework.net">
+  <object id="Shoot" type="Spring.Objects.Factory.Config.DelegateFactoryObject, Spring.Core">
+    <property name="DelegateType" value="System.Action&lt;SpaceAlert.Model.Plateau.Salle,SpaceAlert.Model.Jeu.Game&gt;" />
+    <property name="TargetType" value="SpaceAlert.Model.Helpers.JoueurAction" />
+    <property name="MethodName" value="Shoot" />
+  </object>
+
+  <object id="Shield" type="Spring.Objects.Factory.Config.DelegateFactoryObject, Spring.Core">
+    <property name="DelegateType" value="System.Action&lt;SpaceAlert.Model.Plateau.Salle,SpaceAlert.Model.Jeu.Game&gt;" />
+    <property name="TargetType" value="SpaceAlert.Model.Helpers.JoueurAction" />
+    <property name="MethodName" value="Shield" />
+  </object>
+
+  <object id="FillEnergy" type="Spring.Objects.Factory.Config.DelegateFactoryObject, Spring.Core">
+    <property name="DelegateType" value="System.Action&lt;SpaceAlert.Model.Plateau.Salle,SpaceAlert.Model.Jeu.Game&gt;" />
+    <property name="TargetType" value="SpaceAlert.Model.Helpers.JoueurAction" />
+    <property name="MethodName" value="FillEnergy" />
+  </object>
+
+  <object id="ShootRocket" type="Spring.Objects.Factory.Config.DelegateFactoryObject, Spring.Core">
+    <property name="DelegateType" value="System.Action&lt;SpaceAlert.Model.Plateau.Salle,SpaceAlert.Model.Jeu.Game&gt;" />
+    <property name="TargetType" value="SpaceAlert.Model.Helpers.JoueurAction" />
+    <property name="MethodName" value="ShootRocket" />
+  </object>
+
+  <object id="ActivateInterceptors" type="Spring.Objects.Factory.Config.DelegateFactoryObject, Spring.Core">
+    <property name="DelegateType" value="System.Action&lt;SpaceAlert.Model.Plateau.Salle,SpaceAlert.Model.Jeu.Game&gt;" />
+    <property name="TargetType" value="SpaceAlert.Model.Helpers.JoueurAction" />
+    <property name="MethodName" value="ActivateInterceptors" />
+  </object>
+
+  <object id="Maintenance" type="Spring.Objects.Factory.Config.DelegateFactoryObject, Spring.Core">
+    <property name="DelegateType" value="System.Action&lt;SpaceAlert.Model.Plateau.Salle,SpaceAlert.Model.Jeu.Game&gt;" />
+    <property name="TargetType" value="SpaceAlert.Model.Helpers.JoueurAction" />
+    <property name="MethodName" value="Maintenance" />
+  </object>
+</objects>

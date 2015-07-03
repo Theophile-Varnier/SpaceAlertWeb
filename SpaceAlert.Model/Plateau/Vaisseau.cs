@@ -2,6 +2,7 @@
 using System.Linq;
 using SpaceAlert.Model.Helpers.Enums;
 using System.Collections.Generic;
+using SpaceAlert.Model.Jeu;
 
 namespace SpaceAlert.Model.Plateau
 {

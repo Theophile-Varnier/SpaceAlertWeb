@@ -23,7 +23,7 @@ namespace SpaceAlert.Model.Helpers
             if (source.Canon.HasShot) return;
 
             source.Canon.HasShot = true;
-            InGameMenace zoneMenace = partie.Menaces[source.Zone].OrderByDescending(m => m.Position).ThenBy(m => m.TourArrive).First();
+            InGameMenace zoneMenace = partie.MenacesExternes[source.Zone].OrderByDescending(m => m.Position).ThenBy(m => m.TourArrive).First();
 
             // S'il y a une menace dans la zone on lui inflige des dégâts
             if (zoneMenace != null)
@@ -33,7 +33,7 @@ namespace SpaceAlert.Model.Helpers
                 zoneMenace.Menace.CurrentHp = Math.Max(0, zoneMenace.Menace.CurrentHp - degats);
                 if (zoneMenace.Menace.CurrentHp == 0)
                 {
-                    partie.Menaces[source.Zone].Remove(zoneMenace);
+                    partie.MenacesExternes[source.Zone].Remove(zoneMenace);
                     partie.MenacesDetruites.Add(zoneMenace.Menace);
                 }
             }

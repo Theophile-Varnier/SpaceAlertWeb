@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using SpaceAlert.Model.Plateau;
+﻿using SpaceAlert.Model.Jeu;
+using System.Collections.Generic;
 
 namespace SpaceAlert.Web.Models
 {

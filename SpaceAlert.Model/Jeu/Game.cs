@@ -34,9 +34,9 @@ namespace SpaceAlert.Model.Jeu
         public bool MaintenanceEffectuee { get; set; }
 
         /// <summary>
-        /// Les menaces en cours de résolution
+        /// Les menaces externes en cours de résolution
         /// </summary>
-        public Dictionary<Zone, List<InGameMenace>> Menaces { get; set; }
+        public Dictionary<Zone, List<InGameMenace>> MenacesExternes { get; set; }
 
         /// <summary>
         /// Les menaces détruites au cours de la partie
