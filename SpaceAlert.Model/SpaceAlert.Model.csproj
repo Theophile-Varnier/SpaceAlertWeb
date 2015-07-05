@@ -75,7 +75,6 @@
     <Compile Include="Jeu\Evenements\FinDePhase.cs" />
     <Compile Include="Jeu\Game.cs" />
     <Compile Include="Jeu\GameContext.cs" />
-    <Compile Include="Jeu\InGameJoueur.cs" />
     <Compile Include="Jeu\InGameMenace.cs" />
     <Compile Include="Jeu\Joueur.cs" />
     <Compile Include="Jeu\Mission.cs" />

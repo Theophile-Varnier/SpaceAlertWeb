@@ -76,5 +76,24 @@ namespace SpaceAlert.Model.Helpers
             int index = rand.Next() % enumerable1.Count();
             return enumerable1.ElementAt(index);
         }
+
+        /// <summary>
+        /// Trouve l'indice du premier élément respectant une condition
+        /// </summary>
+        /// <typeparam name="T">Le type de container</typeparam>
+        /// <param name="enumerable">L'énumérable en question</param>
+        /// <param name="condition">La condition à respecter</param>
+        /// <returns>L'indice du premier élément respectant "condition" s'il existe, -1 sinon</returns>
+        public static int FirstIndexOf<T>(this IEnumerable<T> enumerable, Func<T, bool> condition)
+        {
+            for (int i = 0; i < enumerable.Count(); i++)
+            {
+                if (condition(enumerable.ElementAt(i)))
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
     }
 }
