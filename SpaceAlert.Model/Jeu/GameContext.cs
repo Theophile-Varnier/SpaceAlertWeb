@@ -37,6 +37,16 @@ namespace SpaceAlert.Model.Jeu
         public List<Menace> MenacesSurvecues { get; set; }
 
         /// <summary>
+        /// Les rampes
+        /// </summary>
+        public Dictionary<Zone, Rampe> Rampes { get; set; }
+
+        /// <summary>
+        /// La rampe interne
+        /// </summary>
+        public Rampe RampeInterne { get; set; }
+
+        /// <summary>
         /// Indique si la maintenance a été effectuée pendant cette phase
         /// </summary>
         public bool MaintenanceEffectuee { get; set; }

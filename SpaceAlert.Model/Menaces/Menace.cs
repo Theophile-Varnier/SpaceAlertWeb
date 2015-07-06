@@ -57,7 +57,7 @@ namespace SpaceAlert.Model.Menaces
         public Dictionary<TypeCase, int> MinDamages { get; set; }
 
         /// <summary>
-        /// Indique si la menace est ciblable par les canons
+        /// Indique si la menace est ciblable
         /// </summary>
         public bool Targetable { get; set; }
 

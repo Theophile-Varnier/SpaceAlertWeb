@@ -79,6 +79,9 @@
     <Compile Include="Jeu\Joueur.cs" />
     <Compile Include="Jeu\Mission.cs" />
     <Compile Include="Jeu\Evenements\TransfertDeDonnees.cs" />
+    <Compile Include="Jeu\Rampe.cs" />
+    <Compile Include="Menaces\Dysfonctionnement.cs" />
+    <Compile Include="Menaces\Intrus.cs" />
     <Compile Include="Menaces\ListOfMenaces.cs" />
     <Compile Include="Menaces\Menace.cs" />
     <Compile Include="Menaces\MenaceExterne.cs" />

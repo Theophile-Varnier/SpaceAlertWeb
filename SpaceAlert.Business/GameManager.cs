@@ -5,6 +5,8 @@ using System.Linq;
 using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Plateau;
 using System;
+using SpaceAlert.Model.Jeu.Evenements;
+using SpaceAlert.Model.Menaces;
 
 namespace SpaceAlert.Business
 {
@@ -56,7 +58,22 @@ namespace SpaceAlert.Business
                 InitPhase();
             }
 
-            // TODO : Arrivée menaces
+            // Apparition des menaces
+            foreach (EvenementMenace evenement in game.Partie.Mission.Evenements.OfType<EvenementMenace>())
+            {
+                if (evenement.TourArrive == numTour)
+                {
+                    game.Partie.MenacesExternes[evenement.Zone].Add(new InGameMenace
+                    {
+                        Menace = evenement.Menace,
+                        CurrentHp = evenement.Menace.MaxHp,
+                        Position = 0,
+                        TourArrive = numTour,
+                        DegatsSubis = 0,
+                        Rampe = game.Rampes[evenement.Zone]
+                    });
+                }
+            }
 
             // On vérifie que la maintenance a été effectuée
             bool retardMaintenance = SpaceAlertData.DebutPhases.Select(i => i + 2).Contains(numTour) && !game.MaintenanceEffectuee;
@@ -78,7 +95,7 @@ namespace SpaceAlert.Business
                 {
                     DelayPlayer(game.Partie.Joueurs[i], numTour);
                 }
-                
+
                 // On exécute l'action du joueur
                 if (game.Partie.Joueurs[i].Actions[numTour] != null)
                 {
@@ -255,6 +272,20 @@ namespace SpaceAlert.Business
                 joueur.Actions[i] = joueur.Actions[i - 1];
             }
             joueur.Actions[numTour] = null;
+        }
+
+        /// <summary>
+        /// Résout tous les tirs du tour
+        /// </summary>
+        private void ResolveShoots()
+        {
+            IEnumerable<InGameMenace> allMenacesExternes = game.Partie.MenacesExternes.SelectMany(m => m.Value).Where(m => ((MenaceExterne)m.Menace).RocketTargetable);
+            int minDistance = allMenacesExternes.Select(m => m.Distance).Min();
+            InGameMenace closerMenace = allMenacesExternes.First(m => m.Distance == minDistance);
+            foreach (Zone zone in game.Partie.Vaisseau.Zones.Keys)
+            {
+
+            }
         }
     }
 }
