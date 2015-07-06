@@ -1,5 +1,4 @@
 ﻿using SpaceAlert.Model.Helpers.Enums;
-using SpaceAlert.Model.Menaces;
 using SpaceAlert.Model.Plateau;
 using System;
 using System.Collections.Generic;
@@ -29,24 +28,9 @@ namespace SpaceAlert.Model.Jeu
         public Vaisseau Vaisseau { get; set; }
 
         /// <summary>
-        /// Indique si la maintenance a été effectuée pendant cette phase
-        /// </summary>
-        public bool MaintenanceEffectuee { get; set; }
-
-        /// <summary>
         /// Les menaces externes en cours de résolution
         /// </summary>
         public Dictionary<Zone, List<InGameMenace>> MenacesExternes { get; set; }
-
-        /// <summary>
-        /// Les menaces détruites au cours de la partie
-        /// </summary>
-        public List<Menace> MenacesDetruites { get; set; }
-
-        /// <summary>
-        /// Les menaces auxquelles le vaisseau a survécu
-        /// </summary>
-        public List<Menace> MenacesSurvecues { get; set; } 
 
         /// <summary>
         /// Le type de mission

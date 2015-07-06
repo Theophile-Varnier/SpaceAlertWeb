@@ -7,6 +7,10 @@ using System;
 
 namespace SpaceAlert.Business
 {
+    /// <summary>
+    /// Manager de parties
+    /// TODO : Refacto : tous les tirs doivent se résoudre en même temps
+    /// </summary>
     public class GameManager
     {
         private GameContext game;
@@ -71,6 +75,7 @@ namespace SpaceAlert.Business
         /// Résout une action selon son type
         /// </summary>
         /// <param name="action">l'action à résoudre</param>
+        /// <param name="source">Le joueur qui effectue l'action</param>
         private void ResolveAction(TypeAction action, Joueur source)
         {
             switch (action)
@@ -89,16 +94,39 @@ namespace SpaceAlert.Business
                     }
                     break;
                 case TypeAction.C:
-                    ResolveCAction(source.CurrentSalle);
+                    ResolveCAction(source);
                     break;
             }
         }
 
-        private void ResolveCAction(Salle source)
+        /// <summary>
+        /// Résout une action c
+        /// </summary>
+        /// <param name="source"></param>
+        private void ResolveCAction(Joueur source)
         {
-            switch (source.ActionC)
+            switch (source.CurrentSalle.ActionC)
             {
                 case CAction.ROBOTS:
+                    if (source.CurrentSalle.HasRobots == PresenceRobots.PRESENTS && source.Robots == EtatRobots.NONE)
+                    {
+                        source.Robots = EtatRobots.ACTIF;
+                        source.CurrentSalle.HasRobots = PresenceRobots.ACTIFS;
+                    }
+                    if (source.Robots == EtatRobots.CASSE && source.CurrentSalle.HasRobots != PresenceRobots.NONE)
+                    {
+                        source.Robots = EtatRobots.ACTIF;
+                    }
+                    break;
+                case CAction.INTERCEPTEURS:
+                    game.Partie.Vaisseau.Interceptors = true;
+                    break;
+                case CAction.MAINTENANCE:
+                    game.MaintenanceEffectuee = true;
+                    break;
+                case CAction.ROQUETTES:
+                    break;
+                case CAction.HUBLOT:
                     break;
             }
         }
@@ -107,7 +135,6 @@ namespace SpaceAlert.Business
         /// Tire sur une menace
         /// </summary>
         /// <param name="source">La salle d'où est effectuée l'action</param>
-        /// <param name="partie">La partie en cours</param>
         private void Shoot(Salle source)
         {
             // Si le canon a déjà tiré, il ne se passe rien
@@ -125,7 +152,7 @@ namespace SpaceAlert.Business
                 if (zoneMenace.Menace.CurrentHp == 0)
                 {
                     game.Partie.MenacesExternes[source.Zone].Remove(zoneMenace);
-                    game.Partie.MenacesDetruites.Add(zoneMenace.Menace);
+                    game.MenacesDetruites.Add(zoneMenace.Menace);
                 }
             }
 

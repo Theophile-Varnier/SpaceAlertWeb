@@ -1,7 +1,5 @@
 ﻿using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Jeu;
-using System;
-using System.Collections.Generic;
 
 namespace SpaceAlert.Model.Plateau
 {
@@ -24,6 +22,11 @@ namespace SpaceAlert.Model.Plateau
         /// Le type d'action que génère le bouton C
         /// </summary>
         public CAction ActionC { get; set; }
+
+        /// <summary>
+        /// Indique si la salle possède des robots
+        /// </summary>
+        public PresenceRobots HasRobots { get; set; }
 
         /// <summary>
         /// Le nombre max d'énergie (resource ou bouclier)

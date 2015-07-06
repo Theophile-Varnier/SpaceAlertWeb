@@ -36,7 +36,8 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
     <property name="Canon" ref="CanonHaut"/>
     <property name="Zone" value="BLEUE"/>
     <property name="Pont" value="HAUT"/>
-    <property name="ActionC" value="INTERCEPTEURS"/>
+    <property name="HasRobots" value="PRESENTS"/>
+    <property name="ActionC" value="ROBOTS"/>
   </object>
   <object id="BleueBas" type="SpaceAlert.Model.Plateau.Salle" singleton="false">
     <property name="EnergieCourante" value="2"/>
@@ -44,7 +45,8 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
     <property name="Canon" ref="CanonBas"/>
     <property name="Zone" value="BLEUE"/>
     <property name="Pont" value="BAS"/>
-    <property name="ActionC" value="ROBOTS"/>
+    <property name="HasRobots" value="NONE"/>
+    <property name="ActionC" value="ROQUETTES"/>
   </object>
   <object id="BlancHaut" type="SpaceAlert.Model.Plateau.Salle" singleton="false">
     <property name="EnergieCourante" value="1"/>
@@ -52,6 +54,7 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
     <property name="Canon" ref="CanonCentral"/>
     <property name="Zone" value="BLANCHE"/>
     <property name="Pont" value="HAUT"/>
+    <property name="HasRobots" value="NONE"/>
     <property name="ActionC" value="MAINTENANCE"/>
   </object>
   <object id="BlancBas" type="SpaceAlert.Model.Plateau.Salle" singleton="false">
@@ -60,6 +63,7 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
     <property name="Canon" ref="CanonImpulsion"/>
     <property name="Zone" value="BLANCHE"/>
     <property name="Pont" value="BAS"/>
+    <property name="HasRobots" value="NONE"/>
     <property name="ActionC" value="HUBLOT"/>
   </object>
   <object id="RougeHaut" type="SpaceAlert.Model.Plateau.Salle" singleton="false">
@@ -68,7 +72,8 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
     <property name="Canon" ref="CanonHaut"/>
     <property name="Zone" value="ROUGE"/>
     <property name="Pont" value="HAUT"/>
-    <property name="ActionC" value="ROBOTS"/>
+    <property name="HasRobots" value="NONE"/>
+    <property name="ActionC" value="INTERCEPTEURS"/>
   </object>
   <object id="RougeBas" type="SpaceAlert.Model.Plateau.Salle" singleton="false">
     <property name="EnergieCourante" value="2"/>
@@ -76,7 +81,8 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
     <property name="Canon" ref="CanonBas"/>
     <property name="Zone" value="ROUGE"/>
     <property name="Pont" value="BAS"/>
-    <property name="ActionC" value="ROQUETTES"/>
+    <property name="HasRobots" value="PRESENTS"/>
+    <property name="ActionC" value="ROBOTS"/>
   </object>
 
   <object id="CanonHaut" type="SpaceAlert.Model.Jeu.Canon" singleton="false">
