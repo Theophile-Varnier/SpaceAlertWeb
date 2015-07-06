@@ -26,5 +26,10 @@ namespace SpaceAlert.Model.Jeu
         /// Les dégâts subis lors du tour en cours
         /// </summary>
         public int DegatsSubis { get; set; }
+        
+        /// <summary>
+        /// Le nombre de pv actuel de la menace
+        /// </summary>
+        public int CurrentHp { get; set; }
     }
 }

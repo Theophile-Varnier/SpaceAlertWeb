@@ -1,5 +1,5 @@
 ﻿using SpaceAlert.Model.Helpers.Enums;
-using SpaceAlert.Model.Menaces;
+using SpaceAlert.Model.Jeu;
 using SpaceAlert.Model.Plateau;
 using System;
 using System.Linq;
@@ -15,16 +15,16 @@ namespace SpaceAlert.Model.Helpers
         /// <param name="target">La cible de l'attaque</param>
         /// <param name="pallier">Le moment de l'attaque</param>
         /// <param name="from">La zone attaquée</param>
-        public static void Attack(Menace source, Vaisseau target, TypeCase pallier, Zone from)
+        public static void Attack(InGameMenace source, Vaisseau target, TypeCase pallier, Zone from)
         {
-            if (source.MinDamages != null && source.MinDamages.ContainsKey(pallier))
+            if (source.Menace.MinDamages != null && source.Menace.MinDamages.ContainsKey(pallier))
             {
-                if (source.MaxHp - source.CurrentHp < source.MinDamages[pallier])
+                if (source.Menace.MaxHp - source.CurrentHp < source.Menace.MinDamages[pallier])
                 {
                     return;
                 }
             }
-            InflictDamages(target, source.AttackValues[pallier].First(), from);
+            InflictDamages(target, source.Menace.AttackValues[pallier].First(), from);
         }
 
         /// <summary>
@@ -34,31 +34,31 @@ namespace SpaceAlert.Model.Helpers
         /// <param name="target">La cible de l'attaque</param>
         /// <param name="pallier">Le moment de l'attaque</param>
         /// <param name="from">La zone attaquée</param>
-        public static void AttackOnAllZones(Menace source, Vaisseau target, TypeCase pallier, Zone from)
+        public static void AttackOnAllZones(InGameMenace source, Vaisseau target, TypeCase pallier, Zone from)
         {
             Attack(source, target, pallier, from);
             AttackOnOtherZones(source, target, pallier, from);
         }
 
         /// <summary>
-        /// Attaque les zones sur laquelle la menace ne se trouve pas
+        /// Attaque les zones sur laquelle la InGameMenace ne se trouve pas
         /// </summary>
         /// <param name="source">La source de l'attaque</param>
         /// <param name="target">La cible de l'attaque</param>
         /// <param name="pallier">Le moment de l'attaque</param>
         /// <param name="from">La zone attaquée</param>
-        public static void AttackOnOtherZones(Menace source, Vaisseau target, TypeCase pallier, Zone from)
+        public static void AttackOnOtherZones(InGameMenace source, Vaisseau target, TypeCase pallier, Zone from)
         {
-            if (source.MinDamages != null && source.MinDamages.ContainsKey(pallier))
+            if (source.Menace.MinDamages != null && source.Menace.MinDamages.ContainsKey(pallier))
             {
-                if (source.MaxHp - source.CurrentHp < source.MinDamages[pallier])
+                if (source.Menace.MaxHp - source.CurrentHp < source.Menace.MinDamages[pallier])
                 {
                     return;
                 }
             }
             foreach (Zone zone in target.Zones.Keys.Where(k => k != from))
             {
-                InflictDamages(target, source.AttackValues[pallier][1], zone);
+                InflictDamages(target, source.Menace.AttackValues[pallier][1], zone);
             }
         }
 
@@ -69,9 +69,9 @@ namespace SpaceAlert.Model.Helpers
         /// <param name="target">La cible de l'attaque</param>
         /// <param name="pallier">Le moment de l'attaque</param>
         /// <param name="from">La zone attaquée</param>
-        public static void InflictRemainingHitPoints(Menace source, Vaisseau target, TypeCase pallier, Zone from)
+        public static void InflictRemainingHitPoints(InGameMenace source, Vaisseau target, TypeCase pallier, Zone from)
         {
-            InflictDamages(target, source.AttackValues[pallier][0] * source.CurrentHp, from);
+            InflictDamages(target, source.Menace.AttackValues[pallier][0] * source.CurrentHp, from);
         }
 
         /// <summary>
@@ -81,9 +81,9 @@ namespace SpaceAlert.Model.Helpers
         /// <param name="target">La cible de l'attaque</param>
         /// <param name="pallier">Le moment de l'attaque</param>
         /// <param name="from">La zone attaquée</param>
-        public static void IncrShield(Menace source, Vaisseau target, TypeCase pallier, Zone from)
+        public static void IncrShield(InGameMenace source, Vaisseau target, TypeCase pallier, Zone from)
         {
-            source.Shield += source.ShieldValues[pallier];
+            source.Menace.Shield += source.Menace.ShieldValues[pallier];
         }
 
         /// <summary>
@@ -93,9 +93,9 @@ namespace SpaceAlert.Model.Helpers
         /// <param name="target">La cible de l'attaque</param>
         /// <param name="pallier">Le moment de l'attaque</param>
         /// <param name="from">La zone attaquée</param>
-        public static void IncrSpeed(Menace source, Vaisseau target, TypeCase pallier, Zone from)
+        public static void IncrSpeed(InGameMenace source, Vaisseau target, TypeCase pallier, Zone from)
         {
-            source.Speed += source.SpeedValues[pallier];
+            source.Menace.Speed += source.Menace.SpeedValues[pallier];
         }
 
         /// <summary>
@@ -105,9 +105,9 @@ namespace SpaceAlert.Model.Helpers
         /// <param name="target">La cible de l'attaque</param>
         /// <param name="pallier">Le moment de l'attaque</param>
         /// <param name="from">La zone attaquée</param>
-        public static void SetShield(Menace source, Vaisseau target, TypeCase pallier, Zone from)
+        public static void SetShield(InGameMenace source, Vaisseau target, TypeCase pallier, Zone from)
         {
-            source.Shield = source.ShieldValues[pallier];
+            source.Menace.Shield = source.Menace.ShieldValues[pallier];
         }
 
         /// <summary>
@@ -117,9 +117,9 @@ namespace SpaceAlert.Model.Helpers
         /// <param name="target">La cible de l'attaque</param>
         /// <param name="pallier">Le moment de l'attaque</param>
         /// <param name="from">La zone attaquée</param>
-        public static void HealHalf(Menace source, Vaisseau target, TypeCase pallier, Zone from)
+        public static void HealHalf(InGameMenace source, Vaisseau target, TypeCase pallier, Zone from)
         {
-            source.CurrentHp += (source.MaxHp - source.CurrentHp) / 2;
+            source.CurrentHp += (source.Menace.MaxHp - source.CurrentHp) / 2;
         }
 
         /// <summary>
@@ -129,9 +129,9 @@ namespace SpaceAlert.Model.Helpers
         /// <param name="target">La cible de l'attaque</param>
         /// <param name="pallier">Le moment de l'attaque</param>
         /// <param name="from">La zone attaquée</param>
-        public static void Heal(Menace source, Vaisseau target, TypeCase pallier, Zone from)
+        public static void Heal(InGameMenace source, Vaisseau target, TypeCase pallier, Zone from)
         {
-            source.CurrentHp = Math.Min(source.MaxHp, source.CurrentHp + source.HealValues[pallier]);
+            source.CurrentHp = Math.Min(source.Menace.MaxHp, source.CurrentHp + source.Menace.HealValues[pallier]);
         }
 
         /// <summary>
@@ -141,9 +141,9 @@ namespace SpaceAlert.Model.Helpers
         /// <param name="target">La cible de l'attaque</param>
         /// <param name="pallier">Le moment de l'attaque</param>
         /// <param name="from">La zone attaquée</param>
-        public static void Reveals(Menace source, Vaisseau target, TypeCase pallier, Zone from)
+        public static void Reveals(InGameMenace source, Vaisseau target, TypeCase pallier, Zone from)
         {
-            source.Targetable = true;
+            source.Menace.Targetable = true;
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace SpaceAlert.Model.Helpers
         /// <param name="target">La cible de l'attaque</param>
         /// <param name="pallier">Le moment de l'attaque</param>
         /// <param name="from">La zone attaquée</param>
-        public static void DrainsAllShields(Menace source, Vaisseau target, TypeCase pallier, Zone from)
+        public static void DrainsAllShields(InGameMenace source, Vaisseau target, TypeCase pallier, Zone from)
         {
             foreach (Zone z in target.Zones.Keys)
             {
@@ -168,7 +168,7 @@ namespace SpaceAlert.Model.Helpers
         /// <param name="target">La cible de l'attaque</param>
         /// <param name="pallier">Le moment de l'attaque</param>
         /// <param name="from">La zone attaquée</param>
-        public static void DrainShield(Menace source, Vaisseau target, TypeCase pallier, Zone from)
+        public static void DrainShield(InGameMenace source, Vaisseau target, TypeCase pallier, Zone from)
         {
             target.Zones[from].Salles[Pont.HAUT].EnergieCourante = 0;
         }

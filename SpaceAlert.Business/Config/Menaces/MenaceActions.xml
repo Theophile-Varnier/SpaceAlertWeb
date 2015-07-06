@@ -1,66 +1,66 @@
 ﻿<objects xmlns="http://www.springframework.net">
   <object id="Attack" type="Spring.Objects.Factory.Config.DelegateFactoryObject, Spring.Core">
-    <property name="DelegateType" value="System.Action&lt;SpaceAlert.Model.Menaces.Menace,SpaceAlert.Model.Plateau.Vaisseau, SpaceAlert.Model.Helpers.Enums.TypeCase, SpaceAlert.Model.Helpers.Enums.Zone&gt;" />
+    <property name="DelegateType" value="System.Action&lt;SpaceAlert.Model.Jeu.InGameMenace,SpaceAlert.Model.Plateau.Vaisseau, SpaceAlert.Model.Helpers.Enums.TypeCase, SpaceAlert.Model.Helpers.Enums.Zone&gt;" />
     <property name="TargetType" value="SpaceAlert.Model.Helpers.MenaceActions" />
     <property name="MethodName" value="Attack" />
   </object>
 
   <object id="AttackOnAllZones" type="Spring.Objects.Factory.Config.DelegateFactoryObject, Spring.Core">
-    <property name="DelegateType" value="System.Action&lt;SpaceAlert.Model.Menaces.Menace,SpaceAlert.Model.Plateau.Vaisseau, SpaceAlert.Model.Helpers.Enums.TypeCase, SpaceAlert.Model.Helpers.Enums.Zone&gt;" />
+    <property name="DelegateType" value="System.Action&lt;SpaceAlert.Model.Jeu.InGameMenace,SpaceAlert.Model.Plateau.Vaisseau, SpaceAlert.Model.Helpers.Enums.TypeCase, SpaceAlert.Model.Helpers.Enums.Zone&gt;" />
     <property name="TargetType" value="SpaceAlert.Model.Helpers.MenaceActions" />
     <property name="MethodName" value="AttackOnAllZones" />
   </object>
 
   <object id="AttackOnOtherZones" type="Spring.Objects.Factory.Config.DelegateFactoryObject, Spring.Core">
-    <property name="DelegateType" value="System.Action&lt;SpaceAlert.Model.Menaces.Menace,SpaceAlert.Model.Plateau.Vaisseau, SpaceAlert.Model.Helpers.Enums.TypeCase, SpaceAlert.Model.Helpers.Enums.Zone&gt;" />
+    <property name="DelegateType" value="System.Action&lt;SpaceAlert.Model.Jeu.InGameMenace,SpaceAlert.Model.Plateau.Vaisseau, SpaceAlert.Model.Helpers.Enums.TypeCase, SpaceAlert.Model.Helpers.Enums.Zone&gt;" />
     <property name="TargetType" value="SpaceAlert.Model.Helpers.MenaceActions" />
     <property name="MethodName" value="AttackOnOtherZones" />
   </object>
 
   <object id="IncrShield" type="Spring.Objects.Factory.Config.DelegateFactoryObject, Spring.Core">
-    <property name="DelegateType" value="System.Action&lt;SpaceAlert.Model.Menaces.Menace,SpaceAlert.Model.Plateau.Vaisseau, SpaceAlert.Model.Helpers.Enums.TypeCase, SpaceAlert.Model.Helpers.Enums.Zone&gt;" />
+    <property name="DelegateType" value="System.Action&lt;SpaceAlert.Model.Jeu.InGameMenace,SpaceAlert.Model.Plateau.Vaisseau, SpaceAlert.Model.Helpers.Enums.TypeCase, SpaceAlert.Model.Helpers.Enums.Zone&gt;" />
     <property name="TargetType" value="SpaceAlert.Model.Helpers.MenaceActions" />
     <property name="MethodName" value="IncrShield" />
   </object>
 
   <object id="SetShield" type="Spring.Objects.Factory.Config.DelegateFactoryObject, Spring.Core">
-    <property name="DelegateType" value="System.Action&lt;SpaceAlert.Model.Menaces.Menace,SpaceAlert.Model.Plateau.Vaisseau, SpaceAlert.Model.Helpers.Enums.TypeCase, SpaceAlert.Model.Helpers.Enums.Zone&gt;" />
+    <property name="DelegateType" value="System.Action&lt;SpaceAlert.Model.Jeu.InGameMenace,SpaceAlert.Model.Plateau.Vaisseau, SpaceAlert.Model.Helpers.Enums.TypeCase, SpaceAlert.Model.Helpers.Enums.Zone&gt;" />
     <property name="TargetType" value="SpaceAlert.Model.Helpers.MenaceActions" />
     <property name="MethodName" value="SetShield" />
   </object>
 
   <object id="IncrSpeed" type="Spring.Objects.Factory.Config.DelegateFactoryObject, Spring.Core">
-    <property name="DelegateType" value="System.Action&lt;SpaceAlert.Model.Menaces.Menace,SpaceAlert.Model.Plateau.Vaisseau, SpaceAlert.Model.Helpers.Enums.TypeCase, SpaceAlert.Model.Helpers.Enums.Zone&gt;" />
+    <property name="DelegateType" value="System.Action&lt;SpaceAlert.Model.Jeu.InGameMenace,SpaceAlert.Model.Plateau.Vaisseau, SpaceAlert.Model.Helpers.Enums.TypeCase, SpaceAlert.Model.Helpers.Enums.Zone&gt;" />
     <property name="TargetType" value="SpaceAlert.Model.Helpers.MenaceActions" />
     <property name="MethodName" value="IncrSpeed" />
   </object>
-  
+
   <object id="HealHalf" type="Spring.Objects.Factory.Config.DelegateFactoryObject, Spring.Core">
-    <property name="DelegateType" value="System.Action&lt;SpaceAlert.Model.Menaces.Menace,SpaceAlert.Model.Plateau.Vaisseau, SpaceAlert.Model.Helpers.Enums.TypeCase, SpaceAlert.Model.Helpers.Enums.Zone&gt;" />
+    <property name="DelegateType" value="System.Action&lt;SpaceAlert.Model.Jeu.InGameMenace,SpaceAlert.Model.Plateau.Vaisseau, SpaceAlert.Model.Helpers.Enums.TypeCase, SpaceAlert.Model.Helpers.Enums.Zone&gt;" />
     <property name="TargetType" value="SpaceAlert.Model.Helpers.MenaceActions" />
     <property name="MethodName" value="HealHalf" />
   </object>
 
   <object id="Reveals" type="Spring.Objects.Factory.Config.DelegateFactoryObject, Spring.Core">
-    <property name="DelegateType" value="System.Action&lt;SpaceAlert.Model.Menaces.Menace,SpaceAlert.Model.Plateau.Vaisseau, SpaceAlert.Model.Helpers.Enums.TypeCase, SpaceAlert.Model.Helpers.Enums.Zone&gt;" />
+    <property name="DelegateType" value="System.Action&lt;SpaceAlert.Model.Jeu.InGameMenace,SpaceAlert.Model.Plateau.Vaisseau, SpaceAlert.Model.Helpers.Enums.TypeCase, SpaceAlert.Model.Helpers.Enums.Zone&gt;" />
     <property name="TargetType" value="SpaceAlert.Model.Helpers.MenaceActions" />
     <property name="MethodName" value="Reveals" />
   </object>
 
   <object id="DrainsAllShields" type="Spring.Objects.Factory.Config.DelegateFactoryObject, Spring.Core">
-    <property name="DelegateType" value="System.Action&lt;SpaceAlert.Model.Menaces.Menace,SpaceAlert.Model.Plateau.Vaisseau, SpaceAlert.Model.Helpers.Enums.TypeCase, SpaceAlert.Model.Helpers.Enums.Zone&gt;" />
+    <property name="DelegateType" value="System.Action&lt;SpaceAlert.Model.Jeu.InGameMenace,SpaceAlert.Model.Plateau.Vaisseau, SpaceAlert.Model.Helpers.Enums.TypeCase, SpaceAlert.Model.Helpers.Enums.Zone&gt;" />
     <property name="TargetType" value="SpaceAlert.Model.Helpers.MenaceActions" />
     <property name="MethodName" value="DrainsAllShields" />
   </object>
 
   <object id="Heal" type="Spring.Objects.Factory.Config.DelegateFactoryObject, Spring.Core">
-    <property name="DelegateType" value="System.Action&lt;SpaceAlert.Model.Menaces.Menace,SpaceAlert.Model.Plateau.Vaisseau, SpaceAlert.Model.Helpers.Enums.TypeCase, SpaceAlert.Model.Helpers.Enums.Zone&gt;" />
+    <property name="DelegateType" value="System.Action&lt;SpaceAlert.Model.Jeu.InGameMenace,SpaceAlert.Model.Plateau.Vaisseau, SpaceAlert.Model.Helpers.Enums.TypeCase, SpaceAlert.Model.Helpers.Enums.Zone&gt;" />
     <property name="TargetType" value="SpaceAlert.Model.Helpers.MenaceActions" />
     <property name="MethodName" value="Heal" />
   </object>
 
   <object id="InflictRemainingHitPoints" type="Spring.Objects.Factory.Config.DelegateFactoryObject, Spring.Core">
-    <property name="DelegateType" value="System.Action&lt;SpaceAlert.Model.Menaces.Menace,SpaceAlert.Model.Plateau.Vaisseau, SpaceAlert.Model.Helpers.Enums.TypeCase, SpaceAlert.Model.Helpers.Enums.Zone&gt;" />
+    <property name="DelegateType" value="System.Action&lt;SpaceAlert.Model.Jeu.InGameMenace,SpaceAlert.Model.Plateau.Vaisseau, SpaceAlert.Model.Helpers.Enums.TypeCase, SpaceAlert.Model.Helpers.Enums.Zone&gt;" />
     <property name="TargetType" value="SpaceAlert.Model.Helpers.MenaceActions" />
     <property name="MethodName" value="InflictRemainingHitPoints" />
   </object>

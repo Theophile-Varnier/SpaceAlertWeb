@@ -1,4 +1,5 @@
 ﻿using SpaceAlert.Model.Helpers.Enums;
+using SpaceAlert.Model.Jeu;
 using SpaceAlert.Model.Plateau;
 using System;
 using System.Collections.Generic;
@@ -19,11 +20,6 @@ namespace SpaceAlert.Model.Menaces
         /// La valeur de bouclier de la menace
         /// </summary>
         public int Shield { get; set; }
-
-        /// <summary>
-        /// Le nombre de pv actuel de la menace
-        /// </summary>
-        public int CurrentHp { get; set; }
 
         /// <summary>
         /// Le nombre max de pv de la menace
@@ -69,18 +65,18 @@ namespace SpaceAlert.Model.Menaces
         /// Liste des actions effectuées par la menace
         /// lorsqu'elle arrive sur une case X
         /// </summary>
-        public IList<Action<Menace, Vaisseau, TypeCase, Zone>> ActionsX { get; set; }
+        public IList<Action<InGameMenace, Vaisseau, TypeCase, Zone>> ActionsX { get; set; }
 
         /// <summary>
         /// Liste des actions effectuées par la menace
         /// lorsqu'elle arrive sur une case Y
         /// </summary>
-        public IList<Action<Menace, Vaisseau, TypeCase, Zone>> ActionsY { get; set; }
+        public IList<Action<InGameMenace, Vaisseau, TypeCase, Zone>> ActionsY { get; set; }
 
         /// <summary>
         /// Liste des actions effectuées par la menace
         /// lorsqu'elle arrive sur une case Z
         /// </summary>
-        public IList<Action<Menace, Vaisseau, TypeCase, Zone>> ActionsZ { get; set; }
+        public IList<Action<InGameMenace, Vaisseau, TypeCase, Zone>> ActionsZ { get; set; }
     }
 }

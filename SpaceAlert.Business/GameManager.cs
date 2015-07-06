@@ -1,4 +1,5 @@
-﻿using SpaceAlert.Model.Jeu;
+﻿using System.Collections.Generic;
+using SpaceAlert.Model.Jeu;
 using SpaceAlert.Model.Helpers;
 using System.Linq;
 using SpaceAlert.Model.Helpers.Enums;
@@ -58,26 +59,30 @@ namespace SpaceAlert.Business
             // TODO : Arrivée menaces
 
             // On vérifie que la maintenance a été effectuée
-            if (SpaceAlertData.DebutPhases.Select(i => i + 2).Contains(numTour) && ! game.MaintenanceEffectuee)
-            {
-                // TODO : retarder joueurs
-            }
-            else
-            {
-                // Récupération de l'indice du premier joueur à jouer (le capitaine)
-                int indicePremierJoueur = game.Partie.Joueurs.FirstIndexOf(j => j.IsCapitaine);
-                if (indicePremierJoueur == -1)
-                {
-                    return;
-                }
+            bool retardMaintenance = SpaceAlertData.DebutPhases.Select(i => i + 2).Contains(numTour) && !game.MaintenanceEffectuee;
 
-                // Résolution des actions des joueurs
-                for (int i = indicePremierJoueur; i != indicePremierJoueur; i = (i + 1)%game.Partie.Joueurs.Count)
+            // Récupération de l'indice du premier joueur à jouer (le capitaine)
+            int indicePremierJoueur = game.Partie.Joueurs.FirstIndexOf(j => j.IsCapitaine);
+
+            // Paye ta gestion d'erreur...
+            if (indicePremierJoueur == -1)
+            {
+                return;
+            }
+
+            // Résolution des actions des joueurs
+            for (int i = indicePremierJoueur; i != indicePremierJoueur; i = (i + 1) % game.Partie.Joueurs.Count)
+            {
+                // On retarde si la maintenance n'a pas été effectuée
+                if (retardMaintenance)
                 {
-                    if (game.Partie.Joueurs[i].Actions[numTour] != null)
-                    {
-                        ResolveAction(game.Partie.Joueurs[i], numTour);
-                    }
+                    DelayPlayer(game.Partie.Joueurs[i], numTour);
+                }
+                
+                // On exécute l'action du joueur
+                if (game.Partie.Joueurs[i].Actions[numTour] != null)
+                {
+                    ResolveAction(game.Partie.Joueurs[i], numTour);
                 }
             }
 
@@ -187,8 +192,8 @@ namespace SpaceAlert.Business
             {
                 int degats = Math.Max(0, source.Canon.Power - (zoneMenace.Menace.Shield - zoneMenace.DegatsSubis));
                 zoneMenace.DegatsSubis += degats;
-                zoneMenace.Menace.CurrentHp = Math.Max(0, zoneMenace.Menace.CurrentHp - degats);
-                if (zoneMenace.Menace.CurrentHp == 0)
+                zoneMenace.CurrentHp = Math.Max(0, zoneMenace.CurrentHp - degats);
+                if (zoneMenace.CurrentHp == 0)
                 {
                     game.Partie.MenacesExternes[source.Zone].Remove(zoneMenace);
                     game.MenacesDetruites.Add(zoneMenace.Menace);
@@ -232,6 +237,24 @@ namespace SpaceAlert.Business
                 game.Partie.Vaisseau.Salle(Zone.BLANCHE, Pont.BAS).EnergieCourante -= incrValue;
                 source.EnergieCourante += incrValue;
             }
+        }
+
+        /// <summary>
+        /// Retarde un joueur
+        /// </summary>
+        /// <param name="joueur">Le joueur à retarder</param>
+        /// <param name="numTour">le tour à partir duquel on le retarde</param>
+        private void DelayPlayer(Joueur joueur, int numTour)
+        {
+            KeyValuePair<int, ActionJoueur> firstActionNull = joueur.Actions.FirstOrDefault(p => p.Key > numTour && p.Value == null);
+            // bearg...
+            int indexFirstNull = firstActionNull.Equals(default(KeyValuePair<int, ActionJoueur>)) ? game.Partie.Mission.NbTours : firstActionNull.Key;
+
+            for (int i = indexFirstNull; i > numTour; i--)
+            {
+                joueur.Actions[i] = joueur.Actions[i - 1];
+            }
+            joueur.Actions[numTour] = null;
         }
     }
 }
