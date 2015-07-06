@@ -25,6 +25,12 @@ TO DO
 
 -	Résolution de la partie
 
+Refactoring
+--------------
+
+-	Actions Menace -> InGameMenace
+-	Résolution des dégâts à la fin du tour
+
 Nice to Have
 --------------
 

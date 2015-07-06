@@ -21,6 +21,15 @@ namespace SpaceAlert.Business
         }
 
         /// <summary>
+        /// Gestion de l'arrivée dans une nouvelle phase
+        /// </summary>
+        private void InitPhase()
+        {
+            // TODO : points de hublot
+            game.MaintenanceEffectuee = false;
+        }
+
+        /// <summary>
         /// Résout une partie
         /// </summary>
         public void Resolve()
@@ -37,19 +46,44 @@ namespace SpaceAlert.Business
         /// <param name="numTour"></param>
         private void ResolveTurn(int numTour)
         {
-            int indicePremierJoueur = game.Partie.Joueurs.FirstIndexOf(j => j.IsCapitaine);
-            if (indicePremierJoueur == -1)
+            game.RoquettesThisTurn = game.RoquettesNextTurn;
+            game.RoquettesNextTurn = false;
+
+            // Gestion si nouvelle phase
+            if (SpaceAlertData.DebutPhases.Contains(numTour))
             {
-                return;
+                InitPhase();
             }
 
-            for (int i = indicePremierJoueur; i != indicePremierJoueur; i = (i + 1) % game.Partie.Joueurs.Count)
+            // TODO : Arrivée menaces
+
+            // On vérifie que la maintenance a été effectuée
+            if (SpaceAlertData.DebutPhases.Select(i => i + 2).Contains(numTour) && ! game.MaintenanceEffectuee)
             {
-                if (game.Partie.Joueurs[i].Actions[numTour] != null)
+                // TODO : retarder joueurs
+            }
+            else
+            {
+                // Récupération de l'indice du premier joueur à jouer (le capitaine)
+                int indicePremierJoueur = game.Partie.Joueurs.FirstIndexOf(j => j.IsCapitaine);
+                if (indicePremierJoueur == -1)
                 {
-                    ResolveAction(game.Partie.Joueurs[i], numTour);
+                    return;
+                }
+
+                // Résolution des actions des joueurs
+                for (int i = indicePremierJoueur; i != indicePremierJoueur; i = (i + 1)%game.Partie.Joueurs.Count)
+                {
+                    if (game.Partie.Joueurs[i].Actions[numTour] != null)
+                    {
+                        ResolveAction(game.Partie.Joueurs[i], numTour);
+                    }
                 }
             }
+
+            // TODO : résolution tirs
+
+            // TODO : résolution actions menaces
         }
 
         /// <summary>
@@ -100,7 +134,7 @@ namespace SpaceAlert.Business
         }
 
         /// <summary>
-        /// Résout une action c
+        /// Résout une action C
         /// </summary>
         /// <param name="source"></param>
         private void ResolveCAction(Joueur source)
@@ -125,6 +159,11 @@ namespace SpaceAlert.Business
                     game.MaintenanceEffectuee = true;
                     break;
                 case CAction.ROQUETTES:
+                    if (!game.RoquettesNextTurn && game.Partie.Vaisseau.NbRoquettes > 0)
+                    {
+                        game.RoquettesNextTurn = true;
+                        game.Partie.Vaisseau.NbRoquettes--;
+                    }
                     break;
                 case CAction.HUBLOT:
                     break;

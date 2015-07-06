@@ -40,5 +40,15 @@ namespace SpaceAlert.Model.Jeu
         /// Indique si la maintenance a été effectuée pendant cette phase
         /// </summary>
         public bool MaintenanceEffectuee { get; set; }
+
+        /// <summary>
+        /// Indique si des roquettes vont infliger des dégâts ce tour-ci
+        /// </summary>
+        public bool RoquettesThisTurn { get; set; }
+
+        /// <summary>
+        /// Indique si des roquettes ont été tirées ce tour-ci
+        /// </summary>
+        public bool RoquettesNextTurn { get; set; }
     }
 }
