@@ -8,7 +8,7 @@ namespace SpaceAlert.Model.Helpers.Enums
 {
     public enum TypeCase
     {
-        DEFAULT = 0,
+        Default = 0,
         X,
         Y,
         Z

@@ -1,18 +1,17 @@
-﻿using System.Collections.Generic;
-using SpaceAlert.Model.Jeu;
-using SpaceAlert.Model.Helpers;
-using System.Linq;
+﻿using SpaceAlert.Model.Helpers;
 using SpaceAlert.Model.Helpers.Enums;
-using SpaceAlert.Model.Plateau;
-using System;
+using SpaceAlert.Model.Jeu;
 using SpaceAlert.Model.Jeu.Evenements;
 using SpaceAlert.Model.Menaces;
+using SpaceAlert.Model.Plateau;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SpaceAlert.Business
 {
     /// <summary>
     /// Manager de parties
-    /// TODO : Refacto : tous les tirs doivent se résoudre en même temps
     /// </summary>
     public class GameManager
     {
@@ -47,8 +46,12 @@ namespace SpaceAlert.Business
         /// Résout un tour
         /// </summary>
         /// <param name="numTour"></param>
-        private void ResolveTurn(int numTour)
+        public void ResolveTurn(int numTour)
         {
+            if (numTour > game.Partie.Mission.NbTours)
+            {
+                return;
+            }
             game.RoquettesThisTurn = game.RoquettesNextTurn;
             game.RoquettesNextTurn = false;
 
@@ -103,9 +106,11 @@ namespace SpaceAlert.Business
                 }
             }
 
-            // TODO : résolution tirs
+            // Résolution des tirs
+            ResolveShoots();
 
-            // TODO : résolution actions menaces
+            // TODO : résolution actions menaces internes
+            ResolveMenaceActions();
         }
 
         /// <summary>
@@ -188,6 +193,7 @@ namespace SpaceAlert.Business
                     }
                     break;
                 case CAction.HUBLOT:
+                    // TODO
                     break;
             }
         }
@@ -202,20 +208,6 @@ namespace SpaceAlert.Business
             if (source.Canon.HasShot) return;
 
             source.Canon.HasShot = true;
-            InGameMenace zoneMenace = game.Partie.MenacesExternes[source.Zone].OrderByDescending(m => m.Position).ThenBy(m => m.TourArrive).First();
-
-            // S'il y a une menace dans la zone on lui inflige des dégâts
-            if (zoneMenace != null)
-            {
-                int degats = Math.Max(0, source.Canon.Power - (zoneMenace.Menace.Shield - zoneMenace.DegatsSubis));
-                zoneMenace.DegatsSubis += degats;
-                zoneMenace.CurrentHp = Math.Max(0, zoneMenace.CurrentHp - degats);
-                if (zoneMenace.CurrentHp == 0)
-                {
-                    game.Partie.MenacesExternes[source.Zone].Remove(zoneMenace);
-                    game.MenacesDetruites.Add(zoneMenace.Menace);
-                }
-            }
 
             // Si c'est un canon qui consomme de l'énergie, on la déduit de la réserve
             if (source.Canon.ConsumeEnergy)
@@ -279,12 +271,86 @@ namespace SpaceAlert.Business
         /// </summary>
         private void ResolveShoots()
         {
-            IEnumerable<InGameMenace> allMenacesExternes = game.Partie.MenacesExternes.SelectMany(m => m.Value).Where(m => ((MenaceExterne)m.Menace).RocketTargetable);
-            int minDistance = allMenacesExternes.Select(m => m.Distance).Min();
-            InGameMenace closerMenace = allMenacesExternes.First(m => m.Distance == minDistance);
+            // On récupère les menaces ciblables par les roquettes
+            List<InGameMenace> targetableMenacesExternes = game.Partie.MenacesExternes.SelectMany(m => m.Value).Where(m => ((MenaceExterne)m.Menace).RocketTargetable && m.Portee <= 2).ToList();
+            InGameMenace closerMenace = targetableMenacesExternes.OrderBy(m => m.Distance).First();
             foreach (Zone zone in game.Partie.Vaisseau.Zones.Keys)
             {
+                int totalDamages = game.Partie.Vaisseau.Zones[zone].Salles
+                    .Select(s => s.Value.Canon)
+                    .Where(c => c.HasShot)
+                    .Sum(c => c.Power);
 
+                if (game.RoquettesThisTurn && game.Partie.MenacesExternes[zone].Contains(closerMenace))
+                {
+                    totalDamages += SpaceAlertData.RocketDamages;
+                    game.RoquettesThisTurn = false;
+                }
+
+                InGameMenace zoneMenace = game.Partie.MenacesExternes[zone].OrderByDescending(m => m.Position).ThenBy(m => m.TourArrive).First();
+
+                // S'il y a une menace dans la zone on lui inflige des dégâts
+                if (zoneMenace != null)
+                {
+                    Canon impulsionCanon = game.Partie.Vaisseau.Salle(Zone.BLANCHE, Pont.BAS).Canon;
+                    if (zoneMenace.Portee <= impulsionCanon.Range && impulsionCanon.HasShot)
+                    {
+                        totalDamages += impulsionCanon.Power;
+                    }
+                    zoneMenace.DegatsSubis += totalDamages;
+                    zoneMenace.CurrentHp = Math.Max(0, zoneMenace.CurrentHp - Math.Max(0, totalDamages - zoneMenace.Menace.Shield));
+                    //if (zoneMenace.CurrentHp == 0)
+                    //{
+                    //    game.Partie.MenacesExternes[zone].Remove(zoneMenace);
+                    //    game.MenacesDetruites.Add(zoneMenace.Menace);
+                    //}
+                }
+            }
+        }
+
+        /// <summary>
+        /// Résout les actions des menaces présentes
+        /// </summary>
+        private void ResolveMenaceActions()
+        {
+            foreach (Zone zone in game.Partie.MenacesExternes.Keys)
+            {
+                foreach (InGameMenace menace in game.Partie.MenacesExternes[zone])
+                {
+                    // On fait bouger la menace
+                    int oldPos = menace.Position;
+                    menace.Position += menace.Menace.Speed;
+
+                    // On résout ses actions si besoin
+                    ResolveMenaceActions(menace, oldPos, menace.Position, zone);
+
+                    // On sort la menace si elle atteint la fin de la rampe
+                    //if (menace.Position >= menace.Rampe.NbCases - 1)
+                    //{
+                    //    game.MenacesSurvecues.Add(menace.Menace);
+                    //}
+                }
+            }
+        }
+
+        /// <summary>
+        /// Execute les actions d'une menace lors d'un déplacement
+        /// </summary>
+        /// <param name="menace">La menace</param>
+        /// <param name="oldPos">L'ancienne position</param>
+        /// <param name="newPos">La nouvelle position</param>
+        /// <param name="zone">La zone où se situe la menace</param>
+        private void ResolveMenaceActions(InGameMenace menace, int oldPos, int newPos, Zone zone)
+        {
+            foreach (TypeCase typeCase in menace.Rampe.SpecialCases.Keys)
+            {
+                for (int i = 0; i < menace.Rampe.SpecialCases[typeCase].Count(v => v > oldPos && v <= newPos); i++)
+                {
+                    foreach (var action in menace.Menace.Actions[typeCase])
+                    {
+                        action(menace, game.Partie.Vaisseau, typeCase, zone);
+                    }
+                }
             }
         }
     }

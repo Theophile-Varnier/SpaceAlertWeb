@@ -28,8 +28,8 @@ TO DO
 Refactoring
 --------------
 
--	Actions Menace -> InGameMenace
--	Résolution des dégâts à la fin du tour
+-	Gestion menaces détruites/survécues
+-	Gestion erreurs
 
 Nice to Have
 --------------

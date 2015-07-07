@@ -1,8 +1,5 @@
-﻿using System;
+﻿using SpaceAlert.Model.Helpers.Enums;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpaceAlert.Model.Jeu
 {
@@ -13,10 +10,6 @@ namespace SpaceAlert.Model.Jeu
     {
         public int NbCases { get; set; }
 
-        public int IndiceX { get; set; }
-
-        public List<int> IndicesY { get; set; }
-
-        public int IndiceZ { get; set; }
+        public SortedDictionary<TypeCase, List<int>> SpecialCases { get; set; }
     }
 }

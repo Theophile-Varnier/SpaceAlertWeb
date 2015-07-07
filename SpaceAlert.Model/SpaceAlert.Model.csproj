@@ -91,6 +91,8 @@
     <Compile Include="Plateau\Salle.cs" />
     <Compile Include="Plateau\Vaisseau.cs" />
     <Compile Include="Site\Membre.cs" />
+    <Compile Include="Stats\Degats.cs" />
+    <Compile Include="Stats\TypeDegats.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -31,7 +31,9 @@ namespace SpaceAlert.Business
             0,
             3,
             7
-        }; 
+        };
+
+        public static readonly int RocketDamages = 3;
 
         /// <summary>
         /// Initialisation des constantes du jeu

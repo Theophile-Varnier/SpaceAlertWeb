@@ -8,6 +8,7 @@ namespace SpaceAlert.Model.Menaces
 {
     /// <summary>
     /// Décrit une menace en jeu
+    /// TODO : refaire la config spring
     /// </summary>
     public class Menace
     {
@@ -63,20 +64,8 @@ namespace SpaceAlert.Model.Menaces
 
         /// <summary>
         /// Liste des actions effectuées par la menace
-        /// lorsqu'elle arrive sur une case X
+        /// lorsqu'elle arrive sur une case spéciale
         /// </summary>
-        public IList<Action<InGameMenace, Vaisseau, TypeCase, Zone>> ActionsX { get; set; }
-
-        /// <summary>
-        /// Liste des actions effectuées par la menace
-        /// lorsqu'elle arrive sur une case Y
-        /// </summary>
-        public IList<Action<InGameMenace, Vaisseau, TypeCase, Zone>> ActionsY { get; set; }
-
-        /// <summary>
-        /// Liste des actions effectuées par la menace
-        /// lorsqu'elle arrive sur une case Z
-        /// </summary>
-        public IList<Action<InGameMenace, Vaisseau, TypeCase, Zone>> ActionsZ { get; set; }
+        public SortedDictionary<TypeCase, IList<Action<InGameMenace, Vaisseau, TypeCase, Zone>>> Actions { get; set; }
     }
 }

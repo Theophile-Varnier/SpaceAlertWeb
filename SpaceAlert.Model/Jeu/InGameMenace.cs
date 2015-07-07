@@ -45,7 +45,7 @@ namespace SpaceAlert.Model.Jeu
             }
         }
 
-        public int Portée
+        public int Portee
         {
             get
             {
