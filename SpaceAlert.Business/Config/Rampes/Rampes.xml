@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.net http://www.springframework.net/schema/objects/spring-objects-1.1.xsd" >
+  <object id="Rampe1" type="SpaceAlert.Model.Jeu.Rampe">
+    <property name="NbCases" value="11"/>
+    <property name="SpecialCases">
+      <dictionary key-type="SpaceAlert.Model.Helpers.Enums.TypeCase">
+        <entry key="X">
+          <list element-type="int">
+            <value>3</value>
+          </list>
+        </entry>
+        <entry key="Y">
+          <list element-type="int">
+            <value>5</value>
+          </list>
+        </entry>
+        <entry key="Z">
+          <list element-type="int">
+            <value>11</value>
+          </list>
+        </entry>
+      </dictionary>
+    </property>
+  </object>
+</objects>

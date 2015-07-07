@@ -121,6 +121,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Config\JoueurAction.xml" />
+    <Content Include="Config\Menaces\ListeMenaces.xml" />
+    <Content Include="Config\Rampes\Rampes.xml" />
     <Content Include="sql\CREATION_TABLE.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
