@@ -66,6 +66,6 @@ namespace SpaceAlert.Model.Menaces
         /// Liste des actions effectuées par la menace
         /// lorsqu'elle arrive sur une case spéciale
         /// </summary>
-        public SortedDictionary<TypeCase, IList<Action<InGameMenace, Vaisseau, TypeCase, Zone>>> Actions { get; set; }
+        public Dictionary<TypeCase, IList<Action<InGameMenace, Vaisseau, TypeCase, Zone>>> Actions { get; set; }
     }
 }
