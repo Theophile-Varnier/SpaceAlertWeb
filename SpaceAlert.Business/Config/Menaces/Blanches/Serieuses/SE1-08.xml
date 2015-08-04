@@ -4,7 +4,6 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
   <object id="Asteroid" type="SpaceAlert.Model.Menaces.MenaceExterne" singleton="false">
     <property name="Name" value="Asteroid"/>
     <property name="Shield" value="0"/>
-    <property name="CurrentHp" value="9"/>
     <property name="MaxHp" value="9"/>
     <property name="Speed" value="3"/>
     <property name="AttackValues">

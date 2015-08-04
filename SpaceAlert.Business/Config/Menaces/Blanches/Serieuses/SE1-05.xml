@@ -4,7 +4,6 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
   <object id="CryoshieldFrigate" type="SpaceAlert.Model.Menaces.MenaceExterne" singleton="false">
     <property name="Name" value="Cryoshield Frigate"/>
     <property name="Shield" value="1"/>
-    <property name="CurrentHp" value="7"/>
     <property name="MaxHp" value="7"/>
     <property name="Speed" value="2"/>
     <property name="AttackValues">

@@ -4,7 +4,6 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
   <object id="Meteoroid" type="SpaceAlert.Model.Menaces.MenaceExterne" singleton="false">
     <property name="Name" value="Meteoroid"/>
     <property name="Shield" value="0"/>
-    <property name="CurrentHp" value="5"/>
     <property name="MaxHp" value="5"/>
     <property name="Speed" value="5"/>
     <property name="AttackValues">

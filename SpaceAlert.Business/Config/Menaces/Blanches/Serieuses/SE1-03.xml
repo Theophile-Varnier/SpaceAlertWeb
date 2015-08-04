@@ -4,7 +4,6 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
   <object id="LeviathanTanker" type="SpaceAlert.Model.Menaces.MenaceExterne" singleton="false">
     <property name="Name" value="Leviathan Tanker"/>
     <property name="Shield" value="3"/>
-    <property name="CurrentHp" value="8"/>
     <property name="MaxHp" value="8"/>
     <property name="Speed" value="2"/>
     <property name="AttackValues">

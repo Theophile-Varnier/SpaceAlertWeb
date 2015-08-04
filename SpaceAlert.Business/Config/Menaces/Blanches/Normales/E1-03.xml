@@ -4,7 +4,6 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
   <object id="StealthFighter" type="SpaceAlert.Model.Menaces.MenaceExterne" singleton="false">
     <property name="Name" value="Stealth Fighter"/>
     <property name="Shield" value="2"/>
-    <property name="CurrentHp" value="4"/>
     <property name="MaxHp" value="4"/>
     <property name="Speed" value="3"/>
     <property name="AttackValues">
