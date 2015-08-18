@@ -123,7 +123,7 @@
     <Content Include="Config\JoueurAction.xml" />
     <EmbeddedResource Include="Config\Menaces\ListeMenaces.xml" />
     <Content Include="Config\Rampes\Rampes.xml" />
-    <Content Include="sql\CREATION_TABLE.sql" />
+    <Content Include="Exceptions\sql\CREATION_TABLE.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

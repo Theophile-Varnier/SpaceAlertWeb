@@ -7,6 +7,15 @@ namespace SpaceAlert.Model.Jeu
     /// </summary>
     public class InGameMenace
     {
+
+        public InGameMenace(Menace src)
+        {
+            Menace = src;
+            CurrentHp = src.MaxHp;
+            CurrentShield = src.Shield;
+            CurrentSpeed = src.Speed;
+            Position = 0;
+        }
         /// <summary>
         /// La menace associée
         /// </summary>
@@ -31,6 +40,16 @@ namespace SpaceAlert.Model.Jeu
         /// Le nombre de pv actuel de la menace
         /// </summary>
         public int CurrentHp { get; set; }
+
+        /// <summary>
+        /// La vitesse actuelle de la menace
+        /// </summary>
+        public int CurrentSpeed { get; set; }
+
+        /// <summary>
+        /// La valeur actuelle de bouclier de la menace
+        /// </summary>
+        public int CurrentShield { get; set; }
 
         /// <summary>
         /// La rampe sur laquelle la menace se trouve

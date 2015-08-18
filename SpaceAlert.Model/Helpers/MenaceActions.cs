@@ -83,7 +83,7 @@ namespace SpaceAlert.Model.Helpers
         /// <param name="from">La zone attaquée</param>
         public static void IncrShield(InGameMenace source, Vaisseau target, TypeCase pallier, Zone from)
         {
-            source.Menace.Shield += source.Menace.ShieldValues[pallier];
+            source.CurrentShield += source.Menace.ShieldValues[pallier];
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace SpaceAlert.Model.Helpers
         /// <param name="from">La zone attaquée</param>
         public static void IncrSpeed(InGameMenace source, Vaisseau target, TypeCase pallier, Zone from)
         {
-            source.Menace.Speed += source.Menace.SpeedValues[pallier];
+            source.CurrentSpeed += source.Menace.SpeedValues[pallier];
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace SpaceAlert.Model.Helpers
         /// <param name="from">La zone attaquée</param>
         public static void SetShield(InGameMenace source, Vaisseau target, TypeCase pallier, Zone from)
         {
-            source.Menace.Shield = source.Menace.ShieldValues[pallier];
+            source.CurrentShield = source.Menace.ShieldValues[pallier];
         }
 
         /// <summary>
