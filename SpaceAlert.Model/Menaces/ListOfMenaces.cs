@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using SpaceAlert.Model.Helpers;
+﻿using SpaceAlert.Model.Helpers;
 using SpaceAlert.Model.Helpers.Enums;
+using System.Collections.Generic;
 
 namespace SpaceAlert.Model.Menaces
 {

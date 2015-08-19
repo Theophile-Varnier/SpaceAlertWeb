@@ -2,8 +2,11 @@
   <object id="Evenement1" type="SpaceAlert.Model.Jeu.Evenements.EvenementMenace">
     <property name="TourArrive" value="1"/>
     <property name="Menace" ref="PulseBall"/>
+    <property name="TypeMenace" value="MENACE_EXTERNE"/>
+    <property name="Zone" value="ROUGE"/>
+    <property name="Confirme" value="True"/>
   </object>
   <object id="Menace1" type="SpaceAlert.Model.Jeu.InGameMenace">
-    <property name="Position" value="0" />
+    <!-- TODO: appel factory-->
   </object>
 </objects>

@@ -18,6 +18,11 @@ namespace SpaceAlert.Model.Menaces
         public string Name { get; set; }
 
         /// <summary>
+        /// Le type de menace
+        /// </summary>
+        public TypeMenace Type { get; set; }
+
+        /// <summary>
         /// La valeur de bouclier de la menace
         /// </summary>
         public int Shield { get; set; }

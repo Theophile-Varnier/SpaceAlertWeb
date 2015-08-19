@@ -9,16 +9,6 @@ namespace SpaceAlert.Model.Jeu
     public class InGameMenace
     {
 
-        public InGameMenace(EvenementMenace src)
-        {
-            Menace = src.Menace;
-            CurrentHp = src.Menace.MaxHp;
-            CurrentShield = src.Menace.Shield;
-            CurrentSpeed = src.Menace.Speed;
-            Position = 0;
-            TourArrive = src.TourArrive;
-            DegatsSubis = 0;
-        }
         /// <summary>
         /// La menace associée
         /// </summary>
