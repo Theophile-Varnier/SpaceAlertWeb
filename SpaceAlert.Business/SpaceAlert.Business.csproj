@@ -105,6 +105,7 @@
     <Folder Include="Config\Menaces\Rouges\Serieuses\" />
     <Folder Include="Config\Missions\Doubles\" />
     <Folder Include="Config\Missions\Simples\" />
+    <Folder Include="Factories\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

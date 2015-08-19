@@ -1,4 +1,5 @@
-﻿using SpaceAlert.Model.Menaces;
+﻿using SpaceAlert.Model.Jeu.Evenements;
+using SpaceAlert.Model.Menaces;
 
 namespace SpaceAlert.Model.Jeu
 {
@@ -8,18 +9,20 @@ namespace SpaceAlert.Model.Jeu
     public class InGameMenace
     {
 
-        public InGameMenace(Menace src)
+        public InGameMenace(EvenementMenace src)
         {
-            Menace = src;
-            CurrentHp = src.MaxHp;
-            CurrentShield = src.Shield;
-            CurrentSpeed = src.Speed;
+            Menace = src.Menace;
+            CurrentHp = src.Menace.MaxHp;
+            CurrentShield = src.Menace.Shield;
+            CurrentSpeed = src.Menace.Speed;
             Position = 0;
+            TourArrive = src.TourArrive;
+            DegatsSubis = 0;
         }
         /// <summary>
         /// La menace associée
         /// </summary>
-        public virtual Menace Menace { get; set; }
+        public Menace Menace { get; set; }
 
         /// <summary>
         /// La position actuelle de la menace

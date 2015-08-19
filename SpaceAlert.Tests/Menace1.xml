@@ -1,4 +1,8 @@
 ﻿<objects xmlns="http://www.springframework.net">
+  <object id="Evenement1" type="SpaceAlert.Model.Jeu.Evenements.EvenementMenace">
+    <property name="TourArrive" value="1"/>
+    <property name="Menace" ref="PulseBall"/>
+  </object>
   <object id="Menace1" type="SpaceAlert.Model.Jeu.InGameMenace">
     <property name="Position" value="0" />
   </object>
