@@ -38,7 +38,7 @@ namespace SpaceAlert.Business
         {
             while (game.TourEnCours < game.Partie.Mission.NbTours)
             {
-                ResolveTurn(game.TourEnCours);
+                ResolveTurn();
             }
         }
 
@@ -46,10 +46,10 @@ namespace SpaceAlert.Business
         /// Résout un tour
         /// </summary>
         /// <param name="numTour"></param>
-        public void ResolveTurn(int numTour)
+        public void ResolveTurn()
         {
-            game.TourEnCours++;
-            if (numTour > game.Partie.Mission.NbTours)
+
+            if (game.TourEnCours > game.Partie.Mission.NbTours)
             {
                 return;
             }
@@ -57,7 +57,7 @@ namespace SpaceAlert.Business
             game.RoquettesNextTurn = false;
 
             // Gestion si nouvelle phase
-            if (SpaceAlertData.DebutPhases.Contains(numTour))
+            if (SpaceAlertData.DebutPhases.Contains(game.TourEnCours))
             {
                 InitPhase();
             }
@@ -65,14 +65,14 @@ namespace SpaceAlert.Business
             // Apparition des menaces
             foreach (EvenementMenace evenement in game.Partie.Mission.Evenements.OfType<EvenementMenace>())
             {
-                if (evenement.TourArrive == numTour)
+                if (evenement.TourArrive == game.TourEnCours)
                 {
                     game.Partie.MenacesExternes[evenement.Zone].Add(new InGameMenace
                     {
                         Menace = evenement.Menace,
                         CurrentHp = evenement.Menace.MaxHp,
                         Position = 0,
-                        TourArrive = numTour,
+                        TourArrive = game.TourEnCours,
                         DegatsSubis = 0,
                         Rampe = game.Rampes[evenement.Zone]
                     });
@@ -80,7 +80,7 @@ namespace SpaceAlert.Business
             }
 
             // On vérifie que la maintenance a été effectuée
-            bool retardMaintenance = SpaceAlertData.DebutPhases.Select(i => i + 2).Contains(numTour) && !game.MaintenanceEffectuee;
+            bool retardMaintenance = SpaceAlertData.DebutPhases.Select(i => i + 2).Contains(game.TourEnCours) && !game.MaintenanceEffectuee;
 
             // Récupération de l'indice du premier joueur à jouer (le capitaine)
             int indicePremierJoueur = game.Partie.Joueurs.FirstIndexOf(j => j.IsCapitaine);
@@ -88,6 +88,7 @@ namespace SpaceAlert.Business
             // Paye ta gestion d'erreur...
             if (indicePremierJoueur == -1)
             {
+                game.TourEnCours++;
                 return;
             }
 
@@ -97,13 +98,13 @@ namespace SpaceAlert.Business
                 // On retarde si la maintenance n'a pas été effectuée
                 if (retardMaintenance)
                 {
-                    DelayPlayer(game.Partie.Joueurs[i], numTour);
+                    DelayPlayer(game.Partie.Joueurs[i], game.TourEnCours);
                 }
 
                 // On exécute l'action du joueur
-                if (game.Partie.Joueurs[i].Actions[numTour] != null)
+                if (game.Partie.Joueurs[i].Actions[game.TourEnCours] != null)
                 {
-                    ResolveAction(game.Partie.Joueurs[i], numTour);
+                    ResolveAction(game.Partie.Joueurs[i], game.TourEnCours);
                 }
             }
 
@@ -112,6 +113,7 @@ namespace SpaceAlert.Business
 
             // TODO : résolution actions menaces internes
             ResolveMenaceActions();
+            game.TourEnCours++;
         }
 
         /// <summary>

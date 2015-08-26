@@ -24,7 +24,8 @@ namespace SpaceAlert.Business
             {
                 Statut = StatutPartie.CREATION,
                 Partie = game,
-                MenacesDisponibles = new ListOfMenaces()
+                MenacesDisponibles = new ListOfMenaces(),
+                TourEnCours = 1
             };
 
             // Ajout des menaces pouvant apparaître
