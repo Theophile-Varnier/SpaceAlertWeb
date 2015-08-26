@@ -36,9 +36,9 @@ namespace SpaceAlert.Business
         /// </summary>
         public void Resolve()
         {
-            for (int i = 0; i < game.Partie.Mission.NbTours; i++)
+            while (game.TourEnCours < game.Partie.Mission.NbTours)
             {
-                ResolveTurn(i);
+                ResolveTurn(game.TourEnCours);
             }
         }
 
@@ -48,6 +48,7 @@ namespace SpaceAlert.Business
         /// <param name="numTour"></param>
         public void ResolveTurn(int numTour)
         {
+            game.TourEnCours++;
             if (numTour > game.Partie.Mission.NbTours)
             {
                 return;

@@ -24,27 +24,11 @@ namespace SpaceAlert.Model.Jeu
         /// <summary>
         /// Si le canon consomme de l'énergie ou non
         /// </summary>
-        private bool consumeEnergy;
-
-        public bool ConsumeEnergy
-        {
-            get
-            {
-                return consumeEnergy;
-            }
-        }
+        public bool ConsumeEnergy;
 
         /// <summary>
         /// Si le canon attaque sur toutes les zones
         /// </summary>
-        private bool spray;
-
-        public bool Spray
-        {
-            get
-            {
-                return spray;
-            }
-        }
+        public bool Spray;
     }
 }
