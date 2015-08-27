@@ -10,6 +10,6 @@ namespace SpaceAlert.Model.Jeu
     {
         public int NbCases { get; set; }
 
-        public SortedDictionary<TypeCase, List<int>> SpecialCases { get; set; }
+        public Dictionary<TypeCase, List<int>> SpecialCases { get; set; }
     }
 }

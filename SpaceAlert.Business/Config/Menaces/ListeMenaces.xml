@@ -19,18 +19,18 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
             <ref object="Meteoroid" />
           </list>
         </entry>
-        <entry key="menace_externe_serieuse">
-          <list element-type="spacealert.model.menaces.menace">
-            <ref object="frigate" />
-            <ref object="man-of-war" />
-            <ref object="leviathantanker" />
-            <ref object="pulsesatellite" />
-            <ref object="cryoshieldfrigate" />
-            <ref object="interstellaroctopus" />
-            <ref object="maelstrom" />
-            <ref object="asteroid" />
+        <!--<entry key="menace_externe_serieuse">
+          <list element-type="SpaceAlert.Model.Menaces.Menace">
+            <ref object="Frigate" />
+            <ref object="Man-Of-War" />
+            <ref object="LeviathanTanker" />
+            <ref object="PulseSatellite" />
+            <ref object="CryoshieldFrigate" />
+            <ref object="InterstellarOctopus" />
+            <ref object="Maelstrom" />
+            <ref object="Asteroid" />
           </list>
-        </entry>
+        </entry>-->
       </dictionary>
     </constructor-arg>
   </object>

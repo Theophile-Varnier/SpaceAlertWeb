@@ -118,7 +118,7 @@ namespace SpaceAlert.Web.Controllers
         [HttpGet]
         public string ChangeColor(string gameId, string charName)
         {
-            return serviceProvider.GameService.ProchaineCouleur(Guid.Parse(gameId), charName);
+            return GameService.ProchaineCouleur(Guid.Parse(gameId), charName);
         }
 
         /// <summary>

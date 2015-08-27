@@ -14,7 +14,7 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
       </list>
     </property>
     <property name="Zones">
-      <dictionary key-type="SpaceAlert.Model.Helpers.Enums.Zone" value-type="SpaceAlert.Model.Plateau.InGameZone">
+      <dictionary key-type="SpaceAlert.Model.Helpers.Enums.Zone" value-type="SpaceAlert.Model.Jeu.InGameZone">
         <entry key="BLEUE" value-ref="ZoneBleue" />
         <entry key="BLANCHE" value-ref="ZoneBlanche" />
         <entry key="ROUGE" value-ref="ZoneRouge" />
@@ -22,7 +22,7 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
     </property>
   </object>
   
-  <object id="ZoneBleue" type="SpaceAlert.Model.Plateau.InGameZone" singleton="false">
+  <object id="ZoneBleue" type="SpaceAlert.Model.Jeu.InGameZone" singleton="false">
     <property name="Degats" value="0"/>
     <property name="Salles">
       <dictionary key-type="SpaceAlert.Model.Helpers.Enums.Pont" value-type="SpaceAlert.Model.Plateau.Salle">
@@ -31,7 +31,7 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
       </dictionary>
     </property>
   </object>
-  <object id="ZoneBlanche" type="SpaceAlert.Model.Plateau.InGameZone" singleton="false">
+  <object id="ZoneBlanche" type="SpaceAlert.Model.Jeu.InGameZone" singleton="false">
     <property name="Degats" value="0"/>
     <property name="Salles">
       <dictionary key-type="SpaceAlert.Model.Helpers.Enums.Pont" value-type="SpaceAlert.Model.Plateau.Salle">
@@ -40,7 +40,7 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
       </dictionary>
     </property>
   </object>
-  <object id="ZoneRouge" type="SpaceAlert.Model.Plateau.InGameZone" singleton="false">
+  <object id="ZoneRouge" type="SpaceAlert.Model.Jeu.InGameZone" singleton="false">
     <property name="Degats" value="0"/>
     <property name="Salles">
       <dictionary key-type="SpaceAlert.Model.Helpers.Enums.Pont" value-type="SpaceAlert.Model.Plateau.Salle">

@@ -1,4 +1,5 @@
 ﻿using SpaceAlert.Business.Exceptions;
+using SpaceAlert.Business.Factories;
 using SpaceAlert.Model.Helpers;
 using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Jeu;
@@ -24,7 +25,8 @@ namespace SpaceAlert.Business
             {
                 Statut = StatutPartie.CREATION,
                 Partie = game,
-                MenacesDisponibles = new ListOfMenaces()
+                MenacesDisponibles = new ListOfMenaces(),
+                TourEnCours = 1
             };
 
             // Ajout des menaces pouvant apparaître
@@ -62,58 +64,10 @@ namespace SpaceAlert.Business
         /// <returns></returns>
         public Guid InitialiserGame(TypeMission typeMission, int nbJoueurs, bool blanches, bool jaunes, bool rouges, Dictionary<long, string> playerNames)
         {
-            // Créé la partie
-            Game game = new Game
-            {
-                TypeMission = typeMission,
-                DateCreation = DateTime.Now,
-                Joueurs = new List<Joueur>(nbJoueurs)
-            };
-
-            // Ajoute les joueurs
-            foreach (long playerId in playerNames.Keys)
-            {
-                game.Joueurs.Add(new Joueur
-                {
-                    NomPersonnage = playerNames[playerId],
-                    MembreId = playerId
-                });
-            }
-
-            // Initialise le contexte
-            GameContext res = new GameContext
-            {
-                Statut = StatutPartie.CREATION,
-                Partie = game,
-                MenacesDisponibles = new ListOfMenaces()
-            };
-
-            // Ajout des menaces
-            if (blanches)
-            {
-                game.Difficulte |= Couleur.BLANCHE;
-                res.MenacesDisponibles += SpaceAlertData.GetObject<ListOfMenaces>("MenacesBlanches");
-            }
-            if (jaunes)
-            {
-                game.Difficulte |= Couleur.JAUNE;
-                //res.MenacesDisponibles += SpaceAlertData.GetObject<ListOfMenaces>("MenacesJaunes");
-            }
-            if (rouges)
-            {
-                game.Difficulte |= Couleur.ROUGE;
-                //res.MenacesDisponibles += SpaceAlertData.GetObject<ListOfMenaces>("MenacesRouges");
-            }
-
+            GameContext res = GameFactory.CreateGame(typeMission, nbJoueurs, blanches, jaunes, rouges,playerNames);
             SpaceAlertData.AddGame(res);
 
-            // Initialise les couleurs des joueurs
-            foreach (Joueur joueur in game.Joueurs)
-            {
-                ProchaineCouleur(game.Id, joueur.NomPersonnage);
-            }
-
-            return game.Id;
+            return res.Partie.Id;
         }
 
         /// <summary>
@@ -177,7 +131,7 @@ namespace SpaceAlert.Business
         /// <param name="gameId">la partie concernée</param>
         /// <param name="charName">Le nom du personnage à qui assigner la couleur</param>
         /// <returns></returns>
-        public string ProchaineCouleur(Guid gameId, string charName)
+        public static string ProchaineCouleur(Guid gameId, string charName)
         {
             GameContext game = SpaceAlertData.Game(gameId);
             int index = SpaceAlertData.PlayerColors.IndexOf(game.Partie.Joueurs.First(j => j.NomPersonnage == charName).Couleur);
