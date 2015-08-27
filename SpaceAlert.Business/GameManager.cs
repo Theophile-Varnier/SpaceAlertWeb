@@ -67,6 +67,10 @@ namespace SpaceAlert.Business
             {
                 if (evenement.TourArrive == game.TourEnCours)
                 {
+                    if (!game.Partie.MenacesExternes.ContainsKey(evenement.Zone))
+                    {
+                        game.Partie.MenacesExternes.Add(evenement.Zone, new List<InGameMenace>());
+                    }
                     game.Partie.MenacesExternes[evenement.Zone].Add(new InGameMenace
                     {
                         Menace = evenement.Menace,
