@@ -17,6 +17,7 @@ namespace SpaceAlert.Business.Factories
             InGameMenace res = new InGameMenace
             {
                 Menace = source.Menace,
+                Status = MenaceStatus.EnJeu,
                 CurrentHp = source.Menace.MaxHp,
                 CurrentShield = source.Menace.Shield,
                 CurrentSpeed = source.Menace.Speed,

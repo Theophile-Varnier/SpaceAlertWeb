@@ -1,4 +1,5 @@
-﻿using SpaceAlert.Model.Helpers;
+﻿using SpaceAlert.Business.Factories;
+using SpaceAlert.Model.Helpers;
 using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Jeu;
 using SpaceAlert.Model.Jeu.Evenements;
@@ -36,7 +37,7 @@ namespace SpaceAlert.Business
         /// </summary>
         public void Resolve()
         {
-            while (game.TourEnCours < game.Partie.Mission.NbTours)
+            while (game.TourEnCours <= game.Partie.Mission.NbTours)
             {
                 ResolveTurn();
             }
@@ -45,7 +46,6 @@ namespace SpaceAlert.Business
         /// <summary>
         /// Résout un tour
         /// </summary>
-        /// <param name="numTour"></param>
         public void ResolveTurn()
         {
 
@@ -71,15 +71,7 @@ namespace SpaceAlert.Business
                     {
                         game.Partie.MenacesExternes.Add(evenement.Zone, new List<InGameMenace>());
                     }
-                    game.Partie.MenacesExternes[evenement.Zone].Add(new InGameMenace
-                    {
-                        Menace = evenement.Menace,
-                        CurrentHp = evenement.Menace.MaxHp,
-                        Position = 0,
-                        TourArrive = game.TourEnCours,
-                        DegatsSubis = 0,
-                        Rampe = game.Rampes[evenement.Zone]
-                    });
+                    game.Partie.MenacesExternes[evenement.Zone].Add(MenaceFactory.CreateMenace(game, evenement));
                 }
             }
 
@@ -97,26 +89,31 @@ namespace SpaceAlert.Business
             }
 
             // Résolution des actions des joueurs
-            for (int i = indicePremierJoueur; i != indicePremierJoueur; i = (i + 1) % game.Partie.Joueurs.Count)
+            int indiceJoueurCourant = indicePremierJoueur;
+            ActionJoueur actionToResolve;
+            do
             {
                 // On retarde si la maintenance n'a pas été effectuée
                 if (retardMaintenance)
                 {
-                    DelayPlayer(game.Partie.Joueurs[i], game.TourEnCours);
+                    DelayPlayer(game.Partie.Joueurs[indiceJoueurCourant], game.TourEnCours);
                 }
 
                 // On exécute l'action du joueur
-                if (game.Partie.Joueurs[i].Actions[game.TourEnCours] != null)
+                if (game.Partie.Joueurs[indiceJoueurCourant].Actions.TryGetValue(game.TourEnCours, out actionToResolve) && actionToResolve != null)
                 {
-                    ResolveAction(game.Partie.Joueurs[i], game.TourEnCours);
+                    ResolveAction(game.Partie.Joueurs[indiceJoueurCourant]);
                 }
-            }
+
+                indiceJoueurCourant = (indiceJoueurCourant + 1) % game.Partie.Joueurs.Count;
+            } while (indiceJoueurCourant != indicePremierJoueur);
 
             // Résolution des tirs
             ResolveShoots();
 
             // TODO : résolution actions menaces internes
             ResolveMenaceActions();
+
             game.TourEnCours++;
         }
 
@@ -125,9 +122,9 @@ namespace SpaceAlert.Business
         /// </summary>
         /// <param name="joueur"></param>
         /// <param name="numTour"></param>
-        private void ResolveAction(Joueur joueur, int numTour)
+        private void ResolveAction(Joueur joueur)
         {
-            ActionJoueur actionToResolve = joueur.Actions[numTour];
+            ActionJoueur actionToResolve = joueur.Actions[game.TourEnCours];
             switch (actionToResolve.GenreAction)
             {
                 case GenreAction.Action:
@@ -279,8 +276,12 @@ namespace SpaceAlert.Business
         private void ResolveShoots()
         {
             // On récupère les menaces ciblables par les roquettes
+            InGameMenace closerMenace = null;
             List<InGameMenace> targetableMenacesExternes = game.Partie.MenacesExternes.SelectMany(m => m.Value).Where(m => ((MenaceExterne)m.Menace).RocketTargetable && m.Portee <= 2).ToList();
-            InGameMenace closerMenace = targetableMenacesExternes.OrderBy(m => m.Distance).First();
+            if (targetableMenacesExternes.Any())
+            {
+                closerMenace = targetableMenacesExternes.OrderBy(m => m.Distance).First();
+            }
             foreach (Zone zone in game.Partie.Vaisseau.Zones.Keys)
             {
                 int totalDamages = game.Partie.Vaisseau.Zones[zone].Salles
@@ -288,29 +289,31 @@ namespace SpaceAlert.Business
                     .Where(c => c.HasShot)
                     .Sum(c => c.Power);
 
-                if (game.RoquettesThisTurn && game.Partie.MenacesExternes[zone].Contains(closerMenace))
+                if (game.RoquettesThisTurn && closerMenace != null && game.Partie.MenacesExternes[zone].Contains(closerMenace))
                 {
                     totalDamages += SpaceAlertData.RocketDamages;
                     game.RoquettesThisTurn = false;
                 }
 
-                InGameMenace zoneMenace = game.Partie.MenacesExternes[zone].OrderByDescending(m => m.Position).ThenBy(m => m.TourArrive).First();
-
-                // S'il y a une menace dans la zone on lui inflige des dégâts
-                if (zoneMenace != null)
+                if (game.Partie.MenacesExternes.ContainsKey(zone))
                 {
-                    Canon impulsionCanon = game.Partie.Vaisseau.Salle(Zone.BLANCHE, Pont.BAS).Canon;
-                    if (zoneMenace.Portee <= impulsionCanon.Range && impulsionCanon.HasShot)
+                    InGameMenace zoneMenace = game.Partie.MenacesExternes[zone].OrderByDescending(m => m.Position).ThenBy(m => m.TourArrive).First();
+
+                    // S'il y a une menace dans la zone on lui inflige des dégâts
+                    if (zoneMenace != null)
                     {
-                        totalDamages += impulsionCanon.Power;
+                        Canon impulsionCanon = game.Partie.Vaisseau.Salle(Zone.BLANCHE, Pont.BAS).Canon;
+                        if (zoneMenace.Portee <= impulsionCanon.Range && impulsionCanon.HasShot)
+                        {
+                            totalDamages += impulsionCanon.Power;
+                        }
+                        zoneMenace.DegatsSubis += totalDamages;
+                        zoneMenace.CurrentHp = zoneMenace.CurrentHp - Math.Max(0, totalDamages - zoneMenace.Menace.Shield);
+                        if (zoneMenace.CurrentHp <= 0)
+                        {
+                            zoneMenace.Status = MenaceStatus.Detruite;
+                        }
                     }
-                    zoneMenace.DegatsSubis += totalDamages;
-                    zoneMenace.CurrentHp = Math.Max(0, zoneMenace.CurrentHp - Math.Max(0, totalDamages - zoneMenace.Menace.Shield));
-                    //if (zoneMenace.CurrentHp == 0)
-                    //{
-                    //    game.Partie.MenacesExternes[zone].Remove(zoneMenace);
-                    //    game.MenacesDetruites.Add(zoneMenace.Menace);
-                    //}
                 }
             }
         }
@@ -322,20 +325,20 @@ namespace SpaceAlert.Business
         {
             foreach (Zone zone in game.Partie.MenacesExternes.Keys)
             {
-                foreach (InGameMenace menace in game.Partie.MenacesExternes[zone])
+                foreach (InGameMenace menace in game.Partie.MenacesExternes[zone].Where(m => m.Status == MenaceStatus.EnJeu))
                 {
                     // On fait bouger la menace
                     int oldPos = menace.Position;
-                    menace.Position += menace.Menace.Speed;
+                    menace.Position += menace.CurrentSpeed;
 
                     // On résout ses actions si besoin
                     ResolveMenaceActions(menace, oldPos, menace.Position, zone);
 
                     // On sort la menace si elle atteint la fin de la rampe
-                    //if (menace.Position >= menace.Rampe.NbCases - 1)
-                    //{
-                    //    game.MenacesSurvecues.Add(menace.Menace);
-                    //}
+                    if (menace.Position >= menace.Rampe.NbCases - 1)
+                    {
+                        menace.Status = MenaceStatus.Survecue;
+                    }
                 }
             }
         }

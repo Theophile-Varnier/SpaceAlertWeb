@@ -11,7 +11,7 @@ namespace SpaceAlert.Business.Factories
 {
     public class GameFactory
     {
-        public static GameContext CreateGame(TypeMission typeMission, int nbJoueurs, bool blanches, bool jaunes, bool rouges, Dictionary<long, string> playerNames)
+        public static GameContext CreateGame(TypeMission typeMission, int nbJoueurs, bool blanches, bool jaunes, bool rouges, KeyValuePair<long, string> captain)
         {
             // Créé la partie
             Game game = new Game
@@ -22,14 +22,8 @@ namespace SpaceAlert.Business.Factories
             };
 
             // Ajoute les joueurs
-            foreach (long playerId in playerNames.Keys)
-            {
-                game.Joueurs.Add(new Joueur
-                {
-                    NomPersonnage = playerNames[playerId],
-                    MembreId = playerId
-                });
-            }
+            Joueur capitaine = JoueurFactory.CreateJoueur(captain.Key, captain.Value, true);
+            game.Joueurs.Add(capitaine);
 
             // Initialise le contexte
             GameContext res = new GameContext

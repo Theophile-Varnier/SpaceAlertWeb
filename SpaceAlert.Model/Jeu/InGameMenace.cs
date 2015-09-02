@@ -1,4 +1,5 @@
-﻿using SpaceAlert.Model.Jeu.Evenements;
+﻿using SpaceAlert.Model.Helpers.Enums;
+using SpaceAlert.Model.Jeu.Evenements;
 using SpaceAlert.Model.Menaces;
 
 namespace SpaceAlert.Model.Jeu
@@ -13,6 +14,8 @@ namespace SpaceAlert.Model.Jeu
         /// La menace associée
         /// </summary>
         public Menace Menace { get; set; }
+
+        public MenaceStatus Status { get; set; }
 
         /// <summary>
         /// La position actuelle de la menace

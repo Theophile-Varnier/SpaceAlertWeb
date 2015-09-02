@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\Enums\CAction.cs" />
+    <Compile Include="Helpers\Enums\MenaceStatus.cs" />
     <Compile Include="Helpers\Enums\PresenceRobots.cs" />
     <Compile Include="Helpers\Enums\TypeAction.cs" />
     <Compile Include="Helpers\Enums\NiveauMaitrise.cs" />

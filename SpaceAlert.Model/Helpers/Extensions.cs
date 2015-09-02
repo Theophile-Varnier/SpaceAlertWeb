@@ -17,7 +17,7 @@ namespace SpaceAlert.Model.Helpers
         {
             try
             {
-                return (((int) (object) type & (int) (object) value) == (int) (object) value);
+                return (((int)(object)type & (int)(object)value) == (int)(object)value);
             }
             catch
             {
@@ -36,7 +36,7 @@ namespace SpaceAlert.Model.Helpers
         {
             try
             {
-                return (int) (object) type == (int) (object) value;
+                return (int)(object)type == (int)(object)value;
             }
             catch
             {
@@ -94,6 +94,20 @@ namespace SpaceAlert.Model.Helpers
                 }
             }
             return -1;
+        }
+
+        public static int FirstNonExisting<T>(this Dictionary<int, T> dico, int start = 0)
+        {
+            int index = start;
+            while (dico.ContainsKey(index))
+            {
+                if (dico[index] == null)
+                {
+                    return index;
+                }
+                index++;
+            }
+            return index;
         }
     }
 }

@@ -27,16 +27,6 @@ namespace SpaceAlert.Model.Jeu
         public int TourEnCours { get; set; }
 
         /// <summary>
-        /// Les menaces détruites au cours de la partie
-        /// </summary>
-        public List<Menace> MenacesDetruites { get; set; }
-
-        /// <summary>
-        /// Les menaces auxquelles le vaisseau a survécu
-        /// </summary>
-        public List<Menace> MenacesSurvecues { get; set; }
-
-        /// <summary>
         /// Les rampes
         /// </summary>
         public Dictionary<Zone, Rampe> Rampes { get; set; }

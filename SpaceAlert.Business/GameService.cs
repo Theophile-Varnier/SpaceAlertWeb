@@ -13,44 +13,6 @@ namespace SpaceAlert.Business
 {
     public class GameService
     {
-        /// <summary>
-        /// Initialise une nouvelle partie
-        /// </summary>
-        /// <param name="game"></param>
-        /// <returns></returns>
-        public GameContext InitialiserGame(Game game)
-        {
-            // Initialisation du contexte
-            GameContext res = new GameContext
-            {
-                Statut = StatutPartie.CREATION,
-                Partie = game,
-                MenacesDisponibles = new ListOfMenaces(),
-                TourEnCours = 1
-            };
-
-            // Ajout des menaces pouvant apparaître
-            if (res.Partie.Difficulte.HasFlag(Couleur.BLANCHE))
-            {
-                res.MenacesDisponibles += SpaceAlertData.GetObject<ListOfMenaces>("MenacesBlanches");
-            }
-            //if (res.Partie.Difficulte.HasFlag(Couleur.JAUNE))
-            //{
-            //    res.MenacesDisponibles += SpaceAlertData.GetObject<ListOfMenaces>("MenacesJaunes");
-            //}
-            //if (res.Partie.Difficulte.HasFlag(Couleur.ROUGE))
-            //{
-            //    res.MenacesDisponibles += SpaceAlertData.GetObject<ListOfMenaces>("MenacesRouges");
-            //}
-
-            // Initialisation de l'état du vaisseau
-            res.Partie.Vaisseau = SpaceAlertData.GetObject<Vaisseau>("Vaisseau");
-
-            // Ajout de la partie à l'ensemble des parties connues
-            SpaceAlertData.AddGame(res);
-
-            return res;
-        }
 
         /// <summary>
         /// Initialise une nouvelle partie
@@ -62,9 +24,9 @@ namespace SpaceAlert.Business
         /// <param name="rouges">menaces rouges</param>
         /// <param name="playerNames">Le nom des personnages des joueurs</param>
         /// <returns></returns>
-        public Guid InitialiserGame(TypeMission typeMission, int nbJoueurs, bool blanches, bool jaunes, bool rouges, Dictionary<long, string> playerNames)
+        public Guid InitialiserGame(TypeMission typeMission, int nbJoueurs, bool blanches, bool jaunes, bool rouges, KeyValuePair<long, string> captain)
         {
-            GameContext res = GameFactory.CreateGame(typeMission, nbJoueurs, blanches, jaunes, rouges,playerNames);
+            GameContext res = GameFactory.CreateGame(typeMission, nbJoueurs, blanches, jaunes, rouges, captain);
             SpaceAlertData.AddGame(res);
 
             return res.Partie.Id;
@@ -91,6 +53,7 @@ namespace SpaceAlert.Business
         {
             game.Partie.Mission = InitialiserMission(game.Partie.TypeMission);
             game.Statut = StatutPartie.JEU;
+            game.TourEnCours = 1;
             return game.Partie.Id;
         }
 
@@ -171,11 +134,7 @@ namespace SpaceAlert.Business
             }
 
             // On ajoute le joueur à la partie
-            game.Partie.Joueurs.Add(new Joueur
-            {
-                MembreId = memberId,
-                NomPersonnage = charName
-            });
+            game.Partie.Joueurs.Add(JoueurFactory.CreateJoueur(memberId, charName, false));
 
             // On lui assigne une couleur
             ProchaineCouleur(gameId, charName);

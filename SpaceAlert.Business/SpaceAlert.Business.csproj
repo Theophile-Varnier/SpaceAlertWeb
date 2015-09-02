@@ -57,6 +57,7 @@
     <Compile Include="Exceptions\NomDejaUtiliseException.cs" />
     <Compile Include="Exceptions\PartiePleineException.cs" />
     <Compile Include="Factories\GameFactory.cs" />
+    <Compile Include="Factories\JoueurFactory.cs" />
     <Compile Include="Factories\MenaceFactory.cs" />
     <Compile Include="GameManager.cs" />
     <Compile Include="GameService.cs" />

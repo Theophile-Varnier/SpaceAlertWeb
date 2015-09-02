@@ -65,10 +65,7 @@ namespace SpaceAlert.Web.Controllers
                 model.Game.Blanches,
                 model.Game.Jaunes,
                 model.Game.Rouges,
-                new Dictionary<long, string>
-                {
-                    { ((Membre)Session["currentMember"]).Id, model.CreatedBy }
-                });
+                new KeyValuePair<long, string>(((Membre)Session["currentMember"]).Id, model.CreatedBy));
 
             model.Game.Players.First().Color = serviceProvider.GameService.PlayerColor(gameId, model.CreatedBy);
 
