@@ -1,11 +1,9 @@
 ﻿using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Jeu;
 using SpaceAlert.Model.Menaces;
+using SpaceAlert.Model.Plateau;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpaceAlert.Business.Factories
 {
@@ -18,12 +16,10 @@ namespace SpaceAlert.Business.Factories
             {
                 TypeMission = typeMission,
                 DateCreation = DateTime.Now,
+                Vaisseau = SpaceAlertData.GetObject<Vaisseau>("Vaisseau"),
+                MenacesExternes = new Dictionary<Zone,List<InGameMenace>>(),
                 Joueurs = new List<Joueur>(nbJoueurs)
             };
-
-            // Ajoute les joueurs
-            Joueur capitaine = JoueurFactory.CreateJoueur(captain.Key, captain.Value, true);
-            game.Joueurs.Add(capitaine);
 
             // Initialise le contexte
             GameContext res = new GameContext
@@ -32,6 +28,9 @@ namespace SpaceAlert.Business.Factories
                 Partie = game,
                 MenacesDisponibles = new ListOfMenaces()
             };
+            // Ajoute les joueurs
+            Joueur capitaine = JoueurFactory.CreateJoueur(captain.Key, captain.Value, true, game.Vaisseau);
+            game.Joueurs.Add(capitaine);
 
             // Ajout des menaces
             if (blanches)
@@ -53,7 +52,7 @@ namespace SpaceAlert.Business.Factories
             // Initialise les couleurs des joueurs
             foreach (Joueur joueur in game.Joueurs)
             {
-                GameService.ProchaineCouleur(game.Id, joueur.NomPersonnage);
+                GameService.ProchaineCouleur(res, joueur.NomPersonnage);
             }
             return res;
         }

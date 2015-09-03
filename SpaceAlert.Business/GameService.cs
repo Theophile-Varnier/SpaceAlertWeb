@@ -57,6 +57,11 @@ namespace SpaceAlert.Business
             return game.Partie.Id;
         }
 
+        private void InitialiserRampes(GameContext game)
+        {
+
+        }
+
         /// <summary>
         /// Récupère toutes les parties en attente de joueurs
         /// </summary>
@@ -88,15 +93,8 @@ namespace SpaceAlert.Business
             return joueur != null ? joueur.Couleur : null;
         }
 
-        /// <summary>
-        /// Set une couleur et la retourne
-        /// </summary>
-        /// <param name="gameId">la partie concernée</param>
-        /// <param name="charName">Le nom du personnage à qui assigner la couleur</param>
-        /// <returns></returns>
-        public static string ProchaineCouleur(Guid gameId, string charName)
+        public static string ProchaineCouleur(GameContext game, string charName)
         {
-            GameContext game = SpaceAlertData.Game(gameId);
             int index = SpaceAlertData.PlayerColors.IndexOf(game.Partie.Joueurs.First(j => j.NomPersonnage == charName).Couleur);
             int current = index;
             string color;
@@ -109,6 +107,18 @@ namespace SpaceAlert.Business
             game.Partie.Joueurs.First(j => j.NomPersonnage == charName).Couleur = color;
 
             return color;
+        }
+
+        /// <summary>
+        /// Set une couleur et la retourne
+        /// </summary>
+        /// <param name="gameId">la partie concernée</param>
+        /// <param name="charName">Le nom du personnage à qui assigner la couleur</param>
+        /// <returns></returns>
+        public static string ProchaineCouleur(Guid gameId, string charName)
+        {
+            GameContext game = SpaceAlertData.Game(gameId);
+            return ProchaineCouleur(game, charName);
         }
 
         /// <summary>
@@ -134,7 +144,7 @@ namespace SpaceAlert.Business
             }
 
             // On ajoute le joueur à la partie
-            game.Partie.Joueurs.Add(JoueurFactory.CreateJoueur(memberId, charName, false));
+            game.Partie.Joueurs.Add(JoueurFactory.CreateJoueur(memberId, charName, false, game.Partie.Vaisseau));
 
             // On lui assigne une couleur
             ProchaineCouleur(gameId, charName);
