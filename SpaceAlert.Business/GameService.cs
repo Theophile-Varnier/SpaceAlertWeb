@@ -27,6 +27,7 @@ namespace SpaceAlert.Business
         public Guid InitialiserGame(TypeMission typeMission, int nbJoueurs, bool blanches, bool jaunes, bool rouges, KeyValuePair<long, string> captain)
         {
             GameContext res = GameFactory.CreateGame(typeMission, nbJoueurs, blanches, jaunes, rouges, captain);
+            InitialiserRampes(res);
             SpaceAlertData.AddGame(res);
 
             return res.Partie.Id;
@@ -54,12 +55,28 @@ namespace SpaceAlert.Business
             game.Partie.Mission = InitialiserMission(game.Partie.TypeMission);
             game.Statut = StatutPartie.JEU;
             game.TourEnCours = 1;
+
+            foreach (Joueur joueur in game.Partie.Joueurs)
+            {
+                for (int i = 1; i <= game.Partie.Mission.NbTours; i++)
+                {
+                    joueur.Actions.Add(i, null);
+                }
+            }
             return game.Partie.Id;
         }
 
+        /// <summary>
+        /// Ajoute les rampes à une partie
+        /// </summary>
         private void InitialiserRampes(GameContext game)
         {
-
+            List<Rampe> allRampes = SpaceAlertData.GetAll<Rampe>().Select(kvp => kvp.Value).ToList();
+            foreach (Zone zone in Enum.GetValues(typeof(Zone)))
+            {
+                game.Rampes.Add(zone, allRampes.GetNextRandom(true));
+            }
+            game.RampeInterne = allRampes.GetNextRandom(true);
         }
 
         /// <summary>
@@ -144,7 +161,7 @@ namespace SpaceAlert.Business
             }
 
             // On ajoute le joueur à la partie
-            game.Partie.Joueurs.Add(JoueurFactory.CreateJoueur(memberId, charName, false, game.Partie.Vaisseau));
+            game.Partie.Joueurs.Add(JoueurFactory.CreateJoueur(memberId, charName, false, game.Partie));
 
             // On lui assigne une couleur
             ProchaineCouleur(gameId, charName);

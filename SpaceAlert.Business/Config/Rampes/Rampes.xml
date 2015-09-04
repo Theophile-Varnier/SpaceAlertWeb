@@ -18,7 +18,117 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
         </entry>
         <entry key="Z">
           <list element-type="int">
-            <value>11</value>
+            <value>10</value>
+          </list>
+        </entry>
+      </dictionary>
+    </property>
+  </object>
+  <object id="Rampe2" type="SpaceAlert.Model.Jeu.Rampe">
+    <property name="NbCases" value="11"/>
+    <property name="SpecialCases">
+      <dictionary key-type="SpaceAlert.Model.Helpers.Enums.TypeCase">
+        <entry key="X">
+          <list element-type="int">
+            <value>3</value>
+          </list>
+        </entry>
+        <entry key="Y">
+          <list element-type="int">
+            <value>5</value>
+          </list>
+        </entry>
+        <entry key="Z">
+          <list element-type="int">
+            <value>10</value>
+          </list>
+        </entry>
+      </dictionary>
+    </property>
+  </object>
+  <object id="Rampe3" type="SpaceAlert.Model.Jeu.Rampe">
+    <property name="NbCases" value="11"/>
+    <property name="SpecialCases">
+      <dictionary key-type="SpaceAlert.Model.Helpers.Enums.TypeCase">
+        <entry key="X">
+          <list element-type="int">
+            <value>3</value>
+          </list>
+        </entry>
+        <entry key="Y">
+          <list element-type="int">
+            <value>5</value>
+          </list>
+        </entry>
+        <entry key="Z">
+          <list element-type="int">
+            <value>10</value>
+          </list>
+        </entry>
+      </dictionary>
+    </property>
+  </object>
+  <object id="Rampe4" type="SpaceAlert.Model.Jeu.Rampe">
+    <property name="NbCases" value="11"/>
+    <property name="SpecialCases">
+      <dictionary key-type="SpaceAlert.Model.Helpers.Enums.TypeCase">
+        <entry key="X">
+          <list element-type="int">
+            <value>3</value>
+          </list>
+        </entry>
+        <entry key="Y">
+          <list element-type="int">
+            <value>5</value>
+          </list>
+        </entry>
+        <entry key="Z">
+          <list element-type="int">
+            <value>10</value>
+          </list>
+        </entry>
+      </dictionary>
+    </property>
+  </object>
+  <object id="Rampe5" type="SpaceAlert.Model.Jeu.Rampe">
+    <property name="NbCases" value="11"/>
+    <property name="SpecialCases">
+      <dictionary key-type="SpaceAlert.Model.Helpers.Enums.TypeCase">
+        <entry key="X">
+          <list element-type="int">
+            <value>3</value>
+          </list>
+        </entry>
+        <entry key="Y">
+          <list element-type="int">
+            <value>5</value>
+          </list>
+        </entry>
+        <entry key="Z">
+          <list element-type="int">
+            <value>10</value>
+          </list>
+        </entry>
+      </dictionary>
+    </property>
+  </object>
+  <object id="Rampe6" type="SpaceAlert.Model.Jeu.Rampe">
+    <property name="NbCases" value="11"/>
+    <property name="SpecialCases">
+      <dictionary key-type="SpaceAlert.Model.Helpers.Enums.TypeCase">
+        <entry key="X">
+          <list element-type="int">
+            <value>3</value>
+          </list>
+        </entry>
+        <entry key="Y">
+          <list element-type="int">
+            <value>5</value>
+          </list>
+        </entry>
+        <entry key="Z">
+          <list element-type="int">
+            <value>10</value>
           </list>
         </entry>
       </dictionary>

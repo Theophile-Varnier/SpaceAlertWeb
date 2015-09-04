@@ -107,7 +107,6 @@
     <Folder Include="Config\Menaces\Rouges\Normales\" />
     <Folder Include="Config\Menaces\Rouges\Serieuses\" />
     <Folder Include="Config\Missions\Doubles\" />
-    <Folder Include="Config\Missions\Simples\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -126,6 +125,7 @@
     <Content Include="Config\JoueurAction.xml" />
     <EmbeddedResource Include="Config\Menaces\ListeMenaces.xml" />
     <EmbeddedResource Include="Config\Rampes\Rampes.xml" />
+    <EmbeddedResource Include="Config\Missions\Simples\Test.xml" />
     <Content Include="Exceptions\sql\CREATION_TABLE.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

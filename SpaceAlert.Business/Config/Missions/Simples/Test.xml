@@ -1,0 +1,11 @@
+﻿<objects xmlns="http://www.springframework.net">
+  <object id="MissionTest" type="SpaceAlert.Model.Jeu.Mission">
+    <property name="NbTours" value="12"/>
+    <property name="TypeMission" value="SIMPLE"/>
+    <property name="Evenements">
+      <list>
+        <ref object="Evenement1"/>
+      </list>
+    </property>
+  </object>
+</objects>

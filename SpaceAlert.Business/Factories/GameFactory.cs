@@ -26,10 +26,11 @@ namespace SpaceAlert.Business.Factories
             {
                 Statut = StatutPartie.CREATION,
                 Partie = game,
-                MenacesDisponibles = new ListOfMenaces()
+                MenacesDisponibles = new ListOfMenaces(),
+                Rampes = new Dictionary<Zone,Rampe>()
             };
             // Ajoute les joueurs
-            Joueur capitaine = JoueurFactory.CreateJoueur(captain.Key, captain.Value, true, game.Vaisseau);
+            Joueur capitaine = JoueurFactory.CreateJoueur(captain.Key, captain.Value, true, game);
             game.Joueurs.Add(capitaine);
 
             // Ajout des menaces
