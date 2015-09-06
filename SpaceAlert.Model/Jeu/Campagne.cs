@@ -11,7 +11,7 @@ namespace SpaceAlert.Model.Jeu
         [Key]
         public int Id { get; set; }
 
-        public ICollection<Game> Games { get; set; }
+        public virtual ICollection<Game> Games { get; set; }
 
         public Couleur Difficulte { get; set; }
     }

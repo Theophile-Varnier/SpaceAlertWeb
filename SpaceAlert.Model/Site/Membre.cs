@@ -1,4 +1,6 @@
 ﻿
+using SpaceAlert.Model.Stats;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace SpaceAlert.Model.Site
@@ -17,6 +19,8 @@ namespace SpaceAlert.Model.Site
         public string Email { get; set; }
 
         public string MotDePasse { get; set; }
+
+        public virtual ICollection<Personnage> Personnages { get; set; }
 
     }
 }

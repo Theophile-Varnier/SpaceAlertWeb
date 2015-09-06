@@ -2,6 +2,7 @@
 using SpaceAlert.Model.Site;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -18,11 +19,13 @@ namespace SpaceAlert.Model.Stats
         /// <summary>
         /// Identifiant technique
         /// </summary>
+        [Key]
         public int Id { get; set; }
 
         /// <summary>
         /// Id du membre
         /// </summary>
+        [ForeignKey("Membre")]
         public long MembreId { get; set; }
 
         /// <summary>
@@ -45,6 +48,9 @@ namespace SpaceAlert.Model.Stats
         /// </summary>
         public virtual ICollection<Joueur> Games { get; set; }
 
-        public virtual ICollection<Campagne> Campagnes { get; set; }
+        /// <summary>
+        /// Les campagnes du personnage
+        /// </summary>
+        public virtual ICollection<PersonnageInCampagne> Campagnes { get; set; }
     }
 }

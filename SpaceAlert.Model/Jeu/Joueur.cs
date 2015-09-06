@@ -19,6 +19,7 @@ namespace SpaceAlert.Model.Jeu
         /// </summary>
         [Key]
         public int Id { get; set; }
+
         /// <summary>
         /// L'id du personnage joué
         /// </summary>
@@ -30,6 +31,7 @@ namespace SpaceAlert.Model.Jeu
         /// <summary>
         /// La partie à laquelle est lié le joueur
         /// </summary>
+        [ForeignKey("Game")]
         public Guid GameId { get; set; }
 
         public virtual Game Game { get; set; }

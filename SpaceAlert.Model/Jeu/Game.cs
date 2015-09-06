@@ -58,6 +58,14 @@ namespace SpaceAlert.Model.Jeu
         [NotMapped]
         public Mission Mission { get; set; }
 
+        [ForeignKey("Campagne")]
+        public int? CampagneId { get; set; }
+
+        /// <summary>
+        /// La campagne à laquelle appartient la partie
+        /// </summary>
+        public virtual Campagne Campagne { get; set; }
+
         /// <summary>
         /// La difficulté de la partie
         /// </summary>

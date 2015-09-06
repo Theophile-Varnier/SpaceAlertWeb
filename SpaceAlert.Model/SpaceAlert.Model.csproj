@@ -102,6 +102,7 @@
     <Compile Include="Site\Membre.cs" />
     <Compile Include="Stats\Degats.cs" />
     <Compile Include="Stats\Personnage.cs" />
+    <Compile Include="Stats\PersonnageInCampagne.cs" />
     <Compile Include="Stats\TypeDegats.cs" />
   </ItemGroup>
   <ItemGroup>

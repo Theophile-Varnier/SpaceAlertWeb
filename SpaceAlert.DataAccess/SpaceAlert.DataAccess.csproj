@@ -63,6 +63,7 @@
     <Compile Include="Providers\PersonnageProvider.cs" />
     <Compile Include="Repositories\MembreRepository.cs" />
     <Compile Include="SpaceAlertContext.cs" />
+    <Compile Include="SpaceAlertContextInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
