@@ -1,7 +1,10 @@
-﻿using SpaceAlert.Model.Helpers.Enums;
+﻿using SpaceAlert.DataAccess;
+using SpaceAlert.DataAccess.Providers;
+using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Jeu;
 using SpaceAlert.Model.Menaces;
 using SpaceAlert.Model.Plateau;
+using SpaceAlert.Model.Stats;
 using System;
 using System.Collections.Generic;
 
@@ -9,7 +12,7 @@ namespace SpaceAlert.Business.Factories
 {
     public class GameFactory
     {
-        public static GameContext CreateGame(TypeMission typeMission, int nbJoueurs, bool blanches, bool jaunes, bool rouges, KeyValuePair<long, string> captain)
+        public static GameContext CreateGame(TypeMission typeMission, int nbJoueurs, bool blanches, bool jaunes, bool rouges, Personnage captain)
         {
             // Créé la partie
             Game game = new Game
@@ -30,7 +33,7 @@ namespace SpaceAlert.Business.Factories
                 Rampes = new Dictionary<Zone,Rampe>()
             };
             // Ajoute les joueurs
-            Joueur capitaine = JoueurFactory.CreateJoueur(captain.Key, captain.Value, true, game);
+            Joueur capitaine = JoueurFactory.CreateJoueur(captain, true, game);
             game.Joueurs.Add(capitaine);
 
             // Ajout des menaces
@@ -53,7 +56,7 @@ namespace SpaceAlert.Business.Factories
             // Initialise les couleurs des joueurs
             foreach (Joueur joueur in game.Joueurs)
             {
-                GameService.ProchaineCouleur(res, joueur.NomPersonnage);
+                GameService.ProchaineCouleur(res, joueur.Personnage.Nom);
             }
             return res;
         }

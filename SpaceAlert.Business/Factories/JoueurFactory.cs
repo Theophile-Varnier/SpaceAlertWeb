@@ -1,18 +1,20 @@
-﻿using SpaceAlert.Model.Helpers.Enums;
+﻿using SpaceAlert.DataAccess;
+using SpaceAlert.DataAccess.Providers;
+using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Jeu;
 using SpaceAlert.Model.Plateau;
+using SpaceAlert.Model.Stats;
 using System.Collections.Generic;
 
 namespace SpaceAlert.Business.Factories
 {
     public class JoueurFactory
     {
-        public static Joueur CreateJoueur(long membreId, string nomPersonnage, bool captain, Game game)
+        public static Joueur CreateJoueur(Personnage perso, bool captain, Game game)
         {
             Joueur res = new Joueur
             {
-                MembreId = membreId,
-                NomPersonnage = nomPersonnage,
+                IdPersonnage = perso.Id,
                 IsCapitaine = captain,
                 CurrentSalle = game.Vaisseau.Salle(Zone.BLANCHE, Pont.HAUT),
                 Actions = new Dictionary<int, ActionJoueur>()

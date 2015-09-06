@@ -30,10 +30,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data">
       <HintPath>..\packages\MySql.Data.6.9.6\lib\net45\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -49,7 +56,13 @@
     <Compile Include="Extensions\Command.cs" />
     <Compile Include="Extensions\DbDataReaderExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\AbstractProvider.cs" />
+    <Compile Include="Providers\GameProvider.cs" />
+    <Compile Include="Providers\JoueurProvider.cs" />
+    <Compile Include="Providers\MembreProvider.cs" />
+    <Compile Include="Providers\PersonnageProvider.cs" />
     <Compile Include="Repositories\MembreRepository.cs" />
+    <Compile Include="SpaceAlertContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -61,6 +74,7 @@
       <Name>SpaceAlert.Model</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

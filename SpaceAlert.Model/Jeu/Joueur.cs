@@ -1,22 +1,43 @@
 ﻿using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Plateau;
+using SpaceAlert.Model.Stats;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SpaceAlert.Model.Jeu
 {
     /// <summary>
     /// Représente un joueur d'une partie
     /// </summary>
+    [Table("Joueurs")]
     public class Joueur
     {
         /// <summary>
-        /// Le nom du personnage joué
+        /// Id
         /// </summary>
-        public string NomPersonnage { get; set; }
+        [Key]
+        public int Id { get; set; }
+        /// <summary>
+        /// L'id du personnage joué
+        /// </summary>
+        [ForeignKey("Personnage")]
+        public int IdPersonnage { get; set; }
+
+        public virtual Personnage Personnage { get; set; }
+
+        /// <summary>
+        /// La partie à laquelle est lié le joueur
+        /// </summary>
+        public Guid GameId { get; set; }
+
+        public virtual Game Game { get; set; }
 
         /// <summary>
         /// La couleur du pion du joueur
         /// </summary>
+        [NotMapped]
         public string Couleur { get; set; }
 
         /// <summary>
@@ -25,23 +46,21 @@ namespace SpaceAlert.Model.Jeu
         public bool IsCapitaine { get; set; }
 
         /// <summary>
-        /// L'id du membre associé
-        /// </summary>
-        public long MembreId { get; set; }
-
-        /// <summary>
         /// Ses actions
         /// </summary>
+        [NotMapped]
         public Dictionary<int, ActionJoueur> Actions { get; set; }
 
         /// <summary>
         /// A-t-il des robots avec lui ?
         /// </summary>
+        [NotMapped]
         public EtatRobots Robots { get; set; }
 
         /// <summary>
         /// La salle dans laquelle il se trouve actuellement
         /// </summary>
+        [NotMapped]
         public Salle CurrentSalle { get; set; }
     }
 }

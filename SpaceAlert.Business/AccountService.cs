@@ -1,4 +1,6 @@
-﻿using SpaceAlert.DataAccess.Repositories;
+﻿using SpaceAlert.DataAccess;
+using SpaceAlert.DataAccess.Providers;
+using SpaceAlert.DataAccess.Repositories;
 using SpaceAlert.Model.Site;
 using SpaceAlert.Services.Exceptions;
 
@@ -6,7 +8,15 @@ namespace SpaceAlert.Business
 {
     public class AccountService
     {
-        private readonly MembreRepository membreRepository = new MembreRepository();
+
+        private readonly SpaceAlertContext context;
+        private readonly MembreProvider provider;
+
+        public AccountService()
+        {
+            context = new SpaceAlertContext();
+            provider = new MembreProvider(context);
+        }
 
         /// <summary>
         /// Inscription d'un membre
@@ -14,7 +24,7 @@ namespace SpaceAlert.Business
         /// <param name="membre"></param>
         public void Inscrire(Membre membre)
         {
-            membreRepository.EnregistrerMembre(membre);
+            provider.Add(membre);
         }
 
         /// <summary>
@@ -24,12 +34,12 @@ namespace SpaceAlert.Business
         /// <returns></returns>
         public bool Existe(string pseudo)
         {
-            return membreRepository.GetExistingMember(pseudo) != null;
+            return provider.GetMembreByPseudo(pseudo) != null;
         }
 
         public bool EmailDejaUtilise(string email)
         {
-            return membreRepository.GetExistingEmail(email) != null;
+            return provider.GetMailIfExists(email) != null;
         }
 
         /// <summary>
@@ -45,7 +55,7 @@ namespace SpaceAlert.Business
             {
                 throw new MembreNonExistantException(string.Format("Le pseudo {0} n'existe pas", pseudo));
             }
-            res = membreRepository.GetExistingMember(pseudo, motDePasse);
+            res = provider.GetMembreByPseudoAndMdp(pseudo, motDePasse);
             if (res == null)
             {
                 throw new MotDePasseInvalideException("Combinaison pseudo/mot de passe invalide");
@@ -60,7 +70,7 @@ namespace SpaceAlert.Business
         /// <returns></returns>
         public Membre RecupererMembre(string pseudo)
         {
-            return membreRepository.GetExistingMember(pseudo);
+            return provider.GetMembreByPseudo(pseudo);
         }
     }
 }

@@ -130,6 +130,7 @@ namespace SpaceAlert.Web.Controllers
             Membre membre = AccountMapper.MapFromViewModel(model);
             serviceProvider.AccountService.Inscrire(membre);
             FormsAuthentication.SetAuthCookie(membre.Pseudo, false);
+            Session["currentMember"] = membre;
             return RedirectToAction("Index", "Game");
         }
 

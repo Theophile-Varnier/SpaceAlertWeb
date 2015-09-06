@@ -7,36 +7,6 @@ namespace SpaceAlert.Web.Models.Mapping
 {
     public static class GameMapper
     {
-        public static Game MapFromModel(GameViewModel model)
-        {
-            Game res = new Game
-            {
-                TypeMission = model.TypeMission,
-                DateCreation = DateTime.Now
-            };
-            if (model.Blanches)
-            {
-                res.Difficulte |= Couleur.BLANCHE;
-            }
-            if (model.Jaunes)
-            {
-                res.Difficulte |= Couleur.JAUNE;
-            }
-            if (model.Rouges)
-            {
-                res.Difficulte |= Couleur.ROUGE;
-            }
-
-            res.Joueurs = new List<Joueur>(model.NbJoueurs);
-            if (model.Players != null)
-            {
-                foreach (PlayerViewModel player in model.Players)
-                {
-                    res.Joueurs.Add(new Joueur { NomPersonnage = player.Name });
-                }
-            }
-            return res;
-        }
 
         public static GameViewModel MapToModel(Game source)
         {
@@ -56,7 +26,7 @@ namespace SpaceAlert.Web.Models.Mapping
             {
                 res.Players.Add(new PlayerViewModel
                 {
-                    Name = joueur.NomPersonnage,
+                    Name = joueur.Personnage.Nom,
                     Color = joueur.Couleur
                 });
             }

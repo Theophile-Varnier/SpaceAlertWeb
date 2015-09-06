@@ -5,6 +5,7 @@ namespace SpaceAlert.Model.Stats
     {
         Canon,
         Roquette,
-        Intercepteur
+        Intercepteur,
+        Robots
     }
 }
