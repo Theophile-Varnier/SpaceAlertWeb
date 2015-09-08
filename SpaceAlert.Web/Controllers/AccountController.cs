@@ -162,6 +162,14 @@ namespace SpaceAlert.Web.Controllers
             return res;
         }
 
+        [HttpPost]
+        [Authorize]
+        public string AddCharacter(string charName)
+        {
+            serviceProvider.AccountService.AddCharacter(User.Id, charName);
+            return charName;
+        }
+
         public void CreateAuthenticationTicket(string userName)
         {
             Membre authUser = serviceProvider.AccountService.RecupererMembre(userName);

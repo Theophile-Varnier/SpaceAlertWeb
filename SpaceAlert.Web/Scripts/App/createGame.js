@@ -19,4 +19,24 @@
             keyboard: false
         });
     });
+
+    $("#addCharacter").on("click", function (e) {
+        $("#wait").removeClass("hidden");
+        if ($("#newChar").val()) {
+            $.ajax({
+                method: "POST",
+                url: createCharUrl,
+                data: {
+                    charName: $("#newChar").val()
+                }
+            }).success(function (newChar) {
+                $("#CreatedBy").append($('<option>', {
+                    value: newChar,
+                    text: newChar
+                }));
+                $("#CreatedBy").val(newChar);
+                $('#wait').addClass("hidden");
+            });
+        }
+    });
 })

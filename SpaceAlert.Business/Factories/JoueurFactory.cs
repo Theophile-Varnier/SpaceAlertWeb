@@ -12,6 +12,7 @@ namespace SpaceAlert.Business.Factories
             Joueur res = new Joueur
             {
                 IdPersonnage = perso.Id,
+                Personnage = perso,
                 IsCapitaine = captain,
                 CurrentSalle = game.Vaisseau.Salle(Zone.BLANCHE, Pont.HAUT),
                 Actions = new Dictionary<int, ActionJoueur>()

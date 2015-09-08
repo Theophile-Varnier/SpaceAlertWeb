@@ -37,7 +37,10 @@ namespace SpaceAlert.Web.Controllers
         {
             GameCreationViewModel viewModel = new GameCreationViewModel();
             Membre currentMember = serviceProvider.AccountService.RecupererMembre(User.Identity.Name);
-            viewModel.AvailableCharacters = currentMember.Personnages.Select(p => p.Nom);
+            viewModel.Player = new PlayerViewModel
+            {
+                AvailableCharacters = currentMember.Personnages.Select(p => p.Nom)
+            };
             return View(viewModel);
         }
 
@@ -57,7 +60,7 @@ namespace SpaceAlert.Web.Controllers
             {
                 new PlayerViewModel
                 {
-                    Name = model.CreatedBy
+                    Name = model.Player.Name
                 }
             };
 
@@ -68,9 +71,9 @@ namespace SpaceAlert.Web.Controllers
                 model.Game.Blanches,
                 model.Game.Jaunes,
                 model.Game.Rouges,
-                new KeyValuePair<long, string>(User.Id, model.CreatedBy));
+                new KeyValuePair<long, string>(User.Id, model.Player.Name));
 
-            model.Game.Players.First().Color = serviceProvider.GameService.PlayerColor(gameId, model.CreatedBy);
+            model.Game.Players.First().Color = serviceProvider.GameService.PlayerColor(gameId, model.Player.Name);
 
             // On renvoie vers la salle d'attente
             model.Game.GameId = gameId;
@@ -99,7 +102,11 @@ namespace SpaceAlert.Web.Controllers
         {
             JoinGameViewModel model = new JoinGameViewModel
             {
-                AvailableGames = new List<GameViewModel>()
+                AvailableGames = new List<GameViewModel>(),
+                Player = new PlayerViewModel
+                    {
+                        AvailableCharacters = serviceProvider.AccountService.RecupererMembre(User.Identity.Name).Personnages.Select(p => p.Nom)
+                    }
             };
             List<Game> games = serviceProvider.GameService.RecupererGameEnAttente();
             foreach (Game game in games)
@@ -131,10 +138,10 @@ namespace SpaceAlert.Web.Controllers
         {
             try
             {
-                GameContext game = serviceProvider.GameService.AjouterJoueur(model.GameToJoin, Session.CurrentMember().Id, model.Player.Name);
+                GameContext game = serviceProvider.GameService.AjouterJoueur(model.GameToJoin, User.Id, model.Player.Name);
                 GameCreationViewModel newModel = new GameCreationViewModel
                 {
-                    CreatedBy = model.Player.Name,
+                    Player = model.Player,
                     Game = GameMapper.MapToModel(game.Partie),
                     IsGameOwner = false
                 };

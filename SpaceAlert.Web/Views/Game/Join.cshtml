@@ -60,13 +60,28 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-body">
-                        @using (Html.BeginForm("Join", "Game", FormMethod.Post, new { @id = "joinGameForm" }))
+                        @using (Html.BeginForm("Join", "Game", FormMethod.Post, new { @id = "joinGameForm", @class = "form-horizontal" }))
                         {
                             @Html.HiddenFor(m => m.GameToJoin)
                             @Html.HiddenFor(m => m.ConnectionId)
                             <div class="form-group">
-                                @Html.LabelFor(m => m.Player.Name, "Choisissez un personnage")
-                                @Html.TextBoxFor(m => m.Player.Name, new { @class = "form-control", required = "" })
+                                @Html.LabelFor(m => m.Player.Name, new { @class = "control-label col-xs-4" })
+                                <div class="col-xs-8">
+                                    @Html.DropDownListFor(m => m.Player.Name, Model.Player.AvailableCharacters.Select(c => new SelectListItem { Value = c, Text = c }), new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-4 text-right">
+                                    <i class="fa fa-spinner fa-lg fa-pulse hidden" id="wait"></i>
+                                </div>
+                                <div class="col-xs-8">
+                                    <div class="input-group" data-toggle="tooltip" title="Ajouter un personnage...">
+                                        <input class="form-control" type="text" id="newChar" />
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus" id="addCharacter" /></button>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="text-right">
                                 <button class="btn btn-primary">Go !</button>
@@ -81,5 +96,5 @@
 
 @section scripts{
     @Scripts.Render("~/signalr/hubs")
-@Scripts.Render("~/Scripts/App/joinGame.js")
+    @Scripts.Render("~/Scripts/App/joinGame.js")
 }

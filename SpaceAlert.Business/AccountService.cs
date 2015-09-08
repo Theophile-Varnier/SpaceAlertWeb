@@ -45,6 +45,20 @@ namespace SpaceAlert.Business
         }
 
         /// <summary>
+        /// Ajoute un personnage à un membre
+        /// </summary>
+        public void AddCharacter(long membreId, string charName)
+        {
+            Personnage newPersonnage = new Personnage
+            {
+                MembreId = membreId,
+                Nom = charName,
+                Xp = 0
+            };
+            provider.AddCharacter(membreId, newPersonnage);
+        }
+
+        /// <summary>
         /// Tente de se connecter
         /// </summary>
         /// <param name="pseudo"></param>

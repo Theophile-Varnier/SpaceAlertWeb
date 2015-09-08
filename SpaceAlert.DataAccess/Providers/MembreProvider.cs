@@ -1,4 +1,5 @@
 ﻿using SpaceAlert.Model.Site;
+using SpaceAlert.Model.Stats;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,16 @@ namespace SpaceAlert.DataAccess.Providers
         {
             Membre membre = GetWith(m => m.Email == email);
             return membre != null ? membre.Email : null;
+        }
+
+        /// <summary>
+        /// Ajoute un personnage à un membre
+        /// </summary>
+        public void AddCharacter(long membreId, Personnage personnage)
+        {
+            Membre membre = GetWith(m => m.Id == membreId);
+            membre.Personnages.Add(personnage);
+            context.SaveChanges();
         }
     }
 }

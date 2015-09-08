@@ -5,6 +5,10 @@
 @using SpaceAlert.Web.Helpers
 @model SpaceAlert.Web.Models.GameCreationViewModel
 
+<script>
+    var createCharUrl = '@Url.Action("AddCharacter", "Account")';
+</script>
+
 <div class="row">
     <div class="col-xs-4"></div>
     <div class="col-xs-4">
@@ -44,30 +48,35 @@
                             @Html.CheckBoxFor(model => model.Game.Rouges) @Html.LabelFor(m => m.Game.Rouges)
                         </label>
                     </div>
-                    <div class="modal fade" id="modalCharName" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog">
+                    <div class="modal fade" id="modalCharName" tabindex="-1" a role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <div class="modal-body">
+                                <div class="form-horizontal">
+                                    <div class="modal-body">
                                         <div class="form-group">
-                                            @Html.LabelFor(m => m.CreatedBy, new { @class = "control-label col-xs-4" })
+                                            @Html.LabelFor(m => m.Player.Name, new { @class = "control-label col-xs-4" })
                                             <div class="col-xs-8">
-                                                @Html.DropDownListFor(m => m.CreatedBy, Model.AvailableCharacters.Select(c => new SelectListItem { Value = c, Text = c }), new { @class = "form-control" })
+                                                @Html.DropDownListFor(m => m.Player.Name, Model.Player.AvailableCharacters.Select(c => new SelectListItem { Value = c, Text = c }), new { @class = "form-control" })
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <div class="col-xs-4"></div>
+                                            <div class="col-xs-4 text-right">
+                                                <i class="fa fa-spinner fa-lg fa-pulse hidden" id="wait"></i>
+                                            </div>
                                             <div class="col-xs-8">
-                                                <div class="input-group">
-                                                    <input class="form-control" type="text" id="newChar" data-toggle="tooltip" title="Ajouter un personnage..." />
+                                                <div class="input-group" data-toggle="tooltip" title="Ajouter un personnage...">
+                                                    <input class="form-control" type="text" id="newChar" />
                                                     <span class="input-group-btn">
-                                                        <button class="btn btn-default"><span class="glyphicon glyphicon-plus" /></button>
+                                                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus" id="addCharacter" /></button>
                                                     </span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="text-right">
-                                            <button class="btn btn-primary" id="createButton">C'est parti</button>
-                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
+                                        <button class="btn btn-primary" id="createButton">C'est parti</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

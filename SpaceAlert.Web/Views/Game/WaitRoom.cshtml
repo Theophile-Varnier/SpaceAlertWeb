@@ -18,8 +18,8 @@
                 </div>
                 <div class="panel-body">
                     @Html.HiddenFor(m => m.Game.GameId)
-                    @Html.HiddenFor(m => m.CreatedBy)
                     @Html.HiddenFor(m => m.IsGameOwner)
+                    @Html.HiddenFor(m => m.Player.Name)
                     @Html.Hidden("RedirectTo", Url.Action("Play", "Game", new { gameId = @Model.Game.GameId }))
                     <p><strong>Type : </strong>@Model.Game.TypeMission</p>
                     <p><strong>Nombre de joueurs : </strong><span id="nbPlayers">@Model.Game.NbJoueurs</span></p>

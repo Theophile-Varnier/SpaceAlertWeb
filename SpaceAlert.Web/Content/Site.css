@@ -102,6 +102,11 @@ html {
     border-color: darkgreen;
 }
 
-.modal label {
-    color: black;
+.modal .modal-content{
+    background-color: black;
+    border: 1px solid darkgreen;
+}
+
+.modal-footer {
+    border-top-color: darkgreen;
 }
