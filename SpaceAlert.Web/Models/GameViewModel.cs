@@ -1,6 +1,7 @@
 ﻿using SpaceAlert.Model.Helpers.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SpaceAlert.Web.Models
 {
@@ -11,15 +12,18 @@ namespace SpaceAlert.Web.Models
         public Guid GameId { get; set; }
 
         public DateTime DateCreation { get; set; }
-        
+
         public int NbJoueurs { get; set; }
 
         public int NbAndroids { get; set; }
 
+        [Display(Name = "Cartes Blanches")]
         public bool Blanches { get; set; }
 
+        [Display(Name = "Cartes Jaunes")]
         public bool Jaunes { get; set; }
 
+        [Display(Name = "Cartes Rouges")]
         public bool Rouges { get; set; }
 
         public List<PlayerViewModel> Players { get; set; }

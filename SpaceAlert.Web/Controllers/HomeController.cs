@@ -3,7 +3,7 @@ using SpaceAlert.Web.Helpers;
 
 namespace SpaceAlert.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : AbstractController
     {
         public ActionResult Index()
         {

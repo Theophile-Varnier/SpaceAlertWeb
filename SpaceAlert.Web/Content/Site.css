@@ -27,13 +27,6 @@ html {
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
-
 .no-padding {
     padding: 0;
 }
@@ -107,4 +100,8 @@ textarea {
 .btn-primary:hover {
     background-color: #2e8b57;
     border-color: darkgreen;
+}
+
+.modal label {
+    color: black;
 }

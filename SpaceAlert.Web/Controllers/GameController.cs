@@ -13,7 +13,7 @@ using System.Web.Mvc;
 namespace SpaceAlert.Web.Controllers
 {
     [Authorize]
-    public class GameController : Controller
+    public class GameController : AbstractController
     {
         private ServiceProvider serviceProvider = new ServiceProvider();
 
@@ -35,7 +35,10 @@ namespace SpaceAlert.Web.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            GameCreationViewModel viewModel = new GameCreationViewModel();
+            Membre currentMember = serviceProvider.AccountService.RecupererMembre(User.Identity.Name);
+            viewModel.AvailableCharacters = currentMember.Personnages.Select(p => p.Nom);
+            return View(viewModel);
         }
 
         /// <summary>
@@ -65,7 +68,7 @@ namespace SpaceAlert.Web.Controllers
                 model.Game.Blanches,
                 model.Game.Jaunes,
                 model.Game.Rouges,
-                new KeyValuePair<long, string>(((Membre)Session["currentMember"]).Id, model.CreatedBy));
+                new KeyValuePair<long, string>(User.Id, model.CreatedBy));
 
             model.Game.Players.First().Color = serviceProvider.GameService.PlayerColor(gameId, model.CreatedBy);
 

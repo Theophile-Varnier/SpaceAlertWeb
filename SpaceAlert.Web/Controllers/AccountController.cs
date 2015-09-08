@@ -1,16 +1,20 @@
 ﻿using SpaceAlert.Business;
 using SpaceAlert.Model.Site;
 using SpaceAlert.Services.Exceptions;
+using SpaceAlert.Web.Common;
 using SpaceAlert.Web.Helpers;
 using SpaceAlert.Web.Models;
 using SpaceAlert.Web.Models.Mapping;
+using System;
 using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using System.Web.Security;
 
 namespace SpaceAlert.Web.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : AbstractController
     {
         private readonly ServiceProvider serviceProvider = new ServiceProvider();
 
@@ -55,7 +59,7 @@ namespace SpaceAlert.Web.Controllers
                 // Si oui on renseigne les informations dans la session actuelle
                 FormsAuthentication.SetAuthCookie(membre.Pseudo, false);
 
-                Session["currentMember"] = membre;
+                CreateAuthenticationTicket(membre.Pseudo);
 
                 // Gestion de la redirection depuis une page qui nécessite une authentification
                 // Un peu crado mais pas trop le choix
@@ -91,7 +95,6 @@ namespace SpaceAlert.Web.Controllers
         public ActionResult Deconnexion()
         {
             FormsAuthentication.SignOut();
-            Session["currentMember"] = null;
             return RedirectToAction("Index", "Home");
         }
 
@@ -130,7 +133,7 @@ namespace SpaceAlert.Web.Controllers
             Membre membre = AccountMapper.MapFromViewModel(model);
             serviceProvider.AccountService.Inscrire(membre);
             FormsAuthentication.SetAuthCookie(membre.Pseudo, false);
-            Session["currentMember"] = membre;
+            CreateAuthenticationTicket(membre.Pseudo);
             return RedirectToAction("Index", "Game");
         }
 
@@ -157,6 +160,22 @@ namespace SpaceAlert.Web.Controllers
                 res = true;
             }
             return res;
+        }
+
+        public void CreateAuthenticationTicket(string userName)
+        {
+            Membre authUser = serviceProvider.AccountService.RecupererMembre(userName);
+            CustomPrincipalSerializedModel serializeModel = new CustomPrincipalSerializedModel();
+
+            serializeModel.Id = authUser.Id;
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            string userData = serializer.Serialize(serializeModel);
+
+            FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(
+              1, userName, DateTime.Now, DateTime.Now.AddHours(8), false, userData);
+            string encTicket = FormsAuthentication.Encrypt(authTicket);
+            HttpCookie faCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
+            Response.Cookies.Add(faCookie);
         }
     }
 }
