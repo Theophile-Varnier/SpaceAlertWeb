@@ -44,41 +44,38 @@
                             @Html.CheckBoxFor(model => model.Game.Rouges) @Html.LabelFor(m => m.Game.Rouges)
                         </label>
                     </div>
-                    <div class="text-right">
-                        <button class="btn btn-primary" type="button" id="falseSubmit">Go!</button>
-                    </div>
-                    @Html.HiddenFor(model => model.CreatedBy)
-                }
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="modalCharName" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <form id="falseForm" class="form-horizontal">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.CreatedBy, new { @class = "control-label col-xs-4" })
-                        <div class="col-xs-8">
-                            @Html.DropDownListFor(m => m.CreatedBy, Model.AvailableCharacters.Select(c => new SelectListItem { Value = c, Text = c }), new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-xs-4"></div>
-                        <div class="col-xs-8">
-                            <div class="input-group">
-                                <input class="form-control" type="text" id="newChar" data-toggle="tooltip" title="Ajouter un personnage..." />
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default"><span class="glyphicon glyphicon-plus" /></button>
-                                </span>
+                    <div class="modal fade" id="modalCharName" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.CreatedBy, new { @class = "control-label col-xs-4" })
+                                            <div class="col-xs-8">
+                                                @Html.DropDownListFor(m => m.CreatedBy, Model.AvailableCharacters.Select(c => new SelectListItem { Value = c, Text = c }), new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-xs-4"></div>
+                                            <div class="col-xs-8">
+                                                <div class="input-group">
+                                                    <input class="form-control" type="text" id="newChar" data-toggle="tooltip" title="Ajouter un personnage..." />
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-default"><span class="glyphicon glyphicon-plus" /></button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <button class="btn btn-primary" id="createButton">C'est parti</button>
+                                        </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="text-right">
-                        <button class="btn btn-primary" id="createButton">C'est parti</button>
+                        <button class="btn btn-primary" type="button" id="falseSubmit">Go!</button>
                     </div>
-                </form>
+                }
             </div>
         </div>
     </div>

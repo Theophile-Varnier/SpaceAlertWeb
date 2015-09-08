@@ -19,11 +19,4 @@
             keyboard: false
         });
     });
-    $("#falseForm").on('submit', function (e) {
-        e.preventDefault();
-        if ($("#createdByName").val() != "") {
-            $("#CreatedBy").val($("#createdByName").val());
-            $("#creationForm").submit();
-        }
-    });
 })

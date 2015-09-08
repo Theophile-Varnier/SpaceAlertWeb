@@ -10,7 +10,7 @@ namespace SpaceAlert.DataAccess
         public SpaceAlertContext()
             : base("SpaceAlert")
         {
-            Database.SetInitializer<SpaceAlertContext>(new SpaceAlertContextInitializer());
+            Database.SetInitializer(new SpaceAlertContextInitializer());
             Database.Initialize(true);
         }
 

@@ -1,8 +1,5 @@
-﻿using SpaceAlert.DataAccess;
-using SpaceAlert.DataAccess.Providers;
-using SpaceAlert.Model.Helpers.Enums;
+﻿using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Jeu;
-using SpaceAlert.Model.Plateau;
 using SpaceAlert.Model.Stats;
 using System.Collections.Generic;
 
