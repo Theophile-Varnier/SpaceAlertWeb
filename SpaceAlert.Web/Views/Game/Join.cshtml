@@ -58,10 +58,10 @@
         </table>
         <div class="modal fade" id="modalCharName" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        @using (Html.BeginForm("Join", "Game", FormMethod.Post, new { @id = "joinGameForm", @class = "form-horizontal" }))
-                        {
+                @using (Html.BeginForm("Join", "Game", FormMethod.Post, new { @id = "joinGameForm", @class = "form-horizontal" }))
+                {
+                    <div class="modal-content">
+                        <div class="modal-body">
                             @Html.HiddenFor(m => m.GameToJoin)
                             @Html.HiddenFor(m => m.ConnectionId)
                             <div class="form-group">
@@ -84,11 +84,14 @@
                                 </div>
                             </div>
                             <div class="text-right">
-                                <button class="btn btn-primary">Go !</button>
                             </div>
-                        }
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-default" data-dismiss="modal" type="button">Retour</button>
+                            <button class="btn btn-primary">Go !</button>
+                        </div>
                     </div>
-                </div>
+                }
             </div>
         </div>
     </div>

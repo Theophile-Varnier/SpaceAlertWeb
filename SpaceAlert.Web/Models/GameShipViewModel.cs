@@ -11,7 +11,9 @@ namespace SpaceAlert.Web.Models
 
         public PlayerViewModel Joueur { get; set; }
 
-        public List<SalleViewModel> Salles { get; set; } 
+        public List<SalleViewModel> Salles { get; set; }
+
+        public int PhaseEnCours { get; set; }
 
     }
 }

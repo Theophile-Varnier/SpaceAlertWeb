@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace SpaceAlert.DataAccess.Providers
 {
-    public class GameProvider: AbstractProvider<Game>
+    public class GameContextProvider: AbstractProvider<GameContext>
     {
-        public GameProvider(SpaceAlertContext context)
-            : base(context)
+        public GameContextProvider(SpaceAlertContext context)
+            :base(context)
         {
-            Table = context.Set<Game>();
+            Table = context.Set<GameContext>();
         }
     }
 }

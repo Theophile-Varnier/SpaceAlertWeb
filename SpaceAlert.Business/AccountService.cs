@@ -8,16 +8,11 @@ using System.Collections.Generic;
 
 namespace SpaceAlert.Business
 {
-    public class AccountService
+    public class AccountService : AbstractService
     {
-
-        private readonly SpaceAlertContext context;
-        private readonly MembreProvider provider;
-
-        public AccountService()
+        public AccountService(UnitOfWork unitOfWork)
+            : base(unitOfWork)
         {
-            context = new SpaceAlertContext();
-            provider = new MembreProvider(context);
         }
 
         /// <summary>
@@ -26,7 +21,7 @@ namespace SpaceAlert.Business
         /// <param name="membre"></param>
         public void Inscrire(Membre membre)
         {
-            provider.Add(membre);
+            unitOfWork.MembreProvider.Add(membre);
         }
 
         /// <summary>
@@ -36,12 +31,12 @@ namespace SpaceAlert.Business
         /// <returns></returns>
         public bool Existe(string pseudo)
         {
-            return provider.GetMembreByPseudo(pseudo) != null;
+            return unitOfWork.MembreProvider.GetMembreByPseudo(pseudo) != null;
         }
 
         public bool EmailDejaUtilise(string email)
         {
-            return provider.GetMailIfExists(email) != null;
+            return unitOfWork.MembreProvider.GetMailIfExists(email) != null;
         }
 
         /// <summary>
@@ -55,7 +50,7 @@ namespace SpaceAlert.Business
                 Nom = charName,
                 Xp = 0
             };
-            provider.AddCharacter(membreId, newPersonnage);
+            unitOfWork.MembreProvider.AddCharacter(membreId, newPersonnage);
         }
 
         /// <summary>
@@ -71,7 +66,7 @@ namespace SpaceAlert.Business
             {
                 throw new MembreNonExistantException(string.Format("Le pseudo {0} n'existe pas", pseudo));
             }
-            res = provider.GetMembreByPseudoAndMdp(pseudo, motDePasse);
+            res = unitOfWork.MembreProvider.GetMembreByPseudoAndMdp(pseudo, motDePasse);
             if (res == null)
             {
                 throw new MotDePasseInvalideException("Combinaison pseudo/mot de passe invalide");
@@ -86,7 +81,7 @@ namespace SpaceAlert.Business
         /// <returns></returns>
         public Membre RecupererMembre(string pseudo)
         {
-            return provider.GetMembreByPseudo(pseudo);
+            return unitOfWork.MembreProvider.GetMembreByPseudo(pseudo);
         }
     }
 }

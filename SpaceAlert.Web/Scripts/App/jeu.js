@@ -1,6 +1,9 @@
 ﻿$(function () {
     var lastPosition;
 
+    // Le nombre de tours dans chaque phase
+    var toursParPhase = [3, 4, 5];
+
     $(".draggable").draggable({
         containment: "#plateau",
         revert: "invalid",

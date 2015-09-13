@@ -19,44 +19,37 @@ namespace SpaceAlert.Business.Factories
             {
                 TypeMission = typeMission,
                 DateCreation = DateTime.Now,
+                DateFin = DateTime.Now,
                 Vaisseau = SpaceAlertData.GetObject<Vaisseau>("Vaisseau"),
                 MenacesExternes = new Dictionary<Zone,List<InGameMenace>>(),
-                Joueurs = new List<Joueur>(nbJoueurs)
+                NbJoueurs = nbJoueurs,
+                Joueurs = new List<Joueur>()
             };
 
             // Initialise le contexte
             GameContext res = new GameContext
             {
                 Statut = StatutPartie.CREATION,
-                Partie = game,
-                MenacesDisponibles = new ListOfMenaces(),
+                Game = game,
                 Rampes = new Dictionary<Zone,Rampe>()
             };
             // Ajoute les joueurs
             Joueur capitaine = JoueurFactory.CreateJoueur(captain, true, game);
             game.Joueurs.Add(capitaine);
+            capitaine.Couleur = GameService.ProchaineCouleur(res, capitaine.Personnage.Nom);
 
             // Ajout des menaces
             if (blanches)
             {
                 game.Difficulte |= Couleur.BLANCHE;
-                res.MenacesDisponibles += SpaceAlertData.GetObject<ListOfMenaces>("MenacesBlanches");
             }
             if (jaunes)
             {
                 game.Difficulte |= Couleur.JAUNE;
-                //res.MenacesDisponibles += SpaceAlertData.GetObject<ListOfMenaces>("MenacesJaunes");
             }
             if (rouges)
             {
                 game.Difficulte |= Couleur.ROUGE;
-                //res.MenacesDisponibles += SpaceAlertData.GetObject<ListOfMenaces>("MenacesRouges");
-            }
-
-            // Initialise les couleurs des joueurs
-            foreach (Joueur joueur in game.Joueurs)
-            {
-                GameService.ProchaineCouleur(res, joueur.Personnage.Nom);
             }
             return res;
         }

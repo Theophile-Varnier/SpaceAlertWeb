@@ -86,6 +86,7 @@
     <Compile Include="Jeu\GameContext.cs" />
     <Compile Include="Jeu\InGameMenace.cs" />
     <Compile Include="Jeu\Joueur.cs" />
+    <Compile Include="Jeu\MenaceInZone.cs" />
     <Compile Include="Jeu\Mission.cs" />
     <Compile Include="Jeu\Evenements\TransfertDeDonnees.cs" />
     <Compile Include="Jeu\Rampe.cs" />

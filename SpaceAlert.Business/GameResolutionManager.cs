@@ -14,11 +14,11 @@ namespace SpaceAlert.Business
     /// <summary>
     /// Manager de parties
     /// </summary>
-    public class GameManager
+    public class GameResolutionManager
     {
         private GameContext game;
 
-        public GameManager(GameContext gameContext)
+        public GameResolutionManager(GameContext gameContext)
         {
             game = gameContext;
         }
@@ -37,7 +37,7 @@ namespace SpaceAlert.Business
         /// </summary>
         public void Resolve()
         {
-            while (game.TourEnCours <= game.Partie.Mission.NbTours)
+            while (game.TourEnCours <= game.Game.Mission.NbTours)
             {
                 ResolveTurn();
             }
@@ -49,7 +49,7 @@ namespace SpaceAlert.Business
         public void ResolveTurn()
         {
 
-            if (game.TourEnCours > game.Partie.Mission.NbTours)
+            if (game.TourEnCours > game.Game.Mission.NbTours)
             {
                 return;
             }
@@ -63,15 +63,15 @@ namespace SpaceAlert.Business
             }
 
             // Apparition des menaces
-            foreach (EvenementMenace evenement in game.Partie.Mission.Evenements.OfType<EvenementMenace>())
+            foreach (EvenementMenace evenement in game.Game.Mission.Evenements.OfType<EvenementMenace>())
             {
                 if (evenement.TourArrive == game.TourEnCours)
                 {
-                    if (!game.Partie.MenacesExternes.ContainsKey(evenement.Zone))
+                    if (!game.Game.MenacesExternes.ContainsKey(evenement.Zone))
                     {
-                        game.Partie.MenacesExternes.Add(evenement.Zone, new List<InGameMenace>());
+                        game.Game.MenacesExternes.Add(evenement.Zone, new List<InGameMenace>());
                     }
-                    game.Partie.MenacesExternes[evenement.Zone].Add(MenaceFactory.CreateMenace(game, evenement));
+                    game.Game.MenacesExternes[evenement.Zone].Add(MenaceFactory.CreateMenace(game, evenement));
                 }
             }
 
@@ -79,7 +79,7 @@ namespace SpaceAlert.Business
             bool retardMaintenance = SpaceAlertData.DebutPhases.Select(i => i + 2).Contains(game.TourEnCours) && !game.MaintenanceEffectuee;
 
             // Récupération de l'indice du premier joueur à jouer (le capitaine)
-            int indicePremierJoueur = game.Partie.Joueurs.FirstIndexOf(j => j.IsCapitaine);
+            int indicePremierJoueur = game.Game.Joueurs.FirstIndexOf(j => j.IsCapitaine);
 
             // Paye ta gestion d'erreur...
             if (indicePremierJoueur == -1)
@@ -96,16 +96,16 @@ namespace SpaceAlert.Business
                 // On retarde si la maintenance n'a pas été effectuée
                 if (retardMaintenance)
                 {
-                    DelayPlayer(game.Partie.Joueurs[indiceJoueurCourant], game.TourEnCours);
+                    DelayPlayer(game.Game.Joueurs[indiceJoueurCourant], game.TourEnCours);
                 }
 
                 // On exécute l'action du joueur
-                if (game.Partie.Joueurs[indiceJoueurCourant].Actions.TryGetValue(game.TourEnCours, out actionToResolve) && actionToResolve != null)
+                if (game.Game.Joueurs[indiceJoueurCourant].Actions.TryGetValue(game.TourEnCours, out actionToResolve) && actionToResolve != null)
                 {
-                    ResolveAction(game.Partie.Joueurs[indiceJoueurCourant]);
+                    ResolveAction(game.Game.Joueurs[indiceJoueurCourant]);
                 }
 
-                indiceJoueurCourant = (indiceJoueurCourant + 1) % game.Partie.Joueurs.Count;
+                indiceJoueurCourant = (indiceJoueurCourant + 1) % game.Game.Joueurs.Count;
             } while (indiceJoueurCourant != indicePremierJoueur);
 
             // Résolution des tirs
@@ -131,7 +131,7 @@ namespace SpaceAlert.Business
                     ResolveAction((TypeAction)actionToResolve.Value, joueur);
                     break;
                 case GenreAction.Mouvement:
-                    joueur.CurrentSalle = game.Partie.Vaisseau.SalleSuivante(joueur.CurrentSalle, (Direction)actionToResolve.Value);
+                    joueur.CurrentSalle = game.Game.Vaisseau.SalleSuivante(joueur.CurrentSalle, (Direction)actionToResolve.Value);
                     break;
             }
         }
@@ -184,16 +184,16 @@ namespace SpaceAlert.Business
                     }
                     break;
                 case CAction.INTERCEPTEURS:
-                    game.Partie.Vaisseau.Interceptors = true;
+                    game.Game.Vaisseau.Interceptors = true;
                     break;
                 case CAction.MAINTENANCE:
                     game.MaintenanceEffectuee = true;
                     break;
                 case CAction.ROQUETTES:
-                    if (!game.RoquettesNextTurn && game.Partie.Vaisseau.NbRoquettes > 0)
+                    if (!game.RoquettesNextTurn && game.Game.Vaisseau.NbRoquettes > 0)
                     {
                         game.RoquettesNextTurn = true;
-                        game.Partie.Vaisseau.NbRoquettes--;
+                        game.Game.Vaisseau.NbRoquettes--;
                     }
                     break;
                 case CAction.HUBLOT:
@@ -216,7 +216,7 @@ namespace SpaceAlert.Business
             // Si c'est un canon qui consomme de l'énergie, on la déduit de la réserve
             if (source.Canon.ConsumeEnergy)
             {
-                game.Partie.Vaisseau.Salle(source.Zone, Pont.BAS).EnergieCourante--;
+                game.Game.Vaisseau.Salle(source.Zone, Pont.BAS).EnergieCourante--;
             }
         }
 
@@ -227,9 +227,9 @@ namespace SpaceAlert.Business
         public void Shield(Salle source)
         {
             // TODO : vérifier si on peut le faire plusieurs fois
-            int incrValue = Math.Min(source.EnergieMax - source.EnergieCourante, game.Partie.Vaisseau.Salle(source.Zone, Pont.BAS).EnergieCourante);
+            int incrValue = Math.Min(source.EnergieMax - source.EnergieCourante, game.Game.Vaisseau.Salle(source.Zone, Pont.BAS).EnergieCourante);
             source.EnergieCourante += incrValue;
-            game.Partie.Vaisseau.Salle(source.Zone, Pont.BAS).EnergieCourante -= incrValue;
+            game.Game.Vaisseau.Salle(source.Zone, Pont.BAS).EnergieCourante -= incrValue;
         }
 
         /// <summary>
@@ -239,15 +239,15 @@ namespace SpaceAlert.Business
         private void FillEnergy(Salle source)
         {
             // Cas de la salle centrale du bas
-            if (source.Zone == Zone.BLANCHE && game.Partie.Vaisseau.NbCapsules > 0)
+            if (source.Zone == Zone.BLANCHE && game.Game.Vaisseau.NbCapsules > 0)
             {
-                game.Partie.Vaisseau.NbCapsules--;
+                game.Game.Vaisseau.NbCapsules--;
                 source.EnergieCourante = source.EnergieMax;
             }
             else
             {
-                int incrValue = Math.Min(game.Partie.Vaisseau.Salle(Zone.BLANCHE, Pont.BAS).EnergieCourante, source.EnergieMax - source.EnergieCourante);
-                game.Partie.Vaisseau.Salle(Zone.BLANCHE, Pont.BAS).EnergieCourante -= incrValue;
+                int incrValue = Math.Min(game.Game.Vaisseau.Salle(Zone.BLANCHE, Pont.BAS).EnergieCourante, source.EnergieMax - source.EnergieCourante);
+                game.Game.Vaisseau.Salle(Zone.BLANCHE, Pont.BAS).EnergieCourante -= incrValue;
                 source.EnergieCourante += incrValue;
             }
         }
@@ -261,7 +261,7 @@ namespace SpaceAlert.Business
         {
             KeyValuePair<int, ActionJoueur> firstActionNull = joueur.Actions.FirstOrDefault(p => p.Key > numTour && p.Value == null);
             // bearg...
-            int indexFirstNull = firstActionNull.Equals(default(KeyValuePair<int, ActionJoueur>)) ? game.Partie.Mission.NbTours : firstActionNull.Key;
+            int indexFirstNull = firstActionNull.Equals(default(KeyValuePair<int, ActionJoueur>)) ? game.Game.Mission.NbTours : firstActionNull.Key;
 
             for (int i = indexFirstNull; i > numTour; i--)
             {
@@ -277,32 +277,32 @@ namespace SpaceAlert.Business
         {
             // On récupère les menaces ciblables par les roquettes
             InGameMenace closerMenace = null;
-            List<InGameMenace> targetableMenacesExternes = game.Partie.MenacesExternes.SelectMany(m => m.Value).Where(m => ((MenaceExterne)m.Menace).RocketTargetable && m.Portee <= 2).ToList();
+            List<InGameMenace> targetableMenacesExternes = game.Game.MenacesExternes.SelectMany(m => m.Value).Where(m => ((MenaceExterne)m.Menace).RocketTargetable && m.Portee <= 2).ToList();
             if (targetableMenacesExternes.Any())
             {
                 closerMenace = targetableMenacesExternes.OrderBy(m => m.Distance).First();
             }
-            foreach (Zone zone in game.Partie.Vaisseau.Zones.Keys)
+            foreach (Zone zone in game.Game.Vaisseau.Zones.Keys)
             {
-                int totalDamages = game.Partie.Vaisseau.Zones[zone].Salles
+                int totalDamages = game.Game.Vaisseau.Zones[zone].Salles
                     .Select(s => s.Value.Canon)
                     .Where(c => c.HasShot)
                     .Sum(c => c.Power);
 
-                if (game.RoquettesThisTurn && closerMenace != null && game.Partie.MenacesExternes[zone].Contains(closerMenace))
+                if (game.RoquettesThisTurn && closerMenace != null && game.Game.MenacesExternes[zone].Contains(closerMenace))
                 {
                     totalDamages += SpaceAlertData.RocketDamages;
                     game.RoquettesThisTurn = false;
                 }
 
-                if (game.Partie.MenacesExternes.ContainsKey(zone))
+                if (game.Game.MenacesExternes.ContainsKey(zone))
                 {
-                    InGameMenace zoneMenace = game.Partie.MenacesExternes[zone].OrderByDescending(m => m.Position).ThenBy(m => m.TourArrive).First();
+                    InGameMenace zoneMenace = game.Game.MenacesExternes[zone].OrderByDescending(m => m.Position).ThenBy(m => m.TourArrive).First();
 
                     // S'il y a une menace dans la zone on lui inflige des dégâts
                     if (zoneMenace != null)
                     {
-                        Canon impulsionCanon = game.Partie.Vaisseau.Salle(Zone.BLANCHE, Pont.BAS).Canon;
+                        Canon impulsionCanon = game.Game.Vaisseau.Salle(Zone.BLANCHE, Pont.BAS).Canon;
                         if (zoneMenace.Portee <= impulsionCanon.Range && impulsionCanon.HasShot)
                         {
                             totalDamages += impulsionCanon.Power;
@@ -323,9 +323,9 @@ namespace SpaceAlert.Business
         /// </summary>
         private void ResolveMenaceActions()
         {
-            foreach (Zone zone in game.Partie.MenacesExternes.Keys)
+            foreach (Zone zone in game.Game.MenacesExternes.Keys)
             {
-                foreach (InGameMenace menace in game.Partie.MenacesExternes[zone].Where(m => m.Status == MenaceStatus.EnJeu))
+                foreach (InGameMenace menace in game.Game.MenacesExternes[zone].Where(m => m.Status == MenaceStatus.EnJeu))
                 {
                     // On fait bouger la menace
                     int oldPos = menace.Position;
@@ -358,7 +358,7 @@ namespace SpaceAlert.Business
                 {
                     foreach (var action in menace.Menace.Actions[typeCase])
                     {
-                        action(menace, game.Partie.Vaisseau, typeCase, zone);
+                        action(menace, game.Game.Vaisseau, typeCase, zone);
                     }
                 }
             }

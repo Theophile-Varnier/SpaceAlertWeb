@@ -13,7 +13,7 @@ namespace SpaceAlert.DataAccess.Providers
         public MembreProvider(SpaceAlertContext context)
             : base(context)
         {
-            Table = context.Membres;
+            Table = context.Set<Membre>();
         }
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace SpaceAlert.DataAccess.Providers
         /// </summary>
         public Membre GetMembreByPseudo(string pseudo)
         {
-            return GetWith(m => m.Pseudo == pseudo);
+            return GetUniqueResult(m => m.Pseudo == pseudo);
         }
 
         /// <summary>
@@ -29,12 +29,12 @@ namespace SpaceAlert.DataAccess.Providers
         /// </summary>
         public Membre GetMembreByPseudoAndMdp(string pseudo, string motDePasse)
         {
-            return GetWith(m => m.Pseudo == pseudo && m.MotDePasse == motDePasse);
+            return GetUniqueResult(m => m.Pseudo == pseudo && m.MotDePasse == motDePasse);
         }
 
         public string GetMailIfExists(string email)
         {
-            Membre membre = GetWith(m => m.Email == email);
+            Membre membre = GetUniqueResult(m => m.Email == email);
             return membre != null ? membre.Email : null;
         }
 
@@ -43,7 +43,7 @@ namespace SpaceAlert.DataAccess.Providers
         /// </summary>
         public void AddCharacter(long membreId, Personnage personnage)
         {
-            Membre membre = GetWith(m => m.Id == membreId);
+            Membre membre = GetUniqueResult(m => m.Id == membreId);
             membre.Personnages.Add(personnage);
             context.SaveChanges();
         }

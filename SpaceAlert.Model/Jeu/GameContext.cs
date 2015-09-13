@@ -1,25 +1,30 @@
-﻿using System.Collections.Generic;
-using SpaceAlert.Model.Helpers.Enums;
+﻿using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Menaces;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SpaceAlert.Model.Jeu
 {
+    [Table("GameContext")]
     public class GameContext
     {
+        [Key]
+        public int Id { get; set; }
+
         /// <summary>
         /// L'état de la partie en cours
         /// </summary>
         public StatutPartie Statut { get; set; }
 
-        /// <summary>
-        /// L'ensemble des menaces disponibles pour la partie
-        /// </summary>
-        public ListOfMenaces MenacesDisponibles { get; set; }
+        [ForeignKey("Game")]
+        public Guid GameId { get; set; }
 
         /// <summary>
         /// La partie en question
         /// </summary>
-        public Game Partie { get; set; }
+        public Game Game { get; set; }
 
         /// <summary>
         /// Le tour actuel
@@ -29,11 +34,13 @@ namespace SpaceAlert.Model.Jeu
         /// <summary>
         /// Les rampes
         /// </summary>
+        [NotMapped]
         public Dictionary<Zone, Rampe> Rampes { get; set; }
 
         /// <summary>
         /// La rampe interne
         /// </summary>
+        [NotMapped]
         public Rampe RampeInterne { get; set; }
 
         /// <summary>

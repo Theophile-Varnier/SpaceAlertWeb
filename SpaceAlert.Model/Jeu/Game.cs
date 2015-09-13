@@ -39,13 +39,7 @@ namespace SpaceAlert.Model.Jeu
         [NotMapped]
         public Dictionary<Zone, List<InGameMenace>> MenacesExternes { get; set; }
 
-        public List<string> MenacesExternesNames
-        {
-            get
-            {
-                return MenacesExternes.SelectMany(m => m.Value.Select(me => me.Menace.Name)).ToList();
-            }
-        }
+        public List<MenaceInZone> MenacesExternesNames { get; set; }
 
         /// <summary>
         /// Le type de mission
@@ -70,6 +64,11 @@ namespace SpaceAlert.Model.Jeu
         /// La difficulté de la partie
         /// </summary>
         public Couleur Difficulte { get; set; }
+
+        /// <summary>
+        /// Le nombre de joueurs
+        /// </summary>
+        public int NbJoueurs { get; set; }
 
         /// <summary>
         /// Les joueurs

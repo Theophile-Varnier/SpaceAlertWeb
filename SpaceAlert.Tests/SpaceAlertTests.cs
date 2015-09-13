@@ -15,17 +15,16 @@ namespace SpaceAlert.Tests
         [TestMethod]
         public void TestResolution()
         {
-            SpaceAlertData.Init();
-            IApplicationContext context = ContextRegistry.GetContext();
-            //GameContext game = (GameContext)context.GetObject("GameContext");
-            GameService service = new GameService();
-            Guid gameId = service.InitialiserGame(TypeMission.SIMPLE, 1, true, false, false, new KeyValuePair<long, string>(42, "Dieu"));
-            GameContext game = SpaceAlertData.Game(gameId);
-            service.DemarrerGame(game);
+            //SpaceAlertData.Init();
+            //IApplicationContext context = ContextRegistry.GetContext();
+            //GameService service = new GameService();
+            //Guid gameId = service.InitialiserGame(TypeMission.SIMPLE, 1, true, false, false, new KeyValuePair<long, string>(42, "Dieu"));
+            //GameContext game = SpaceAlertData.Game(gameId);
+            //service.DemarrerGame(game);
 
-            GameManager manager = new GameManager(game);
-            manager.Resolve();
-            Assert.IsTrue(true);
+            //GameResolutionManager manager = new GameResolutionManager(game);
+            //manager.Resolve();
+            //Assert.IsTrue(true);
         }
     }
 }

@@ -15,8 +15,6 @@ namespace SpaceAlert.Business
     {
         private static IApplicationContext AppContext;
 
-        private static List<GameContext> Games;
-
         public static readonly List<string> PlayerColors = new List<string>
         {
             "blue",
@@ -41,26 +39,6 @@ namespace SpaceAlert.Business
         public static void Init()
         {
             AppContext = ContextRegistry.GetContext();
-            Games = new List<GameContext>();
-        }
-
-        /// <summary>
-        /// Récupère une partie en cours
-        /// </summary>
-        /// <param name="gameId">L'id de la partie à récupérer</param>
-        /// <returns></returns>
-        public static GameContext Game(Guid gameId)
-        {
-            return Games.FirstOrDefault(g => g.Partie.Id == gameId);
-        }
-
-        /// <summary>
-        /// Récupère la liste des parties en attente
-        /// </summary>
-        /// <returns></returns>
-        public static List<Game> GameEnAttente()
-        {
-            return Games.Where(c => c.Statut == StatutPartie.CREATION).Select(c => c.Partie).ToList();
         }
 
         /// <summary>
@@ -72,15 +50,6 @@ namespace SpaceAlert.Business
         public static T GetObject<T>(string objectName)
         {
             return (T) AppContext.GetObject(objectName);
-        }
-
-        /// <summary>
-        /// Ajoute une parties à celles connues
-        /// </summary>
-        /// <param name="gameContext">La partie à ajouter</param>
-        public static void AddGame(GameContext gameContext)
-        {
-            Games.Add(gameContext);
         }
 
         /// <summary>

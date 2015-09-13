@@ -63,7 +63,7 @@
     $.connection.hub.start().done(function () {
 
         // Indique au serveur qu'un nouveau joueur a rejoint la salle d'attente
-        roomHub.server.join($("#CreatedBy").val(), $("#Game_GameId").val());
+        roomHub.server.join($("#Player_Name").val(), $("#Game_GameId").val());
 
 
         $("#startGame").on("click", function () {
@@ -82,13 +82,13 @@
         });
 
         // Permet à un joueur de changer de couleur
-        $("tr[data-color-toggle='" + $("#CreatedBy").val() + "']").on("click", ".colored-square", function () {
+        $("tr[data-color-toggle='" + $("#Player_Name").val() + "']").on("click", ".colored-square", function () {
             var currentElem = $(this);
             // On affiche le zigwigwi de chargement
             currentElem.prev().removeClass("no-display");
             // On récupère la prochaine couleur disponible (s'il en existe une)
             $.ajax({
-                url: "ChangeColor?gameId=" + $("#Game_GameId").val() + "&charName=" + $("#CreatedBy").val(),
+                url: "ChangeColor?gameId=" + $("#Game_GameId").val() + "&charName=" + $("#Player_Name").val(),
                 method: "GET"
             })
             .done(function (newColor) {

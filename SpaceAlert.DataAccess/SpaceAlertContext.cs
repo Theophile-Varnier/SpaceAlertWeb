@@ -14,6 +14,8 @@ namespace SpaceAlert.DataAccess
             Database.Initialize(true);
         }
 
+        public DbSet<GameContext> GameContext { get; set; }
+
         public DbSet<Membre> Membres { get; set; }
 
         public DbSet<Game> Games { get; set; }

@@ -13,12 +13,12 @@ namespace SpaceAlert.DataAccess.Providers
         public PersonnageProvider(SpaceAlertContext context)
             : base(context)
         {
-            Table = context.Personnages;
+            Table = context.Set<Personnage>();
         }
 
         public Personnage Get(long membreId, string nomPersonnage)
         {
-            return GetWith(p => p.MembreId == membreId && p.Nom == nomPersonnage);
+            return GetUniqueResult(p => p.MembreId == membreId && p.Nom == nomPersonnage);
         }
     }
 }

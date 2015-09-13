@@ -9,6 +9,7 @@ namespace SpaceAlert.Web.Models.Mapping
         {
             GameShipViewModel res = new GameShipViewModel
             {
+                PhaseEnCours = 1,
                 Salles = new List<SalleViewModel>
                 {
                     new SalleViewModel

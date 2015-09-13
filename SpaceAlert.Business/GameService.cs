@@ -1,19 +1,24 @@
 ﻿using SpaceAlert.Business.Exceptions;
 using SpaceAlert.Business.Factories;
 using SpaceAlert.DataAccess;
-using SpaceAlert.DataAccess.Providers;
 using SpaceAlert.Model.Helpers;
 using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Jeu;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace SpaceAlert.Business
 {
-    public class GameService
+    public class GameService : AbstractService
     {
-        private readonly SpaceAlertContext context = new SpaceAlertContext();
+
+        public GameService(UnitOfWork unitOfWork)
+            : base(unitOfWork)
+        {
+        }
+
         /// <summary>
         /// Initialise une nouvelle partie
         /// </summary>
@@ -26,12 +31,11 @@ namespace SpaceAlert.Business
         /// <returns></returns>
         public Guid InitialiserGame(TypeMission typeMission, int nbJoueurs, bool blanches, bool jaunes, bool rouges, KeyValuePair<long, string> captain)
         {
-            PersonnageProvider provider = new PersonnageProvider(context);
-            GameContext res = GameFactory.CreateGame(typeMission, nbJoueurs, blanches, jaunes, rouges, provider.Get(captain.Key, captain.Value));
+            GameContext res = GameFactory.CreateGame(typeMission, nbJoueurs, blanches, jaunes, rouges, unitOfWork.PersonnageProvider.Get(captain.Key, captain.Value));
             InitialiserRampes(res);
-            SpaceAlertData.AddGame(res);
+            unitOfWork.GameContextProvider.Add(res);
 
-            return res.Partie.Id;
+            return res.Game.Id;
         }
 
         /// <summary>
@@ -47,25 +51,34 @@ namespace SpaceAlert.Business
         }
 
         /// <summary>
+        /// Démarre une partie
+        /// </summary>
+        /// <param name="gameId"></param>
+        public void DemarrerGame(Guid gameId)
+        {
+            DemarrerGame(GetGame(gameId));
+        }
+
+        /// <summary>
         /// Démarrer une partie
         /// </summary>
         /// <param name="game"></param>
         /// <returns>L'id de la partie qui a été commencée</returns>
         public Guid DemarrerGame(GameContext game)
         {
-            game.Partie.Mission = InitialiserMission(game.Partie.TypeMission);
+            game.Game.Mission = InitialiserMission(game.Game.TypeMission);
             game.Statut = StatutPartie.JEU;
             game.TourEnCours = 1;
 
-            foreach (Joueur joueur in game.Partie.Joueurs)
+            foreach (Joueur joueur in game.Game.Joueurs)
             {
-                for (int i = 1; i <= game.Partie.Mission.NbTours; i++)
+                for (int i = 1; i <= game.Game.Mission.NbTours; i++)
                 {
                     joueur.Actions.Add(i, null);
                 }
             }
-            RegisterGame(game.Partie);
-            return game.Partie.Id;
+            RegisterGame(game.Game);
+            return game.Game.Id;
         }
 
         /// <summary>
@@ -87,7 +100,11 @@ namespace SpaceAlert.Business
         /// <returns></returns>
         public List<Game> RecupererGameEnAttente()
         {
-            return SpaceAlertData.GameEnAttente().Where(g => g.Joueurs.Count < g.Joueurs.Capacity).ToList();
+            IEnumerable<GameContext> contexts = unitOfWork.Context.GameContext
+                .Include(g => g.Game)
+                .Include("Game.Joueurs")
+                .Where(g => g.Statut == StatutPartie.CREATION && g.Game.Joueurs.Count < g.Game.NbJoueurs).ToList();
+            return contexts.Select(g => g.Game).ToList();
         }
 
         /// <summary>
@@ -97,7 +114,7 @@ namespace SpaceAlert.Business
         /// <returns></returns>
         public GameContext GetGame(Guid gameId)
         {
-            return SpaceAlertData.Game(gameId);
+            return unitOfWork.Context.GameContext.Include(g => g.Game).SingleOrDefault(g => g.GameId == gameId);
         }
 
         /// <summary>
@@ -108,22 +125,23 @@ namespace SpaceAlert.Business
         /// <returns></returns>
         public string PlayerColor(Guid gameId, string charName)
         {
-            Joueur joueur = SpaceAlertData.Game(gameId).Partie.Joueurs.FirstOrDefault(j => j.Personnage.Nom == charName);
+            // Joueur joueur = SpaceAlertData.Game(gameId).Partie.Joueurs.FirstOrDefault(j => j.Personnage.Nom == charName);
+            Joueur joueur = unitOfWork.GameProvider.GetUniqueResult(g => g.Id == gameId).Joueurs.FirstOrDefault(j => j.Personnage.Nom == charName);
             return joueur != null ? joueur.Couleur : null;
         }
 
         public static string ProchaineCouleur(GameContext game, string charName)
         {
-            int index = SpaceAlertData.PlayerColors.IndexOf(game.Partie.Joueurs.First(j => j.Personnage.Nom == charName).Couleur);
+            int index = SpaceAlertData.PlayerColors.IndexOf(game.Game.Joueurs.First(j => j.Personnage.Nom == charName).Couleur);
             int current = index;
             string color;
             do
             {
                 current = (current + 1) % SpaceAlertData.PlayerColors.Count;
                 color = SpaceAlertData.PlayerColors[current];
-            } while (current != index && game.Partie.Joueurs.Select(j => j.Couleur).Contains(color));
+            } while (current != index && game.Game.Joueurs.Select(j => j.Couleur).Contains(color));
 
-            game.Partie.Joueurs.First(j => j.Personnage.Nom == charName).Couleur = color;
+            game.Game.Joueurs.First(j => j.Personnage.Nom == charName).Couleur = color;
 
             return color;
         }
@@ -134,9 +152,9 @@ namespace SpaceAlert.Business
         /// <param name="gameId">la partie concernée</param>
         /// <param name="charName">Le nom du personnage à qui assigner la couleur</param>
         /// <returns></returns>
-        public static string ProchaineCouleur(Guid gameId, string charName)
+        public string ProchaineCouleur(Guid gameId, string charName)
         {
-            GameContext game = SpaceAlertData.Game(gameId);
+            GameContext game = GetGame(gameId);
             return ProchaineCouleur(game, charName);
         }
 
@@ -149,22 +167,21 @@ namespace SpaceAlert.Business
         public GameContext AjouterJoueur(Guid gameId, long memberId, string charName)
         {
 
-            GameContext game = SpaceAlertData.Game(gameId);
+            GameContext game = GetGame(gameId);
 
-            if (game.Partie.Joueurs.Count == game.Partie.Joueurs.Capacity)
+            if (game.Game.Joueurs.Count == game.Game.NbJoueurs)
             {
                 throw new PartiePleineException();
             }
 
             // On vérifie qu'un joueur ne porte pas déjà ce nom
-            if (game.Partie.Joueurs.Any(j => j.Personnage.Nom == charName))
+            if (game.Game.Joueurs.Any(j => j.Personnage.Nom == charName))
             {
                 throw new NomDejaUtiliseException();
             }
 
             // On ajoute le joueur à la partie
-            PersonnageProvider provider = new PersonnageProvider(context);
-            game.Partie.Joueurs.Add(JoueurFactory.CreateJoueur(provider.Get(memberId, charName), false, game.Partie));
+            game.Game.Joueurs.Add(JoueurFactory.CreateJoueur(unitOfWork.PersonnageProvider.Get(memberId, charName), false, game.Game));
 
             // On lui assigne une couleur
             ProchaineCouleur(gameId, charName);
@@ -177,13 +194,13 @@ namespace SpaceAlert.Business
         /// </summary>
         private void RegisterGame(Game game)
         {
-            GameProvider gameProvider = new GameProvider(context);
-            gameProvider.Add(game);
             foreach (Joueur joueur in game.Joueurs)
             {
-                JoueurProvider provider = new JoueurProvider(context);
-                provider.RegisterGame(joueur, game);
+                unitOfWork.Context.Personnages.Attach(joueur.Personnage);
+                unitOfWork.Context.Membres.Attach(joueur.Personnage.Membre);
+                unitOfWork.JoueurProvider.RegisterGame(joueur, game);
             }
+            unitOfWork.GameProvider.Add(game);
         }
     }
 }

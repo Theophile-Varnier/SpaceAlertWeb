@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 
 namespace SpaceAlert.DataAccess.Providers
@@ -43,9 +45,18 @@ namespace SpaceAlert.DataAccess.Providers
         /// <summary>
         /// Récupère un unique élément en fonction de ses attributs
         /// </summary>
-        protected T GetWith(Func<T, bool> filtres)
+        public T GetUniqueResult(Func<T, bool> filtres)
         {
             return Table.SingleOrDefault(filtres);
+        }
+
+        /// <summary>
+        /// Récupère plusieurs éléments en fonction de leurs attributs
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<T> GetWith(Func<T, bool> filtres)
+        {
+            return Table.Where(filtres);
         }
     }
 }

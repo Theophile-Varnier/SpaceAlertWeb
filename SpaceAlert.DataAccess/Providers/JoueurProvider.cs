@@ -12,7 +12,7 @@ namespace SpaceAlert.DataAccess.Providers
         public JoueurProvider(SpaceAlertContext context)
             : base(context)
         {
-            Table = context.Joueurs;
+            Table = context.Set<Joueur>();
         }
 
         /// <summary>

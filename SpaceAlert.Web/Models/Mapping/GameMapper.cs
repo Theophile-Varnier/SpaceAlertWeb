@@ -17,7 +17,7 @@ namespace SpaceAlert.Web.Models.Mapping
                 GameId = source.Id,
                 Blanches = source.Difficulte.HasFlag(Couleur.BLANCHE),
                 Jaunes = source.Difficulte.HasFlag(Couleur.JAUNE),
-                NbJoueurs = source.Joueurs.Capacity,
+                NbJoueurs = source.NbJoueurs,
                 Players = new List<PlayerViewModel>(),
                 Rouges = source.Difficulte.HasFlag(Couleur.ROUGE)
             };

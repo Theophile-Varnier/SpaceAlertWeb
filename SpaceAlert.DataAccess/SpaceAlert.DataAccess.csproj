@@ -57,6 +57,7 @@
     <Compile Include="Extensions\DbDataReaderExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\AbstractProvider.cs" />
+    <Compile Include="Providers\GameContextProvider.cs" />
     <Compile Include="Providers\GameProvider.cs" />
     <Compile Include="Providers\JoueurProvider.cs" />
     <Compile Include="Providers\MembreProvider.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Repositories\MembreRepository.cs" />
     <Compile Include="SpaceAlertContext.cs" />
     <Compile Include="SpaceAlertContextInitializer.cs" />
+    <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

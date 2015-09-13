@@ -125,7 +125,7 @@ namespace SpaceAlert.Web.Controllers
         [HttpGet]
         public string ChangeColor(string gameId, string charName)
         {
-            return GameService.ProchaineCouleur(Guid.Parse(gameId), charName);
+            return serviceProvider.GameService.ProchaineCouleur(Guid.Parse(gameId), charName);
         }
 
         /// <summary>
@@ -142,10 +142,10 @@ namespace SpaceAlert.Web.Controllers
                 GameCreationViewModel newModel = new GameCreationViewModel
                 {
                     Player = model.Player,
-                    Game = GameMapper.MapToModel(game.Partie),
+                    Game = GameMapper.MapToModel(game.Game),
                     IsGameOwner = false
                 };
-                Session["currentGameId"] = game.Partie.Id;
+                Session["currentGameId"] = game.Game.Id;
                 return View("WaitRoom", newModel);
             }
             catch (NomDejaUtiliseException)
@@ -172,8 +172,10 @@ namespace SpaceAlert.Web.Controllers
         /// <param name="gameId"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult Play(string gameId)
+        public ActionResult Play(Guid gameId)
         {
+            serviceProvider.GameService.DemarrerGame(gameId);
+            GameExecutionManager manager = new GameExecutionManager(serviceProvider.GameService.GetGame(gameId).Game);
             return View(ShipFactory.DefaultShip());
         }
     }

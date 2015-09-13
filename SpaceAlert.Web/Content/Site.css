@@ -78,35 +78,43 @@ html {
     border-color: darkgreen;
 }
 
-.panel-primary > .panel-heading {
-    background-color: darkgreen;
-    border-color: darkgreen;
-}
+    .panel-primary > .panel-heading {
+        background-color: darkgreen;
+        border-color: darkgreen;
+    }
 
-.panel-primary > .panel-body {
-    background-color: black;
-}
+    .panel-primary > .panel-body {
+        background-color: black;
+    }
 
 .btn-primary {
     background-color: darkgreen;
     border-color: darkgreen;
 }
 
-.btn-primary[disabled] {
-    background-color: #2e8b57;
-    border-color: darkgreen;
-}
+    .btn-primary[disabled] {
+        background-color: #2e8b57;
+        border-color: darkgreen;
+    }
 
-.btn-primary:hover {
-    background-color: #2e8b57;
-    border-color: darkgreen;
-}
+    .btn-primary:hover {
+        background-color: #2e8b57;
+        border-color: darkgreen;
+    }
 
-.modal .modal-content{
+.modal .modal-content {
     background-color: black;
     border: 1px solid darkgreen;
 }
 
 .modal-footer {
     border-top-color: darkgreen;
+}
+
+.table.table-hover tbody tr:hover {
+    color: black;
+    -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+    -moz-user-select: none; /* mozilla browsers */
+    -khtml-user-select: none; /* webkit (konqueror) browsers */
+    -ms-user-select: none; /* IE10+ */
 }
