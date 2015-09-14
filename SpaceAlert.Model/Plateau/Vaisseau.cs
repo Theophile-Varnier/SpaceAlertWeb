@@ -37,15 +37,15 @@ namespace SpaceAlert.Model.Plateau
         /// </summary>
         public IList<bool> RobotsActifs { get; set; }
 
+
         /// <summary>
-        /// Accède à une salle du vaisseau
+        /// Salles the specified p.
         /// </summary>
-        /// <param name="z">La zone dans laquelle se situe la salle</param>
-        /// <param name="p">Le pont sur lequel se trouve la salle</param>
+        /// <param name="p">The p.</param>
         /// <returns></returns>
-        public Salle Salle(Zone z, Pont p)
+        public Salle Salle(Position p)
         {
-            return Zones[z].Salles[p];
+            return Zones[p.Zone].Salles[p.Pont];
         }
 
         /// <summary>
@@ -55,18 +55,19 @@ namespace SpaceAlert.Model.Plateau
         /// <param name="source">La salle d'origine</param>
         /// <param name="direction">La direction du déplacement</param>
         /// <returns>La salle suivante</returns>
-        public Salle SalleSuivante(Salle source, Direction direction)
+        public Salle SalleSuivante(Position source, Direction direction)
         {
-            int minZone = (int) Enum.GetValues(typeof (Zone)).Cast<Zone>().Min();
-            int maxZone = (int) Enum.GetValues(typeof (Zone)).Cast<Zone>().Max();
+            int minZone = (int)Enum.GetValues(typeof(Zone)).Cast<Zone>().Min();
+            int maxZone = (int)Enum.GetValues(typeof(Zone)).Cast<Zone>().Max();
 
             // Ascenseur
-            if ((int) direction == 0)
+            if ((int)direction == 0)
             {
-                return Salle(source.Zone, (Pont)(1 - (int) source.Pont));
+                return Salle(new Position(source.Zone,(Pont)(1 - (int)source.Pont)));
             }
             // Mouvement latéral
-            return Salle((Zone) Math.Min(Math.Max((int) source.Zone + (int) direction, minZone), maxZone), source.Pont);
+            Position newPosition = new Position((Zone)Math.Min(Math.Max((int)source.Zone + (int)direction, minZone), maxZone), source.Pont);
+            return Salle(newPosition);
         }
     }
 }

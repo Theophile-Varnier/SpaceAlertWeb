@@ -96,6 +96,7 @@
     <Compile Include="Menaces\Menace.cs" />
     <Compile Include="Menaces\MenaceExterne.cs" />
     <Compile Include="Menaces\MenaceInterne.cs" />
+    <Compile Include="Plateau\Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Jeu\InGameZone.cs" />
     <Compile Include="Plateau\Salle.cs" />

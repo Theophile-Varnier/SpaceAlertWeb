@@ -9,14 +9,12 @@ namespace SpaceAlert.Model.Plateau
     public class Salle
     {
         /// <summary>
-        /// La zone à laquelle la salle appartient
+        /// Gets or sets the position.
         /// </summary>
-        public Zone Zone { get; set; }
-
-        /// <summary>
-        /// Le pont auquel la salle appartient
-        /// </summary>
-        public Pont Pont { get; set; }
+        /// <value>
+        /// The position.
+        /// </value>
+        public Position Position { get; set; }
 
         /// <summary>
         /// Le type d'action que génère le bouton C

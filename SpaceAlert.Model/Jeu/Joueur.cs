@@ -56,13 +56,11 @@ namespace SpaceAlert.Model.Jeu
         /// <summary>
         /// A-t-il des robots avec lui ?
         /// </summary>
-        [NotMapped]
         public EtatRobots Robots { get; set; }
 
         /// <summary>
         /// La salle dans laquelle il se trouve actuellement
         /// </summary>
-        [NotMapped]
-        public Salle CurrentSalle { get; set; }
+        public Position CurrentSalle { get; set; }
     }
 }

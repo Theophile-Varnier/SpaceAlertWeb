@@ -21,7 +21,7 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
       </dictionary>
     </property>
   </object>
-  
+
   <object id="ZoneBleue" type="SpaceAlert.Model.Jeu.InGameZone" singleton="false">
     <property name="Degats" value="0"/>
     <property name="Salles">
@@ -49,13 +49,12 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
       </dictionary>
     </property>
   </object>
-  
+
   <object id="BleueHaut" type="SpaceAlert.Model.Plateau.Salle" singleton="false">
     <property name="EnergieCourante" value="1"/>
     <property name="EnergieMax" value="2"/>
     <property name="Canon" ref="CanonHaut"/>
-    <property name="Zone" value="BLEUE"/>
-    <property name="Pont" value="HAUT"/>
+    <property name="Position" ref="PosBleueHaut"/>
     <property name="HasRobots" value="PRESENTS"/>
     <property name="ActionC" value="ROBOTS"/>
   </object>
@@ -63,8 +62,7 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
     <property name="EnergieCourante" value="2"/>
     <property name="EnergieMax" value="3"/>
     <property name="Canon" ref="CanonBas"/>
-    <property name="Zone" value="BLEUE"/>
-    <property name="Pont" value="BAS"/>
+    <property name="Position" ref="PosBleueBas"/>
     <property name="HasRobots" value="NONE"/>
     <property name="ActionC" value="ROQUETTES"/>
   </object>
@@ -72,8 +70,7 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
     <property name="EnergieCourante" value="1"/>
     <property name="EnergieMax" value="3"/>
     <property name="Canon" ref="CanonCentral"/>
-    <property name="Zone" value="BLANCHE"/>
-    <property name="Pont" value="HAUT"/>
+    <property name="Position" ref="PosBlancHaut"/>
     <property name="HasRobots" value="NONE"/>
     <property name="ActionC" value="MAINTENANCE"/>
   </object>
@@ -81,8 +78,7 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
     <property name="EnergieCourante" value="3"/>
     <property name="EnergieMax" value="5"/>
     <property name="Canon" ref="CanonImpulsion"/>
-    <property name="Zone" value="BLANCHE"/>
-    <property name="Pont" value="BAS"/>
+    <property name="Position" ref="PosBlancBas"/>
     <property name="HasRobots" value="NONE"/>
     <property name="ActionC" value="HUBLOT"/>
   </object>
@@ -90,8 +86,7 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
     <property name="EnergieCourante" value="1"/>
     <property name="EnergieMax" value="2"/>
     <property name="Canon" ref="CanonHaut"/>
-    <property name="Zone" value="ROUGE"/>
-    <property name="Pont" value="HAUT"/>
+    <property name="Position" ref="PosRougeHaut"/>
     <property name="HasRobots" value="NONE"/>
     <property name="ActionC" value="INTERCEPTEURS"/>
   </object>
@@ -99,10 +94,38 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
     <property name="EnergieCourante" value="2"/>
     <property name="EnergieMax" value="3"/>
     <property name="Canon" ref="CanonBas"/>
-    <property name="Zone" value="ROUGE"/>
-    <property name="Pont" value="BAS"/>
+    <property name="Position" ref="PosRougeBas"/>
     <property name="HasRobots" value="PRESENTS"/>
     <property name="ActionC" value="ROBOTS"/>
+  </object>
+
+  <object id="PosBleueHaut" type="SpaceAlert.Model.Plateau.Position">
+    <constructor-arg value="BLEUE"/>
+    <constructor-arg value="HAUT"/>
+  </object>
+
+  <object id="PosBleueBas" type="SpaceAlert.Model.Plateau.Position">
+    <constructor-arg value="BLEUE"/>
+    <constructor-arg value="BAS"/>
+  </object>
+  <object id="PosBlancHaut" type="SpaceAlert.Model.Plateau.Position">
+    <constructor-arg value="BLANCHE"/>
+    <constructor-arg value="HAUT"/>
+  </object>
+
+  <object id="PosBlancBas" type="SpaceAlert.Model.Plateau.Position">
+    <constructor-arg value="BLANCHE"/>
+    <constructor-arg value="BAS"/>
+  </object>
+
+  <object id="PosRougeHaut" type="SpaceAlert.Model.Plateau.Position">
+    <constructor-arg value="ROUGE"/>
+    <constructor-arg value="HAUT"/>
+  </object>
+
+  <object id="PosRougeBas" type="SpaceAlert.Model.Plateau.Position">
+    <constructor-arg value="ROUGE"/>
+    <constructor-arg value="BAS"/>
   </object>
 
   <object id="CanonHaut" type="SpaceAlert.Model.Jeu.Canon" singleton="false">

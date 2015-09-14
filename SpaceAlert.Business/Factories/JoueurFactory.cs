@@ -1,5 +1,6 @@
 ﻿using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Jeu;
+using SpaceAlert.Model.Plateau;
 using SpaceAlert.Model.Stats;
 using System.Collections.Generic;
 
@@ -14,7 +15,7 @@ namespace SpaceAlert.Business.Factories
                 IdPersonnage = perso.Id,
                 Personnage = perso,
                 IsCapitaine = captain,
-                CurrentSalle = game.Vaisseau.Salle(Zone.BLANCHE, Pont.HAUT),
+                CurrentSalle = new Position(Zone.BLANCHE, Pont.HAUT),
                 Actions = new Dictionary<int, ActionJoueur>()
             };
             return res;

@@ -1,7 +1,6 @@
 ﻿using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Plateau;
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -24,6 +23,12 @@ namespace SpaceAlert.Model.Jeu
             Joueurs = new List<Joueur>();
         }
 
+        /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>
+        /// The identifier.
+        /// </value>
         [Key]
         public Guid Id { get; set; }
 
@@ -39,6 +44,12 @@ namespace SpaceAlert.Model.Jeu
         [NotMapped]
         public Dictionary<Zone, List<InGameMenace>> MenacesExternes { get; set; }
 
+        /// <summary>
+        /// Gets or sets the menaces externes names.
+        /// </summary>
+        /// <value>
+        /// The menaces externes names.
+        /// </value>
         public List<MenaceInZone> MenacesExternesNames { get; set; }
 
         /// <summary>
@@ -52,6 +63,12 @@ namespace SpaceAlert.Model.Jeu
         [NotMapped]
         public Mission Mission { get; set; }
 
+        /// <summary>
+        /// Gets or sets the campagne identifier.
+        /// </summary>
+        /// <value>
+        /// The campagne identifier.
+        /// </value>
         [ForeignKey("Campagne")]
         public int? CampagneId { get; set; }
 
