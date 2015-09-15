@@ -1,5 +1,4 @@
 ﻿using SpaceAlert.Model.Helpers.Enums;
-using SpaceAlert.Model.Jeu.Evenements;
 using SpaceAlert.Model.Menaces;
 
 namespace SpaceAlert.Model.Jeu
@@ -15,6 +14,12 @@ namespace SpaceAlert.Model.Jeu
         /// </summary>
         public Menace Menace { get; set; }
 
+        /// <summary>
+        /// Gets or sets the status.
+        /// </summary>
+        /// <value>
+        /// The status.
+        /// </value>
         public MenaceStatus Status { get; set; }
 
         /// <summary>
@@ -52,6 +57,12 @@ namespace SpaceAlert.Model.Jeu
         /// </summary>
         public Rampe Rampe { get; set; }
 
+        /// <summary>
+        /// Gets the distance.
+        /// </summary>
+        /// <value>
+        /// The distance.
+        /// </value>
         public int Distance
         {
             get
@@ -60,6 +71,12 @@ namespace SpaceAlert.Model.Jeu
             }
         }
 
+        /// <summary>
+        /// Gets the portee.
+        /// </summary>
+        /// <value>
+        /// The portee.
+        /// </value>
         public int Portee
         {
             get
