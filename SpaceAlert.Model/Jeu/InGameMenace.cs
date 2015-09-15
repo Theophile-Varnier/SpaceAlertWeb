@@ -1,18 +1,46 @@
 ﻿using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Menaces;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SpaceAlert.Model.Jeu
 {
     /// <summary>
     /// Représente une menace dans une partie en cours
     /// </summary>
+    [Table("Menaces")]
     public class InGameMenace
     {
+        /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>
+        /// The identifier.
+        /// </value>
+        [Key]
+        public int Id { get; set; }
 
         /// <summary>
         /// La menace associée
         /// </summary>
-        public Menace Menace { get; set; }
+        public string MenaceName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the menace in zone identifier.
+        /// </summary>
+        /// <value>
+        /// The menace in zone identifier.
+        /// </value>
+        [ForeignKey("MenaceInZone")]
+        public int MenaceInZoneId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the menace in zone.
+        /// </summary>
+        /// <value>
+        /// The menace in zone.
+        /// </value>
+        public virtual MenaceInZone MenaceInZone { get; set; }
 
         /// <summary>
         /// Gets or sets the status.

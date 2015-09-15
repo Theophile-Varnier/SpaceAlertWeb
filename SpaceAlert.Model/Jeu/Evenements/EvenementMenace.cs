@@ -33,7 +33,7 @@ namespace SpaceAlert.Model.Jeu.Evenements
         /// <summary>
         /// La menace associée
         /// </summary>
-        public Menace Menace { get; set; }
+        public string MenaceName { get; set; }
 
         public override void Resolve()
         {

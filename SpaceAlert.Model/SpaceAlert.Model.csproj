@@ -55,7 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\Enums\CAction.cs" />
+    <Compile Include="Helpers\Enums\ActionC.cs" />
     <Compile Include="Helpers\Enums\MenaceStatus.cs" />
     <Compile Include="Helpers\Enums\PresenceRobots.cs" />
     <Compile Include="Helpers\Enums\TypeAction.cs" />
@@ -72,7 +72,6 @@
     <Compile Include="Helpers\Enums\Direction.cs" />
     <Compile Include="Helpers\Enums\Couleur.cs" />
     <Compile Include="Helpers\Extensions.cs" />
-    <Compile Include="Helpers\MenaceActions.cs" />
     <Compile Include="Jeu\ActionJoueur.cs" />
     <Compile Include="Jeu\Campagne.cs" />
     <Compile Include="Jeu\Canon.cs" />
@@ -92,7 +91,6 @@
     <Compile Include="Jeu\Rampe.cs" />
     <Compile Include="Menaces\Dysfonctionnement.cs" />
     <Compile Include="Menaces\Intrus.cs" />
-    <Compile Include="Menaces\ListOfMenaces.cs" />
     <Compile Include="Menaces\Menace.cs" />
     <Compile Include="Menaces\MenaceExterne.cs" />
     <Compile Include="Menaces\MenaceInterne.cs" />

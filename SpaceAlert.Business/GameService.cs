@@ -121,18 +121,18 @@ namespace SpaceAlert.Business
         /// Récupère la couleur actuelle d'un joueur dans une partie
         /// </summary>
         /// <param name="gameId"></param>
-        /// <param name="charName"></param>
+        /// <param name="characterName"></param>
         /// <returns></returns>
-        public string PlayerColor(Guid gameId, string charName)
+        public string PlayerColor(Guid gameId, string characterName)
         {
             // Joueur joueur = SpaceAlertData.Game(gameId).Partie.Joueurs.FirstOrDefault(j => j.Personnage.Nom == charName);
-            Joueur joueur = unitOfWork.GameProvider.GetUniqueResult(g => g.Id == gameId).Joueurs.FirstOrDefault(j => j.Personnage.Nom == charName);
+            Joueur joueur = unitOfWork.GameProvider.GetUniqueResult(g => g.Id == gameId).Joueurs.FirstOrDefault(j => j.Personnage.Nom == characterName);
             return joueur != null ? joueur.Couleur : null;
         }
 
-        public static string ProchaineCouleur(GameContext game, string charName)
+        public static string ProchaineCouleur(GameContext game, string characterName)
         {
-            int index = SpaceAlertData.PlayerColors.IndexOf(game.Game.Joueurs.First(j => j.Personnage.Nom == charName).Couleur);
+            int index = SpaceAlertData.PlayerColors.IndexOf(game.Game.Joueurs.First(j => j.Personnage.Nom == characterName).Couleur);
             int current = index;
             string color;
             do
@@ -141,7 +141,7 @@ namespace SpaceAlert.Business
                 color = SpaceAlertData.PlayerColors[current];
             } while (current != index && game.Game.Joueurs.Select(j => j.Couleur).Contains(color));
 
-            game.Game.Joueurs.First(j => j.Personnage.Nom == charName).Couleur = color;
+            game.Game.Joueurs.First(j => j.Personnage.Nom == characterName).Couleur = color;
 
             return color;
         }
@@ -150,12 +150,12 @@ namespace SpaceAlert.Business
         /// Set une couleur et la retourne
         /// </summary>
         /// <param name="gameId">la partie concernée</param>
-        /// <param name="charName">Le nom du personnage à qui assigner la couleur</param>
+        /// <param name="characterName">Le nom du personnage à qui assigner la couleur</param>
         /// <returns></returns>
-        public string ProchaineCouleur(Guid gameId, string charName)
+        public string ProchaineCouleur(Guid gameId, string characterName)
         {
             GameContext game = GetGame(gameId);
-            return ProchaineCouleur(game, charName);
+            return ProchaineCouleur(game, characterName);
         }
 
         /// <summary>
@@ -163,8 +163,8 @@ namespace SpaceAlert.Business
         /// </summary>
         /// <param name="gameId">La partie concernée</param>
         /// <param name="memberId">L'id du membre qui rejoint la partie</param>
-        /// <param name="charName">Le nom du personnage du membre</param>
-        public GameContext AjouterJoueur(Guid gameId, long memberId, string charName)
+        /// <param name="characterName">Le nom du personnage du membre</param>
+        public GameContext AjouterJoueur(Guid gameId, long memberId, string characterName)
         {
 
             GameContext game = GetGame(gameId);
@@ -175,16 +175,16 @@ namespace SpaceAlert.Business
             }
 
             // On vérifie qu'un joueur ne porte pas déjà ce nom
-            if (game.Game.Joueurs.Any(j => j.Personnage.Nom == charName))
+            if (game.Game.Joueurs.Any(j => j.Personnage.Nom == characterName))
             {
                 throw new NomDejaUtiliseException();
             }
 
             // On ajoute le joueur à la partie
-            game.Game.Joueurs.Add(JoueurFactory.CreateJoueur(unitOfWork.PersonnageProvider.Get(memberId, charName), false, game.Game));
+            game.Game.Joueurs.Add(JoueurFactory.CreateJoueur(unitOfWork.PersonnageProvider.Get(memberId, characterName), false, game.Game));
 
             // On lui assigne une couleur
-            ProchaineCouleur(gameId, charName);
+            ProchaineCouleur(gameId, characterName);
 
             return game;
         }
@@ -196,8 +196,6 @@ namespace SpaceAlert.Business
         {
             foreach (Joueur joueur in game.Joueurs)
             {
-                unitOfWork.Context.Personnages.Attach(joueur.Personnage);
-                unitOfWork.Context.Membres.Attach(joueur.Personnage.Membre);
                 unitOfWork.JoueurProvider.RegisterGame(joueur, game);
             }
             unitOfWork.GameProvider.Add(game);

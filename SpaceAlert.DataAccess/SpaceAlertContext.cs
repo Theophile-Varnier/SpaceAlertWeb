@@ -5,7 +5,7 @@ using System.Data.Entity;
 
 namespace SpaceAlert.DataAccess
 {
-    public class SpaceAlertContext: DbContext
+    public class SpaceAlertContext : DbContext
     {
         public SpaceAlertContext()
             : base("SpaceAlert")
@@ -25,5 +25,13 @@ namespace SpaceAlert.DataAccess
         public DbSet<Campagne> Campagnes { get; set; }
 
         public DbSet<Personnage> Personnages { get; set; }
+
+        public DbSet<MenaceInZone> MenacesInZones { get; set; }
+
+        public DbSet<InGameMenace> Menaces { get; set; }
+
+        public DbSet<ActionJoueur> Actions { get; set; }
+
+        public DbSet<PersonnageInCampagne> PersonnagesInCampagnes { get; set; }
     }
 }

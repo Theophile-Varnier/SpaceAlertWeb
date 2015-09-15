@@ -19,7 +19,7 @@ namespace SpaceAlert.Model.Plateau
         /// <summary>
         /// Le type d'action que génère le bouton C
         /// </summary>
-        public CAction ActionC { get; set; }
+        public ActionC ActionC { get; set; }
 
         /// <summary>
         /// Indique si la salle possède des robots

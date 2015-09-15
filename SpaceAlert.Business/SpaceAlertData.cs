@@ -1,5 +1,6 @@
 ﻿using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Jeu;
+using SpaceAlert.Model.Menaces;
 using Spring.Context;
 using Spring.Context.Support;
 using System;
@@ -15,7 +16,7 @@ namespace SpaceAlert.Business
     {
         private static IApplicationContext AppContext;
 
-        public static readonly List<string> PlayerColors = new List<string>
+        public static List<string> PlayerColors = new List<string>
         {
             "blue",
             "red",
@@ -24,14 +25,14 @@ namespace SpaceAlert.Business
             "purple"
         };
 
-        public static readonly List<int> DebutPhases = new List<int>
+        public static List<int> DebutPhases = new List<int>
         {
             0,
             3,
             7
         };
 
-        public static readonly int RocketDamages = 3;
+        public const int RocketDamages = 3;
 
         /// <summary>
         /// Initialisation des constantes du jeu
@@ -50,6 +51,16 @@ namespace SpaceAlert.Business
         public static T GetObject<T>(string objectName)
         {
             return (T) AppContext.GetObject(objectName);
+        }
+
+        /// <summary>
+        /// Menaces the in zone.
+        /// </summary>
+        /// <param name="menaceName">Name of the menace.</param>
+        /// <returns></returns>
+        public static Menace Menace(string menaceName)
+        {
+            return GetObject<Menace>(menaceName);
         }
 
         /// <summary>

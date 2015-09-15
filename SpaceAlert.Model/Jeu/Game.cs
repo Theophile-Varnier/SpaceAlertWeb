@@ -39,18 +39,12 @@ namespace SpaceAlert.Model.Jeu
         public Vaisseau Vaisseau { get; set; }
 
         /// <summary>
-        /// Les menaces externes en cours de résolution
-        /// </summary>
-        [NotMapped]
-        public Dictionary<Zone, List<InGameMenace>> MenacesExternes { get; set; }
-
-        /// <summary>
         /// Gets or sets the menaces externes names.
         /// </summary>
         /// <value>
         /// The menaces externes names.
         /// </value>
-        public List<MenaceInZone> MenacesExternesNames { get; set; }
+        public List<MenaceInZone> MenacesExternes { get; set; }
 
         /// <summary>
         /// Le type de mission

@@ -1,7 +1,7 @@
 ﻿
 namespace SpaceAlert.Model.Helpers.Enums
 {
-    public enum CAction
+    public enum ActionC
     {
         ROBOTS = 0,
         ROQUETTES,

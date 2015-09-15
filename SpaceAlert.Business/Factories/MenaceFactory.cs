@@ -1,6 +1,7 @@
 ﻿using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Jeu;
 using SpaceAlert.Model.Jeu.Evenements;
+using SpaceAlert.Model.Menaces;
 
 namespace SpaceAlert.Business.Factories
 {
@@ -12,30 +13,41 @@ namespace SpaceAlert.Business.Factories
         /// <param name="game">Le contexte de la partie</param>
         /// <param name="source">L'événement à partir duquel est générée la menace</param>
         /// <returns></returns>
-        public static InGameMenace CreateMenace(GameContext game, EvenementMenace source)
+        public static MenaceInZone CreateMenace(GameContext game, EvenementMenace source)
         {
-            InGameMenace res = new InGameMenace
+            Menace selectedMenace = SpaceAlertData.Menace(source.MenaceName);
+            InGameMenace menace = new InGameMenace
             {
-                Menace = source.Menace,
+                MenaceName = source.MenaceName,
                 Status = MenaceStatus.EnJeu,
-                CurrentHp = source.Menace.MaxHp,
-                CurrentShield = source.Menace.Shield,
-                CurrentSpeed = source.Menace.Speed,
+                CurrentHp = selectedMenace.MaxHp,
+                CurrentShield = selectedMenace.Shield,
+                CurrentSpeed = selectedMenace.Speed,
                 Position = 0,
                 TourArrive = source.TourArrive,
                 DegatsSubis = 0
             };
             switch (source.Type)
             {
-                case TypeMenace.MENACE_EXTERNE:
-                case TypeMenace.MENACE_EXTERNE_SERIEUSE:
-                    res.Rampe = game.Rampes[source.Zone];
+                case TypeMenace.MenaceExterne:
+                case TypeMenace.MenaceExterneSerieuse:
+                    menace.Rampe = game.Rampes[source.Zone];
                     break;
-                case TypeMenace.MENACE_INTERNE:
-                case TypeMenace.MENACE_INTERNE_SERIEUSE:
-                    res.Rampe = game.RampeInterne;
+                case TypeMenace.MenaceInterne:
+                case TypeMenace.MenaceInterneSerieuse:
+                    menace.Rampe = game.RampeInterne;
+                    break;
+                default:
+                    // do the default action
                     break;
             }
+            MenaceInZone res = new MenaceInZone
+            {
+                Menace = menace,
+                GameId = game.Game.Id,
+                Game = game.Game,
+                Zone = source.Zone
+            };
             return res;
         }
     }

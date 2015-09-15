@@ -18,6 +18,6 @@ namespace SpaceAlert.Model.Jeu
 
         public Zone Zone { get; set; }
 
-        public string MenaceName { get; set; }
+        public InGameMenace Menace { get; set; }
     }
 }

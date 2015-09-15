@@ -1,8 +1,5 @@
-﻿using SpaceAlert.DataAccess;
-using SpaceAlert.DataAccess.Providers;
-using SpaceAlert.Model.Helpers.Enums;
+﻿using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Jeu;
-using SpaceAlert.Model.Menaces;
 using SpaceAlert.Model.Plateau;
 using SpaceAlert.Model.Stats;
 using System;
@@ -10,7 +7,7 @@ using System.Collections.Generic;
 
 namespace SpaceAlert.Business.Factories
 {
-    public class GameFactory
+    public static class GameFactory
     {
         public static GameContext CreateGame(TypeMission typeMission, int nbJoueurs, bool blanches, bool jaunes, bool rouges, Personnage captain)
         {
@@ -21,7 +18,7 @@ namespace SpaceAlert.Business.Factories
                 DateCreation = DateTime.Now,
                 DateFin = DateTime.Now,
                 Vaisseau = SpaceAlertData.GetObject<Vaisseau>("Vaisseau"),
-                MenacesExternes = new Dictionary<Zone,List<InGameMenace>>(),
+                MenacesExternes = new List<MenaceInZone>(),
                 NbJoueurs = nbJoueurs,
                 Joueurs = new List<Joueur>()
             };
