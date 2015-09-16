@@ -1,9 +1,7 @@
-﻿using SpaceAlert.Model.Helpers.Enums;
-using SpaceAlert.Model.Jeu;
+﻿using SpaceAlert.Model.Jeu;
 using SpaceAlert.Model.Menaces;
 using Spring.Context;
 using Spring.Context.Support;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -61,6 +59,16 @@ namespace SpaceAlert.Business
         public static Menace Menace(string menaceName)
         {
             return GetObject<Menace>(menaceName);
+        }
+
+        /// <summary>
+        /// Rampes the specified rampe identifier.
+        /// </summary>
+        /// <param name="rampeId">The rampe identifier.</param>
+        /// <returns></returns>
+        public static Rampe Rampe(int rampeId)
+        {
+            return GetAll<Rampe>().Select(e => e.Value).Single(r => r.Id == rampeId);
         }
 
         /// <summary>

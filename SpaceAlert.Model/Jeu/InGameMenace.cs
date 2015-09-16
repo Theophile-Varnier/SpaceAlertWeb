@@ -83,34 +83,6 @@ namespace SpaceAlert.Model.Jeu
         /// <summary>
         /// La rampe sur laquelle la menace se trouve
         /// </summary>
-        public Rampe Rampe { get; set; }
-
-        /// <summary>
-        /// Gets the distance.
-        /// </summary>
-        /// <value>
-        /// The distance.
-        /// </value>
-        public int Distance
-        {
-            get
-            {
-                return (Rampe.NbCases - Position);
-            }
-        }
-
-        /// <summary>
-        /// Gets the portee.
-        /// </summary>
-        /// <value>
-        /// The portee.
-        /// </value>
-        public int Portee
-        {
-            get
-            {
-                return Distance / 5 + 1;
-            }
-        }
+        public int RampeId { get; set; }
     }
 }

@@ -289,10 +289,10 @@ namespace SpaceAlert.Business
         {
             // On récupère les menaces ciblables par les roquettes
             InGameMenace closerMenace = null;
-            List<InGameMenace> targetableMenacesExternes = game.Game.MenacesExternes.Select(m => m.Menace).Where(m => ((MenaceExterne)SpaceAlertData.Menace(m.MenaceName)).RocketTargetable && m.Portee <= 2).ToList();
+            List<InGameMenace> targetableMenacesExternes = game.Game.MenacesExternes.Select(m => m.Menace).Where(m => ((MenaceExterne)SpaceAlertData.Menace(m.MenaceName)).RocketTargetable && MenacePortee(m) <= 2).ToList();
             if (targetableMenacesExternes.Any())
             {
-                closerMenace = targetableMenacesExternes.OrderBy(m => m.Distance).First();
+                closerMenace = targetableMenacesExternes.OrderBy(MenaceDistance).First();
             }
             foreach (Zone zone in game.Game.Vaisseau.Zones.Keys)
             {
@@ -315,7 +315,7 @@ namespace SpaceAlert.Business
                     if (zoneMenace != null)
                     {
                         Canon impulsionCanon = game.Game.Vaisseau.Salle(new Position(Zone.BLANCHE, Pont.BAS)).Canon;
-                        if (zoneMenace.Portee <= impulsionCanon.Range && impulsionCanon.HasShot)
+                        if (MenacePortee(zoneMenace) <= impulsionCanon.Range && impulsionCanon.HasShot)
                         {
                             totalDamages += impulsionCanon.Power;
                         }
@@ -347,7 +347,7 @@ namespace SpaceAlert.Business
                     ResolveMenaceActions(menace, oldPos, menace.Position, zone);
 
                     // On sort la menace si elle atteint la fin de la rampe
-                    if (menace.Position >= menace.Rampe.NbCases - 1)
+                    if (menace.Position >= SpaceAlertData.Rampe(menace.RampeId).NbCases - 1)
                     {
                         menace.Status = MenaceStatus.Survecue;
                     }
@@ -364,9 +364,10 @@ namespace SpaceAlert.Business
         /// <param name="zone">La zone où se situe la menace</param>
         private void ResolveMenaceActions(InGameMenace menace, int oldPos, int newPos, Zone zone)
         {
-            foreach (TypeCase typeCase in menace.Rampe.SpecialCases.Keys)
+            Rampe menaceRampe = SpaceAlertData.Rampe(menace.RampeId);
+            foreach (TypeCase typeCase in menaceRampe.SpecialCases.Keys)
             {
-                for (int i = 0; i < menace.Rampe.SpecialCases[typeCase].Count(v => v > oldPos && v <= newPos); i++)
+                for (int i = 0; i < menaceRampe.SpecialCases[typeCase].Count(v => v > oldPos && v <= newPos); i++)
                 {
                     Menace currentMenace = SpaceAlertData.Menace(menace.MenaceName);
                     foreach (var action in currentMenace.Actions[typeCase])
@@ -375,6 +376,26 @@ namespace SpaceAlert.Business
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Récupère la distance à laquelle se trouve une menace
+        /// </summary>
+        /// <param name="menace">The menace.</param>
+        /// <returns></returns>
+        private int MenaceDistance(InGameMenace menace)
+        {
+            return SpaceAlertData.Rampe(menace.RampeId).NbCases - menace.Position;
+        }
+
+        /// <summary>
+        /// Récupère la portée à laquelle se trouve une menace
+        /// </summary>
+        /// <param name="menace">The menace.</param>
+        /// <returns></returns>
+        private int MenacePortee(InGameMenace menace)
+        {
+            return MenaceDistance(menace) / 5 + 1;
         }
     }
 }

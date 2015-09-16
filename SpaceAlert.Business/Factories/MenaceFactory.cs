@@ -31,11 +31,11 @@ namespace SpaceAlert.Business.Factories
             {
                 case TypeMenace.MenaceExterne:
                 case TypeMenace.MenaceExterneSerieuse:
-                    menace.Rampe = game.Rampes[source.Zone];
+                    menace.RampeId = game.Rampes[source.Zone].Id;
                     break;
                 case TypeMenace.MenaceInterne:
                 case TypeMenace.MenaceInterneSerieuse:
-                    menace.Rampe = game.RampeInterne;
+                    menace.RampeId = game.RampeInterne.Id;
                     break;
                 default:
                     // do the default action
