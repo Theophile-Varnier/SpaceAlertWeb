@@ -34,14 +34,12 @@ namespace SpaceAlert.Model.Jeu
         /// <summary>
         /// Les rampes
         /// </summary>
-        [NotMapped]
-        public Dictionary<Zone, Rampe> Rampes { get; set; }
+        public List<RampeInZone> Rampes { get; set; }
 
         /// <summary>
         /// La rampe interne
         /// </summary>
-        [NotMapped]
-        public Rampe RampeInterne { get; set; }
+        public int RampeInterneId { get; set; }
 
         /// <summary>
         /// Indique si la maintenance a été effectuée pendant cette phase

@@ -2,6 +2,7 @@
 using SpaceAlert.Model.Jeu;
 using SpaceAlert.Model.Jeu.Evenements;
 using SpaceAlert.Model.Menaces;
+using System.Linq;
 
 namespace SpaceAlert.Business.Factories
 {
@@ -31,11 +32,11 @@ namespace SpaceAlert.Business.Factories
             {
                 case TypeMenace.MenaceExterne:
                 case TypeMenace.MenaceExterneSerieuse:
-                    menace.RampeId = game.Rampes[source.Zone].Id;
+                    menace.RampeId = game.Rampes.Single(r => r.Zone == source.Zone).Id;
                     break;
                 case TypeMenace.MenaceInterne:
                 case TypeMenace.MenaceInterneSerieuse:
-                    menace.RampeId = game.RampeInterne.Id;
+                    menace.RampeId = game.RampeInterneId;
                     break;
                 default:
                     // do the default action

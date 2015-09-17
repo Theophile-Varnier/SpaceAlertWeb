@@ -28,7 +28,7 @@ namespace SpaceAlert.Business.Factories
             {
                 Statut = StatutPartie.CREATION,
                 Game = game,
-                Rampes = new Dictionary<Zone,Rampe>()
+                Rampes = new List<RampeInZone>()
             };
             // Ajoute les joueurs
             Joueur capitaine = JoueurFactory.CreateJoueur(captain, true, game);

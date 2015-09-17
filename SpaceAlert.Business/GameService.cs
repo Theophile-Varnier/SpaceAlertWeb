@@ -89,9 +89,12 @@ namespace SpaceAlert.Business
             List<Rampe> allRampes = SpaceAlertData.GetAll<Rampe>().Select(kvp => kvp.Value).ToList();
             foreach (Zone zone in Enum.GetValues(typeof(Zone)))
             {
-                game.Rampes.Add(zone, allRampes.GetNextRandom(true));
+                game.Rampes.Add(new RampeInZone{
+                    Zone = zone, 
+                    RampeId = allRampes.GetNextRandom(true).Id
+                });
             }
-            game.RampeInterne = allRampes.GetNextRandom(true);
+            game.RampeInterneId = allRampes.GetNextRandom(true).Id;
         }
 
         /// <summary>
