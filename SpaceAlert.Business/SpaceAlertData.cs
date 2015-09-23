@@ -25,9 +25,9 @@ namespace SpaceAlert.Business
 
         public static List<int> DebutPhases = new List<int>
         {
-            0,
-            3,
-            7
+            1,
+            4,
+            8
         };
 
         public const int RocketDamages = 3;

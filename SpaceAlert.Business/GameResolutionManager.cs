@@ -67,7 +67,7 @@ namespace SpaceAlert.Business
             {
                 if (evenement.TourArrive == game.TourEnCours)
                 {
-                    game.Game.MenacesExternes.Add(MenaceFactory.CreateMenace(game, evenement));
+                    game.Game.MenacesExternes.Single(m => m.AnnonceEvenement == evenement.Annonce).Menace.Status = MenaceStatus.EnJeu;
                 }
             }
 
@@ -86,7 +86,7 @@ namespace SpaceAlert.Business
 
             // Résolution des actions des joueurs
             int indiceJoueurCourant = indicePremierJoueur;
-            ActionJoueur actionToResolve;
+            ActionInTour actionToResolve;
             do
             {
                 // On retarde si la maintenance n'a pas été effectuée
@@ -96,7 +96,7 @@ namespace SpaceAlert.Business
                 }
 
                 // On exécute l'action du joueur
-                if (game.Game.Joueurs[indiceJoueurCourant].Actions.TryGetValue(game.TourEnCours, out actionToResolve) && actionToResolve != null)
+                if ((actionToResolve = game.Game.Joueurs[indiceJoueurCourant].Actions.SingleOrDefault(a => a.Tour == game.TourEnCours)) != null)
                 {
                     ResolveAction(game.Game.Joueurs[indiceJoueurCourant]);
                 }
@@ -120,7 +120,7 @@ namespace SpaceAlert.Business
         /// <param name="numTour"></param>
         private void ResolveAction(Joueur joueur)
         {
-            ActionJoueur actionToResolve = joueur.Actions[game.TourEnCours];
+            ActionJoueur actionToResolve = joueur.Actions.Single(a => a.Tour == game.TourEnCours).Action;
             switch (actionToResolve.GenreAction)
             {
                 case GenreAction.Action:
@@ -188,7 +188,7 @@ namespace SpaceAlert.Business
                     }
                     break;
                 case ActionC.INTERCEPTEURS:
-                    game.Game.Vaisseau.Interceptors = true;
+                    game.Game.Vaisseau.InterceptorsInUse = true;
                     break;
                 case ActionC.MAINTENANCE:
                     game.MaintenanceEffectuee = true;
@@ -271,13 +271,13 @@ namespace SpaceAlert.Business
         /// <param name="numTour">le tour à partir duquel on le retarde</param>
         private void DelayPlayer(Joueur joueur, int numTour)
         {
-            KeyValuePair<int, ActionJoueur> firstActionNull = joueur.Actions.FirstOrDefault(p => p.Key > numTour && p.Value == null);
+            ActionInTour firstActionNull = joueur.Actions.OrderBy(a => a.Tour).FirstOrDefault(p => p.Tour > numTour && p.Action == null);
             // bearg...
-            int indexFirstNull = firstActionNull.Equals(default(KeyValuePair<int, ActionJoueur>)) ? game.Game.Mission.NbTours : firstActionNull.Key;
+            int indexFirstNull = firstActionNull == null ? game.Game.Mission.NbTours : firstActionNull.Tour;
 
             for (int i = indexFirstNull; i > numTour; i--)
             {
-                joueur.Actions[i] = joueur.Actions[i - 1];
+                joueur.Actions.Single(a => a.Tour == i).Action = joueur.Actions.Single(a => a.Tour == i - 1).Action;
             }
             joueur.Actions[numTour] = null;
         }
@@ -294,10 +294,10 @@ namespace SpaceAlert.Business
             {
                 closerMenace = targetableMenacesExternes.OrderBy(MenaceDistance).First();
             }
-            foreach (Zone zone in game.Game.Vaisseau.Zones.Keys)
+            foreach (Zone zone in game.Game.Vaisseau.Zones.Select(z => z.Zone).Distinct())
             {
-                int totalDamages = game.Game.Vaisseau.Zones[zone].Salles
-                    .Select(s => s.Value.Canon)
+                int totalDamages = game.Game.Vaisseau.Zones.Single(z => z.Zone == zone).Salles
+                    .Select(s => s.Canon)
                     .Where(c => c.HasShot)
                     .Sum(c => c.Power);
 
@@ -335,9 +335,11 @@ namespace SpaceAlert.Business
         /// </summary>
         private void ResolveMenaceActions()
         {
-            foreach (Zone zone in game.Game.MenacesExternes.Select(m => m.Zone).Distinct())
+            IEnumerable<Zone> zones = game.Game.MenacesExternes.Select(m => m.Zone).Distinct();
+            foreach (Zone zone in zones)
             {
-                foreach (InGameMenace menace in game.Game.MenacesExternes.Where(m => m.Zone == zone).Select(m => m.Menace).Where(m => m.Status == MenaceStatus.EnJeu))
+                IEnumerable<InGameMenace> activesMenacesInZone = game.Game.MenacesExternes.Where(m => m.Zone == zone).Select(m => m.Menace).Where(m => m.Status == MenaceStatus.EnJeu);
+                foreach (InGameMenace menace in activesMenacesInZone)
                 {
                     // On fait bouger la menace
                     int oldPos = menace.Position;

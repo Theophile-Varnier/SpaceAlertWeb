@@ -4,6 +4,8 @@ using SpaceAlert.DataAccess;
 using SpaceAlert.Model.Helpers;
 using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Jeu;
+using SpaceAlert.Model.Jeu.Evenements;
+using SpaceAlert.Model.Menaces;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -35,6 +37,8 @@ namespace SpaceAlert.Business
             InitialiserRampes(res);
             unitOfWork.GameContextProvider.Add(res);
 
+            unitOfWork.Context.SaveChanges();
+
             return res.Game.Id;
         }
 
@@ -43,11 +47,20 @@ namespace SpaceAlert.Business
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        private Mission InitialiserMission(TypeMission type)
+        private void InitialiserMission(GameContext game)
         {
             Dictionary<string, Mission> allMissions = SpaceAlertData.GetAll<Mission>();
 
-            return allMissions.Where(m => m.Value.TypeMission == type).GetNextRandom().Value;
+            KeyValuePair<string, Mission> val = allMissions.Where(m => m.Value.TypeMission == game.Game.TypeMission).GetNextRandom();
+            game.Game.MissionId = val.Key;
+            Dictionary<string, Menace> availableMenaces = SpaceAlertData.GetAll<Menace>();
+            foreach (EvenementMenace evenement in game.Game.Mission.Evenements.OfType<EvenementMenace>())
+            {
+                KeyValuePair<string, Menace> selectedMenace = availableMenaces.GetNextRandom(kvp => kvp.Value.Type == evenement.Type);
+                availableMenaces.Remove(selectedMenace.Key);
+                evenement.MenaceName = selectedMenace.Key;
+                game.Game.MenacesExternes.Add(MenaceFactory.CreateMenace(game, evenement));
+            }
         }
 
         /// <summary>
@@ -66,7 +79,7 @@ namespace SpaceAlert.Business
         /// <returns>L'id de la partie qui a été commencée</returns>
         public Guid DemarrerGame(GameContext game)
         {
-            game.Game.Mission = InitialiserMission(game.Game.TypeMission);
+            InitialiserMission(game);
             game.Statut = StatutPartie.JEU;
             game.TourEnCours = 1;
 
@@ -74,10 +87,17 @@ namespace SpaceAlert.Business
             {
                 for (int i = 1; i <= game.Game.Mission.NbTours; i++)
                 {
-                    joueur.Actions.Add(i, null);
+                    joueur.Actions.Add(new ActionInTour
+                    {
+                        Tour = i,
+                        JoueurId = joueur.Id,
+                        Joueur = joueur,
+                        Action = null
+                    });
                 }
             }
             RegisterGame(game.Game);
+            unitOfWork.Context.SaveChanges();
             return game.Game.Id;
         }
 
@@ -128,7 +148,6 @@ namespace SpaceAlert.Business
         /// <returns></returns>
         public string PlayerColor(Guid gameId, string characterName)
         {
-            // Joueur joueur = SpaceAlertData.Game(gameId).Partie.Joueurs.FirstOrDefault(j => j.Personnage.Nom == charName);
             Joueur joueur = unitOfWork.GameProvider.GetUniqueResult(g => g.Id == gameId).Joueurs.FirstOrDefault(j => j.Personnage.Nom == characterName);
             return joueur != null ? joueur.Couleur : null;
         }

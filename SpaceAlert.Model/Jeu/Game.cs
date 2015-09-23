@@ -35,14 +35,13 @@ namespace SpaceAlert.Model.Jeu
         /// <summary>
         /// Le vaisseau
         /// </summary>
-        [NotMapped]
         public Vaisseau Vaisseau { get; set; }
 
         /// <summary>
-        /// Gets or sets the menaces externes names.
+        /// Gets or sets the menaces externes.
         /// </summary>
         /// <value>
-        /// The menaces externes names.
+        /// The menaces externes.
         /// </value>
         public List<MenaceInZone> MenacesExternes { get; set; }
 
@@ -56,6 +55,14 @@ namespace SpaceAlert.Model.Jeu
         /// </summary>
         [NotMapped]
         public Mission Mission { get; set; }
+
+        /// <summary>
+        /// Gets or sets the mission identifier.
+        /// </summary>
+        /// <value>
+        /// The mission identifier.
+        /// </value>
+        public string MissionId { get; set; }
 
         /// <summary>
         /// Gets or sets the campagne identifier.

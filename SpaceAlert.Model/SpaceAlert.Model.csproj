@@ -72,6 +72,7 @@
     <Compile Include="Helpers\Enums\Direction.cs" />
     <Compile Include="Helpers\Enums\Couleur.cs" />
     <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Jeu\ActionInTour.cs" />
     <Compile Include="Jeu\ActionJoueur.cs" />
     <Compile Include="Jeu\Campagne.cs" />
     <Compile Include="Jeu\Canon.cs" />

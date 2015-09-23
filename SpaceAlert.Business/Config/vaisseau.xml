@@ -7,12 +7,6 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
     <property name="NbCapsules" value="3" />
     <property name="NbRoquettes" value="3" />
     <property name="Interceptors" value="True" />
-    <property name="RobotsActifs">
-      <list>
-        <value>False</value>
-        <value>False</value>
-      </list>
-    </property>
     <property name="Zones">
       <dictionary key-type="SpaceAlert.Model.Helpers.Enums.Zone" value-type="SpaceAlert.Model.Jeu.InGameZone">
         <entry key="BLEUE" value-ref="ZoneBleue" />

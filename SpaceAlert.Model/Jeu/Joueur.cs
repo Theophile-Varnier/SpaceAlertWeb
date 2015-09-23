@@ -39,7 +39,6 @@ namespace SpaceAlert.Model.Jeu
         /// <summary>
         /// La couleur du pion du joueur
         /// </summary>
-        [NotMapped]
         public string Couleur { get; set; }
 
         /// <summary>
@@ -50,8 +49,7 @@ namespace SpaceAlert.Model.Jeu
         /// <summary>
         /// Ses actions
         /// </summary>
-        [NotMapped]
-        public Dictionary<int, ActionJoueur> Actions { get; set; }
+        public List<ActionInTour> Actions { get; set; }
 
         /// <summary>
         /// A-t-il des robots avec lui ?

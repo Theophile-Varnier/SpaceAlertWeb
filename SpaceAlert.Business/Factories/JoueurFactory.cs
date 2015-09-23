@@ -16,7 +16,7 @@ namespace SpaceAlert.Business.Factories
                 Personnage = perso,
                 IsCapitaine = captain,
                 CurrentSalle = new Position(Zone.BLANCHE, Pont.HAUT),
-                Actions = new Dictionary<int, ActionJoueur>()
+                Actions = new List<ActionInTour>()
             };
             return res;
         }

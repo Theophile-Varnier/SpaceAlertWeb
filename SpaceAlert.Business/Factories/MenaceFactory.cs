@@ -20,7 +20,7 @@ namespace SpaceAlert.Business.Factories
             InGameMenace menace = new InGameMenace
             {
                 MenaceName = source.MenaceName,
-                Status = MenaceStatus.EnJeu,
+                Status = MenaceStatus.Attente,
                 CurrentHp = selectedMenace.MaxHp,
                 CurrentShield = selectedMenace.Shield,
                 CurrentSpeed = selectedMenace.Speed,
@@ -47,7 +47,8 @@ namespace SpaceAlert.Business.Factories
                 Menace = menace,
                 GameId = game.Game.Id,
                 Game = game.Game,
-                Zone = source.Zone
+                Zone = source.Zone,
+                AnnonceEvenement = source.Annonce
             };
             return res;
         }

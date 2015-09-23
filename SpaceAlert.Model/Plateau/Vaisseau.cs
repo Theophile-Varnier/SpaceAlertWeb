@@ -3,14 +3,42 @@ using System.Linq;
 using SpaceAlert.Model.Helpers.Enums;
 using System.Collections.Generic;
 using SpaceAlert.Model.Jeu;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace SpaceAlert.Model.Plateau
 {
     /// <summary>
     /// Décrit l'état du vaisseau à chaque instant de la partie
     /// </summary>
+    [Table("Vaisseaux")]
     public class Vaisseau
     {
+        /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>
+        /// The identifier.
+        /// </value>
+        [Key]
+        public int Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the game identifier.
+        /// </summary>
+        /// <value>
+        /// The game identifier.
+        /// </value>
+        [ForeignKey("Game")]
+        public Guid GameId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the game.
+        /// </summary>
+        /// <value>
+        /// The game.
+        /// </value>
+        public virtual Game Game { get; set; }
 
         /// <summary>
         /// Le nombre de capsules d'énergie restant
@@ -25,18 +53,12 @@ namespace SpaceAlert.Model.Plateau
         /// <summary>
         /// Indique si les intercepteurs sont utilisés par un joueur
         /// </summary>
-        public bool Interceptors { get; set; }
+        public bool InterceptorsInUse { get; set; }
 
         /// <summary>
         /// L'état des différentes zones du vaisseau à chaque instant
         /// </summary>
-        public Dictionary<Zone, InGameZone> Zones { get; set; }
-
-        /// <summary>
-        /// Indique si les robots ont été activés par un joueur
-        /// </summary>
-        public IList<bool> RobotsActifs { get; set; }
-
+        public List<InGameZone> Zones { get; set; }
 
         /// <summary>
         /// Salles the specified p.
@@ -45,7 +67,7 @@ namespace SpaceAlert.Model.Plateau
         /// <returns></returns>
         public Salle Salle(Position p)
         {
-            return Zones[p.Zone].Salles[p.Pont];
+            return Zones.Single(z => z.Zone == p.Zone).Salles.Single(s => s.Position.Pont == p.Pont);
         }
 
         /// <summary>

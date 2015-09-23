@@ -64,17 +64,48 @@ namespace SpaceAlert.Model.Helpers
         }
 
         /// <summary>
+        /// Gets the next random.
+        /// </summary>
+        /// <typeparam name="T1">The type of the 1.</typeparam>
+        /// <typeparam name="T2">The type of the 2.</typeparam>
+        /// <param name="dico">The dico.</param>
+        /// <param name="remove">if set to <c>true</c> [remove].</param>
+        /// <returns></returns>
+        public static KeyValuePair<T1, T2> GetNextRandom<T1, T2>(this Dictionary<T1, T2> dico, bool remove = true)
+        {
+            Random rand = new Random();
+            int index = rand.Next() % dico.Count;
+            KeyValuePair<T1, T2> res = dico.ElementAt(index);
+            if (remove)
+            {
+                dico.Remove(res.Key);
+            }
+            return res;
+        }
+
+        /// <summary>
         /// Récupère un élément aléatoire d'une collection
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="enumerable"></param>
         /// <returns></returns>
-        public static T GetNextRandom<T>(this IEnumerable<T> enumerable)
+        public static T GetNextRandom<T>(this IEnumerable<T> enumerable, Func<T, bool> condition = null)
         {
             Random rand = new Random();
             IEnumerable<T> enumerable1 = enumerable as IList<T> ?? enumerable.ToList();
-            int index = rand.Next() % enumerable1.Count();
-            return enumerable1.ElementAt(index);
+            int index;
+            T res;
+            if (condition != null)
+            {
+                index = rand.Next() % enumerable1.Where(condition).Count();
+                res = enumerable1.Where(condition).ElementAt(index);
+            }
+            else
+            {
+                index = rand.Next() % enumerable1.Count();
+                res = enumerable1.ElementAt(index);
+            }
+            return res;
         }
 
         /// <summary>

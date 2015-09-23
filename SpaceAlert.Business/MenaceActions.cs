@@ -57,7 +57,7 @@ namespace SpaceAlert.Business
                     return;
                 }
             }
-            foreach (Zone zone in target.Zones.Keys.Where(k => k != from))
+            foreach (Zone zone in target.Zones.Select(z => z.Zone).Distinct().Where(k => k != from))
             {
                 InflictDamages(target, SpaceAlertData.Menace(source.MenaceName).AttackValues[pallier][1], zone);
             }
@@ -156,7 +156,7 @@ namespace SpaceAlert.Business
         /// <param name="from">La zone attaquée</param>
         public static void DrainsAllShields(InGameMenace source, Vaisseau target, TypeCase pallier, Zone from)
         {
-            foreach (Zone z in target.Zones.Keys)
+            foreach (Zone z in target.Zones.Select(z => z.Zone).Distinct())
             {
                 DrainShield(source, target, pallier, z);
             }
@@ -171,7 +171,7 @@ namespace SpaceAlert.Business
         /// <param name="from">La zone attaquée</param>
         public static void DrainShield(InGameMenace source, Vaisseau target, TypeCase pallier, Zone from)
         {
-            target.Zones[from].Salles[Pont.HAUT].EnergieCourante = 0;
+            target.Zones.Single(z => z.Zone == from).Salles.Single(s => s.Position.Pont == Pont.HAUT).EnergieCourante = 0;
         }
 
         /// <summary>
@@ -183,16 +183,16 @@ namespace SpaceAlert.Business
         private static void InflictDamages(Vaisseau target, int damageValue, Zone from)
         {
             // dégats non absorbés par le bouclier
-            int degatsRestants = damageValue - target.Zones[from].Salles[Pont.HAUT].EnergieCourante;
+            int degatsRestants = damageValue - target.Zones.Single(z => z.Zone == from).Salles.Single(s => s.Position.Pont == Pont.HAUT).EnergieCourante;
 
             if (degatsRestants > 0)
             {
-                target.Zones[from].Degats += degatsRestants;
-                target.Zones[from].Salles[Pont.HAUT].EnergieCourante = 0;
+                target.Zones.Single(z => z.Zone == from).Degats += degatsRestants;
+                target.Zones.Single(z => z.Zone == from).Salles.Single(s => s.Position.Pont == Pont.HAUT).EnergieCourante = 0;
             }
             else
             {
-                target.Zones[from].Salles[Pont.HAUT].EnergieCourante = Math.Abs(degatsRestants);
+                target.Zones.Single(z => z.Zone == from).Salles.Single(s => s.Position.Pont == Pont.HAUT).EnergieCourante = Math.Abs(degatsRestants);
             }
         }
     }
