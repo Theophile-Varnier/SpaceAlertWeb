@@ -28,12 +28,12 @@ namespace SpaceAlert.Business.Factories
             {
                 Statut = StatutPartie.CREATION,
                 Game = game,
+                Id = game.Id,
                 Rampes = new List<RampeInZone>()
             };
             // Ajoute les joueurs
             Joueur capitaine = JoueurFactory.CreateJoueur(captain, true, game);
             game.Joueurs.Add(capitaine);
-            capitaine.Couleur = GameService.ProchaineCouleur(res, capitaine.Personnage.Nom);
 
             // Ajout des menaces
             if (blanches)

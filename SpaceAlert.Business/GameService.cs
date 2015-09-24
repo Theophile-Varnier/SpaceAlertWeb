@@ -34,12 +34,14 @@ namespace SpaceAlert.Business
         public Guid InitialiserGame(TypeMission typeMission, int nbJoueurs, bool blanches, bool jaunes, bool rouges, KeyValuePair<long, string> captain)
         {
             GameContext res = GameFactory.CreateGame(typeMission, nbJoueurs, blanches, jaunes, rouges, unitOfWork.PersonnageProvider.Get(captain.Key, captain.Value));
+
+            res.Game.Joueurs[0].Couleur = ProchaineCouleur(res, res.Game.Joueurs[0].Personnage.Nom);
             InitialiserRampes(res);
             unitOfWork.GameContextProvider.Add(res);
 
             unitOfWork.Context.SaveChanges();
 
-            return res.Game.Id;
+            return res.Id;
         }
 
         /// <summary>
@@ -53,7 +55,7 @@ namespace SpaceAlert.Business
 
             KeyValuePair<string, Mission> val = allMissions.Where(m => m.Value.TypeMission == game.Game.TypeMission).GetNextRandom();
             game.Game.MissionId = val.Key;
-            Dictionary<string, Menace> availableMenaces = SpaceAlertData.GetAll<Menace>();
+            Dictionary<string, Menace> availableMenaces = SpaceAlertData.GetAll<Menace>().Where(kvp => game.Game.Difficulte.HasFlag(kvp.Value.Couleur)).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             foreach (EvenementMenace evenement in game.Game.Mission.Evenements.OfType<EvenementMenace>())
             {
                 KeyValuePair<string, Menace> selectedMenace = availableMenaces.GetNextRandom(kvp => kvp.Value.Type == evenement.Type);
@@ -98,7 +100,7 @@ namespace SpaceAlert.Business
             }
             RegisterGame(game.Game);
             unitOfWork.Context.SaveChanges();
-            return game.Game.Id;
+            return game.Id;
         }
 
         /// <summary>
@@ -137,7 +139,10 @@ namespace SpaceAlert.Business
         /// <returns></returns>
         public GameContext GetGame(Guid gameId)
         {
-            return unitOfWork.Context.GameContext.Include(g => g.Game).SingleOrDefault(g => g.GameId == gameId);
+            return unitOfWork.Context.GameContext
+                .Include(g => g.Game)
+                .Include(g => g.Game.Joueurs)
+                .SingleOrDefault(g => g.Id == gameId);
         }
 
         /// <summary>
@@ -152,7 +157,7 @@ namespace SpaceAlert.Business
             return joueur != null ? joueur.Couleur : null;
         }
 
-        public static string ProchaineCouleur(GameContext game, string characterName)
+        public string ProchaineCouleur(GameContext game, string characterName)
         {
             int index = SpaceAlertData.PlayerColors.IndexOf(game.Game.Joueurs.First(j => j.Personnage.Nom == characterName).Couleur);
             int current = index;
@@ -164,6 +169,8 @@ namespace SpaceAlert.Business
             } while (current != index && game.Game.Joueurs.Select(j => j.Couleur).Contains(color));
 
             game.Game.Joueurs.First(j => j.Personnage.Nom == characterName).Couleur = color;
+
+            unitOfWork.Context.SaveChanges();
 
             return color;
         }

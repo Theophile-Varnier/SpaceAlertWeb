@@ -6,7 +6,8 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
     <property name="Shield" value="3"/>
     <property name="MaxHp" value="4"/>
     <property name="Speed" value="2"/>
-    <property name="Type" value="MENACE_EXTERNE"/>
+    <property name="Type" value="MenaceExterne"/>
+    <property name="Couleur" value="BLANCHE"/>
     <property name="AttackValues">
       <dictionary key-type="SpaceAlert.Model.Helpers.Enums.TypeCase">
         <entry key="X">

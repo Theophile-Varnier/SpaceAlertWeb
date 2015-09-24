@@ -135,7 +135,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Config\JoueurAction.xml" />
-    <EmbeddedResource Include="Config\Menaces\ListeMenaces.xml" />
     <EmbeddedResource Include="Config\Rampes\Rampes.xml" />
     <EmbeddedResource Include="Config\Missions\Simples\Test.xml" />
     <Content Include="Exceptions\sql\CREATION_TABLE.sql" />

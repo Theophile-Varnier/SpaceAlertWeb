@@ -1,4 +1,5 @@
 ﻿using SpaceAlert.Model.Jeu;
+using SpaceAlert.Model.Plateau;
 using SpaceAlert.Model.Site;
 using SpaceAlert.Model.Stats;
 using System.Data.Entity;
@@ -33,5 +34,15 @@ namespace SpaceAlert.DataAccess
         public DbSet<ActionJoueur> Actions { get; set; }
 
         public DbSet<PersonnageInCampagne> PersonnagesInCampagnes { get; set; }
+
+        public DbSet<ActionInTour> ActionsInTour { get; set; }
+
+        public DbSet<InGameZone> Zones { get; set; }
+
+        public DbSet<RampeInZone> RampesInZone { get; set; }
+
+        public DbSet<Salle> Salles { get; set; }
+
+        public DbSet<Vaisseau> Vaisseaux { get; set; }
     }
 }

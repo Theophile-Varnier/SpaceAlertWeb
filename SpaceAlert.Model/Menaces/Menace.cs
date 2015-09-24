@@ -23,6 +23,14 @@ namespace SpaceAlert.Model.Menaces
         public TypeMenace Type { get; set; }
 
         /// <summary>
+        /// Gets or sets the couleur.
+        /// </summary>
+        /// <value>
+        /// The couleur.
+        /// </value>
+        public Couleur Couleur { get; set; }
+
+        /// <summary>
         /// La valeur de bouclier de la menace
         /// </summary>
         public int Shield { get; set; }

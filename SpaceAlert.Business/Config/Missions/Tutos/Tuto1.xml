@@ -24,14 +24,14 @@
     <property name="Zone" value="BLEUE"/>
     <property name="TourArrive" value="1"/>
     <property name="Confirme" value="True"/>
-    <property name="Type" value="MENACE_EXTERNE"/>
+    <property name="Type" value="MenaceExterne"/>
   </object>
   <object id="Tuto1_Event2" type="SpaceAlert.Model.Jeu.Evenements.EvenementMenace">
     <property name="Annonce" value="00:01:00"/>
     <property name="Zone" value="BLANCHE"/>
     <property name="TourArrive" value="2"/>
     <property name="Confirme" value="True"/>
-    <property name="Type" value="MENACE_EXTERNE"/>
+    <property name="Type" value="MenaceExterne"/>
   </object>
   <object id="Tuto1_Event3" type="SpaceAlert.Model.Jeu.Evenements.TransfertDeDonnees">
     <property name="Annonce" value="00:01:30"/>
@@ -41,7 +41,7 @@
     <property name="Zone" value="ROUGE" />
     <property name="TourArrive" value="3" />
     <property name="Confirme" value="True"/>
-    <property name="Type" value="MENACE_EXTERNE"/>
+    <property name="Type" value="MenaceExterne"/>
   </object>
   <object id="Tuto1_Event5" type="SpaceAlert.Model.Jeu.Evenements.FinDePhase">
     <property name="Annonce" value="00:03:10"/>

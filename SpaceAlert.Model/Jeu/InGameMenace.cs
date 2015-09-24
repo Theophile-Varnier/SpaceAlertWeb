@@ -17,7 +17,7 @@ namespace SpaceAlert.Model.Jeu
         /// <value>
         /// The identifier.
         /// </value>
-        [Key]
+        [Key, ForeignKey("MenaceInZone")]
         public int Id { get; set; }
 
         /// <summary>
@@ -26,20 +26,12 @@ namespace SpaceAlert.Model.Jeu
         public string MenaceName { get; set; }
 
         /// <summary>
-        /// Gets or sets the menace in zone identifier.
-        /// </summary>
-        /// <value>
-        /// The menace in zone identifier.
-        /// </value>
-        [ForeignKey("MenaceInZone")]
-        public int MenaceInZoneId { get; set; }
-
-        /// <summary>
         /// Gets or sets the menace in zone.
         /// </summary>
         /// <value>
         /// The menace in zone.
         /// </value>
+        [Required]
         public virtual MenaceInZone MenaceInZone { get; set; }
 
         /// <summary>

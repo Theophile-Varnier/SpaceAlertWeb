@@ -1,4 +1,5 @@
 ﻿using SpaceAlert.Business.Factories;
+using SpaceAlert.DataAccess;
 using SpaceAlert.Model.Helpers;
 using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Jeu;
@@ -48,7 +49,6 @@ namespace SpaceAlert.Business
         /// </summary>
         public void ResolveTurn()
         {
-
             if (game.TourEnCours > game.Game.Mission.NbTours)
             {
                 return;

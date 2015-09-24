@@ -11,7 +11,7 @@ namespace SpaceAlert.Model.Jeu
         [ForeignKey("Game")]
         public Guid GameId { get; set; }
 
-        public virtual Game Game { get; set; }
+        public virtual GameContext Game { get; set; }
 
         [Key]
         public int Id { get; set; }

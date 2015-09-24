@@ -25,5 +25,10 @@ namespace SpaceAlert.Model.Plateau
             Zone = z;
             Pont = p;
         }
+
+        public Position()
+        {
+
+        }
     }
 }

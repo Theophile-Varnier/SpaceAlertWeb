@@ -2,7 +2,7 @@
   <object id="Evenement1" type="SpaceAlert.Model.Jeu.Evenements.EvenementMenace">
     <property name="TourArrive" value="1"/>
     <property name="Menace" ref="PulseBall"/>
-    <property name="Type" value="MENACE_EXTERNE"/>
+    <property name="Type" value="MenaceExterne"/>
     <property name="Zone" value="ROUGE"/>
     <property name="Confirme" value="True"/>
   </object>

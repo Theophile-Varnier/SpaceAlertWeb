@@ -48,6 +48,7 @@ namespace SpaceAlert.Model.Jeu
         /// <value>
         /// The menace.
         /// </value>
+        [Required]
         public InGameMenace Menace { get; set; }
 
         /// <summary>

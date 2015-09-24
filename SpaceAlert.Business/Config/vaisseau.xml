@@ -6,41 +6,44 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
   <object id="Vaisseau" type="SpaceAlert.Model.Plateau.Vaisseau" singleton="false">
     <property name="NbCapsules" value="3" />
     <property name="NbRoquettes" value="3" />
-    <property name="Interceptors" value="True" />
+    <property name="InterceptorsInUse" value="True" />
     <property name="Zones">
-      <dictionary key-type="SpaceAlert.Model.Helpers.Enums.Zone" value-type="SpaceAlert.Model.Jeu.InGameZone">
-        <entry key="BLEUE" value-ref="ZoneBleue" />
-        <entry key="BLANCHE" value-ref="ZoneBlanche" />
-        <entry key="ROUGE" value-ref="ZoneRouge" />
-      </dictionary>
+      <list>
+        <ref object="ZoneBleue" />
+        <ref object="ZoneBlanche" />
+        <ref object="ZoneRouge" />
+      </list>
     </property>
   </object>
 
   <object id="ZoneBleue" type="SpaceAlert.Model.Jeu.InGameZone" singleton="false">
     <property name="Degats" value="0"/>
+    <property name="Zone" value="BLEUE"/>
     <property name="Salles">
-      <dictionary key-type="SpaceAlert.Model.Helpers.Enums.Pont" value-type="SpaceAlert.Model.Plateau.Salle">
-        <entry key="HAUT" value-ref="BleueHaut"/>
-        <entry key="BAS" value-ref="BleueBas"/>
-      </dictionary>
+      <list>
+        <ref object="BleueHaut"/>
+        <ref object="BleueBas"/>
+      </list>
     </property>
   </object>
   <object id="ZoneBlanche" type="SpaceAlert.Model.Jeu.InGameZone" singleton="false">
     <property name="Degats" value="0"/>
+    <property name="Zone" value="BLANCHE"/>
     <property name="Salles">
-      <dictionary key-type="SpaceAlert.Model.Helpers.Enums.Pont" value-type="SpaceAlert.Model.Plateau.Salle">
-        <entry key="HAUT" value-ref="BlancHaut"/>
-        <entry key="BAS" value-ref="BlancBas"/>
-      </dictionary>
+      <list>
+        <ref object="BlancHaut"/>
+        <ref object="BlancBas"/>
+      </list>
     </property>
   </object>
   <object id="ZoneRouge" type="SpaceAlert.Model.Jeu.InGameZone" singleton="false">
     <property name="Degats" value="0"/>
+    <property name="Zone" value="ROUGE"/>
     <property name="Salles">
-      <dictionary key-type="SpaceAlert.Model.Helpers.Enums.Pont" value-type="SpaceAlert.Model.Plateau.Salle">
-        <entry key="HAUT" value-ref="RougeHaut"/>
-        <entry key="BAS" value-ref="RougeBas"/>
-      </dictionary>
+      <list>
+        <ref object="RougeHaut"/>
+        <ref object="RougeBas"/>
+      </list>
     </property>
   </object>
 

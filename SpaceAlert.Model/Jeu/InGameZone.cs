@@ -3,6 +3,7 @@ using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Plateau;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System;
 
 namespace SpaceAlert.Model.Jeu
 {
@@ -28,7 +29,7 @@ namespace SpaceAlert.Model.Jeu
         /// The vaisseau identifier.
         /// </value>
         [ForeignKey("Vaisseau")]
-        public int VaisseauId { get; set; }
+        public Guid VaisseauId { get; set; }
 
         /// <summary>
         /// Gets or sets the vaisseau.

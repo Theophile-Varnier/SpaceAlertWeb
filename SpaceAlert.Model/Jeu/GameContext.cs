@@ -10,16 +10,13 @@ namespace SpaceAlert.Model.Jeu
     [Table("GameContext")]
     public class GameContext
     {
-        [Key]
-        public int Id { get; set; }
+        [Key, ForeignKey("Game")]
+        public Guid Id { get; set; }
 
         /// <summary>
         /// L'état de la partie en cours
         /// </summary>
         public StatutPartie Statut { get; set; }
-
-        [ForeignKey("Game")]
-        public Guid GameId { get; set; }
 
         /// <summary>
         /// La partie en question

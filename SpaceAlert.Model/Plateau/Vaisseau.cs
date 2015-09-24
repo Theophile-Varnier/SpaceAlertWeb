@@ -20,17 +20,8 @@ namespace SpaceAlert.Model.Plateau
         /// <value>
         /// The identifier.
         /// </value>
-        [Key]
-        public int Id { get; set; }
-
-        /// <summary>
-        /// Gets or sets the game identifier.
-        /// </summary>
-        /// <value>
-        /// The game identifier.
-        /// </value>
-        [ForeignKey("Game")]
-        public Guid GameId { get; set; }
+        [Key, ForeignKey("Game")]
+        public Guid Id { get; set; }
 
         /// <summary>
         /// Gets or sets the game.
