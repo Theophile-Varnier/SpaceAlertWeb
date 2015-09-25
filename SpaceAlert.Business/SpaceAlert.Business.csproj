@@ -64,6 +64,7 @@
     <Compile Include="Exceptions\MotDePasseInvalideException.cs" />
     <Compile Include="Exceptions\NomDejaUtiliseException.cs" />
     <Compile Include="Exceptions\PartiePleineException.cs" />
+    <Compile Include="Exceptions\UserAlreadyInGameException.cs" />
     <Compile Include="Factories\GameFactory.cs" />
     <Compile Include="Factories\JoueurFactory.cs" />
     <Compile Include="Factories\MenaceFactory.cs" />

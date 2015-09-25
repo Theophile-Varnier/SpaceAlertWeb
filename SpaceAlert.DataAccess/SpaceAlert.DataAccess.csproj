@@ -50,9 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dao\BaseDao.cs" />
     <Compile Include="Exceptions\DaoException.cs" />
-    <Compile Include="Dao\MembreDao.cs" />
     <Compile Include="Extensions\Command.cs" />
     <Compile Include="Extensions\DbDataReaderExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,7 +60,6 @@
     <Compile Include="Providers\JoueurProvider.cs" />
     <Compile Include="Providers\MembreProvider.cs" />
     <Compile Include="Providers\PersonnageProvider.cs" />
-    <Compile Include="Repositories\MembreRepository.cs" />
     <Compile Include="SpaceAlertContext.cs" />
     <Compile Include="SpaceAlertContextInitializer.cs" />
     <Compile Include="UnitOfWork.cs" />

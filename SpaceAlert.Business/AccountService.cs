@@ -1,10 +1,7 @@
 ﻿using SpaceAlert.DataAccess;
-using SpaceAlert.DataAccess.Providers;
-using SpaceAlert.DataAccess.Repositories;
 using SpaceAlert.Model.Site;
 using SpaceAlert.Model.Stats;
 using SpaceAlert.Services.Exceptions;
-using System.Collections.Generic;
 
 namespace SpaceAlert.Business
 {
@@ -34,6 +31,11 @@ namespace SpaceAlert.Business
             return unitOfWork.MembreProvider.GetMembreByPseudo(pseudo) != null;
         }
 
+        /// <summary>
+        /// Emails the deja utilise.
+        /// </summary>
+        /// <param name="email">The email.</param>
+        /// <returns></returns>
         public bool EmailDejaUtilise(string email)
         {
             return unitOfWork.MembreProvider.GetMailIfExists(email) != null;
@@ -61,12 +63,11 @@ namespace SpaceAlert.Business
         /// <returns></returns>
         public Membre RecupererMembre(string pseudo, string motDePasse)
         {
-            Membre res;
             if (!Existe(pseudo))
             {
                 throw new MembreNonExistantException(string.Format("Le pseudo {0} n'existe pas", pseudo));
             }
-            res = unitOfWork.MembreProvider.GetMembreByPseudoAndMdp(pseudo, motDePasse);
+            Membre res = unitOfWork.MembreProvider.GetMembreByPseudoAndMdp(pseudo, motDePasse);
             if (res == null)
             {
                 throw new MotDePasseInvalideException("Combinaison pseudo/mot de passe invalide");

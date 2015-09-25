@@ -10,7 +10,7 @@ namespace SpaceAlert.Web.Models.Mapping
             {
                 Pseudo = model.Pseudo,
                 Email = model.Email,
-                MotDePasse = model.MotDePasse
+                ClearPassWord = model.MotDePasse
             };
         }
     }

@@ -73,7 +73,7 @@ namespace SpaceAlert.Web.Controllers
                 model.Game.Rouges,
                 new KeyValuePair<long, string>(User.Id, model.Player.Name));
 
-            model.Game.Players.First().Color = serviceProvider.GameService.PlayerColor(gameId, model.Player.Name);
+            model.Game.Players.First().Color = serviceProvider.GameService.GetPlayerColor(gameId, User.Id);
 
             // On renvoie vers la salle d'attente
             model.Game.GameId = gameId;
@@ -125,7 +125,7 @@ namespace SpaceAlert.Web.Controllers
         [HttpGet]
         public string ChangeColor(string gameId, string charName)
         {
-            return serviceProvider.GameService.ProchaineCouleur(Guid.Parse(gameId), charName);
+            return serviceProvider.GameService.GetNextColor(Guid.Parse(gameId), charName);
         }
 
         /// <summary>

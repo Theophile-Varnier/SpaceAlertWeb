@@ -1,6 +1,4 @@
-﻿using SpaceAlert.Business.Factories;
-using SpaceAlert.DataAccess;
-using SpaceAlert.Model.Helpers;
+﻿using SpaceAlert.Model.Helpers;
 using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Jeu;
 using SpaceAlert.Model.Jeu.Evenements;
@@ -117,7 +115,6 @@ namespace SpaceAlert.Business
         /// Résout une action d'un joueur
         /// </summary>
         /// <param name="joueur"></param>
-        /// <param name="numTour"></param>
         private void ResolveAction(Joueur joueur)
         {
             ActionJoueur actionToResolve = joueur.Actions.Single(a => a.Tour == game.TourEnCours).Action;

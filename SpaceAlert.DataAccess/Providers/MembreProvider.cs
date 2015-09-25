@@ -1,10 +1,8 @@
 ﻿using SpaceAlert.Model.Site;
 using SpaceAlert.Model.Stats;
-using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SpaceAlert.DataAccess.Providers
 {
@@ -29,7 +27,9 @@ namespace SpaceAlert.DataAccess.Providers
         /// </summary>
         public Membre GetMembreByPseudoAndMdp(string pseudo, string motDePasse)
         {
-            return GetUniqueResult(m => m.Pseudo == pseudo && m.MotDePasse == motDePasse);
+            byte[] array = Encoding.UTF8.GetBytes(motDePasse);
+            SHA256Managed sha256 = new SHA256Managed();
+            return GetUniqueResult(m => m.Pseudo == pseudo && m.PassWord == string.Join(string.Empty, sha256.ComputeHash(array).Select(b => string.Format("{0:x2}", b))));
         }
 
         public string GetMailIfExists(string email)
