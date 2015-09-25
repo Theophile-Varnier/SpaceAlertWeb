@@ -15,7 +15,7 @@ namespace SpaceAlert.Business.Factories
                 IdPersonnage = perso.Id,
                 Personnage = perso,
                 IsCapitaine = captain,
-                CurrentSalle = new Position(Zone.BLANCHE, Pont.HAUT),
+                CurrentSalle = new Position(Zone.Blanche, Pont.Haut),
                 Actions = new List<ActionInTour>()
             };
             return res;

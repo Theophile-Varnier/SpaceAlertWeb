@@ -3,10 +3,10 @@ namespace SpaceAlert.Model.Helpers.Enums
 {
     public enum ActionC
     {
-        ROBOTS = 0,
-        ROQUETTES,
-        MAINTENANCE,
-        HUBLOT,
-        INTERCEPTEURS
+        Robots = 0,
+        Roquettes,
+        Maintenance,
+        Hublot,
+        Intercepteurs
     }
 }

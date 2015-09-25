@@ -8,8 +8,8 @@ namespace SpaceAlert.Model.Helpers.Enums
     [Flags]
     public enum NiveauMaitrise
     {
-        NONE = 0,
-        SIMPLE = 1,
-        AVANCE = 2
+        None = 0,
+        Simple = 1,
+        Avance = 2
     }
 }

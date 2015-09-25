@@ -2,8 +2,8 @@
 {
     public enum TypeMission
     {
-        TUTORIEL = 0,
-        SIMPLE,
-        DOUBLE
+        Tutoriel = 0,
+        Simple,
+        Double
     }
 }

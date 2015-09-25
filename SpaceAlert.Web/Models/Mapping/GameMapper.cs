@@ -15,11 +15,11 @@ namespace SpaceAlert.Web.Models.Mapping
                 DateCreation = source.DateCreation,
                 TypeMission = source.TypeMission,
                 GameId = source.Id,
-                Blanches = source.Difficulte.HasFlag(Couleur.BLANCHE),
-                Jaunes = source.Difficulte.HasFlag(Couleur.JAUNE),
+                Blanches = source.Difficulte.HasFlag(Couleur.Blanche),
+                Jaunes = source.Difficulte.HasFlag(Couleur.Jaune),
                 NbJoueurs = source.NbJoueurs,
                 Players = new List<PlayerViewModel>(),
-                Rouges = source.Difficulte.HasFlag(Couleur.ROUGE)
+                Rouges = source.Difficulte.HasFlag(Couleur.Rouge)
             };
 
             foreach (Joueur joueur in source.Joueurs)

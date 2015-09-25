@@ -93,7 +93,7 @@ namespace SpaceAlert.Business
         public Guid DemarrerGame(GameContext game)
         {
             InitialiserMission(game);
-            game.Statut = StatutPartie.JEU;
+            game.Statut = StatutPartie.Jeu;
             game.TourEnCours = 1;
 
             foreach (Joueur joueur in game.Game.Joueurs)
@@ -140,7 +140,7 @@ namespace SpaceAlert.Business
             IEnumerable<GameContext> contexts = unitOfWork.Context.GameContext
                 .Include(g => g.Game)
                 .Include(g => g.Game.Joueurs)
-                .Where(g => g.Statut == StatutPartie.CREATION && g.Game.Joueurs.Count < g.Game.NbJoueurs).ToList();
+                .Where(g => g.Statut == StatutPartie.Creation && g.Game.Joueurs.Count < g.Game.NbJoueurs).ToList();
             return contexts.Select(g => g.Game).ToList();
         }
 

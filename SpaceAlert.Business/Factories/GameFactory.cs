@@ -26,7 +26,7 @@ namespace SpaceAlert.Business.Factories
             // Initialise le contexte
             GameContext res = new GameContext
             {
-                Statut = StatutPartie.CREATION,
+                Statut = StatutPartie.Creation,
                 Game = game,
                 Id = game.Id,
                 Rampes = new List<RampeInZone>()
@@ -38,15 +38,15 @@ namespace SpaceAlert.Business.Factories
             // Ajout des menaces
             if (blanches)
             {
-                game.Difficulte |= Couleur.BLANCHE;
+                game.Difficulte |= Couleur.Blanche;
             }
             if (jaunes)
             {
-                game.Difficulte |= Couleur.JAUNE;
+                game.Difficulte |= Couleur.Jaune;
             }
             if (rouges)
             {
-                game.Difficulte |= Couleur.ROUGE;
+                game.Difficulte |= Couleur.Rouge;
             }
             return res;
         }

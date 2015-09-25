@@ -8,8 +8,8 @@ namespace SpaceAlert.Model.Helpers.Enums
     /// </summary>
     public enum Direction
     {
-        BLUE = -1,
-        ASC = 0,
-        RED = 1
+        Blue = -1,
+        Asc = 0,
+        Red = 1
     }
 }

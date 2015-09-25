@@ -9,6 +9,6 @@ namespace SpaceAlert.Model.Helpers.Enums
         A = 0,
         B,
         C,
-        R
+        Robots
     }
 }

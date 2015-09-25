@@ -29,6 +29,14 @@ namespace SpaceAlert.Model.Jeu
         public int TourEnCours { get; set; }
 
         /// <summary>
+        /// Gets or sets the deck.
+        /// </summary>
+        /// <value>
+        /// The deck.
+        /// </value>
+        public List<PartialDeck> Deck { get; set; } 
+
+        /// <summary>
         /// Les rampes
         /// </summary>
         public List<RampeInZone> Rampes { get; set; }

@@ -1,5 +1,4 @@
-﻿using SpaceAlert.Business;
-using SpaceAlert.Model.Helpers.Enums;
+﻿using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Jeu;
 using SpaceAlert.Model.Plateau;
 using System;
@@ -171,7 +170,7 @@ namespace SpaceAlert.Business
         /// <param name="from">La zone attaquée</param>
         public static void DrainShield(InGameMenace source, Vaisseau target, TypeCase pallier, Zone from)
         {
-            target.Zones.Single(z => z.Zone == from).Salles.Single(s => s.Position.Pont == Pont.HAUT).EnergieCourante = 0;
+            target.Zones.Single(z => z.Zone == from).Salles.Single(s => s.Position.Pont == Pont.Haut).EnergieCourante = 0;
         }
 
         /// <summary>
@@ -183,16 +182,16 @@ namespace SpaceAlert.Business
         private static void InflictDamages(Vaisseau target, int damageValue, Zone from)
         {
             // dégats non absorbés par le bouclier
-            int degatsRestants = damageValue - target.Zones.Single(z => z.Zone == from).Salles.Single(s => s.Position.Pont == Pont.HAUT).EnergieCourante;
+            int degatsRestants = damageValue - target.Zones.Single(z => z.Zone == from).Salles.Single(s => s.Position.Pont == Pont.Haut).EnergieCourante;
 
             if (degatsRestants > 0)
             {
                 target.Zones.Single(z => z.Zone == from).Degats += degatsRestants;
-                target.Zones.Single(z => z.Zone == from).Salles.Single(s => s.Position.Pont == Pont.HAUT).EnergieCourante = 0;
+                target.Zones.Single(z => z.Zone == from).Salles.Single(s => s.Position.Pont == Pont.Haut).EnergieCourante = 0;
             }
             else
             {
-                target.Zones.Single(z => z.Zone == from).Salles.Single(s => s.Position.Pont == Pont.HAUT).EnergieCourante = Math.Abs(degatsRestants);
+                target.Zones.Single(z => z.Zone == from).Salles.Single(s => s.Position.Pont == Pont.Haut).EnergieCourante = Math.Abs(degatsRestants);
             }
         }
     }

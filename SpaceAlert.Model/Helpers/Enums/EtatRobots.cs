@@ -2,8 +2,8 @@
 {
     public enum EtatRobots
     {
-        NONE = 0,
-        ACTIF,
-        CASSE
+        None = 0,
+        Actif,
+        Casse
     }
 }

@@ -52,6 +52,14 @@ namespace SpaceAlert.Model.Jeu
         public List<ActionInTour> Actions { get; set; }
 
         /// <summary>
+        /// Gets or sets the deck.
+        /// </summary>
+        /// <value>
+        /// The deck.
+        /// </value>
+        public List<PartialDeck> Deck { get; set; } 
+
+        /// <summary>
         /// A-t-il des robots avec lui ?
         /// </summary>
         public EtatRobots Robots { get; set; }

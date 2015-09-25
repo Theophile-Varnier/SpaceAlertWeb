@@ -15,7 +15,7 @@ namespace SpaceAlert.Business
     /// </summary>
     public class GameResolutionManager
     {
-        private GameContext game;
+        private readonly GameContext game;
 
         public GameResolutionManager(GameContext gameContext)
         {
@@ -146,7 +146,7 @@ namespace SpaceAlert.Business
                     Shoot(currentSalle);
                     break;
                 case TypeAction.B:
-                    if (source.CurrentSalle.Pont == Pont.HAUT)
+                    if (source.CurrentSalle.Pont == Pont.Haut)
                     {
                         Shield(currentSalle);
                     }
@@ -157,6 +157,9 @@ namespace SpaceAlert.Business
                     break;
                 case TypeAction.C:
                     ResolveCAction(source);
+                    break;
+                case TypeAction.Robots:
+                    // TODO : Menaces internes
                     break;
                 default:
                     // do the default action
@@ -173,31 +176,31 @@ namespace SpaceAlert.Business
             Salle playerSalle = game.Game.Vaisseau.Salle(source.CurrentSalle);
             switch (playerSalle.ActionC)
             {
-                case ActionC.ROBOTS:
-                    if (playerSalle.HasRobots == PresenceRobots.PRESENTS && source.Robots == EtatRobots.NONE)
+                case ActionC.Robots:
+                    if (playerSalle.HasRobots == PresenceRobots.Presents && source.Robots == EtatRobots.None)
                     {
-                        source.Robots = EtatRobots.ACTIF;
-                        playerSalle.HasRobots = PresenceRobots.ACTIFS;
+                        source.Robots = EtatRobots.Actif;
+                        playerSalle.HasRobots = PresenceRobots.Actifs;
                     }
-                    if (source.Robots == EtatRobots.CASSE && playerSalle.HasRobots != PresenceRobots.NONE)
+                    if (source.Robots == EtatRobots.Casse && playerSalle.HasRobots != PresenceRobots.None)
                     {
-                        source.Robots = EtatRobots.ACTIF;
+                        source.Robots = EtatRobots.Actif;
                     }
                     break;
-                case ActionC.INTERCEPTEURS:
+                case ActionC.Intercepteurs:
                     game.Game.Vaisseau.InterceptorsInUse = true;
                     break;
-                case ActionC.MAINTENANCE:
+                case ActionC.Maintenance:
                     game.MaintenanceEffectuee = true;
                     break;
-                case ActionC.ROQUETTES:
+                case ActionC.Roquettes:
                     if (!game.RoquettesNextTurn && game.Game.Vaisseau.NbRoquettes > 0)
                     {
                         game.RoquettesNextTurn = true;
                         game.Game.Vaisseau.NbRoquettes--;
                     }
                     break;
-                case ActionC.HUBLOT:
+                case ActionC.Hublot:
                     // TODO
                     break;
                 default:
@@ -224,7 +227,7 @@ namespace SpaceAlert.Business
             // Si c'est un canon qui consomme de l'énergie, on la déduit de la réserve
             if (source.Canon.ConsumeEnergy)
             {
-                game.Game.Vaisseau.Salle(new Position(source.Position.Zone, Pont.BAS)).EnergieCourante--;
+                game.Game.Vaisseau.Salle(new Position(source.Position.Zone, Pont.Bas)).EnergieCourante--;
             }
         }
 
@@ -235,9 +238,9 @@ namespace SpaceAlert.Business
         public void Shield(Salle source)
         {
             // TODO : vérifier si on peut le faire plusieurs fois
-            int incrValue = Math.Min(source.EnergieMax - source.EnergieCourante, game.Game.Vaisseau.Salle(new Position(source.Position.Zone, Pont.BAS)).EnergieCourante);
+            int incrValue = Math.Min(source.EnergieMax - source.EnergieCourante, game.Game.Vaisseau.Salle(new Position(source.Position.Zone, Pont.Bas)).EnergieCourante);
             source.EnergieCourante += incrValue;
-            game.Game.Vaisseau.Salle(new Position(source.Position.Zone, Pont.BAS)).EnergieCourante -= incrValue;
+            game.Game.Vaisseau.Salle(new Position(source.Position.Zone, Pont.Bas)).EnergieCourante -= incrValue;
         }
 
         /// <summary>
@@ -247,14 +250,14 @@ namespace SpaceAlert.Business
         private void FillEnergy(Salle source)
         {
             // Cas de la salle centrale du bas
-            if (source.Position.Zone == Zone.BLANCHE && game.Game.Vaisseau.NbCapsules > 0)
+            if (source.Position.Zone == Zone.Blanche && game.Game.Vaisseau.NbCapsules > 0)
             {
                 game.Game.Vaisseau.NbCapsules--;
                 source.EnergieCourante = source.EnergieMax;
             }
             else
             {
-                Position middleTop = new Position(Zone.BLANCHE, Pont.BAS);
+                Position middleTop = new Position(Zone.Blanche, Pont.Bas);
                 int incrValue = Math.Min(game.Game.Vaisseau.Salle(middleTop).EnergieCourante, source.EnergieMax - source.EnergieCourante);
                 game.Game.Vaisseau.Salle(middleTop).EnergieCourante -= incrValue;
                 source.EnergieCourante += incrValue;
@@ -311,7 +314,7 @@ namespace SpaceAlert.Business
                     // S'il y a une menace dans la zone on lui inflige des dégâts
                     if (zoneMenace != null)
                     {
-                        Canon impulsionCanon = game.Game.Vaisseau.Salle(new Position(Zone.BLANCHE, Pont.BAS)).Canon;
+                        Canon impulsionCanon = game.Game.Vaisseau.Salle(new Position(Zone.Blanche, Pont.Bas)).Canon;
                         if (MenacePortee(zoneMenace) <= impulsionCanon.Range && impulsionCanon.HasShot)
                         {
                             totalDamages += impulsionCanon.Power;
