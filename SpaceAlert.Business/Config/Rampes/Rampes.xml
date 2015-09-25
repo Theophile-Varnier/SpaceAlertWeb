@@ -3,6 +3,7 @@
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://www.springframework.net http://www.springframework.net/schema/objects/spring-objects-1.1.xsd" >
   <object id="Rampe1" type="SpaceAlert.Model.Jeu.Rampe">
+    <property name="Id" value="1"/>
     <property name="NbCases" value="11"/>
     <property name="SpecialCases">
       <dictionary key-type="SpaceAlert.Model.Helpers.Enums.TypeCase">
@@ -25,6 +26,7 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
     </property>
   </object>
   <object id="Rampe2" type="SpaceAlert.Model.Jeu.Rampe">
+    <property name="Id" value="2"/>
     <property name="NbCases" value="11"/>
     <property name="SpecialCases">
       <dictionary key-type="SpaceAlert.Model.Helpers.Enums.TypeCase">
@@ -47,6 +49,7 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
     </property>
   </object>
   <object id="Rampe3" type="SpaceAlert.Model.Jeu.Rampe">
+    <property name="Id" value="3"/>
     <property name="NbCases" value="11"/>
     <property name="SpecialCases">
       <dictionary key-type="SpaceAlert.Model.Helpers.Enums.TypeCase">
@@ -69,6 +72,7 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
     </property>
   </object>
   <object id="Rampe4" type="SpaceAlert.Model.Jeu.Rampe">
+    <property name="Id" value="4"/>
     <property name="NbCases" value="11"/>
     <property name="SpecialCases">
       <dictionary key-type="SpaceAlert.Model.Helpers.Enums.TypeCase">
@@ -91,6 +95,7 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
     </property>
   </object>
   <object id="Rampe5" type="SpaceAlert.Model.Jeu.Rampe">
+    <property name="Id" value="5"/>
     <property name="NbCases" value="11"/>
     <property name="SpecialCases">
       <dictionary key-type="SpaceAlert.Model.Helpers.Enums.TypeCase">
@@ -113,6 +118,7 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
     </property>
   </object>
   <object id="Rampe6" type="SpaceAlert.Model.Jeu.Rampe">
+    <property name="Id" value="6"/>
     <property name="NbCases" value="11"/>
     <property name="SpecialCases">
       <dictionary key-type="SpaceAlert.Model.Helpers.Enums.TypeCase">

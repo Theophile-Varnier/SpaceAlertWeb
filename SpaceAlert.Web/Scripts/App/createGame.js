@@ -34,7 +34,7 @@
                     value: newChar,
                     text: newChar
                 }));
-                $("#CreatedBy").val(newChar);
+                $("#Game_Player_Name").val(newChar);
                 $('#wait').addClass("hidden");
             });
         }

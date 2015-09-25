@@ -78,8 +78,7 @@ namespace SpaceAlert.Web.Controllers
             // On renvoie vers la salle d'attente
             model.Game.GameId = gameId;
             model.IsGameOwner = true;
-            Session["currentGameId"] = gameId;
-            return View("WaitRoom", model);
+            return RedirectToAction("WaitRoom", model);
         }
 
         /// <summary>
@@ -145,14 +144,13 @@ namespace SpaceAlert.Web.Controllers
                     Game = GameMapper.MapToModel(game.Game),
                     IsGameOwner = false
                 };
-                Session["currentGameId"] = game.Game.Id;
-                return View("WaitRoom", newModel);
+                return RedirectToAction("WaitRoom", newModel);
             }
-            catch (NomDejaUtiliseException)
+            catch (UserAlreadyInGameException)
             {
                 model.ErrorMessages = new List<string>
                 {
-                    "Ce nom de personnage est déjà utilisé"
+                    "T'es déjà dans une partie, espèce de gredin !"
                 };
                 return RedirectToAction("Join");
             }

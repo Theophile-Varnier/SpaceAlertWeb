@@ -55,11 +55,11 @@ namespace SpaceAlert.Business
             return res.Id;
         }
 
+
         /// <summary>
-        /// Récupère une mission aléatoire d'un type défini
+        /// Initializes the mission.
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
+        /// <param name="game">The game.</param>
         private void InitialiserMission(GameContext game)
         {
             Dictionary<string, Mission> allMissions = SpaceAlertData.GetAll<Mission>();

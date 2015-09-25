@@ -62,7 +62,6 @@
     <Compile Include="AccountService.cs" />
     <Compile Include="Exceptions\MembreNonExistantException.cs" />
     <Compile Include="Exceptions\MotDePasseInvalideException.cs" />
-    <Compile Include="Exceptions\NomDejaUtiliseException.cs" />
     <Compile Include="Exceptions\PartiePleineException.cs" />
     <Compile Include="Exceptions\UserAlreadyInGameException.cs" />
     <Compile Include="Factories\GameFactory.cs" />
