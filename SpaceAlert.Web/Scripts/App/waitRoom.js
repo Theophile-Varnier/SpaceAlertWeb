@@ -63,16 +63,16 @@
     $.connection.hub.start().done(function () {
 
         // Indique au serveur qu'un nouveau joueur a rejoint la salle d'attente
-        roomHub.server.join($("#Player_Name").val(), $("#Game_GameId").val());
+        roomHub.server.joinAsync($("#Player_Name").val(), $("#Game_GameId").val());
 
 
         $("#startGame").on("click", function () {
             // Le propriétaire de la partie la lance
             if (isGameOwner()) {
-                roomHub.server.start($("#Game_GameId").val());
+                roomHub.server.startAsync($("#Game_GameId").val());
             } else {
                 // Les autres joueurs indiquent qu'ils sont prêts
-                roomHub.server.playerReady($("#Game_GameId").val());
+                roomHub.server.playerReadyAsync($("#Game_GameId").val());
             }
             // Modal indiquant le nombre de joueurs prêts
             $("#gameLoading").modal({
@@ -93,7 +93,7 @@
             })
             .done(function (newColor) {
                 // On indique à tout le monde qu'il y a eu un changement de couleur
-                roomHub.server.notifyColorChanged($("#Game_GameId").val(), currentElem.attr('class').split(/\s+/)[1], newColor);
+                roomHub.server.notifyColorChangedAsync($("#Game_GameId").val(), currentElem.attr('class').split(/\s+/)[1], newColor);
             });
         });
 

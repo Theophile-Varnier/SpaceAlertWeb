@@ -1,48 +1,50 @@
 <objects xmlns="http://www.springframework.net">
-<object id="Jellyfish" type="SpaceAlert.Model.Menaces.MenaceExterne">
-<property name="Name" value="Jellyfish"/>
-<property name="Shield" value="-2"/>
-<property name="CurrentHp" value="13"/>
-<property name="MaxHp" value="13"/>
-<property name="Speed" value="2"/>
-<property name="AttackValues">
-<dictionary key-type="SpaceAlert.Model.Helpers.Enums.TypeCase">
-<entry key="X">
-<list element-type="int">
-<value>1</value>
-<value>1</value>
-</list>
-</entry>
-<entry key="Y">
-<list element-type="int">
-<value>1</value>
-<value>1</value>
-</list>
-</entry>
-<entry key="Z">
-<list element-type="int">
-<value>2</value>
-<value>2</value>
-</list>
-</entry>
-</dictionary>
-</property>
-<property name="ActionsX">
-<list>
-<ref object="AttackOnAllZones" />
-<ref object=" Heals half damage (round down)"" />
-</list>
-</property>
-<property name="ActionsY">
-<list>
-<ref object="AttackOnAllZones" />
-<ref object=" Heals half damage (round down)"" />
-</list>
-</property>
-<property name="ActionsZ">
-<list>
-<ref object="AttackOnAllZones" />
-</list>
-</property>
-</object>
+  <object id="Jellyfish" type="SpaceAlert.Model.Menaces.MenaceExterne">
+    <property name="Name" value="Jellyfish"/>
+    <property name="Shield" value="-2"/>
+    <property name="CurrentHp" value="13"/>
+    <property name="MaxHp" value="13"/>
+    <property name="Speed" value="2"/>
+    <property name="AttackValues">
+      <dictionary key-type="SpaceAlert.Model.Helpers.Enums.TypeCase">
+        <entry key="X">
+          <list element-type="int">
+            <value>1</value>
+            <value>1</value>
+          </list>
+        </entry>
+        <entry key="Y">
+          <list element-type="int">
+            <value>1</value>
+            <value>1</value>
+          </list>
+        </entry>
+        <entry key="Z">
+          <list element-type="int">
+            <value>2</value>
+            <value>2</value>
+          </list>
+        </entry>
+      </dictionary>
+    </property>
+    <property name="Actions">
+      <dictionary key-type="SpaceAlert.Model.Helpers.Enums.TypeCase">
+        <entry key="X">
+          <list>
+            <ref object="AttackOnAllZones" />
+          </list>
+        </entry>
+        <entry key="Y">
+          <list>
+            <ref object="AttackOnAllZones" />
+          </list>
+        </entry>
+        <entry key="Z">
+          <list>
+            <ref object="AttackOnAllZones" />
+          </list>
+        </entry>
+      </dictionary>
+    </property>
+  </object>
 </objects>

@@ -5,45 +5,19 @@ using System.Threading.Tasks;
 
 namespace SpaceAlert.Web.Hubs
 {
-    public class WaitHub : Hub
+    public class WaitHub : AbstractHub
     {
-
-        private static ConcurrentDictionary<string, HubUser> GameUsers = new ConcurrentDictionary<string, HubUser>();
-
         private static ConcurrentDictionary<string, int> PlayersReady = new ConcurrentDictionary<string, int>();
 
         /// <summary>
-        /// Inscrit un membre à un groupe
+        /// Starts the asynchronous.
         /// </summary>
-        /// <param name="charName"></param>
-        /// <param name="gameId"></param>
+        /// <param name="gameId">The game identifier.</param>
         /// <returns></returns>
-        public async Task Join(string charName, string gameId)
-        {
-            await Groups.Add(Context.ConnectionId, gameId);
-
-            GameUsers.AddOrUpdate(charName, new HubUser
-            {
-                GameId = gameId,
-                LastKnownConnectionId = Context.ConnectionId
-            }, (s, user) =>
-            {
-                user.LastKnownConnectionId = Context.ConnectionId;
-                return user;
-            });
-
-            Clients.OthersInGroup(gameId).addPlayer(charName);
-        }
-
-        /// <summary>
-        /// Démarre une partie
-        /// </summary>
-        /// <param name="gameId"></param>
-        /// <returns></returns>
-        public async Task Start(string gameId)
+        public async Task StartAsync(string gameId)
         {
             await Clients.OthersInGroup(gameId).enableConnectionToGame();
-            PlayerReady(gameId);
+            PlayerReadyAsync(gameId);
         }
 
         /// <summary>
@@ -51,7 +25,7 @@ namespace SpaceAlert.Web.Hubs
         /// </summary>
         /// <param name="gameId">l'id de la partie</param>
         /// <returns></returns>
-        public async Task PlayerReady(string gameId)
+        public async Task PlayerReadyAsync(string gameId)
         {
             lock (PlayersReady)
             {
@@ -60,33 +34,17 @@ namespace SpaceAlert.Web.Hubs
             await Clients.Group(gameId).addPlayerReady(PlayersReady[gameId]);
         }
 
+
         /// <summary>
-        /// Indique aux joueurs que l'un d'entre eux a changé de couleur (le salop)
+        /// Notifies the color changed asynchronous.
         /// </summary>
-        /// <param name="gameId"></param>
-        /// <param name="oldColor"></param>
-        /// <param name="newColor"></param>
+        /// <param name="gameId">The game identifier.</param>
+        /// <param name="oldColor">The old color.</param>
+        /// <param name="newColor">The new color.</param>
         /// <returns></returns>
-        public async Task NotifyColorChanged(string gameId, string oldColor, string newColor)
+        public async Task NotifyColorChangedAsync(string gameId, string oldColor, string newColor)
         {
             await Clients.Group(gameId).notifyColorChanged(oldColor, newColor);
-        }
-
-        /// <summary>
-        /// Quand un joueur rejoint une partie
-        /// </summary>
-        /// <param name="charName"></param>
-        /// <param name="connectionId"></param>
-        /// <param name="gameId"></param>
-        /// <returns></returns>
-        public static async Task JoinGame(string charName, string connectionId, Guid gameId)
-        {
-            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<WaitHub>();
-            string id = gameId.ToString();
-
-            await context.Groups.Add(connectionId, id);
-
-            context.Clients.Group(id).addChatMessage(charName + " joined.");
         }
     }
 }

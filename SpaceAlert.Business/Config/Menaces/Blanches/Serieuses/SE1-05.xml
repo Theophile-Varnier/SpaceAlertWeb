@@ -27,20 +27,24 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
         </entry>
       </dictionary>
     </property>
-    <property name="ActionsX">
-      <list>
-        <ref object="Attack" />
-      </list>
-    </property>
-    <property name="ActionsY">
-      <list>
-        <ref object="Attack" />
-      </list>
-    </property>
-    <property name="ActionsZ">
-      <list>
-        <ref object="Attack" />
-      </list>
+    <property name="Actions">
+      <dictionary key-type="SpaceAlert.Model.Helpers.Enums.TypeCase">
+        <entry key="X">
+          <list>
+            <ref object="AttackOnAllZones" />
+          </list>
+        </entry>
+        <entry key="Y">
+          <list>
+            <ref object="AttackOnAllZones" />
+          </list>
+        </entry>
+        <entry key="Z">
+          <list>
+            <ref object="AttackOnAllZones" />
+          </list>
+        </entry>
+      </dictionary>
     </property>
   </object>
 </objects>

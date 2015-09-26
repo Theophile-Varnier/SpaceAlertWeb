@@ -17,10 +17,14 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
         </entry>
       </dictionary>
     </property>
-    <property name="ActionsZ">
-      <list>
-        <ref object="InflictRemainingHitPoints" />
-      </list>
+    <property name="Actions">
+      <dictionary key-type="SpaceAlert.Model.Helpers.Enums.TypeCase">
+        <entry key="Z">
+          <list>
+            <ref object="InflictRemainingHitPoints" />
+          </list>
+        </entry>
+      </dictionary>
     </property>
   </object>
 </objects>

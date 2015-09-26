@@ -1,7 +1,7 @@
 ﻿@{
     Layout = null;
 }
-
+@model SpaceAlert.Web.Models.GameShipViewModel
 <!DOCTYPE html>
 
 <html>
@@ -38,10 +38,14 @@
         </div>
     </div>
     @Html.Partial("Menu")
+
+    @Html.HiddenFor(m => m.GameId);
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/signalR")
     @Scripts.Render("~/Scripts/jquery-ui-1.11.4.js")
+    @Scripts.Render("~/signalr/hubs")
     @Scripts.Render("~/Scripts/App/jeu.js")
 </body>
 </html>

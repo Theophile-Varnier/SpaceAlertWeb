@@ -46,7 +46,7 @@ namespace SpaceAlert.Business
             GameContext res = GameFactory.CreateGame(typeMission, nbJoueurs, blanches, jaunes, rouges, unitOfWork.PersonnageProvider.Get(captain.Key, captain.Value));
 
             res.Game.Joueurs[0].Couleur = GetNextColor(res, res.Game.Joueurs[0].Personnage.Nom);
-            membre.CurrentGame = res.Id;
+            //membre.CurrentGame = res.Id;
             InitialiserRampes(res);
             unitOfWork.GameContextProvider.Add(res);
 
@@ -66,6 +66,7 @@ namespace SpaceAlert.Business
 
             KeyValuePair<string, Mission> val = allMissions.Where(m => m.Value.TypeMission == game.Game.TypeMission).GetNextRandom();
             game.Game.MissionId = val.Key;
+            game.Game.Mission = val.Value;
             Dictionary<string, Menace> availableMenaces = SpaceAlertData.GetAll<Menace>().Where(kvp => game.Game.Difficulte.HasFlag(kvp.Value.Couleur)).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             foreach (EvenementMenace evenement in game.Game.Mission.Evenements.OfType<EvenementMenace>())
             {
@@ -82,7 +83,13 @@ namespace SpaceAlert.Business
         /// <param name="gameId"></param>
         public void DemarrerGame(Guid gameId)
         {
-            DemarrerGame(GetGame(gameId));
+            DemarrerGame(unitOfWork.Context.GameContext
+                .Include(g => g.Game)
+                .Include(g => g.Game.Joueurs)
+                .Include(g => g.Game.Joueurs.Select(j => j.Actions))
+                .Include(g => g.Rampes)
+                .Include(g => g.Game.MenacesExternes)
+                .SingleOrDefault(g => g.Id == gameId));
         }
 
         /// <summary>
@@ -258,7 +265,6 @@ namespace SpaceAlert.Business
             {
                 unitOfWork.JoueurProvider.RegisterGame(joueur, game);
             }
-            unitOfWork.GameProvider.Add(game);
         }
     }
 }

@@ -5,10 +5,11 @@ namespace SpaceAlert.Web.Models.Mapping
 {
     public class ShipFactory
     {
-        public static GameShipViewModel DefaultShip()
+        public static GameShipViewModel DefaultShip(Guid gameId)
         {
             GameShipViewModel res = new GameShipViewModel
             {
+                GameId = gameId,
                 PhaseEnCours = 1,
                 Salles = new List<SalleViewModel>
                 {

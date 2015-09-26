@@ -1,5 +1,14 @@
 ﻿$(function () {
+    var playHub = $.connection.playHub;
     var lastPosition;
+
+    playHub.client.addChatMessage = function (message) {
+        console.log(message);
+    }
+
+    $.connection.hub.start().done(function () {
+        playHub.server.joinAsync("", $("#GameId").val());
+    });
 
     // Le nombre de tours dans chaque phase
     var toursParPhase = [3, 4, 5];

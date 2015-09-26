@@ -3,6 +3,7 @@ using SpaceAlert.Business.Exceptions;
 using SpaceAlert.Model.Jeu;
 using SpaceAlert.Model.Site;
 using SpaceAlert.Web.Helpers;
+using SpaceAlert.Web.Hubs;
 using SpaceAlert.Web.Models;
 using SpaceAlert.Web.Models.Mapping;
 using System;
@@ -65,20 +66,28 @@ namespace SpaceAlert.Web.Controllers
             };
 
             // On initialise la partie côté serveur
-            Guid gameId = serviceProvider.GameService.InitialiserGame(
-                model.Game.TypeMission,
-                model.Game.NbJoueurs,
-                model.Game.Blanches,
-                model.Game.Jaunes,
-                model.Game.Rouges,
-                new KeyValuePair<long, string>(User.Id, model.Player.Name));
+            try
+            {
+                Guid gameId = serviceProvider.GameService.InitialiserGame(
+                    model.Game.TypeMission,
+                    model.Game.NbJoueurs,
+                    model.Game.Blanches,
+                    model.Game.Jaunes,
+                    model.Game.Rouges,
+                    new KeyValuePair<long, string>(User.Id, model.Player.Name));
 
-            model.Game.Players.First().Color = serviceProvider.GameService.GetPlayerColor(gameId, User.Id);
+                model.Game.Players.First().Color = serviceProvider.GameService.GetPlayerColor(gameId, User.Id);
 
-            // On renvoie vers la salle d'attente
-            model.Game.GameId = gameId;
-            model.IsGameOwner = true;
-            return RedirectToAction("WaitRoom", model);
+                // On renvoie vers la salle d'attente
+                model.Game.GameId = gameId;
+                model.IsGameOwner = true;
+                TempData["GameModel"] = model;
+                return RedirectToAction("WaitRoom");
+            }
+            catch (UserAlreadyInGameException)
+            {
+                return RedirectToAction("Create");
+            }
         }
 
         /// <summary>
@@ -87,9 +96,14 @@ namespace SpaceAlert.Web.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult WaitRoom(GameCreationViewModel model)
+        public ActionResult WaitRoom()
         {
-            return View(model);
+            GameCreationViewModel newModel = (GameCreationViewModel)TempData["GameModel"];
+            if (newModel != null)
+            {
+                return View(newModel);
+            }
+            return RedirectToAction("Join");
         }
 
         /// <summary>
@@ -144,7 +158,8 @@ namespace SpaceAlert.Web.Controllers
                     Game = GameMapper.MapToModel(game.Game),
                     IsGameOwner = false
                 };
-                return RedirectToAction("WaitRoom", newModel);
+                TempData["GameModel"] = newModel;
+                return RedirectToAction("WaitRoom");
             }
             catch (UserAlreadyInGameException)
             {
@@ -174,7 +189,8 @@ namespace SpaceAlert.Web.Controllers
         {
             serviceProvider.GameService.DemarrerGame(gameId);
             GameExecutionManager manager = new GameExecutionManager(serviceProvider.GameService.GetGame(gameId).Game);
-            return View(ShipFactory.DefaultShip());
+            PlayHub.StartAsync(gameId.ToString().ToUpperInvariant(), manager);
+            return View(ShipFactory.DefaultShip(gameId));
         }
     }
 }

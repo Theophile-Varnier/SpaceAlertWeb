@@ -1,44 +1,46 @@
 <objects xmlns="http://www.springframework.net">
-<object id="Nemesis" type="SpaceAlert.Model.Menaces.MenaceExterne">
-<property name="Name" value="Nemesis"/>
-<property name="Shield" value="1"/>
-<property name="CurrentHp" value="9"/>
-<property name="MaxHp" value="9"/>
-<property name="Speed" value="3"/>
-<property name="AttackValues">
-<dictionary key-type="SpaceAlert.Model.Helpers.Enums.TypeCase">
-<entry key="X">
-<list element-type="int">
-<value>1</value>
-</list>
-</entry>
-<entry key="Y">
-<list element-type="int">
-<value>2</value>
-</list>
-</entry>
-<entry key="Z">
-<list element-type="int">
-</list>
-</entry>
-</dictionary>
-</property>
-<property name="ActionsX">
-<list>
-<ref object="Attack" />
-<ref object="Takes 1 damage"" />
-</list>
-</property>
-<property name="ActionsY">
-<list>
-<ref object="Attack" />
-<ref object="Takes 2 damage"" />
-</list>
-</property>
-<property name="ActionsZ">
-<list>
-<ref object="Destroys itself and the ship" />
-</list>
-</property>
-</object>
+  <object id="Nemesis" type="SpaceAlert.Model.Menaces.MenaceExterne">
+    <property name="Name" value="Nemesis"/>
+    <property name="Shield" value="1"/>
+    <property name="CurrentHp" value="9"/>
+    <property name="MaxHp" value="9"/>
+    <property name="Speed" value="3"/>
+    <property name="AttackValues">
+      <dictionary key-type="SpaceAlert.Model.Helpers.Enums.TypeCase">
+        <entry key="X">
+          <list element-type="int">
+            <value>1</value>
+          </list>
+        </entry>
+        <entry key="Y">
+          <list element-type="int">
+            <value>2</value>
+          </list>
+        </entry>
+        <entry key="Z">
+          <list element-type="int">
+          </list>
+        </entry>
+      </dictionary>
+    </property>
+    <property name="Actions">
+      <dictionary key-type="SpaceAlert.Model.Helpers.Enums.TypeCase">
+        <entry key="X">
+          <list>
+            <ref object="AttackOnAllZones" />
+          </list>
+        </entry>
+        <entry key="Y">
+          <list>
+            <ref object="AttackOnAllZones" />
+          </list>
+        </entry>
+        <entry key="Z">
+          <list>
+            <ref object="AttackOnAllZones" />
+          </list>
+        </entry>
+      </dictionary>
+    </property>
+  </object>
 </objects>
