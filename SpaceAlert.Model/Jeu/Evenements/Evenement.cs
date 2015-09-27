@@ -11,10 +11,5 @@ namespace SpaceAlert.Model.Jeu.Evenements
         /// Le moment auquel est annoncé l'événement
         /// </summary>
         public TimeSpan Annonce { get; set; }
-
-        /// <summary>
-        /// Résout l'événement
-        /// </summary>
-        public abstract void Resolve();
     }
 }

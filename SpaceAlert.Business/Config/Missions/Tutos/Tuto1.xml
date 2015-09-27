@@ -7,9 +7,7 @@
         <ref object="Tuto1_Event2"/>
         <ref object="Tuto1_Event3"/>
         <ref object="Tuto1_Event4"/>
-        <ref object="Tuto1_Event5"/>
         <ref object="Tuto1_Event6"/>
-        <ref object="Tuto1_Event7"/>
         <ref object="Tuto1_Event8"/>
         <ref object="Tuto1_Event9"/>
         <ref object="Tuto1_Event10"/>
@@ -43,20 +41,12 @@
     <property name="Confirme" value="True"/>
     <property name="Type" value="MenaceExterne"/>
   </object>
-  <object id="Tuto1_Event5" type="SpaceAlert.Model.Jeu.Evenements.FinDePhase">
-    <property name="Annonce" value="00:03:10"/>
-    <property name="TempsRestant" value="00:01:00"/>
-  </object>
   <object id="Tuto1_Event6" type="SpaceAlert.Model.Jeu.Evenements.TransfertDeDonnees">
     <property name="Annonce" value="00:03:20"/>
   </object>
-  <object id="Tuto1_Event7" type="SpaceAlert.Model.Jeu.Evenements.FinDePhase">
-    <property name="Annonce" value="00:03:50"/>
-    <property name="TempsRestant" value="00:00:20"/>
-  </object>
   <object id="Tuto1_Event8" type="SpaceAlert.Model.Jeu.Evenements.FinDePhase">
-    <property name="Annonce" value="00:04:05"/>
-    <property name="TempsRestant" value="00:00:05"/>
+    <property name="Annonce" value="00:04:10"/>
+    <property name="TempsRestant" value="00:00:00"/>
   </object>
   <object id="Tuto1_Event9" type="SpaceAlert.Model.Jeu.Evenements.DonneesEntrantes">
     <property name="Annonce" value="00:04:40"/>
@@ -64,8 +54,7 @@
   <object id="Tuto1_Event10" type="SpaceAlert.Model.Jeu.Evenements.TransfertDeDonnees">
     <property name="Annonce" value="00:05:10"/>
   </object>
-  <object id="Tuto1_Event11" type="SpaceAlert.Model.Jeu.Evenements.FinDePhase">
-    <property name="Annonce" value="00:06:00"/>
-    <property name="TempsRestant" value="00:01:00"/>
+  <object id="Tuto1_Event11" type="SpaceAlert.Model.Jeu.Evenements.FinDePartie">
+    <property name="Annonce" value="00:07:00"/>
   </object>
 </objects>

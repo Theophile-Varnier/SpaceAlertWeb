@@ -8,20 +8,10 @@ namespace SpaceAlert.Web.Hubs
 {
     public class PlayHub : AbstractHub
     {
-        private static ConcurrentDictionary<GameExecutionManager, string> games = new ConcurrentDictionary<GameExecutionManager, string>();
 
-        public static async Task StartAsync(string gameId, GameExecutionManager manager)
+        public void PopMenace(string gameId, string message)
         {
-            games.AddOrUpdate(manager, gameId, (m, s) => gameId);
-            manager.NewEventEvent += manager_NewEventEvent;
-        }
-
-        private static void manager_NewEventEvent(object sender, NewEventArgs e)
-        {
-            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<PlayHub>();
-            string id = games[(GameExecutionManager)sender];
-
-            context.Clients.Group(id).addChatMessage(e.Evenement.GetType());
+            Clients.Group(gameId).addChatMessage(message);
         }
     }
 }

@@ -7,9 +7,5 @@ namespace SpaceAlert.Model.Jeu.Evenements
     /// </summary>
     public class CoupureDeCommunication : Evenement
     {
-        public override void Resolve()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

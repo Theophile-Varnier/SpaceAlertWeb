@@ -7,9 +7,6 @@ namespace SpaceAlert.Model.Jeu.Evenements
     /// </summary>
     public class TransfertDeDonnees: Evenement
     {
-        public override void Resolve()
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

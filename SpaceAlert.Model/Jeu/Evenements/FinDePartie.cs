@@ -5,7 +5,7 @@ namespace SpaceAlert.Model.Jeu.Evenements
     /// <summary>
     /// Evénement d'annonce de fin d'une phase
     /// </summary>
-    public class FinDePhase : Evenement
+    public class FinDePartie : Evenement
     {
         /// <summary>
         /// Le temps restant avant la fin de la phase

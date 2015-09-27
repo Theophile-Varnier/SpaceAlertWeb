@@ -35,9 +35,5 @@ namespace SpaceAlert.Model.Jeu.Evenements
         /// </summary>
         public string MenaceName { get; set; }
 
-        public override void Resolve()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

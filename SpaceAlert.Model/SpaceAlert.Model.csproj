@@ -76,6 +76,7 @@
     <Compile Include="Jeu\ActionJoueur.cs" />
     <Compile Include="Jeu\Campagne.cs" />
     <Compile Include="Jeu\Canon.cs" />
+    <Compile Include="Jeu\Evenements\FinDePartie.cs" />
     <Compile Include="Jeu\PartialDeck.cs" />
     <Compile Include="Jeu\Evenements\CoupureDeCommunication.cs" />
     <Compile Include="Jeu\Evenements\DonneesEntrantes.cs" />

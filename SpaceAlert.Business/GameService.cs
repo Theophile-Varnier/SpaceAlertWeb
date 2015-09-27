@@ -164,6 +164,16 @@ namespace SpaceAlert.Business
                 .SingleOrDefault(g => g.Id == gameId);
         }
 
+        public GameContext GetGameForExecution(Guid gameId)
+        {
+            return unitOfWork.Context.GameContext
+                .Include(g => g.Game)
+                .Include(g => g.Game.Joueurs)
+                .Include(g => g.Game.MenacesExternes)
+                .Include(g => g.Game.MenacesExternes.Select(m => m.Menace))
+                .SingleOrDefault(g => g.Id == gameId);
+        }
+
         /// <summary>
         /// Gets the color of the player.
         /// </summary>

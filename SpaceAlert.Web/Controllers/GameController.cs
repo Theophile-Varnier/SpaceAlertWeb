@@ -188,8 +188,8 @@ namespace SpaceAlert.Web.Controllers
         public ActionResult Play(Guid gameId)
         {
             serviceProvider.GameService.DemarrerGame(gameId);
-            GameExecutionManager manager = new GameExecutionManager(serviceProvider.GameService.GetGame(gameId).Game);
-            PlayHub.StartAsync(gameId.ToString().ToUpperInvariant(), manager);
+            HubClient client = new HubClient(gameId, serviceProvider);
+            client.StartAsync();
             return View(ShipFactory.DefaultShip(gameId));
         }
     }
