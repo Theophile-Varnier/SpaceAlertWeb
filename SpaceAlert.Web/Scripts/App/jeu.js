@@ -6,6 +6,19 @@
         console.log(message);
     }
 
+    var endPhase = function (phase) {
+        $(".ligne .carte-container").each(function () {
+            var tour = parseInt($(this).attr("data-tour"));
+            if (tour < debutPhase[phase]) {
+                console.log("tour verrouillé : " + tour);
+            }
+        });
+    };
+
+    playHub.client.endPhase = function (phase) {
+        endPhase(phase);
+    }
+
     $.connection.hub.start().done(function () {
         playHub.server.joinAsync("", $("#GameId").val());
     });

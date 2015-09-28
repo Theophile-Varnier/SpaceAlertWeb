@@ -276,5 +276,39 @@ namespace SpaceAlert.Business
                 unitOfWork.JoueurProvider.RegisterGame(joueur, game);
             }
         }
+
+        /// <summary>
+        /// Adds the player actions.
+        /// </summary>
+        /// <param name="membreId">The membre identifier.</param>
+        /// <param name="gameId">The game identifier.</param>
+        /// <param name="actions">The actions.</param>
+        public void AddPlayerActions(long membreId, Guid gameId, IEnumerable<ActionInTour> actions)
+        {
+            unitOfWork.Context.Games.Find(gameId).Joueurs.Single(j => j.Personnage.MembreId == membreId).Actions.AddRange(actions);
+            unitOfWork.Context.SaveChanges();
+        }
+
+        /// <summary>
+        /// Adds the player action.
+        /// </summary>
+        /// <param name="membreId">The membre identifier.</param>
+        /// <param name="gameId">The game identifier.</param>
+        /// <param name="tour">The tour.</param>
+        /// <param name="genre">The genre.</param>
+        /// <param name="value">The value.</param>
+        public void AddPlayerAction(long membreId, Guid gameId, int tour, GenreAction genre, int value)
+        {
+            unitOfWork.Context.Games.Find(gameId).Joueurs.Single(j => j.Personnage.MembreId == membreId).Actions.Add(new ActionInTour
+            {
+                Action = new ActionJoueur
+                {
+                    GenreAction = genre,
+                    Value = value
+                },
+                Tour = tour
+            });
+            unitOfWork.Context.SaveChanges();
+        }
     }
 }

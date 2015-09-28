@@ -12,5 +12,13 @@ namespace SpaceAlert.Model.Jeu.Evenements
         /// </summary>
         public TimeSpan TempsRestant { get; set; }
 
+        /// <summary>
+        /// Gets or sets the phase.
+        /// </summary>
+        /// <value>
+        /// The phase.
+        /// </value>
+        public int Phase { get; set; }
+
     }
 }
