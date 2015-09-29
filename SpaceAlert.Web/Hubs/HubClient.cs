@@ -54,8 +54,14 @@ namespace SpaceAlert.Web.Hubs
             }
             else if (e.Evenement is FinDePartie)
             {
+                FinDePartie ev = (FinDePartie)e.Evenement;
                 manager.NewEventEvent -= manager_NewEventEvent;
-                hubProxy.Invoke("FinDePartie", gameId);
+                hubProxy.Invoke("FinDePartie", gameId, ev.Phase);
+            }
+            else if (e.Evenement is FinDePhase)
+            {
+                FinDePhase ev = (FinDePhase)e.Evenement;
+                hubProxy.Invoke("FinDePhase", gameId, ev.Phase);
             }
         }
     }

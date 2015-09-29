@@ -44,7 +44,7 @@ namespace SpaceAlert.Business
             Evenement futurEvent = Game.Mission.Evenements.OrderBy(ev => ev.Annonce).FirstOrDefault(ev => ev.Annonce > nextEvent.Annonce);
             if (futurEvent != null)
             {
-                timer.Interval = futurEvent.Annonce.TotalMilliseconds;
+                timer.Interval = futurEvent.Annonce.TotalMilliseconds - nextEvent.Annonce.TotalMilliseconds;
                 nextEvent = futurEvent;
             }
             else

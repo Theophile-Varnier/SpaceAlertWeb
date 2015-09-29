@@ -2,13 +2,13 @@
 using SpaceAlert.Business.Exceptions;
 using SpaceAlert.Model.Jeu;
 using SpaceAlert.Model.Site;
-using SpaceAlert.Web.Helpers;
 using SpaceAlert.Web.Hubs;
 using SpaceAlert.Web.Models;
 using SpaceAlert.Web.Models.Mapping;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 
 namespace SpaceAlert.Web.Controllers
@@ -191,6 +191,26 @@ namespace SpaceAlert.Web.Controllers
             HubClient client = new HubClient(gameId, serviceProvider);
             client.StartAsync();
             return View(ShipFactory.DefaultShip(gameId));
+        }
+
+        /// <summary>
+        /// Adds the player actions.
+        /// </summary>
+        /// <param name="gameId">The game identifier.</param>
+        /// <param name="actions">The actions.</param>
+        /// <returns></returns>
+        public ActionResult AddPlayerActions(Guid gameId, ActionViewModel[] actions)
+        {
+            IEnumerable<ActionInTour> actionsToAdd = actions.Select(a => new ActionInTour
+            {
+                Action = new ActionJoueur{
+                    GenreAction = a.Genre,
+                    Value = a.Value
+                },
+                Tour = a.Tour
+            });
+            serviceProvider.GameService.AddPlayerActions(User.Id, gameId, actionsToAdd);
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
     }
 }

@@ -191,6 +191,7 @@
     <Compile Include="Hubs\PlayHub.cs" />
     <Compile Include="Models\AbstractViewModel.cs" />
     <Compile Include="Models\AccountViewModel.cs" />
+    <Compile Include="Models\ActionViewModel.cs" />
     <Compile Include="Models\GameCreationViewModel.cs" />
     <Compile Include="Models\GameViewModel.cs" />
     <Compile Include="Models\JoinGameViewModel.cs" />
