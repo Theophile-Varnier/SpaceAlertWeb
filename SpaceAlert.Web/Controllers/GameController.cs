@@ -209,6 +209,8 @@ namespace SpaceAlert.Web.Controllers
                 },
                 Tour = a.Tour
             });
+
+
             serviceProvider.GameService.AddPlayerActions(User.Id, gameId, actionsToAdd);
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
