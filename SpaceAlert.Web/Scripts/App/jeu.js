@@ -2,22 +2,41 @@
     var playHub = $.connection.playHub;
     var lastPosition;
 
-    playHub.client.addChatMessage = function (message) {
+    playHub.client.addChatMessage = function(message) {
         console.log(message);
-    }
+    };
 
     var endPhase = function (phase) {
+        var actionsToSend = [];
         $(".ligne .carte-container").each(function () {
             var tour = parseInt($(this).attr("data-tour"));
-            if (tour < debutPhase[phase]) {
+            if (tour < debutPhase[phase] && tour >= debutPhase[phase - 1]) {
                 console.log("tour verrouillé : " + tour);
+                if ($(this).children(".carte").length == 1) {
+                    var carte = $(this).children(".carte")[0];
+                    var reversed = carte.children("img")[0].className.indexOf("reverse") == -1;
+                    actionsToSend.push({
+                        Genre: reversed ? 0 : 1,
+                        Value: reversed ? carte.attr("data-action") : carte.attr("data-mouvement"),
+                        Tour: tour
+                    });
+                }
+            }
+        });
+        $.ajax({
+            method: "POST",
+            url: addActionsUrl,
+            traditional: true,
+            data: {
+                gameId: $("#GameId").val(),
+                actions: actionsToSend
             }
         });
     };
 
     playHub.client.endPhase = function (phase) {
         endPhase(phase);
-    }
+    };
 
     $.connection.hub.start().done(function () {
         playHub.server.joinAsync("", $("#GameId").val());
