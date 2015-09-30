@@ -17,6 +17,7 @@
 <body>
     <script type="text/javascript">
         var debutPhase = @Html.Raw(Json.Encode(SpaceAlert.Business.SpaceAlertData.DebutPhases));
+        var addActionsUrl = '@Url.Action("AddPlayerActions")';
     </script>
     <div id="infoJeu">
         @*<div class="col-xs-2" id="recap"></div>*@
@@ -25,30 +26,30 @@
         </div>
         @*<div class="col-xs-2"></div>*@
     </div>
-        <div id="playerInfo">
-            <div class="col-xs-6 no-padding" id="playerPlan">
-                @Html.Partial("PlayerPlan")
-            </div>
-            <div class="col-xs-6 no-padding" id="playerDeck">
-                <div id="carteClones"></div>
-                <div id="cartes">
-                    @Html.Partial("Carte")
-                    @Html.Partial("Carte")
-                    @Html.Partial("Carte")
-                    @Html.Partial("Carte")
-                    @Html.Partial("Carte")
-                </div>
+    <div id="playerInfo">
+        <div class="col-xs-6 no-padding" id="playerPlan">
+            @Html.Partial("PlayerPlan")
+        </div>
+        <div class="col-xs-6 no-padding" id="playerDeck">
+            <div id="carteClones"></div>
+            <div id="cartes">
+                @Html.Partial("Carte")
+                @Html.Partial("Carte")
+                @Html.Partial("Carte")
+                @Html.Partial("Carte")
+                @Html.Partial("Carte")
             </div>
         </div>
-        @Html.Partial("Menu")
+    </div>
+    @Html.Partial("Menu")
 
-        @Html.HiddenFor(m => m.GameId);
+    @Html.HiddenFor(m => m.GameId);
 
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @Scripts.Render("~/bundles/signalR")
-        @Scripts.Render("~/Scripts/jquery-ui-1.11.4.js")
-        @Scripts.Render("~/signalr/hubs")
-        @Scripts.Render("~/Scripts/App/jeu.js")
-        </body>
-        </html>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/signalR")
+    @Scripts.Render("~/Scripts/jquery-ui-1.11.4.js")
+    @Scripts.Render("~/signalr/hubs")
+    @Scripts.Render("~/Scripts/App/jeu.js")
+</body>
+</html>

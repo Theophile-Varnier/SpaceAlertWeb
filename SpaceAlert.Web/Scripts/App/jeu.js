@@ -2,22 +2,43 @@
     var playHub = $.connection.playHub;
     var lastPosition;
 
-    playHub.client.addChatMessage = function (message) {
+    playHub.client.addChatMessage = function(message) {
         console.log(message);
-    }
+    };
 
     var endPhase = function (phase) {
+        var actionsToSend = [];
         $(".ligne .carte-container").each(function () {
             var tour = parseInt($(this).attr("data-tour"));
-            if (tour < debutPhase[phase]) {
+            if (tour < debutPhase[phase] && tour >= debutPhase[phase - 1]) {
                 console.log("tour verrouillé : " + tour);
+                if ($(this).find(".carte").length == 1) {
+                    var carte = $($(this).find(".carte")[0]);
+                    var reversed = carte.find("img")[0].className.indexOf("reverse") == -1;
+                    actionsToSend.push({
+                        Genre: reversed ? 0 : 1,
+                        Value: reversed ? parseInt(carte.attr("data-action")) : parseInt(carte.attr("data-mouvement")),
+                        Tour: tour
+                    });
+                }
+            }
+        });
+        var datas = JSON.stringify(actionsToSend);
+        var gameId = $("#GameId").val();
+        $.ajax({
+            type: "POST",
+            url: addActionsUrl,
+            dataType: "application/json",
+            data: {
+                gameId: gameId,
+                actions: datas
             }
         });
     };
 
     playHub.client.endPhase = function (phase) {
         endPhase(phase);
-    }
+    };
 
     $.connection.hub.start().done(function () {
         playHub.server.joinAsync("", $("#GameId").val());

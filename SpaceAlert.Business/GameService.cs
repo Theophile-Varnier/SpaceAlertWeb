@@ -285,7 +285,12 @@ namespace SpaceAlert.Business
         /// <param name="actions">The actions.</param>
         public void AddPlayerActions(long membreId, Guid gameId, IEnumerable<ActionInTour> actions)
         {
-            unitOfWork.Context.Games.Find(gameId).Joueurs.Single(j => j.Personnage.MembreId == membreId).Actions.AddRange(actions);
+            Game game = unitOfWork.Context.Games
+                .Include(g => g.Joueurs)
+                .Include(g => g.Joueurs.Select(j => j.Personnage))
+                .Include(g => g.Joueurs.Select(j => j.Actions))
+                .SingleOrDefault(g => g.Id == gameId);
+            game.Joueurs.Single(j => j.Personnage.MembreId == membreId).Actions.AddRange(actions);
             unitOfWork.Context.SaveChanges();
         }
 

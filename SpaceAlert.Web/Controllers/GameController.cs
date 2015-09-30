@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace SpaceAlert.Web.Controllers
 {
@@ -199,11 +200,15 @@ namespace SpaceAlert.Web.Controllers
         /// <param name="gameId">The game identifier.</param>
         /// <param name="actions">The actions.</param>
         /// <returns></returns>
-        public ActionResult AddPlayerActions(Guid gameId, ActionViewModel[] actions)
+        [HttpPost]
+        public ActionResult AddPlayerActions(Guid gameId, string actions)
         {
-            IEnumerable<ActionInTour> actionsToAdd = actions.Select(a => new ActionInTour
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            ActionViewModel[] actionsViewModel = serializer.Deserialize<ActionViewModel[]>(actions);
+            IEnumerable<ActionInTour> actionsToAdd = actionsViewModel.Select(a => new ActionInTour
             {
-                Action = new ActionJoueur{
+                Action = new ActionJoueur
+                {
                     GenreAction = a.Genre,
                     Value = a.Value
                 },
