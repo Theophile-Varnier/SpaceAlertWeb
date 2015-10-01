@@ -12,6 +12,8 @@
             var tour = parseInt($(this).attr("data-tour"));
             if (tour < debutPhase[phase] && tour >= debutPhase[phase - 1]) {
                 console.log("tour verrouillé : " + tour);
+                $(this).prepend("<img class='locker bottom animated bounceInUp' src='../Content/Medias/cartelockedbottom.png'></img>");
+                $(this).prepend("<img class='locker top animated bounceInDown' src='../Content/Medias/cartelockedtop.png'></img>");
                 if ($(this).find(".carte").length == 1) {
                     var carte = $($(this).find(".carte")[0]);
                     var reversed = carte.find("img")[0].className.indexOf("reverse") == -1;
@@ -23,17 +25,19 @@
                 }
             }
         });
-        var datas = JSON.stringify(actionsToSend);
-        var gameId = $("#GameId").val();
-        $.ajax({
-            type: "POST",
-            url: addActionsUrl,
-            dataType: "application/json",
-            data: {
-                gameId: gameId,
-                actions: datas
-            }
-        });
+        if (actionsToSend.length) {
+            var datas = JSON.stringify(actionsToSend);
+            var gameId = $("#GameId").val();
+            $.ajax({
+                type: "POST",
+                url: addActionsUrl,
+                dataType: "application/json",
+                data: {
+                    gameId: gameId,
+                    actions: datas
+                }
+            });
+        }
     };
 
     playHub.client.endPhase = function (phase) {

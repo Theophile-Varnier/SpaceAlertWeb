@@ -206,10 +206,13 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\Game.css" />
+    <Content Include="Content\Medias\cartelockedbottom.png" />
+    <Content Include="Content\Medias\cartelockedtop.png" />
     <Content Include="Content\Medias\carte_dos.png" />
     <Content Include="Content\Medias\progra.png" />
     <Content Include="Content\Medias\SA_cover.png" />

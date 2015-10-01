@@ -19,26 +19,26 @@ body {
     height: 75%;
 }
 
-    #infoJeu > div {
-        height: 100%;
-        border-bottom: 1px solid black;
-    }
+#infoJeu > div {
+    height: 100%;
+    border-bottom: 1px solid black;
+}
 
-        #infoJeu > div:first-child {
-            border-right: 1px solid black;
-        }
+#infoJeu > div:first-child {
+    border-right: 1px solid black;
+}
 
-        #infoJeu > div:last-child {
-            border-left: 1px solid black;
-        }
+#infoJeu > div:last-child {
+    border-left: 1px solid black;
+}
 
 #playerInfo {
     height: 25%;
 }
 
-    #playerInfo > div {
-        height: 100%;
-    }
+#playerInfo > div {
+    height: 100%;
+}
 
 #playerDeck {
     border-left: 1px solid black;
@@ -80,25 +80,45 @@ body {
         width: 100%;
         height: 50%;
         display: flex;
+        overflow-y: hidden;
 
         & img {
             height: 100%;
             width: 100%;
         }
-    }
 
-        & .ligne > div {
-            width: 100/7%;
-            height: 100%;
-            display: inline-block;
+        & img.locker {
+            user-drag: none;
+            -moz-user-select: none;
+            -webkit-user-drag: none;
+            position: absolute;
+            width: 100%;
+            height: 50%;
+            z-index: 10001;
 
-            &.hovered {
-                border: 1px solid black;
+            &.top {
+                top: 0;
+            }
+
+            &.bottom {
+                bottom: 0;
             }
         }
+    }
+
+    & .ligne > div {
+        width: 100/7%;
+        height: 100%;
+        display: inline-block;
+        position: relative;
+
+        &.hovered {
+            border: 1px solid black;
+        }
+    }
 }
 
-#paddingLeft{
+#paddingLeft {
     width: 19% !important;
 }
 
@@ -145,9 +165,9 @@ body {
             width: 25%;
         }
 
-            & .grid-cell:first-child, & .grid-cell:last-child {
-                width: 12.5%;
-            }
+        & .grid-cell:first-child, & .grid-cell:last-child {
+            width: 12.5%;
+        }
 
         & .salle:hover {
             border: 2px solid black;
