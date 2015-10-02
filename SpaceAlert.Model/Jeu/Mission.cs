@@ -14,6 +14,8 @@ namespace SpaceAlert.Model.Jeu
         /// </summary>
         public int NbTours { get; set; }
 
+        public string Name { get; set; }
+
         /// <summary>
         /// Le type de mission
         /// </summary>

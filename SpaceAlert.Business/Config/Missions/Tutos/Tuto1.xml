@@ -1,6 +1,7 @@
 ﻿<objects xmlns="http://www.springframework.net">
   <object id="Tuto1" type="SpaceAlert.Model.Jeu.Mission">
     <property name="TypeMission" value="TUTORIEL"/>
+    <property name="Name" value="Tuto1"/>
     <property name="Evenements">
       <list element-type="SpaceAlert.Model.Jeu.Evenements.Evenement">
         <ref object="Tuto1_Event1"/>

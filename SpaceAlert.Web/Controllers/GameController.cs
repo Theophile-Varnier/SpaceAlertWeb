@@ -188,10 +188,33 @@ namespace SpaceAlert.Web.Controllers
         [HttpGet]
         public ActionResult Play(Guid gameId)
         {
+            return View(ShipFactory.DefaultShip(gameId));
+        }
+
+
+        /// <summary>
+        /// Plays the specified game.
+        /// </summary>
+        /// <param name="game">The game.</param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Play(GameCreationViewModel game)
+        {
+            return View(ShipFactory.DefaultShip(game.Game.GameId));
+        }
+
+        /// <summary>
+        /// Starts the specified game.
+        /// </summary>
+        /// <param name="gameId">The game identifier.</param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Start(Guid gameId)
+        {
             serviceProvider.GameService.DemarrerGame(gameId);
             HubClient client = new HubClient(gameId, serviceProvider);
             client.StartAsync();
-            return View(ShipFactory.DefaultShip(gameId));
+            return View("Play", ShipFactory.DefaultShip(gameId));
         }
 
         /// <summary>
@@ -214,7 +237,6 @@ namespace SpaceAlert.Web.Controllers
                 },
                 Tour = a.Tour
             });
-
 
             serviceProvider.GameService.AddPlayerActions(User.Id, gameId, actionsToAdd);
             return new HttpStatusCodeResult(HttpStatusCode.OK);

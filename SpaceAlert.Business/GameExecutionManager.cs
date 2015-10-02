@@ -1,6 +1,5 @@
 ﻿using SpaceAlert.Model.Jeu;
 using SpaceAlert.Model.Jeu.Evenements;
-using System;
 using System.Linq;
 using System.Timers;
 
@@ -26,8 +25,10 @@ namespace SpaceAlert.Business
         {
             Game = game;
             nextEvent = game.Mission.Evenements.OrderBy(e => e.Annonce).First();
-            timer = new Timer();
-            timer.Interval = nextEvent.Annonce.TotalMilliseconds;
+            timer = new Timer
+            {
+                Interval = nextEvent.Annonce.TotalMilliseconds
+            };
             timer.Elapsed += timer_Elapsed;
             timer.Enabled = true;
         }
