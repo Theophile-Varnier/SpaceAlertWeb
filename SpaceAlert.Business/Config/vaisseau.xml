@@ -96,31 +96,31 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
     <property name="ActionC" value="ROBOTS"/>
   </object>
 
-  <object id="PosBleueHaut" type="SpaceAlert.Model.Plateau.Position">
+  <object id="PosBleueHaut" type="SpaceAlert.Model.Plateau.Position" singleton="false">
     <constructor-arg value="BLEUE"/>
     <constructor-arg value="HAUT"/>
   </object>
 
-  <object id="PosBleueBas" type="SpaceAlert.Model.Plateau.Position">
+  <object id="PosBleueBas" type="SpaceAlert.Model.Plateau.Position" singleton="false">
     <constructor-arg value="BLEUE"/>
     <constructor-arg value="BAS"/>
   </object>
-  <object id="PosBlancHaut" type="SpaceAlert.Model.Plateau.Position">
+  <object id="PosBlancHaut" type="SpaceAlert.Model.Plateau.Position" singleton="false">
     <constructor-arg value="BLANCHE"/>
     <constructor-arg value="HAUT"/>
   </object>
 
-  <object id="PosBlancBas" type="SpaceAlert.Model.Plateau.Position">
+  <object id="PosBlancBas" type="SpaceAlert.Model.Plateau.Position" singleton="false">
     <constructor-arg value="BLANCHE"/>
     <constructor-arg value="BAS"/>
   </object>
 
-  <object id="PosRougeHaut" type="SpaceAlert.Model.Plateau.Position">
+  <object id="PosRougeHaut" type="SpaceAlert.Model.Plateau.Position" singleton="false">
     <constructor-arg value="ROUGE"/>
     <constructor-arg value="HAUT"/>
   </object>
 
-  <object id="PosRougeBas" type="SpaceAlert.Model.Plateau.Position">
+  <object id="PosRougeBas" type="SpaceAlert.Model.Plateau.Position" singleton="false">
     <constructor-arg value="ROUGE"/>
     <constructor-arg value="BAS"/>
   </object>
