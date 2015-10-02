@@ -16,7 +16,7 @@ namespace SpaceAlert.Web.Hubs
     /// </summary>
     public class HubClient
     {
-        private GameContext game;
+        private readonly GameContext game;
 
         private GameExecutionManager manager;
 
@@ -32,7 +32,7 @@ namespace SpaceAlert.Web.Hubs
         /// <param name="serviceProvider">The service provider.</param>
         public HubClient(Guid gameId, ServiceProvider serviceProvider)
         {
-            this.game = serviceProvider.GameService.GetGameForExecution(gameId);
+            game = serviceProvider.GameService.GetGameForExecution(gameId);
             this.serviceProvider = serviceProvider;
         }
 
@@ -52,16 +52,24 @@ namespace SpaceAlert.Web.Hubs
             {
                 hubProxy.Invoke("PopMenace", gameId, e.Evenement.GetType());
             }
-            else if (e.Evenement is FinDePartie)
+            else
             {
-                FinDePartie ev = (FinDePartie)e.Evenement;
-                manager.NewEventEvent -= manager_NewEventEvent;
-                hubProxy.Invoke("FinDePartie", gameId, ev.Phase);
-            }
-            else if (e.Evenement is FinDePhase)
-            {
-                FinDePhase ev = (FinDePhase)e.Evenement;
-                hubProxy.Invoke("FinDePhase", gameId, ev.Phase);
+                FinDePartie partie = e.Evenement as FinDePartie;
+                if (partie != null)
+                {
+                    FinDePartie ev = partie;
+                    manager.NewEventEvent -= manager_NewEventEvent;
+                    hubProxy.Invoke("FinDePartie", gameId, ev.Phase);
+                }
+                else
+                {
+                    FinDePhase phase = e.Evenement as FinDePhase;
+                    if (phase != null)
+                    {
+                        FinDePhase ev = phase;
+                        hubProxy.Invoke("FinDePhase", gameId, ev.Phase);
+                    }
+                }
             }
         }
     }
