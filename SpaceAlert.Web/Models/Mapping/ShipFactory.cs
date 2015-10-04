@@ -1,16 +1,19 @@
-﻿using System;
+﻿using SpaceAlert.Model.Jeu;
+using System;
 using System.Collections.Generic;
 
 namespace SpaceAlert.Web.Models.Mapping
 {
     public class ShipFactory
     {
-        public static GameShipViewModel DefaultShip(Guid gameId)
+        public static GameShipViewModel DefaultShip(Game game)
         {
             GameShipViewModel res = new GameShipViewModel
             {
-                GameId = gameId,
+                GameId = game.Id,
+                MissionId = game.MissionId,
                 PhaseEnCours = 1,
+                Joueurs = new List<PlayerViewModel>(),
                 Salles = new List<SalleViewModel>
                 {
                     new SalleViewModel
@@ -87,6 +90,17 @@ namespace SpaceAlert.Web.Models.Mapping
                     },
                 }
             };
+
+            foreach (Joueur joueur in game.Joueurs)
+            {
+                res.Joueurs.Add(new PlayerViewModel
+                {
+                    Name = joueur.Personnage.Nom,
+                    MembreName = joueur.Personnage.Membre.Pseudo,
+                    Avatar = joueur.Personnage.Membre.Avatar,
+                    Color = joueur.Couleur
+                });
+            }
 
             return res;
         }

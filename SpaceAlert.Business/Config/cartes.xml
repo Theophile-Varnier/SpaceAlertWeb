@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<objects xmlns="http://www.springframework.net"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.net http://www.springframework.net/schema/objects/spring-objects-1.1.xsd" >
+
+  <object id="Deck1" type="SpaceAlert.Model.Jeu.PartialDeck" singleton="false">
+    <property name="TypeAction" value="A" />
+    <property name="Mouvement" value="Asc" />
+    <property name="NbCartes" value="10" />
+  </object>
+
+  <object id="Deck2" type="SpaceAlert.Model.Jeu.PartialDeck" singleton="false">
+    <property name="TypeAction" value="A" />
+    <property name="Mouvement" value="Blue" />
+    <property name="NbCartes" value="10" />
+  </object>
+
+  <object id="Deck3" type="SpaceAlert.Model.Jeu.PartialDeck" singleton="false">
+    <property name="TypeAction" value="A" />
+    <property name="Mouvement" value="Red" />
+    <property name="NbCartes" value="10" />
+  </object>
+
+  <object id="Deck4" type="SpaceAlert.Model.Jeu.PartialDeck" singleton="false">
+    <property name="TypeAction" value="B" />
+    <property name="Mouvement" value="Asc" />
+    <property name="NbCartes" value="8" />
+  </object>
+
+  <object id="Deck5" type="SpaceAlert.Model.Jeu.PartialDeck" singleton="false">
+    <property name="TypeAction" value="B" />
+    <property name="Mouvement" value="Blue" />
+    <property name="NbCartes" value="8" />
+  </object>
+
+  <object id="Deck6" type="SpaceAlert.Model.Jeu.PartialDeck" singleton="false">
+    <property name="TypeAction" value="B" />
+    <property name="Mouvement" value="Red" />
+    <property name="NbCartes" value="8" />
+  </object>
+
+  <object id="Deck7" type="SpaceAlert.Model.Jeu.PartialDeck" singleton="false">
+    <property name="TypeAction" value="C" />
+    <property name="Mouvement" value="Asc" />
+    <property name="NbCartes" value="7" />
+  </object>
+
+  <object id="Deck8" type="SpaceAlert.Model.Jeu.PartialDeck" singleton="false">
+    <property name="TypeAction" value="C" />
+    <property name="Mouvement" value="Blue" />
+    <property name="NbCartes" value="7" />
+  </object>
+
+  <object id="Deck9" type="SpaceAlert.Model.Jeu.PartialDeck" singleton="false">
+    <property name="TypeAction" value="C" />
+    <property name="Mouvement" value="Red" />
+    <property name="NbCartes" value="7" />
+  </object>
+
+  <object id="Deck10" type="SpaceAlert.Model.Jeu.PartialDeck" singleton="false">
+    <property name="TypeAction" value="Robots" />
+    <property name="Mouvement" value="Asc" />
+    <property name="NbCartes" value="5" />
+  </object>
+
+  <object id="Deck11" type="SpaceAlert.Model.Jeu.PartialDeck" singleton="false">
+    <property name="TypeAction" value="Robots" />
+    <property name="Mouvement" value="Blue" />
+    <property name="NbCartes" value="5" />
+  </object>
+
+  <object id="Deck12" type="SpaceAlert.Model.Jeu.PartialDeck" singleton="false">
+    <property name="TypeAction" value="Robots" />
+    <property name="Mouvement" value="Red" />
+    <property name="NbCartes" value="5" />
+  </object>
+
+</objects>

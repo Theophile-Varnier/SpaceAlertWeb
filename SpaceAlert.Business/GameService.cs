@@ -34,7 +34,7 @@ namespace SpaceAlert.Business
         /// <param name="captain">The captain.</param>
         /// <returns></returns>
         /// <exception cref="UserAlreadyInGameException"></exception>
-        public Guid InitialiserGame(TypeMission typeMission, int nbJoueurs, bool blanches, bool jaunes, bool rouges, KeyValuePair<long, string> captain)
+        public int InitialiserGame(TypeMission typeMission, int nbJoueurs, bool blanches, bool jaunes, bool rouges, KeyValuePair<long, string> captain)
         {
             Membre membre = unitOfWork.MembreProvider.GetUniqueResult(m => m.Id == captain.Key);
 
@@ -81,9 +81,9 @@ namespace SpaceAlert.Business
         /// Démarre une partie
         /// </summary>
         /// <param name="gameId"></param>
-        public void DemarrerGame(Guid gameId)
+        public GameContext DemarrerGame(int gameId)
         {
-            DemarrerGame(unitOfWork.Context.GameContext
+            return DemarrerGame(unitOfWork.Context.GameContext
                 .Include(g => g.Game)
                 .Include(g => g.Game.Joueurs)
                 .Include(g => g.Game.Joueurs.Select(j => j.Actions))
@@ -97,7 +97,7 @@ namespace SpaceAlert.Business
         /// </summary>
         /// <param name="game"></param>
         /// <returns>L'id de la partie qui a été commencée</returns>
-        public Guid DemarrerGame(GameContext game)
+        public GameContext DemarrerGame(GameContext game)
         {
             InitialiserMission(game);
             game.Statut = StatutPartie.Jeu;
@@ -118,7 +118,7 @@ namespace SpaceAlert.Business
             }
             RegisterGame(game.Game);
             unitOfWork.Context.SaveChanges();
-            return game.Id;
+            return game;
         }
 
         /// <summary>
@@ -156,22 +156,27 @@ namespace SpaceAlert.Business
         /// </summary>
         /// <param name="gameId"></param>
         /// <returns></returns>
-        public GameContext GetGame(Guid gameId)
+        public GameContext GetGame(int gameId)
         {
             return unitOfWork.Context.GameContext
                 .Include(g => g.Game)
                 .Include(g => g.Game.Joueurs)
+                .Include(g => g.Game.Joueurs.Select(j => j.Personnage))
+                .Include(g => g.Game.Joueurs.Select(j => j.Personnage.Membre))
                 .SingleOrDefault(g => g.Id == gameId);
         }
 
-        public GameContext GetGameForExecution(Guid gameId)
+        public GameContext GetGameForExecution(int gameId)
         {
-            return unitOfWork.Context.GameContext
+            GameContext res = unitOfWork.Context.GameContext
                 .Include(g => g.Game)
                 .Include(g => g.Game.Joueurs)
                 .Include(g => g.Game.MenacesExternes)
                 .Include(g => g.Game.MenacesExternes.Select(m => m.Menace))
                 .SingleOrDefault(g => g.Id == gameId);
+
+            res.Game.Mission = SpaceAlertData.GetObject<Mission>(res.Game.MissionId);
+            return res;
         }
 
         /// <summary>
@@ -180,7 +185,7 @@ namespace SpaceAlert.Business
         /// <param name="gameId">The game identifier.</param>
         /// <param name="membreId">The membre identifier.</param>
         /// <returns></returns>
-        public string GetPlayerColor(Guid gameId, long membreId)
+        public string GetPlayerColor(int gameId, long membreId)
         {
             // On récupère la partie en cours
             Game game = unitOfWork.Context.Games
@@ -223,7 +228,7 @@ namespace SpaceAlert.Business
         /// <param name="gameId">The game identifier.</param>
         /// <param name="characterName">Name of the character.</param>
         /// <returns></returns>
-        public string GetNextColor(Guid gameId, string characterName)
+        public string GetNextColor(int gameId, string characterName)
         {
             GameContext game = GetGame(gameId);
             return GetNextColor(game, characterName);
@@ -235,7 +240,7 @@ namespace SpaceAlert.Business
         /// <param name="gameId">La partie concernée</param>
         /// <param name="memberId">L'id du membre qui rejoint la partie</param>
         /// <param name="characterName">Le nom du personnage du membre</param>
-        public GameContext AjouterJoueur(Guid gameId, long memberId, string characterName)
+        public GameContext AjouterJoueur(int gameId, long memberId, string characterName)
         {
             Membre membre = unitOfWork.MembreProvider.GetUniqueResult(j => j.Id == memberId);
 
@@ -253,7 +258,7 @@ namespace SpaceAlert.Business
                 throw new UserAlreadyInGameException();
             }
 
-            membre.CurrentGame = gameId;
+            // membre.CurrentGame = gameId;
 
             // On ajoute le joueur à la partie
             game.Game.Joueurs.Add(JoueurFactory.CreateJoueur(unitOfWork.PersonnageProvider.Get(memberId, characterName), false, game.Game));
@@ -283,7 +288,7 @@ namespace SpaceAlert.Business
         /// <param name="membreId">The membre identifier.</param>
         /// <param name="gameId">The game identifier.</param>
         /// <param name="actions">The actions.</param>
-        public void AddPlayerActions(long membreId, Guid gameId, IEnumerable<ActionInTour> actions)
+        public void AddPlayerActions(long membreId, int gameId, IEnumerable<ActionInTour> actions)
         {
             Game game = unitOfWork.Context.Games
                 .Include(g => g.Joueurs)
@@ -302,7 +307,7 @@ namespace SpaceAlert.Business
         /// <param name="tour">The tour.</param>
         /// <param name="genre">The genre.</param>
         /// <param name="value">The value.</param>
-        public void AddPlayerAction(long membreId, Guid gameId, int tour, GenreAction genre, int value)
+        public void AddPlayerAction(long membreId, int gameId, int tour, GenreAction genre, int value)
         {
             unitOfWork.Context.Games.Find(gameId).Joueurs.Single(j => j.Personnage.MembreId == membreId).Actions.Add(new ActionInTour
             {
@@ -314,6 +319,30 @@ namespace SpaceAlert.Business
                 Tour = tour
             });
             unitOfWork.Context.SaveChanges();
+        }
+
+        /// <summary>
+        /// Gets the next card.
+        /// </summary>
+        /// <param name="gameId">The game identifier.</param>
+        /// <returns></returns>
+        public KeyValuePair<TypeAction, Direction> GetNextCard(int gameId)
+        {
+            GameContext game = unitOfWork.Context.GameContext.Include(g => g.Deck).Single(g => g.Id == gameId);
+            int nbCartes = game.Deck.Sum(deck => deck.NbCartes);
+            Random rand = new Random();
+            int val = rand.Next() % nbCartes;
+            int lastCount = 0;
+            foreach (PartialDeck deck in game.Deck.OrderByDescending(d => d.NbCartes))
+            {
+                lastCount += deck.NbCartes;
+                if (deck.NbCartes > 0 && val < lastCount)
+                {
+                    deck.NbCartes--;
+                    return new KeyValuePair<TypeAction, Direction>(deck.TypeAction, deck.Mouvement);
+                }
+            }
+            return new KeyValuePair<TypeAction,Direction>();
         }
     }
 }

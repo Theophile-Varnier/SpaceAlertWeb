@@ -9,7 +9,7 @@ namespace SpaceAlert.Model.Jeu
     public class RampeInZone
     {
         [ForeignKey("Game")]
-        public Guid GameId { get; set; }
+        public int GameId { get; set; }
 
         public virtual GameContext Game { get; set; }
 

@@ -18,7 +18,7 @@ namespace SpaceAlert.Tests
             //SpaceAlertData.Init();
             //IApplicationContext context = ContextRegistry.GetContext();
             //GameService service = new GameService();
-            //Guid gameId = service.InitialiserGame(TypeMission.SIMPLE, 1, true, false, false, new KeyValuePair<long, string>(42, "Dieu"));
+            //int gameId = service.InitialiserGame(TypeMission.SIMPLE, 1, true, false, false, new KeyValuePair<long, string>(42, "Dieu"));
             //GameContext game = SpaceAlertData.Game(gameId);
             //service.DemarrerGame(game);
 

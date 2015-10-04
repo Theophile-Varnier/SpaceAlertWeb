@@ -32,7 +32,7 @@ namespace SpaceAlert.Model.Jeu
         /// La partie à laquelle est lié le joueur
         /// </summary>
         [ForeignKey("Game")]
-        public Guid GameId { get; set; }
+        public int GameId { get; set; }
 
         public virtual Game Game { get; set; }
 

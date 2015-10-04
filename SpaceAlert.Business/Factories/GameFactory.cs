@@ -3,6 +3,7 @@ using SpaceAlert.Model.Jeu;
 using SpaceAlert.Model.Plateau;
 using SpaceAlert.Model.Stats;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace SpaceAlert.Business.Factories
@@ -29,7 +30,8 @@ namespace SpaceAlert.Business.Factories
                 Statut = StatutPartie.Creation,
                 Game = game,
                 Id = game.Id,
-                Rampes = new List<RampeInZone>()
+                Rampes = new List<RampeInZone>(),
+                Deck = SpaceAlertData.GetAll<PartialDeck>().Select(kvp => kvp.Value).ToList()
             };
             // Ajoute les joueurs
             Joueur capitaine = JoueurFactory.CreateJoueur(captain, true, game);

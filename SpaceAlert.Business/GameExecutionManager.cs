@@ -52,7 +52,17 @@ namespace SpaceAlert.Business
             {
                 timer.Enabled = false;
                 timer.Elapsed -= timer_Elapsed;
+                timer.Close();
             }
+        }
+
+        /// <summary>
+        /// Stops this instance.
+        /// </summary>
+        public void Stop()
+        {
+            timer.Elapsed -= timer_Elapsed;
+            timer.Close();
         }
     }
 }

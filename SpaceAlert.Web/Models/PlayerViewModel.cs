@@ -8,6 +8,10 @@ namespace SpaceAlert.Web.Models
         [Display(Name="Personnage à utiliser")]
         public string Name { get; set; }
 
+        public string MembreName { get; set; }
+
+        public string Avatar { get; set; }
+
         public string Color { get; set; }
 
         public IEnumerable<string> AvailableCharacters { get; set; }

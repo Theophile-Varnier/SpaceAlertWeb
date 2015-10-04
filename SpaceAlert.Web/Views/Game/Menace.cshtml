@@ -1,0 +1,15 @@
+﻿@model SpaceAlert.Web.Models.CardViewModel
+<div class="modal fade" id="menaceModal">
+    <div class="presenter">
+        <div class="carte" data-action="@Model.Type" data-mouvement="@Model.Direction">
+            <div class="flipper">
+                <div class="front">
+                    <img src="@Model.FrontImgUri" />
+                </div>
+                <div class="back">
+                    <img src="@Model.BackImageUri" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

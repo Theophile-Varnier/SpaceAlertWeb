@@ -30,6 +30,9 @@ namespace SpaceAlert.Web
                       "~/Content/site.css",
                       "~/Content/font-awesome.css"));
 
+            bundles.Add(new LessBundle("~/Content/colors").Include(
+                "~/Content/Colors.less"));
+
             bundles.Add(new LessBundle("~/Content/less").Include(
                       "~/Content/less/jeu.less",
                       "~/Content/less/Menu.less"));

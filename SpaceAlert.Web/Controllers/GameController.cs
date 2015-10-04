@@ -69,7 +69,7 @@ namespace SpaceAlert.Web.Controllers
             // On initialise la partie côté serveur
             try
             {
-                Guid gameId = serviceProvider.GameService.InitialiserGame(
+                int gameId = serviceProvider.GameService.InitialiserGame(
                     model.Game.TypeMission,
                     model.Game.NbJoueurs,
                     model.Game.Blanches,
@@ -139,7 +139,7 @@ namespace SpaceAlert.Web.Controllers
         [HttpGet]
         public string ChangeColor(string gameId, string charName)
         {
-            return serviceProvider.GameService.GetNextColor(Guid.Parse(gameId), charName);
+            return serviceProvider.GameService.GetNextColor(int.Parse(gameId), charName);
         }
 
         /// <summary>
@@ -186,9 +186,15 @@ namespace SpaceAlert.Web.Controllers
         /// <param name="gameId"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult Play(Guid gameId)
+        public ActionResult Play(int gameId)
         {
-            return View(ShipFactory.DefaultShip(gameId));
+            //HubClient.Stop(gameId);
+
+            //serviceProvider.GameService.DemarrerGame(gameId);
+            GameContext game = serviceProvider.GameService.GetGame(gameId);
+            HubClient client = new HubClient(gameId, serviceProvider);
+            client.StartAsync();
+            return View(ShipFactory.DefaultShip(game.Game));
         }
 
 
@@ -198,9 +204,10 @@ namespace SpaceAlert.Web.Controllers
         /// <param name="game">The game.</param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Play(GameCreationViewModel game)
+        public ActionResult Play(GameCreationViewModel gameViewModel)
         {
-            return View(ShipFactory.DefaultShip(game.Game.GameId));
+            GameContext game = serviceProvider.GameService.GetGame(gameViewModel.Game.GameId);
+            return View(ShipFactory.DefaultShip(game.Game));
         }
 
         /// <summary>
@@ -209,12 +216,12 @@ namespace SpaceAlert.Web.Controllers
         /// <param name="gameId">The game identifier.</param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Start(Guid gameId)
+        public ActionResult Start(int gameId)
         {
-            serviceProvider.GameService.DemarrerGame(gameId);
+            GameContext game = serviceProvider.GameService.DemarrerGame(gameId);
             HubClient client = new HubClient(gameId, serviceProvider);
             client.StartAsync();
-            return View("Play", ShipFactory.DefaultShip(gameId));
+            return View("Play", ShipFactory.DefaultShip(game.Game));
         }
 
         /// <summary>
@@ -224,7 +231,7 @@ namespace SpaceAlert.Web.Controllers
         /// <param name="actions">The actions.</param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult AddPlayerActions(Guid gameId, string actions)
+        public ActionResult AddPlayerActions(int gameId, string actions)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             ActionViewModel[] actionsViewModel = serializer.Deserialize<ActionViewModel[]>(actions);

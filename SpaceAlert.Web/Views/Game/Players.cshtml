@@ -1,0 +1,14 @@
+﻿@using SpaceAlert.Web.Models
+@model GameShipViewModel
+<div class="modal fade" id="playersModal">
+    <div class="presenter">
+        @for (int i = 0; i < Model.Joueurs.Count; i++)
+        {
+            string cos = string.Concat("-", 150 * Math.Cos((Math.PI * i) / Model.Joueurs.Count), "px");
+            string sin = string.Concat(150 * Math.Sin((Math.PI * i) / Model.Joueurs.Count), "px");
+            <div style="-webkit-transform: translate(@cos,@sin)">
+                @Html.Partial("Avatar", Model.Joueurs[i]);
+            </div>
+        }
+    </div>
+</div>

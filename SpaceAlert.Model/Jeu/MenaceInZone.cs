@@ -24,7 +24,7 @@ namespace SpaceAlert.Model.Jeu
         /// The game identifier.
         /// </value>
         [ForeignKey("Game")]
-        public Guid GameId { get; set; }
+        public int GameId { get; set; }
 
         /// <summary>
         /// Gets or sets the game.

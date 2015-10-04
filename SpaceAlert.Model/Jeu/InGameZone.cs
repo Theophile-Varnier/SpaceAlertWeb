@@ -29,7 +29,7 @@ namespace SpaceAlert.Model.Jeu
         /// The vaisseau identifier.
         /// </value>
         [ForeignKey("Vaisseau")]
-        public Guid VaisseauId { get; set; }
+        public int VaisseauId { get; set; }
 
         /// <summary>
         /// Gets or sets the vaisseau.

@@ -192,6 +192,7 @@
     <Compile Include="Models\AbstractViewModel.cs" />
     <Compile Include="Models\AccountViewModel.cs" />
     <Compile Include="Models\ActionViewModel.cs" />
+    <Compile Include="Models\CardViewModel.cs" />
     <Compile Include="Models\GameCreationViewModel.cs" />
     <Compile Include="Models\GameViewModel.cs" />
     <Compile Include="Models\JoinGameViewModel.cs" />
@@ -214,8 +215,10 @@
     <Content Include="Content\Medias\cartelockedbottom.png" />
     <Content Include="Content\Medias\cartelockedtop.png" />
     <Content Include="Content\Medias\carte_dos.png" />
+    <Content Include="Content\Medias\default.jpg" />
     <Content Include="Content\Medias\progra.png" />
     <Content Include="Content\Medias\SA_cover.png" />
+    <Content Include="Content\Medias\Scenarii\Tuto1.wav" />
     <Content Include="Content\Menu.css" />
     <Content Include="Content\octicons.css" />
     <Content Include="Content\themes\base\accordion.css" />
@@ -316,6 +319,7 @@
     <Content Include="Content\less\octicons.less" />
     <Content Include="Content\less\octicons.woff" />
     <Content Include="Content\less\octicons.ttf" />
+    <Content Include="Content\less\Colors.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -366,6 +370,9 @@
     <Content Include="Views\Game\PlayerPlan.cshtml" />
     <Content Include="Views\Shared\Menu.cshtml" />
     <Content Include="Views\Game\Carte.cshtml" />
+    <Content Include="Views\Shared\Avatar.cshtml" />
+    <Content Include="Views\Game\Players.cshtml" />
+    <Content Include="Views\Game\Menace.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

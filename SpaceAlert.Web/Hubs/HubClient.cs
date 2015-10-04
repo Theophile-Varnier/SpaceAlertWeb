@@ -2,6 +2,7 @@
 using SpaceAlert.Business;
 using SpaceAlert.Model.Jeu;
 using SpaceAlert.Model.Jeu.Evenements;
+using SpaceAlert.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -16,7 +17,23 @@ namespace SpaceAlert.Web.Hubs
     /// </summary>
     public class HubClient
     {
+        public static List<HubClient> Instances = new List<HubClient>();
+
         private readonly GameContext game;
+
+        /// <summary>
+        /// Gets the game identifier.
+        /// </summary>
+        /// <value>
+        /// The game identifier.
+        /// </value>
+        public int GameId
+        {
+            get
+            {
+                return game.Id;
+            }
+        }
 
         private GameExecutionManager manager;
 
@@ -30,14 +47,19 @@ namespace SpaceAlert.Web.Hubs
         /// <param name="gameId">The game identifier.</param>
         /// <param name="manager">The manager.</param>
         /// <param name="serviceProvider">The service provider.</param>
-        public HubClient(Guid gameId, ServiceProvider serviceProvider)
+        public HubClient(int gameId, ServiceProvider serviceProvider)
         {
             game = serviceProvider.GameService.GetGameForExecution(gameId);
             this.serviceProvider = serviceProvider;
         }
 
+        /// <summary>
+        /// Starts the asynchronous.
+        /// </summary>
+        /// <returns></returns>
         public async Task StartAsync()
         {
+            Instances.Add(this);
             HubConnection hubConnection = new HubConnection(ConfigurationManager.AppSettings["SignalRServerUri"]);
             hubProxy = hubConnection.CreateHubProxy("PlayHub");
             await hubConnection.Start();
@@ -47,9 +69,14 @@ namespace SpaceAlert.Web.Hubs
 
         private void manager_NewEventEvent(object sender, NewEventArgs e)
         {
-            string gameId = game.Id.ToString().ToUpperInvariant();
+            string gameId = game.Id.ToString();
             if (e.Evenement is EvenementMenace)
             {
+                CardViewModel model = new CardViewModel
+                {
+                    FrontImgUri = string.Concat(@"~/Content/Medias/", ((EvenementMenace)e.Evenement).MenaceName, ".png"),
+                    BackImageUri = string.Concat(@"~/Content/Medias/", ((EvenementMenace)e.Evenement).Type, ".png")
+                };
                 hubProxy.Invoke("PopMenace", gameId, e.Evenement.GetType());
             }
             else
@@ -70,6 +97,25 @@ namespace SpaceAlert.Web.Hubs
                         hubProxy.Invoke("FinDePhase", gameId, ev.Phase);
                     }
                 }
+            }
+        }
+
+        private void Stop()
+        {
+            manager.NewEventEvent -= manager_NewEventEvent;
+            manager.Stop();
+        }
+
+        /// <summary>
+        /// Stops this instance.
+        /// </summary>
+        public static void Stop(int gameId)
+        {
+            HubClient selected = Instances.SingleOrDefault(i => i.GameId == gameId);
+            if (selected != null)
+            {
+                selected.Stop();
+                Instances.Remove(selected);
             }
         }
     }

@@ -2,9 +2,21 @@
     var playHub = $.connection.playHub;
     var lastPosition;
 
-    playHub.client.addChatMessage = function(message) {
+    $("#playersModal").modal({
+        backdrop: 'static'
+    });
+
+    //var soundtrack = document.createElement('audio');
+    //soundtrack.setAttribute('src', '../Content/Medias/Scenarii/' + $("#MissionId").val() + '.wav');
+    //soundtrack.play();
+
+    playHub.client.addChatMessage = function (message) {
         console.log(message);
     };
+    $(".carte-container").on('webkitAnimationEnd oanimationend msAnimationEnd animationend', ".locker",
+        function () {
+            $(".carte-container").removeAttr("css");
+        });
 
     var endPhase = function (phase) {
         var actionsToSend = [];
@@ -12,6 +24,8 @@
             var tour = parseInt($(this).attr("data-tour"));
             if (tour < debutPhase[phase] && tour >= debutPhase[phase - 1]) {
                 console.log("tour verrouillé : " + tour);
+                $(this).droppable("destroy");
+                $(this).css("overflow-y", "hidden");
                 $(this).prepend("<img class='locker bottom animated bounceInUp' src='../Content/Medias/cartelockedbottom.png'></img>");
                 $(this).prepend("<img class='locker top animated bounceInDown' src='../Content/Medias/cartelockedtop.png'></img>");
                 if ($(this).find(".carte").length == 1) {
@@ -77,6 +91,7 @@
     });
 
     $(".salle").droppable({
+        hoverClass: 'hovered',
         drop: function (event, ui) {
             var target = $(this).children().children("." + ui.draggable.attr("data-character") + "-container");
             ui.draggable.attr("style", "position: relative;");
@@ -101,8 +116,10 @@
 
     $(".carte").draggable({
         container: "#playerInfo",
+        zIndex: 10000,
         revert: "invalid",
         addClasses: false,
+        scroll: false,
         start: function () {
             $(".carte-container .carte").addClass("locked");
             if ($(this).parent()[0].className.indexOf("carte-container") == -1) {
@@ -121,7 +138,6 @@
         hoverClass: "hovered",
         accept: ".carte",
         drop: function (e, ui) {
-
             // S'il y a déjà une carte à l'emplacement choisi
             // On la renvoie dans la main du joueur
             if ($(this).find('.carte').length > 0) {
@@ -133,10 +149,11 @@
                 generateCardClone(carte);
             }
 
-            // Pose la carte à l'emplacement choisi
-
             // On enregistre la dernière position pour une animation
             lastPosition = ui.draggable.offset();
+            lastPosition.top = lastPosition.top - $(this).offset().top;
+            lastPosition.left = lastPosition.left - $(this).offset().left;
+            // Pose la carte à l'emplacement choisi
 
             ui.draggable.appendTo($(this));
             var tempClone = ui.draggable.clone();
@@ -145,7 +162,7 @@
             tempClone.css("position", "absolute")
                 .css("width", ui.draggable.width())
                 .css("height", ui.draggable.height())
-                .css("top", lastPosition.top - $(this).offset().top)
+                .css("top", lastPosition.top)
                 .css("left", lastPosition.left);
 
             tempClone.appendTo($(this));

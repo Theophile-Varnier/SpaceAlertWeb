@@ -39,37 +39,6 @@ html {
     vertical-align: middle;
 }
 
-.colored-square {
-    width: 14px;
-    height: 14px;
-    /*border-style: outset;
-    border-width: 4px;
-    border-color: transparent;
-    border-color: rgba(1, 1, 1, 0.5);*/
-    display: inline-block;
-    cursor: pointer;
-}
-
-.blue {
-    background-color: darkblue;
-}
-
-.red {
-    background-color: darkred;
-}
-
-.yellow {
-    background-color: yellow;
-}
-
-.purple {
-    background-color: darkviolet;
-}
-
-.green {
-    background-color: darkgreen;
-}
-
 .no-display {
     visibility: hidden;
 }

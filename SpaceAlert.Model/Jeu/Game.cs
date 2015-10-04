@@ -19,7 +19,6 @@ namespace SpaceAlert.Model.Jeu
         /// </summary>
         public Game()
         {
-            Id = Guid.NewGuid();
             Joueurs = new List<Joueur>();
         }
 
@@ -30,7 +29,7 @@ namespace SpaceAlert.Model.Jeu
         /// The identifier.
         /// </value>
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Le vaisseau

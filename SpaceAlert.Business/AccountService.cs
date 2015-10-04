@@ -2,6 +2,9 @@
 using SpaceAlert.Model.Site;
 using SpaceAlert.Model.Stats;
 using SpaceAlert.Services.Exceptions;
+using System;
+using System.Drawing;
+using System.IO;
 
 namespace SpaceAlert.Business
 {
@@ -83,6 +86,11 @@ namespace SpaceAlert.Business
         public Membre RecupererMembre(string pseudo)
         {
             return unitOfWork.MembreProvider.GetMembreByPseudo(pseudo);
+        }
+
+        public Membre GetById(long id)
+        {
+            return unitOfWork.Context.Membres.Find(id);
         }
     }
 }

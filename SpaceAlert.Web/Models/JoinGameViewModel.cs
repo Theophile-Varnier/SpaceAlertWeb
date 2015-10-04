@@ -7,7 +7,7 @@ namespace SpaceAlert.Web.Models
     {
         public List<GameViewModel> AvailableGames { get; set; }
 
-        public Guid GameToJoin { get; set; }
+        public int GameToJoin { get; set; }
 
         public string ConnectionId { get; set; }
 

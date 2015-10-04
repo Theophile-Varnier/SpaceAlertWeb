@@ -7,6 +7,8 @@ using SpaceAlert.Web.Models;
 using SpaceAlert.Web.Models.Mapping;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
@@ -131,6 +133,17 @@ namespace SpaceAlert.Web.Controllers
             }
             // Si tout va bien on fait l'inscription
             Membre membre = AccountMapper.MapFromViewModel(model);
+            using (Image image = Image.FromFile(Server.MapPath("~/Content/Medias/default.jpg")))
+            {
+                using (MemoryStream m = new MemoryStream())
+                {
+                    image.Save(m, image.RawFormat);
+                    byte[] imageBytes = m.ToArray();
+
+                    // Convert byte[] to Base64 String
+                    membre.Avatar = Convert.ToBase64String(imageBytes);
+                }
+            }
             serviceProvider.AccountService.Inscrire(membre);
             FormsAuthentication.SetAuthCookie(membre.Pseudo, false);
             CreateAuthenticationTicket(membre.Pseudo);

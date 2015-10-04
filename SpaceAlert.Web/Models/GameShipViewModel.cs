@@ -6,13 +6,15 @@ namespace SpaceAlert.Web.Models
 {
     public class GameShipViewModel
     {
-        public Guid GameId { get; set; }
+        public int GameId { get; set; }
+
+        public string MissionId { get; set; }
 
         public List<string> Bonshommes { get; set; }
 
         public Dictionary<InGameZone, int> Energies { get; set; }
 
-        public PlayerViewModel Joueur { get; set; }
+        public List<PlayerViewModel> Joueurs { get; set; }
 
         public List<SalleViewModel> Salles { get; set; }
 

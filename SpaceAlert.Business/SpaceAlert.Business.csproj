@@ -137,6 +137,9 @@
     <Content Include="Config\JoueurAction.xml" />
     <EmbeddedResource Include="Config\Rampes\Rampes.xml" />
     <EmbeddedResource Include="Config\Missions\Simples\Test.xml" />
+    <EmbeddedResource Include="Config\cartes.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <Content Include="Exceptions\sql\CREATION_TABLE.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

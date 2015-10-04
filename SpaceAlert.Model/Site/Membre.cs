@@ -73,7 +73,15 @@ namespace SpaceAlert.Model.Site
         /// <value>
         /// The current game.
         /// </value>
-        public Guid? CurrentGame { get; set; }
+        public int? CurrentGame { get; set; }
+
+        /// <summary>
+        /// Gets or sets the avatar.
+        /// </summary>
+        /// <value>
+        /// The avatar.
+        /// </value>
+        public string Avatar { get; set; }
 
     }
 }

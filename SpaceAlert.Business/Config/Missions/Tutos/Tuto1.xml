@@ -1,5 +1,5 @@
 ﻿<objects xmlns="http://www.springframework.net">
-  <object id="Tuto1" type="SpaceAlert.Model.Jeu.Mission">
+  <object id="Tuto1" type="SpaceAlert.Model.Jeu.Mission, SpaceAlert.Model">
     <property name="TypeMission" value="TUTORIEL"/>
     <property name="Name" value="Tuto1"/>
     <property name="Evenements">
@@ -18,45 +18,45 @@
     <property name="NbTours" value="7"/>
   </object>
 
-  <object id="Tuto1_Event1" type="SpaceAlert.Model.Jeu.Evenements.EvenementMenace">
-    <property name="Annonce" value="00:00:15"/>
+  <object id="Tuto1_Event1" type="SpaceAlert.Model.Jeu.Evenements.EvenementMenace, SpaceAlert.Model">
+    <property name="Annonce" value="00:00:05"/>
     <property name="Zone" value="BLEUE"/>
     <property name="TourArrive" value="1"/>
     <property name="Confirme" value="True"/>
     <property name="Type" value="MenaceExterne"/>
   </object>
-  <object id="Tuto1_Event2" type="SpaceAlert.Model.Jeu.Evenements.EvenementMenace">
+  <object id="Tuto1_Event2" type="SpaceAlert.Model.Jeu.Evenements.EvenementMenace, SpaceAlert.Model">
     <property name="Annonce" value="00:01:00"/>
     <property name="Zone" value="BLANCHE"/>
     <property name="TourArrive" value="2"/>
     <property name="Confirme" value="True"/>
     <property name="Type" value="MenaceExterne"/>
   </object>
-  <object id="Tuto1_Event3" type="SpaceAlert.Model.Jeu.Evenements.TransfertDeDonnees">
+  <object id="Tuto1_Event3" type="SpaceAlert.Model.Jeu.Evenements.TransfertDeDonnees, SpaceAlert.Model">
     <property name="Annonce" value="00:01:30"/>
   </object>
-  <object id="Tuto1_Event4" type="SpaceAlert.Model.Jeu.Evenements.EvenementMenace">
+  <object id="Tuto1_Event4" type="SpaceAlert.Model.Jeu.Evenements.EvenementMenace, SpaceAlert.Model">
     <property name="Annonce" value="00:02:15"/>
     <property name="Zone" value="ROUGE" />
     <property name="TourArrive" value="3" />
     <property name="Confirme" value="True"/>
     <property name="Type" value="MenaceExterne"/>
   </object>
-  <object id="Tuto1_Event6" type="SpaceAlert.Model.Jeu.Evenements.TransfertDeDonnees">
+  <object id="Tuto1_Event6" type="SpaceAlert.Model.Jeu.Evenements.TransfertDeDonnees, SpaceAlert.Model">
     <property name="Annonce" value="00:03:20"/>
   </object>
-  <object id="Tuto1_Event8" type="SpaceAlert.Model.Jeu.Evenements.FinDePhase">
-    <property name="Annonce" value="00:00:30" />
+  <object id="Tuto1_Event8" type="SpaceAlert.Model.Jeu.Evenements.FinDePhase, SpaceAlert.Model">
+    <property name="Annonce" value="00:00:10" />
     <property name="TempsRestant" value="00:00:00" />
     <property name="Phase" value="1" />
   </object>
-  <object id="Tuto1_Event9" type="SpaceAlert.Model.Jeu.Evenements.DonneesEntrantes">
+  <object id="Tuto1_Event9" type="SpaceAlert.Model.Jeu.Evenements.DonneesEntrantes, SpaceAlert.Model">
     <property name="Annonce" value="00:04:40"/>
   </object>
-  <object id="Tuto1_Event10" type="SpaceAlert.Model.Jeu.Evenements.TransfertDeDonnees">
+  <object id="Tuto1_Event10" type="SpaceAlert.Model.Jeu.Evenements.TransfertDeDonnees, SpaceAlert.Model">
     <property name="Annonce" value="00:05:10"/>
   </object>
-  <object id="Tuto1_Event11" type="SpaceAlert.Model.Jeu.Evenements.FinDePartie">
+  <object id="Tuto1_Event11" type="SpaceAlert.Model.Jeu.Evenements.FinDePartie, SpaceAlert.Model">
     <property name="Annonce" value="00:07:00"/>
     <property name="Phase" value="2" />
   </object>

@@ -1,4 +1,5 @@
-﻿using SpaceAlert.Model.Site;
+﻿using SpaceAlert.Model.Jeu;
+using SpaceAlert.Model.Site;
 
 namespace SpaceAlert.Web.Models.Mapping
 {
@@ -11,6 +12,17 @@ namespace SpaceAlert.Web.Models.Mapping
                 Pseudo = model.Pseudo,
                 Email = model.Email,
                 ClearPassWord = model.MotDePasse
+            };
+        }
+
+        public static PlayerViewModel MapFromDto(Joueur joueur)
+        {
+            return new PlayerViewModel
+            {
+                Name = joueur.Personnage.Nom,
+                MembreName = joueur.Personnage.Membre.Pseudo,
+                Color = joueur.Couleur,
+                Avatar = joueur.Personnage.Membre.Avatar
             };
         }
     }
