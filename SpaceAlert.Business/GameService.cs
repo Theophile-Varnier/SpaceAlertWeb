@@ -115,6 +115,11 @@ namespace SpaceAlert.Business
                         Action = null
                     });
                 }
+                for (int j = 0; j < 3; j++)
+                {
+                    Tuple<TypeAction, Direction> nextCarte = GetNextCard(game.Id);
+                    joueur.Deck.Single(d => d.Mouvement == nextCarte.Item2 && d.TypeAction == nextCarte.Item1).NbCartes++;
+                }
             }
             RegisterGame(game.Game);
             unitOfWork.Context.SaveChanges();
@@ -326,7 +331,7 @@ namespace SpaceAlert.Business
         /// </summary>
         /// <param name="gameId">The game identifier.</param>
         /// <returns></returns>
-        public KeyValuePair<TypeAction, Direction> GetNextCard(int gameId)
+        public Tuple<TypeAction, Direction> GetNextCard(int gameId)
         {
             GameContext game = unitOfWork.Context.GameContext.Include(g => g.Deck).Single(g => g.Id == gameId);
             int nbCartes = game.Deck.Sum(deck => deck.NbCartes);
@@ -339,10 +344,10 @@ namespace SpaceAlert.Business
                 if (deck.NbCartes > 0 && val < lastCount)
                 {
                     deck.NbCartes--;
-                    return new KeyValuePair<TypeAction, Direction>(deck.TypeAction, deck.Mouvement);
+                    return new Tuple<TypeAction, Direction>(deck.TypeAction, deck.Mouvement);
                 }
             }
-            return new KeyValuePair<TypeAction,Direction>();
+            return null;
         }
     }
 }

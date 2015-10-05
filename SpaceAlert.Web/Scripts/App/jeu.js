@@ -14,7 +14,6 @@
 
     var removeModal = function () {
         $("#menaceModal").modal('hide');
-        $("#menaceModal .carte").css("visibility", "hidden");
         $("#menaceModal .carte").addClass("posay");
     }
 
@@ -25,16 +24,14 @@
     playHub.client.popMenace = function (frontImg, backImg) {
         $("#menaceModal .front img").attr("src", serverPath + frontImg);
         $("#menaceModal .back img").attr("src", serverPath + backImg);
-        $("#menaceModal .carte").css("visibility", "hidden");
         $("#menaceModal").modal('show');
-        //setTimeout(removeModal, 2000);
     };
 
     $("#menaceModal").on("shown.bs.modal", function () {
-        setTimeout(function () {
-            $("#menaceModal .carte").css("visibility", "visible");
-            $("#menaceModal .carte").removeClass("posay");
-        }, 100);
+        //setTimeout(function(){
+        //    $("#menaceModal .carte").removeClass("posay");
+        //}, 500);
+        $("#menaceModal .carte").removeClass("posay");
         setTimeout(removeModal, 2000);
     });
 

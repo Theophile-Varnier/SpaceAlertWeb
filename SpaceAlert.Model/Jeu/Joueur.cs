@@ -57,7 +57,6 @@ namespace SpaceAlert.Model.Jeu
         /// <value>
         /// The deck.
         /// </value>
-        [NotMapped]
         public List<PartialDeck> Deck { get; set; } 
 
         /// <summary>

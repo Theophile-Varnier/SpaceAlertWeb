@@ -190,7 +190,7 @@ namespace SpaceAlert.Web.Controllers
         {
             //HubClient.Stop(gameId);
 
-            //serviceProvider.GameService.DemarrerGame(gameId);
+            serviceProvider.GameService.DemarrerGame(gameId);
             GameContext game = serviceProvider.GameService.GetGame(gameId);
             HubClient client = new HubClient(gameId, serviceProvider);
             client.StartAsync();
