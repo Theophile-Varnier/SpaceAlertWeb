@@ -3,16 +3,41 @@
     var lastPosition;
 
     $("#playersModal").modal({
-        backdrop: 'static'
+        backdrop: 'static',
+        show: false
     });
+
+    $("#menaceModal").modal({
+        backdrop: 'static',
+        show: false
+    });
+
+    var removeModal = function () {
+        $("#menaceModal").modal('hide');
+        $("#menaceModal .carte").css("visibility", "hidden");
+        $("#menaceModal .carte").addClass("posay");
+    }
 
     //var soundtrack = document.createElement('audio');
     //soundtrack.setAttribute('src', '../Content/Medias/Scenarii/' + $("#MissionId").val() + '.wav');
     //soundtrack.play();
 
-    playHub.client.addChatMessage = function (message) {
-        console.log(message);
+    playHub.client.popMenace = function (frontImg, backImg) {
+        $("#menaceModal .front img").attr("src", serverPath + frontImg);
+        $("#menaceModal .back img").attr("src", serverPath + backImg);
+        $("#menaceModal .carte").css("visibility", "hidden");
+        $("#menaceModal").modal('show');
+        //setTimeout(removeModal, 2000);
     };
+
+    $("#menaceModal").on("shown.bs.modal", function () {
+        setTimeout(function () {
+            $("#menaceModal .carte").css("visibility", "visible");
+            $("#menaceModal .carte").removeClass("posay");
+        }, 100);
+        setTimeout(removeModal, 2000);
+    });
+
     $(".carte-container").on('webkitAnimationEnd oanimationend msAnimationEnd animationend', ".locker",
         function () {
             $(".carte-container").removeAttr("css");

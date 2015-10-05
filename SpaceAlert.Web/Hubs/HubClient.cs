@@ -74,10 +74,10 @@ namespace SpaceAlert.Web.Hubs
             {
                 CardViewModel model = new CardViewModel
                 {
-                    FrontImgUri = string.Concat(@"~/Content/Medias/", ((EvenementMenace)e.Evenement).MenaceName, ".png"),
-                    BackImageUri = string.Concat(@"~/Content/Medias/", ((EvenementMenace)e.Evenement).Type, ".png")
+                    FrontImgUri = string.Concat(@"Content/Medias/", "Pulse_Ball.jpg"),
+                    BackImageUri = string.Concat(@"Content/Medias/", "carte_dos", ".png")
                 };
-                hubProxy.Invoke("PopMenace", gameId, e.Evenement.GetType());
+                hubProxy.Invoke("PopMenace", gameId, model.FrontImgUri, model.BackImageUri);
             }
             else
             {
@@ -87,6 +87,7 @@ namespace SpaceAlert.Web.Hubs
                     FinDePartie ev = partie;
                     manager.NewEventEvent -= manager_NewEventEvent;
                     hubProxy.Invoke("FinDePartie", gameId, ev.Phase);
+                    Instances.Remove(this);
                 }
                 else
                 {
@@ -102,8 +103,11 @@ namespace SpaceAlert.Web.Hubs
 
         private void Stop()
         {
-            manager.NewEventEvent -= manager_NewEventEvent;
-            manager.Stop();
+            if (manager != null)
+            {
+                manager.NewEventEvent -= manager_NewEventEvent;
+                manager.Stop();
+            }
         }
 
         /// <summary>

@@ -20,5 +20,6 @@ namespace SpaceAlert.Web.Models
 
         public int PhaseEnCours { get; set; }
 
+        public CardViewModel CurrentMenace { get; set; }
     }
 }

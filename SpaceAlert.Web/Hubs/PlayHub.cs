@@ -9,9 +9,9 @@ namespace SpaceAlert.Web.Hubs
         /// </summary>
         /// <param name="gameId">The game identifier.</param>
         /// <param name="message">The message.</param>
-        public void PopMenace(string gameId, string message)
+        public void PopMenace(string gameId, string frontImage, string backImage)
         {
-            Clients.Group(gameId).addChatMessage(message);
+            Clients.Group(gameId).popMenace(frontImage, backImage);
         }
 
         /// <summary>

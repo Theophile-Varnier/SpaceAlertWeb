@@ -14,6 +14,10 @@ namespace SpaceAlert.Web.Models.Mapping
                 MissionId = game.MissionId,
                 PhaseEnCours = 1,
                 Joueurs = new List<PlayerViewModel>(),
+                CurrentMenace  = new CardViewModel
+                {
+                    
+                },
                 Salles = new List<SalleViewModel>
                 {
                     new SalleViewModel
