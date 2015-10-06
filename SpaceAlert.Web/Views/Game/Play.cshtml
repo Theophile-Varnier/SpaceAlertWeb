@@ -21,6 +21,11 @@
         var debutPhase = @Html.Raw(Json.Encode(SpaceAlert.Business.SpaceAlertData.DebutPhases))
         var addActionsUrl = '@Url.Action("AddPlayerActions")'
         var serverPath = '@Url.Content("~")'
+        var currentPlayer = {
+            color: '@Model.ClientPlayer.Color',
+            characterId: '@Model.ClientPlayer.PersonnageId',
+            charName: '@Model.ClientPlayer.Name'
+            }
     </script>
     <div id="infoJeu">
         @*<div class="col-xs-2" id="recap"></div>*@
@@ -36,11 +41,10 @@
         <div class="col-xs-6 no-padding" id="playerDeck">
             <div id="carteClones"></div>
             <div id="cartes">
-                @Html.Partial("Carte")
-                @Html.Partial("Carte")
-                @Html.Partial("Carte")
-                @Html.Partial("Carte")
-                @Html.Partial("Carte")
+                @foreach (SpaceAlert.Web.Models.CardViewModel card in Model.StartingDeck)
+                {
+                    Html.Partial("Carte", card);
+                }
             </div>
         </div>
     </div>
@@ -52,6 +56,7 @@
 
     @Html.HiddenFor(m => m.GameId);
     @Html.HiddenFor(m => m.MissionId);
+    @Html.HiddenFor(m => m.ClientPlayer);
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

@@ -10,6 +10,8 @@ namespace SpaceAlert.Web.Models
 
         public string MembreName { get; set; }
 
+        public int PersonnageId { get; set; }
+
         public string Avatar { get; set; }
 
         public string Color { get; set; }

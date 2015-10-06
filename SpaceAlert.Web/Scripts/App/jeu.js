@@ -2,6 +2,8 @@
     var playHub = $.connection.playHub;
     var lastPosition;
 
+    var gameId = $("#GameId").val();
+
     $("#playersModal").modal({
         backdrop: 'static',
         show: false
@@ -26,6 +28,12 @@
         $("#menaceModal .back img").attr("src", serverPath + backImg);
         $("#menaceModal").modal('show');
     };
+
+    playHub.client.receiveNewCard = function (charId, direction, action) {
+        if (currentPlayer.characterId == charId) {
+            $("#cartes").append("<div class='carte'></div>");
+        }
+    }
 
     $("#menaceModal").on("shown.bs.modal", function () {
         //setTimeout(function(){
@@ -63,7 +71,6 @@
         });
         if (actionsToSend.length) {
             var datas = JSON.stringify(actionsToSend);
-            var gameId = $("#GameId").val();
             $.ajax({
                 type: "POST",
                 url: addActionsUrl,
@@ -81,7 +88,16 @@
     };
 
     $.connection.hub.start().done(function () {
-        playHub.server.joinAsync("", $("#GameId").val());
+        playHub.server.joinAsync("", gameId);
+
+        $(".avatar").droppable({
+            accept: '.carte',
+            drop: function (e, ui) {
+                playHub.server.transfertCard(gameId, $(this).attr("data-char"));
+                ui.draggable.remove();
+            }
+        });
+
     });
 
     // Le nombre de tours dans chaque phase
@@ -136,7 +152,7 @@
         }
     });
 
-    $(".carte").draggable({
+    $("#playerInfo .carte").draggable({
         container: "#playerInfo",
         zIndex: 10000,
         revert: "invalid",

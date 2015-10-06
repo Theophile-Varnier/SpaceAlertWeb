@@ -20,7 +20,7 @@ namespace SpaceAlert.Web.Models.Mapping
             return new PlayerViewModel
             {
                 Name = joueur.Personnage.Nom,
-                MembreName = joueur.Personnage.Membre.Pseudo,
+                PersonnageId = joueur.IdPersonnage,
                 Color = joueur.Couleur,
                 Avatar = joueur.Personnage.Membre.Avatar
             };

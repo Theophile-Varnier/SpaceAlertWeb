@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using SpaceAlert.Model.Site;
+using SpaceAlert.Model.Stats;
 
 namespace SpaceAlert.Business
 {
@@ -87,6 +88,7 @@ namespace SpaceAlert.Business
                 .Include(g => g.Game)
                 .Include(g => g.Game.Joueurs)
                 .Include(g => g.Game.Joueurs.Select(j => j.Actions))
+                .Include(g => g.Game.Joueurs.Select(j => j.Deck))
                 .Include(g => g.Rampes)
                 .Include(g => g.Game.MenacesExternes)
                 .SingleOrDefault(g => g.Id == gameId));
@@ -196,10 +198,9 @@ namespace SpaceAlert.Business
             Game game = unitOfWork.Context.Games
                 .Include(g => g.Joueurs)
                 .Include(g => g.Joueurs.Select(j => j.Personnage))
-                .Include(g => g.Joueurs.Select(j => j.Personnage).Select(p => p.Membre))
                 .SingleOrDefault(g => g.Id == gameId);
 
-            Joueur joueur = game != null ? game.Joueurs.FirstOrDefault(j => j.Personnage.Membre.Id == membreId) : null;
+            Joueur joueur = game != null ? game.Joueurs.FirstOrDefault(j => j.Personnage.MembreId == membreId) : null;
             return joueur != null ? joueur.Couleur : null;
         }
 
@@ -274,6 +275,17 @@ namespace SpaceAlert.Business
             unitOfWork.Context.SaveChanges();
 
             return game;
+        }
+
+        /// <summary>
+        /// Gets the player character.
+        /// </summary>
+        /// <param name="gameId">The game identifier.</param>
+        /// <param name="membreId">The membre identifier.</param>
+        /// <returns></returns>
+        public Personnage GetPlayerCharacter(int gameId, long membreId)
+        {
+            return GetGame(gameId).Game.Joueurs.Select(j => j.Personnage).SingleOrDefault(p => p.MembreId == membreId);
         }
 
         /// <summary>

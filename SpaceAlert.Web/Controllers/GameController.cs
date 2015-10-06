@@ -190,11 +190,11 @@ namespace SpaceAlert.Web.Controllers
         {
             //HubClient.Stop(gameId);
 
-            serviceProvider.GameService.DemarrerGame(gameId);
+            //serviceProvider.GameService.DemarrerGame(gameId);
             GameContext game = serviceProvider.GameService.GetGame(gameId);
             HubClient client = new HubClient(gameId, serviceProvider);
             client.StartAsync();
-            return View(ShipFactory.DefaultShip(game.Game));
+            return View(ShipFactory.DefaultShip(game.Game, User.Identity.Name));
         }
 
 
@@ -207,7 +207,7 @@ namespace SpaceAlert.Web.Controllers
         public ActionResult Play(GameCreationViewModel gameViewModel)
         {
             GameContext game = serviceProvider.GameService.GetGame(gameViewModel.Game.GameId);
-            return View(ShipFactory.DefaultShip(game.Game));
+            return View(ShipFactory.DefaultShip(game.Game, User.Identity.Name));
         }
 
         /// <summary>
@@ -221,7 +221,7 @@ namespace SpaceAlert.Web.Controllers
             GameContext game = serviceProvider.GameService.DemarrerGame(gameId);
             HubClient client = new HubClient(gameId, serviceProvider);
             client.StartAsync();
-            return View("Play", ShipFactory.DefaultShip(game.Game));
+            return View("Play", ShipFactory.DefaultShip(game.Game, User.Identity.Name));
         }
 
         /// <summary>

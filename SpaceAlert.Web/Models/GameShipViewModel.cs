@@ -21,5 +21,9 @@ namespace SpaceAlert.Web.Models
         public int PhaseEnCours { get; set; }
 
         public CardViewModel CurrentMenace { get; set; }
+
+        public List<CardViewModel> StartingDeck { get; set; }
+
+        public PlayerViewModel ClientPlayer { get; set; }
     }
 }

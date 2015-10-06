@@ -1,12 +1,13 @@
 ﻿using SpaceAlert.Model.Jeu;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace SpaceAlert.Web.Models.Mapping
 {
     public class ShipFactory
     {
-        public static GameShipViewModel DefaultShip(Game game)
+        public static GameShipViewModel DefaultShip(Game game, int charSelected)
         {
             GameShipViewModel res = new GameShipViewModel
             {
@@ -14,6 +15,7 @@ namespace SpaceAlert.Web.Models.Mapping
                 MissionId = game.MissionId,
                 PhaseEnCours = 1,
                 Joueurs = new List<PlayerViewModel>(),
+                StartingDeck = new List<CardViewModel>(),
                 CurrentMenace  = new CardViewModel
                 {
                     
@@ -100,11 +102,27 @@ namespace SpaceAlert.Web.Models.Mapping
                 res.Joueurs.Add(new PlayerViewModel
                 {
                     Name = joueur.Personnage.Nom,
-                    MembreName = joueur.Personnage.Membre.Pseudo,
+                    PersonnageId = joueur.IdPersonnage,
                     Avatar = joueur.Personnage.Membre.Avatar,
+                    MembreName = joueur.Personnage.Membre.Pseudo,
                     Color = joueur.Couleur
                 });
             }
+            Joueur currentPlayer = game.Joueurs.Single(j => j.IdPersonnage == charSelected);
+
+            foreach (PartialDeck deck in currentPlayer.Deck)
+            {
+                for (int i = 0; i < deck.NbCartes; i++)
+                {
+                    res.StartingDeck.Add(new CardViewModel
+                    {
+                        Type = deck.TypeAction,
+                        Direction = deck.Mouvement
+                    });
+                }
+            }
+
+            res.ClientPlayer = res.Joueurs.Single(j => j.PersonnageId == charSelected);
 
             return res;
         }
