@@ -28,6 +28,8 @@ TO DO
 		-	Fin de partie
 
 -	Résolution de la partie
+	-	~~Implem~~
+	-	Vérif
 
 Refactoring
 --------------
