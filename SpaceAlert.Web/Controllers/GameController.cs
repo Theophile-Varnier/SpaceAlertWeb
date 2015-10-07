@@ -1,5 +1,6 @@
 ﻿using SpaceAlert.Business;
 using SpaceAlert.Business.Exceptions;
+using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Jeu;
 using SpaceAlert.Model.Site;
 using SpaceAlert.Web.Hubs;
@@ -193,8 +194,10 @@ namespace SpaceAlert.Web.Controllers
             //serviceProvider.GameService.DemarrerGame(gameId);
             GameContext game = serviceProvider.GameService.GetGame(gameId);
             HubClient client = new HubClient(gameId, serviceProvider);
+            int personnageId = game.Game.Joueurs.Single(j => j.Personnage.MembreId == User.Id).IdPersonnage;
+            GameShipViewModel viewModel = ShipFactory.DefaultShip(game.Game, personnageId);
             client.StartAsync();
-            return View(ShipFactory.DefaultShip(game.Game, User.Identity.Name));
+            return View("Play", viewModel);
         }
 
 
@@ -207,7 +210,9 @@ namespace SpaceAlert.Web.Controllers
         public ActionResult Play(GameCreationViewModel gameViewModel)
         {
             GameContext game = serviceProvider.GameService.GetGame(gameViewModel.Game.GameId);
-            return View(ShipFactory.DefaultShip(game.Game, User.Identity.Name));
+            int personnageId = game.Game.Joueurs.Single(j => j.Personnage.MembreId == User.Id).IdPersonnage;
+            GameShipViewModel viewModel = ShipFactory.DefaultShip(game.Game, personnageId);
+            return View(ShipFactory.DefaultShip(game.Game, personnageId));
         }
 
         /// <summary>
@@ -220,8 +225,27 @@ namespace SpaceAlert.Web.Controllers
         {
             GameContext game = serviceProvider.GameService.DemarrerGame(gameId);
             HubClient client = new HubClient(gameId, serviceProvider);
+            int personnageId = game.Game.Joueurs.Single(j => j.Personnage.MembreId == User.Id).IdPersonnage;
+            GameShipViewModel viewModel = ShipFactory.DefaultShip(game.Game, personnageId);
             client.StartAsync();
-            return View("Play", ShipFactory.DefaultShip(game.Game, User.Identity.Name));
+            return View("Play", viewModel);
+        }
+
+        /// <summary>
+        /// Creates the card.
+        /// </summary>
+        /// <param name="action">The action.</param>
+        /// <param name="direction">The direction.</param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult CreateCard(int action, int direction)
+        {
+            CardViewModel vm = new CardViewModel
+            {
+                Direction = (Direction)direction,
+                Type = (TypeAction)action
+            };
+            return PartialView("Carte", vm);
         }
 
         /// <summary>

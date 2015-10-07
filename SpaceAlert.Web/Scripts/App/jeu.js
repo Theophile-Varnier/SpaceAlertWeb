@@ -6,7 +6,7 @@
 
     $("#playersModal").modal({
         backdrop: 'static',
-        show: false
+        show: true
     });
 
     $("#menaceModal").modal({
@@ -26,12 +26,21 @@
     playHub.client.popMenace = function (frontImg, backImg) {
         $("#menaceModal .front img").attr("src", serverPath + frontImg);
         $("#menaceModal .back img").attr("src", serverPath + backImg);
-        $("#menaceModal").modal('show');
+        //$("#menaceModal").modal('show');
     };
 
     playHub.client.receiveNewCard = function (charId, direction, action) {
         if (currentPlayer.characterId == charId) {
-            $("#cartes").append("<div class='carte'></div>");
+            $.ajax({
+                type: "POST",
+                url: getCardUrl,
+                data: {
+                    action: action,
+                    direction : direction
+                }
+            }).success(function (card) {
+                $("#cartes").append(card);
+            });
         }
     }
 
@@ -93,7 +102,7 @@
         $(".avatar").droppable({
             accept: '.carte',
             drop: function (e, ui) {
-                playHub.server.transfertCard(gameId, $(this).attr("data-char"));
+                playHub.server.transfertCard(gameId, $(this).attr("data-char"), ui.draggable.attr("data-mouvement"), ui.draggable.attr("data-action"));
                 ui.draggable.remove();
             }
         });
@@ -169,6 +178,27 @@
         },
         stop: function () {
             $(".carte").removeClass("locked");
+            var nbClones = $("#cartes .carte").length;
+            var i = 0;
+            // On anime les cartes restantes de la main du joueur
+            $("#cartes .carte").each(function () {
+                var item = $(this);
+                var clone = item.data("clone");
+                if (!clone) {
+                    nbClones--;
+                } else {
+                    clone.stop(true, false);
+
+                    var position = item.position();
+                    clone.animate({ left: position.left, top: position.top }, 400, "easeInQuart", function () {
+                        i++;
+                        if (i === nbClones) {
+                            $("#cartes .carte").css("visibility", "visible");
+                            $("#carteClones").empty();
+                        }
+                    });
+                }
+            });
         }
     });
 
@@ -210,27 +240,6 @@
                 ui.draggable.css("visibility", "visible");
                 tempClone.remove();
                 ui.draggable.addClass("posay");
-            });
-            var nbClones = $("#cartes .carte").length;
-            var i = 0;
-            // On anime les cartes restantes de la main du joueur
-            $("#cartes .carte").each(function () {
-                var item = $(this);
-                var clone = item.data("clone");
-                if (!clone) {
-                    nbClones--;
-                } else {
-                    clone.stop(true, false);
-
-                    var position = item.position();
-                    clone.animate({ left: position.left, top: position.top }, 400, "easeInQuart", function () {
-                        i++;
-                        if (i === nbClones) {
-                            $("#cartes .carte").css("visibility", "visible");
-                            $("#carteClones").empty();
-                        }
-                    });
-                }
             });
         }
     });

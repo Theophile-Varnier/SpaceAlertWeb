@@ -1,4 +1,5 @@
 ﻿
+using SpaceAlert.Model.Helpers.Enums;
 using System.Threading.Tasks;
 namespace SpaceAlert.Web.Hubs
 {
@@ -23,9 +24,9 @@ namespace SpaceAlert.Web.Hubs
         /// <param name="cardDirection">The card direction.</param>
         /// <param name="cardAction">The card action.</param>
         /// <returns></returns>
-        public async Task TransfertCard(string gameId, string newMembre, int cardDirection, int cardAction)
+        public async Task TransfertCard(string gameId, string newMembre, Direction cardDirection, TypeAction cardAction)
         {
-            Clients.OthersInGroup(gameId).receiveNewCard(newMembre, cardDirection, cardAction);
+            Clients.Group(gameId).receiveNewCard(newMembre, cardDirection, cardAction);
         }
 
         /// <summary>

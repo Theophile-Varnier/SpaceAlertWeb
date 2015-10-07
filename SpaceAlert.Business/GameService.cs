@@ -168,6 +168,7 @@ namespace SpaceAlert.Business
             return unitOfWork.Context.GameContext
                 .Include(g => g.Game)
                 .Include(g => g.Game.Joueurs)
+                .Include(g => g.Game.Joueurs.Select(j => j.Deck))
                 .Include(g => g.Game.Joueurs.Select(j => j.Personnage))
                 .Include(g => g.Game.Joueurs.Select(j => j.Personnage.Membre))
                 .SingleOrDefault(g => g.Id == gameId);
