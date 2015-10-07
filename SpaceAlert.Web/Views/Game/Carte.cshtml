@@ -1,7 +1,12 @@
-﻿<div class="carte" data-action="0" data-mouvement="0">
+﻿@model SpaceAlert.Web.Models.CardViewModel
+<div class="carte" data-action="@Model.Type" data-mouvement="@Model.Direction">
     <div class="flipper">
         <div class="front">
-            <img src="~/Content/Medias/carte_mouvement.png" />
+            @{
+                //string imgPath = string.Concat(Model.Type, "_", Model.Direction, ".png");
+                string imgPath = "carte_mouvement.png";
+                <img src="~/Content/Medias/@imgPath" />
+            }
         </div>
         <div class="back">
             <img src="~/Content/Medias/carte_dos.png" />

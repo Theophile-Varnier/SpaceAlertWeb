@@ -2,9 +2,11 @@
     var playHub = $.connection.playHub;
     var lastPosition;
 
+    var gameId = $("#GameId").val();
+
     $("#playersModal").modal({
         backdrop: 'static',
-        show: false
+        show: true
     });
 
     $("#menaceModal").modal({
@@ -24,8 +26,23 @@
     playHub.client.popMenace = function (frontImg, backImg) {
         $("#menaceModal .front img").attr("src", serverPath + frontImg);
         $("#menaceModal .back img").attr("src", serverPath + backImg);
-        $("#menaceModal").modal('show');
+        //$("#menaceModal").modal('show');
     };
+
+    playHub.client.receiveNewCard = function (charId, direction, action) {
+        if (currentPlayer.characterId == charId) {
+            $.ajax({
+                type: "POST",
+                url: getCardUrl,
+                data: {
+                    action: action,
+                    direction : direction
+                }
+            }).success(function (card) {
+                $("#cartes").append(card);
+            });
+        }
+    }
 
     $("#menaceModal").on("shown.bs.modal", function () {
         //setTimeout(function(){
@@ -63,7 +80,6 @@
         });
         if (actionsToSend.length) {
             var datas = JSON.stringify(actionsToSend);
-            var gameId = $("#GameId").val();
             $.ajax({
                 type: "POST",
                 url: addActionsUrl,
@@ -81,7 +97,16 @@
     };
 
     $.connection.hub.start().done(function () {
-        playHub.server.joinAsync("", $("#GameId").val());
+        playHub.server.joinAsync("", gameId);
+
+        $(".avatar").droppable({
+            accept: '.carte',
+            drop: function (e, ui) {
+                playHub.server.transfertCard(gameId, $(this).attr("data-char"), ui.draggable.attr("data-mouvement"), ui.draggable.attr("data-action"));
+                ui.draggable.remove();
+            }
+        });
+
     });
 
     // Le nombre de tours dans chaque phase
@@ -136,7 +161,7 @@
         }
     });
 
-    $(".carte").draggable({
+    $("#playerInfo .carte").draggable({
         container: "#playerInfo",
         zIndex: 10000,
         revert: "invalid",
@@ -153,6 +178,27 @@
         },
         stop: function () {
             $(".carte").removeClass("locked");
+            var nbClones = $("#cartes .carte").length;
+            var i = 0;
+            // On anime les cartes restantes de la main du joueur
+            $("#cartes .carte").each(function () {
+                var item = $(this);
+                var clone = item.data("clone");
+                if (!clone) {
+                    nbClones--;
+                } else {
+                    clone.stop(true, false);
+
+                    var position = item.position();
+                    clone.animate({ left: position.left, top: position.top }, 400, "easeInQuart", function () {
+                        i++;
+                        if (i === nbClones) {
+                            $("#cartes .carte").css("visibility", "visible");
+                            $("#carteClones").empty();
+                        }
+                    });
+                }
+            });
         }
     });
 
@@ -194,27 +240,6 @@
                 ui.draggable.css("visibility", "visible");
                 tempClone.remove();
                 ui.draggable.addClass("posay");
-            });
-            var nbClones = $("#cartes .carte").length;
-            var i = 0;
-            // On anime les cartes restantes de la main du joueur
-            $("#cartes .carte").each(function () {
-                var item = $(this);
-                var clone = item.data("clone");
-                if (!clone) {
-                    nbClones--;
-                } else {
-                    clone.stop(true, false);
-
-                    var position = item.position();
-                    clone.animate({ left: position.left, top: position.top }, 400, "easeInQuart", function () {
-                        i++;
-                        if (i === nbClones) {
-                            $("#cartes .carte").css("visibility", "visible");
-                            $("#carteClones").empty();
-                        }
-                    });
-                }
             });
         }
     });

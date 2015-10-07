@@ -1,6 +1,6 @@
 ﻿@model SpaceAlert.Web.Models.PlayerViewModel
 
-<div class="avatar">
+<div class="avatar" data-membre="@Model.MembreName" data-char="@Model.PersonnageId">
     <img src="data:image/jpg;base64,@Model.Avatar" class="img-thumbnail" />
     <div class="text-center">
         <span class="colored-square @Model.Color"></span>&nbsp;<span>@Model.MembreName [@Model.Name]</span>
