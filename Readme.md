@@ -10,6 +10,8 @@ TO DO
 
 -	Gestion capitaine
 
+-	Gestion menaces internes
+
 -	Proprification accès partie
 	-	Nombre de joueurs
 	-	Une seule connexion par client
@@ -19,16 +21,18 @@ TO DO
 	-	~~Déplacement des pièces~~
 	-	~~Cartes actions~~
 	-	Gestion des événements
-		-	Apparition des menaces
-		-	Transferts de données
+		-	~~Apparition des menaces~~
+		-	~~Transferts de données~~
 		-	Données entrantes
+		-	~~Fin de phase~~
+		-	Fin de partie
 
 -	Résolution de la partie
 
 Refactoring
 --------------
 
--	Gestion menaces détruites/survécues
+-	~~Gestion menaces détruites/survécues~~
 -	Gestion erreurs
 
 Nice to Have
@@ -43,6 +47,6 @@ Nice to Have
 Extension (v2 ?)
 --------------
 
--	Personnages
+-	~~Personnages~~
 -	Expérience
 -	Spécialisation
