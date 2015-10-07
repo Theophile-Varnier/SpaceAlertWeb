@@ -362,5 +362,52 @@ namespace SpaceAlert.Business
             }
             return null;
         }
+
+        /// <summary>
+        /// Computes the game score.
+        /// </summary>
+        /// <param name="gameId">The game identifier.</param>
+        public int ComputeGameScore(int gameId)
+        {
+            // TODO : ajouter les robots cassés, les joueurs dans les intercepteurs
+            GameContext game = unitOfWork.Context.GameContext
+                .Include(g => g.Game.MenacesExternes)
+                .Include(g => g.Game.Vaisseau)
+                .Include(g => g.Game.Joueurs)
+                .Include(g => g.Game.Joueurs.Select(j => j.Statistiques))
+                .SingleOrDefault(g => g.Id == gameId);
+            int pointsDeVictoire = 0;
+
+            IEnumerable<InGameMenace> menaces = game.Game.MenacesExternes.Select(m => m.Menace); // .Union(game.Game.MenacesInternes.Select(m => m.Menace))
+
+            // On ajoute les points des menaces
+            foreach (InGameMenace menace in menaces)
+            {
+                if (menace.Status == MenaceStatus.Detruite)
+                {
+                    pointsDeVictoire += SpaceAlertData.GetObject<Menace>(menace.MenaceName).PointsSiDetruite;
+                }
+                else
+                {
+                    pointsDeVictoire += SpaceAlertData.GetObject<Menace>(menace.MenaceName).PointsSiSurvecu;
+                }
+            }
+
+            // On ajoute les points de hublot
+            var pointsDeHublot = game.Game.Joueurs.Select(j => j.Statistiques).SelectMany(s => s.PointsDeHublot);
+            foreach (int phase in pointsDeHublot.Select(h => h.Phase).Distinct())
+            {
+                pointsDeVictoire += pointsDeHublot.Where(p => p.Phase == phase).Max(p => p.NbPoints);
+            }
+
+            // On retire les points dûs aux dégâts sur les zones
+            foreach (InGameZone zone in game.Game.Vaisseau.Zones)
+            {
+                pointsDeVictoire -= zone.Degats;
+            }
+            pointsDeVictoire -= game.Game.Vaisseau.Zones.Max(z => z.Degats);
+
+            return pointsDeVictoire;
+        }
     }
 }

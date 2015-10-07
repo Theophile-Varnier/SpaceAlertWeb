@@ -23,6 +23,22 @@ namespace SpaceAlert.Model.Menaces
         public TypeMenace Type { get; set; }
 
         /// <summary>
+        /// Gets or sets the PTS si detruit.
+        /// </summary>
+        /// <value>
+        /// The PTS si detruit.
+        /// </value>
+        public int PointsSiDetruite { get; set; }
+
+        /// <summary>
+        /// Gets or sets the points si survecu.
+        /// </summary>
+        /// <value>
+        /// The points si survecu.
+        /// </value>
+        public int PointsSiSurvecu { get; set; }
+
+        /// <summary>
         /// Gets or sets the couleur.
         /// </summary>
         /// <value>

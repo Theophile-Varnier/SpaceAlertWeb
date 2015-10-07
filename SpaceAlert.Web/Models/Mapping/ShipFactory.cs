@@ -116,8 +116,8 @@ namespace SpaceAlert.Web.Models.Mapping
                 {
                     res.StartingDeck.Add(new CardViewModel
                     {
-                        Type = deck.TypeAction,
-                        Direction = deck.Mouvement
+                        Type = (int)deck.TypeAction,
+                        Direction = (int)deck.Mouvement
                     });
                 }
             }

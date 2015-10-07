@@ -106,6 +106,8 @@
     <Compile Include="Stats\Degats.cs" />
     <Compile Include="Stats\Personnage.cs" />
     <Compile Include="Stats\PersonnageInCampagne.cs" />
+    <Compile Include="Stats\PointsDeHublot.cs" />
+    <Compile Include="Stats\Statistiques.cs" />
     <Compile Include="Stats\TypeDegats.cs" />
   </ItemGroup>
   <ItemGroup>

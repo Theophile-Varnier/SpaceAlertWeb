@@ -11,9 +11,18 @@ namespace SpaceAlert.Web.Hubs
         /// </summary>
         /// <param name="gameId">The game identifier.</param>
         /// <param name="message">The message.</param>
-        public void PopMenace(string gameId, string frontImage, string backImage)
+        public async Task PopMenace(string gameId, string frontImage, string backImage)
         {
             Clients.Group(gameId).popMenace(frontImage, backImage);
+        }
+
+        /// <summary>
+        /// Datas the transfert.
+        /// </summary>
+        /// <param name="gameId">The game identifier.</param>
+        public async Task DataTransfert(string gameId)
+        {
+            Clients.Group(gameId).enableDataTransfert();
         }
 
         /// <summary>
@@ -34,7 +43,7 @@ namespace SpaceAlert.Web.Hubs
         /// </summary>
         /// <param name="gameId">The game identifier.</param>
         /// <param name="phase">The phase.</param>
-        public void FinDePhase(string gameId, int phase)
+        public async Task FinDePhase(string gameId, int phase)
         {
             Clients.Group(gameId).endPhase(phase);
         }

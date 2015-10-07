@@ -50,6 +50,14 @@ namespace SpaceAlert.Model.Jeu
         public TypeMission TypeMission { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="Game"/> is win.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if win; otherwise, <c>false</c>.
+        /// </value>
+        public bool Win { get; set; }
+
+        /// <summary>
         /// La mission
         /// </summary>
         [NotMapped]

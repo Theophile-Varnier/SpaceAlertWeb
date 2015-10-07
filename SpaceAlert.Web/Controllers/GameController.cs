@@ -242,8 +242,8 @@ namespace SpaceAlert.Web.Controllers
         {
             CardViewModel vm = new CardViewModel
             {
-                Direction = (Direction)direction,
-                Type = (TypeAction)action
+                Direction = direction,
+                Type = action
             };
             return PartialView("Carte", vm);
         }

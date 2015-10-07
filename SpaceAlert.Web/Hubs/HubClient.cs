@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.SignalR.Client;
 using SpaceAlert.Business;
+using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Jeu;
 using SpaceAlert.Model.Jeu.Evenements;
 using SpaceAlert.Web.Models;
@@ -78,6 +79,18 @@ namespace SpaceAlert.Web.Hubs
                     BackImageUri = string.Concat(@"Content/Medias/", "carte_dos", ".png")
                 };
                 hubProxy.Invoke("PopMenace", gameId, model.FrontImgUri, model.BackImageUri);
+            }
+            else if (e.Evenement is TransfertDeDonnees)
+            {
+                hubProxy.Invoke("DataTransfert", gameId);
+            }
+            else if (e.Evenement is DonneesEntrantes)
+            {
+                foreach (Joueur joueur in game.Game.Joueurs)
+                {
+                    Tuple<TypeAction, Direction> nextCard = serviceProvider.GameService.GetNextCard(GameId);
+                    hubProxy.Invoke("TransfertCard", gameId, joueur.IdPersonnage.ToString(), nextCard.Item2, nextCard.Item1);
+                }
             }
             else
             {

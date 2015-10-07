@@ -4,9 +4,9 @@ namespace SpaceAlert.Web.Models
 {
     public class CardViewModel
     {
-        public Direction Direction { get; set; }
+        public int Direction { get; set; }
 
-        public TypeAction Type { get; set; }
+        public int Type { get; set; }
 
         public string FrontImgUri { get; set; }
 

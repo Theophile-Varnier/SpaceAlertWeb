@@ -68,5 +68,13 @@ namespace SpaceAlert.Model.Jeu
         /// La salle dans laquelle il se trouve actuellement
         /// </summary>
         public Position CurrentSalle { get; set; }
+
+        /// <summary>
+        /// Gets or sets the statistiques.
+        /// </summary>
+        /// <value>
+        /// The statistiques.
+        /// </value>
+        public Statistiques Statistiques { get; set; }
     }
 }
