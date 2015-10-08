@@ -42,11 +42,6 @@ namespace SpaceAlert.Model.Plateau
         public int NbRoquettes { get; set; }
 
         /// <summary>
-        /// Indique si les intercepteurs sont utilisés par un joueur
-        /// </summary>
-        public bool InterceptorsInUse { get; set; }
-
-        /// <summary>
         /// L'état des différentes zones du vaisseau à chaque instant
         /// </summary>
         public List<InGameZone> Zones { get; set; }

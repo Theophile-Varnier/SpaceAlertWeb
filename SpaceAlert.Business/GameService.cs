@@ -56,7 +56,6 @@ namespace SpaceAlert.Business
             return res.Id;
         }
 
-
         /// <summary>
         /// Initializes the mission.
         /// </summary>
@@ -174,6 +173,11 @@ namespace SpaceAlert.Business
                 .SingleOrDefault(g => g.Id == gameId);
         }
 
+        /// <summary>
+        /// Gets the game for execution.
+        /// </summary>
+        /// <param name="gameId">The game identifier.</param>
+        /// <returns></returns>
         public GameContext GetGameForExecution(int gameId)
         {
             GameContext res = unitOfWork.Context.GameContext
@@ -288,7 +292,7 @@ namespace SpaceAlert.Business
         {
             return GetGame(gameId).Game.Joueurs.Select(j => j.Personnage).SingleOrDefault(p => p.MembreId == membreId);
         }
-
+         
         /// <summary>
         /// Enregistre une partie lorsqu'elle est lancée
         /// </summary>
@@ -369,7 +373,7 @@ namespace SpaceAlert.Business
         /// <param name="gameId">The game identifier.</param>
         public int ComputeGameScore(int gameId)
         {
-            // TODO : ajouter les robots cassés, les joueurs dans les intercepteurs
+            // TODO : ajouter les robots cassés, les joueurs assommés / dans les intercepteurs
             GameContext game = unitOfWork.Context.GameContext
                 .Include(g => g.Game.MenacesExternes)
                 .Include(g => g.Game.Vaisseau)
@@ -407,7 +411,33 @@ namespace SpaceAlert.Business
             }
             pointsDeVictoire -= game.Game.Vaisseau.Zones.Max(z => z.Degats);
 
+            // On retire les points des joueurs assommés
+            pointsDeVictoire -= 2 * game.Game.Joueurs.Count(j => j.Status == StatusJoueur.Assomme);
+
+            // On retire les points des robots désactivés
+            pointsDeVictoire -= game.Game.Joueurs.Count(j => j.Robots == EtatRobots.Casse);
+
             return pointsDeVictoire;
+        }
+
+        /// <summary>
+        /// Ends the game.
+        /// </summary>
+        /// <param name="gameId">The game identifier.</param>
+        public void EndGame(int gameId)
+        {
+            GameContext game = GetGame(gameId);
+
+            game.Game.Win = game.Game.Vaisseau.Zones.All(z => z.Degats < 6);
+
+            game.Statut = StatutPartie.Termine;
+
+            foreach (Membre membre in game.Game.Joueurs.Select(j => j.Personnage).Select(p => p.Membre))
+            {
+                membre.CurrentGame = null;
+            }
+
+            unitOfWork.Context.SaveChanges();
         }
     }
 }

@@ -26,6 +26,15 @@ namespace SpaceAlert.Model.Jeu
         public string MenaceName { get; set; }
 
         /// <summary>
+        /// Gets or sets the menace.
+        /// </summary>
+        /// <value>
+        /// The menace.
+        /// </value>
+        [NotMapped]
+        public Menace Menace { get; set; }
+
+        /// <summary>
         /// Gets or sets the menace in zone.
         /// </summary>
         /// <value>

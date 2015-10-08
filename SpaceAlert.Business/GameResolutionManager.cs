@@ -87,16 +87,17 @@ namespace SpaceAlert.Business
             ActionInTour actionToResolve;
             do
             {
+                Joueur currentPlayer = game.Game.Joueurs[indiceJoueurCourant];
                 // On retarde si la maintenance n'a pas été effectuée
                 if (retardMaintenance)
                 {
-                    DelayPlayer(game.Game.Joueurs[indiceJoueurCourant], game.TourEnCours);
+                    DelayPlayer(currentPlayer, game.TourEnCours);
                 }
 
                 // On exécute l'action du joueur
-                if ((actionToResolve = game.Game.Joueurs[indiceJoueurCourant].Actions.SingleOrDefault(a => a.Tour == game.TourEnCours)) != null)
+                if (currentPlayer.Status != StatusJoueur.Assomme && (actionToResolve = currentPlayer.Actions.FirstOrDefault(a => a.Tour == game.TourEnCours)) != null)
                 {
-                    ResolveAction(game.Game.Joueurs[indiceJoueurCourant]);
+                    ResolveAction(currentPlayer);
                 }
 
                 indiceJoueurCourant = (indiceJoueurCourant + 1) % game.Game.Joueurs.Count;
@@ -124,7 +125,10 @@ namespace SpaceAlert.Business
                     ResolveAction((TypeAction)actionToResolve.Value, joueur);
                     break;
                 case GenreAction.Mouvement:
-                    joueur.CurrentSalle = game.Game.Vaisseau.SalleSuivante(joueur.CurrentSalle, (Direction)actionToResolve.Value).Position;
+                    if (joueur.Status == StatusJoueur.EnJeu)
+                    {
+                        joueur.CurrentSalle = game.Game.Vaisseau.SalleSuivante(joueur.CurrentSalle, (Direction)actionToResolve.Value).Position;
+                    }
                     break;
                 default:
                     // do the default action
@@ -188,7 +192,7 @@ namespace SpaceAlert.Business
                     }
                     break;
                 case ActionC.Intercepteurs:
-                    game.Game.Vaisseau.InterceptorsInUse = true;
+                    source.Status = StatusJoueur.Intercepteurs;
                     break;
                 case ActionC.Maintenance:
                     game.MaintenanceEffectuee = true;

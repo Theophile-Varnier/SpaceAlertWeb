@@ -19,6 +19,14 @@ namespace SpaceAlert.Model.Stats
         public int Id { get; set; }
 
         /// <summary>
+        /// Gets or sets the clones.
+        /// </summary>
+        /// <value>
+        /// The clones.
+        /// </value>
+        public int Clones { get; set; }
+
+        /// <summary>
         /// Id du membre
         /// </summary>
         [ForeignKey("Membre")]

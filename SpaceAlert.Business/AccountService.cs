@@ -53,6 +53,7 @@ namespace SpaceAlert.Business
             {
                 MembreId = membreId,
                 Nom = charName,
+                Clones = -1,
                 Xp = 0
             };
             unitOfWork.MembreProvider.AddCharacter(membreId, newPersonnage);

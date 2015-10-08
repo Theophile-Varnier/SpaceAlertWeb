@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SpaceAlert.Model.Stats
 {
-    [Table("Hublot")]
+    [Table("Hublots")]
     public class PointsDeHublot
     {
         /// <summary>

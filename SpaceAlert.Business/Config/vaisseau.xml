@@ -6,7 +6,6 @@ xsi:schemaLocation="http://www.springframework.net http://www.springframework.ne
   <object id="Vaisseau" type="SpaceAlert.Model.Plateau.Vaisseau" singleton="false">
     <property name="NbCapsules" value="3" />
     <property name="NbRoquettes" value="3" />
-    <property name="InterceptorsInUse" value="True" />
     <property name="Zones">
       <list>
         <ref object="ZoneBleue" />

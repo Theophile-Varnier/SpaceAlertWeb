@@ -26,6 +26,12 @@ namespace SpaceAlert.Model.Jeu
         [ForeignKey("Personnage")]
         public int IdPersonnage { get; set; }
 
+        /// <summary>
+        /// Gets or sets the personnage.
+        /// </summary>
+        /// <value>
+        /// The personnage.
+        /// </value>
         public virtual Personnage Personnage { get; set; }
 
         /// <summary>
@@ -47,6 +53,14 @@ namespace SpaceAlert.Model.Jeu
         public bool IsCapitaine { get; set; }
 
         /// <summary>
+        /// Gets or sets the status.
+        /// </summary>
+        /// <value>
+        /// The status.
+        /// </value>
+        public StatusJoueur Status { get; set; }
+
+        /// <summary>
         /// Ses actions
         /// </summary>
         public List<ActionInTour> Actions { get; set; }
@@ -57,7 +71,7 @@ namespace SpaceAlert.Model.Jeu
         /// <value>
         /// The deck.
         /// </value>
-        public List<PartialDeck> Deck { get; set; } 
+        public List<PartialDeck> Deck { get; set; }
 
         /// <summary>
         /// A-t-il des robots avec lui ?

@@ -44,5 +44,11 @@ namespace SpaceAlert.DataAccess
         public DbSet<Salle> Salles { get; set; }
 
         public DbSet<Vaisseau> Vaisseaux { get; set; }
+
+        public DbSet<Statistiques> Statistiques { get; set; }
+
+        public DbSet<PointsDeHublot> Hublots { get; set; }
+
+        public DbSet<PartialDeck> Decks { get; set; }
     }
 }
