@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace SpaceAlert.DataAccess.Providers
 {
@@ -45,9 +46,14 @@ namespace SpaceAlert.DataAccess.Providers
         /// <summary>
         /// Récupère un unique élément en fonction de ses attributs
         /// </summary>
-        public T GetUniqueResult(Func<T, bool> filtres)
+        public T GetUniqueResult(Func<T, bool> filtres, params Expression<Func<T, object>>[] dataLoadOptions)
         {
-            return Table.SingleOrDefault(filtres);
+            IQueryable<T> res = Table;
+            foreach (Expression<Func<T, object>> field in dataLoadOptions)
+            {
+                res = res.Include(field);
+            }
+            return res.SingleOrDefault(filtres);
         }
 
         /// <summary>

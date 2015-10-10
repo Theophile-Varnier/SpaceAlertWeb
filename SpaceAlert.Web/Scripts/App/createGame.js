@@ -30,11 +30,11 @@
                     charName: $("#newChar").val()
                 }
             }).success(function (newChar) {
-                $("#CreatedBy").append($('<option>', {
+                $("#Player_Name").append($('<option>', {
                     value: newChar,
                     text: newChar
                 }));
-                $("#Game_Player_Name").val(newChar);
+                $("#Player_Name").val(newChar);
                 $('#wait').addClass("hidden");
             });
         }

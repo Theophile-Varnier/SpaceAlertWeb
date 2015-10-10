@@ -16,9 +16,26 @@ namespace SpaceAlert.DataAccess.Providers
             Table = context.Set<Personnage>();
         }
 
+        /// <summary>
+        /// Gets the specified membre identifier.
+        /// </summary>
+        /// <param name="membreId">The membre identifier.</param>
+        /// <param name="nomPersonnage">The nom personnage.</param>
+        /// <returns></returns>
         public Personnage Get(long membreId, string nomPersonnage)
         {
             return GetUniqueResult(p => p.MembreId == membreId && p.Nom == nomPersonnage);
+        }
+
+        /// <summary>
+        /// Adds the xp points.
+        /// </summary>
+        /// <param name="personnageId">The personnage identifier.</param>
+        /// <param name="points">The points.</param>
+        public void AddXpPoints(int personnageId, int points)
+        {
+            Table.Find(personnageId).Xp += points;
+            context.SaveChanges();
         }
     }
 }

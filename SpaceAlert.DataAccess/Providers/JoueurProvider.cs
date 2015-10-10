@@ -1,9 +1,8 @@
 ﻿using SpaceAlert.Model.Jeu;
-using System;
+using SpaceAlert.Model.Stats;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpaceAlert.DataAccess.Providers
 {
@@ -23,6 +22,19 @@ namespace SpaceAlert.DataAccess.Providers
             joueur.GameId = game.Id;
             joueur.Personnage.Games.Add(joueur);
             context.SaveChanges();
+        }
+
+        /// <summary>
+        /// Gets the game characters.
+        /// </summary>
+        /// <param name="gameId">The game identifier.</param>
+        /// <returns></returns>
+        public IEnumerable<Personnage> GetGameCharacters(int gameId)
+        {
+            return Table
+                .Include(j => j.Personnage)
+                .Where(j => j.GameId == gameId)
+                .Select(j => j.Personnage);
         }
     }
 }

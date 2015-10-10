@@ -167,6 +167,7 @@ namespace SpaceAlert.Business
             return unitOfWork.Context.GameContext
                 .Include(g => g.Game)
                 .Include(g => g.Game.Joueurs)
+                .Include(g => g.Game.Vaisseau.Zones)
                 .Include(g => g.Game.Joueurs.Select(j => j.Deck))
                 .Include(g => g.Game.Joueurs.Select(j => j.Personnage))
                 .Include(g => g.Game.Joueurs.Select(j => j.Personnage.Membre))
@@ -368,6 +369,40 @@ namespace SpaceAlert.Business
         }
 
         /// <summary>
+        /// Resolves the game.
+        /// </summary>
+        /// <param name="gameId">The game identifier.</param>
+        public void ResolveGame(int gameId)
+        {
+            GameContext game = ReconstructGame(gameId);
+
+            GameResolutionManager manager = new GameResolutionManager(game);
+            manager.Resolve();
+            unitOfWork.Context.SaveChanges();
+
+            game = EndGame(gameId);
+
+            if (game.Game.Win)
+            {
+                UpdateTeamScore(gameId);
+            }
+        }
+
+        /// <summary>
+        /// Updates the team score.
+        /// </summary>
+        /// <param name="gameId">The game identifier.</param>
+        private void UpdateTeamScore(int gameId)
+        {
+            int pts = ComputeGameScore(gameId);
+            IEnumerable<Personnage> personnages = unitOfWork.JoueurProvider.GetGameCharacters(gameId);
+            foreach (Personnage personnage in personnages)
+            {
+                unitOfWork.PersonnageProvider.AddXpPoints(personnage.Id, pts);
+            }
+        }
+
+        /// <summary>
         /// Computes the game score.
         /// </summary>
         /// <param name="gameId">The game identifier.</param>
@@ -424,7 +459,7 @@ namespace SpaceAlert.Business
         /// Ends the game.
         /// </summary>
         /// <param name="gameId">The game identifier.</param>
-        public void EndGame(int gameId)
+        public GameContext EndGame(int gameId)
         {
             GameContext game = GetGame(gameId);
 
@@ -438,6 +473,31 @@ namespace SpaceAlert.Business
             }
 
             unitOfWork.Context.SaveChanges();
+
+            return game;
+        }
+
+        /// <summary>
+        /// Reconstructs the game.
+        /// </summary>
+        /// <param name="gameId">The game identifier.</param>
+        /// <returns></returns>
+        public GameContext ReconstructGame(int gameId)
+        {
+            GameContext res = unitOfWork.GameContextProvider.GetUniqueResult(g => g.Id == gameId, 
+                g => g.Game.Joueurs,
+                g => g.Game.Vaisseau.Zones,
+                g => g.Game.Joueurs.Select(j => j.Actions.Select(a => a.Action)), 
+                g => g.Game.MenacesExternes);
+
+            res.Game.Mission = SpaceAlertData.GetObject<Mission>(res.Game.MissionId);
+
+            foreach (InGameMenace menace in res.Game.MenacesExternes.Select(m => m.Menace))
+            {
+                menace.Menace = SpaceAlertData.GetObject<Menace>(menace.MenaceName);
+            }
+
+            return res;
         }
     }
 }
