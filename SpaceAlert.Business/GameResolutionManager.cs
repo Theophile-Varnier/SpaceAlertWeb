@@ -65,7 +65,7 @@ namespace SpaceAlert.Business
             {
                 if (evenement.TourArrive == game.TourEnCours)
                 {
-                    game.Game.MenacesExternes.Single(m => m.AnnonceEvenement == evenement.Annonce).Menace.Status = MenaceStatus.EnJeu;
+                    game.Game.MenacesExternes.Single(m => m.AnnonceEvenement == evenement.Annonce).Status = MenaceStatus.EnJeu;
                 }
             }
 
@@ -293,7 +293,7 @@ namespace SpaceAlert.Business
         {
             // On récupère les menaces ciblables par les roquettes
             InGameMenace closerMenace = null;
-            List<InGameMenace> targetableMenacesExternes = game.Game.MenacesExternes.Select(m => m.Menace).Where(m => ((MenaceExterne)SpaceAlertData.Menace(m.MenaceName)).RocketTargetable && MenacePortee(m) <= 2).ToList();
+            List<InGameMenace> targetableMenacesExternes = game.Game.MenacesExternes.Where(m => ((MenaceExterne)SpaceAlertData.Menace(m.MenaceName)).RocketTargetable && MenacePortee(m) <= 2).ToList();
             if (targetableMenacesExternes.Any())
             {
                 closerMenace = targetableMenacesExternes.OrderBy(MenaceDistance).First();
@@ -305,7 +305,7 @@ namespace SpaceAlert.Business
                     .Where(c => c.HasShot)
                     .Sum(c => c.Power);
 
-                if (game.RoquettesThisTurn && closerMenace != null && game.Game.MenacesExternes.Where(m => m.Zone == zone).Select(m => m.Menace).Contains(closerMenace))
+                if (game.RoquettesThisTurn && closerMenace != null && game.Game.MenacesExternes.Where(m => m.Zone == zone).Contains(closerMenace))
                 {
                     totalDamages += SpaceAlertData.RocketDamages;
                     game.RoquettesThisTurn = false;
@@ -313,7 +313,7 @@ namespace SpaceAlert.Business
 
                 if (game.Game.MenacesExternes.Any(m => m.Zone == zone))
                 {
-                    InGameMenace zoneMenace = game.Game.MenacesExternes.Where(m => m.Zone == zone).Select(m => m.Menace).OrderByDescending(m => m.Position).ThenBy(m => m.TourArrive).First();
+                    InGameMenace zoneMenace = game.Game.MenacesExternes.Where(m => m.Zone == zone).OrderByDescending(m => m.Position).ThenBy(m => m.TourArrive).First();
 
                     // S'il y a une menace dans la zone on lui inflige des dégâts
                     if (zoneMenace != null)
@@ -342,7 +342,7 @@ namespace SpaceAlert.Business
             IEnumerable<Zone> zones = game.Game.MenacesExternes.Select(m => m.Zone).Distinct();
             foreach (Zone zone in zones)
             {
-                IEnumerable<InGameMenace> activesMenacesInZone = game.Game.MenacesExternes.Where(m => m.Zone == zone).Select(m => m.Menace).Where(m => m.Status == MenaceStatus.EnJeu);
+                IEnumerable<InGameMenace> activesMenacesInZone = game.Game.MenacesExternes.Where(m => m.Zone == zone).Where(m => m.Status == MenaceStatus.EnJeu);
                 foreach (InGameMenace menace in activesMenacesInZone)
                 {
                     // On fait bouger la menace

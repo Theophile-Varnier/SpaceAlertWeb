@@ -42,7 +42,7 @@ namespace SpaceAlert.Model.Jeu
         /// <value>
         /// The menaces externes.
         /// </value>
-        public List<MenaceInZone> MenacesExternes { get; set; }
+        public List<InGameMenace> MenacesExternes { get; set; }
 
         /// <summary>
         /// Le type de mission

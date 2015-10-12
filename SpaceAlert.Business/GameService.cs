@@ -415,9 +415,10 @@ namespace SpaceAlert.Business
                 .Include(g => g.Game.Joueurs)
                 .Include(g => g.Game.Joueurs.Select(j => j.Statistiques))
                 .SingleOrDefault(g => g.Id == gameId);
+
             int pointsDeVictoire = 0;
 
-            IEnumerable<InGameMenace> menaces = game.Game.MenacesExternes.Select(m => m.Menace); // .Union(game.Game.MenacesInternes.Select(m => m.Menace))
+            IEnumerable<InGameMenace> menaces = game.Game.MenacesExternes; // .Union(game.Game.MenacesInternes)
 
             // On ajoute les points des menaces
             foreach (InGameMenace menace in menaces)
@@ -492,7 +493,7 @@ namespace SpaceAlert.Business
 
             res.Game.Mission = SpaceAlertData.GetObject<Mission>(res.Game.MissionId);
 
-            foreach (InGameMenace menace in res.Game.MenacesExternes.Select(m => m.Menace))
+            foreach (InGameMenace menace in res.Game.MenacesExternes)
             {
                 menace.Menace = SpaceAlertData.GetObject<Menace>(menace.MenaceName);
             }

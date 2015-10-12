@@ -61,6 +61,14 @@ namespace SpaceAlert.Model.Jeu
         public StatusJoueur Status { get; set; }
 
         /// <summary>
+        /// Gets or sets the interceptors range.
+        /// </summary>
+        /// <value>
+        /// The interceptors range.
+        /// </value>
+        public int InterceptorsRange { get; set; }
+
+        /// <summary>
         /// Ses actions
         /// </summary>
         public List<ActionInTour> Actions { get; set; }

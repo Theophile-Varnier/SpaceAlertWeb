@@ -1,4 +1,5 @@
-﻿using SpaceAlert.Model.Helpers.Enums;
+﻿using System;
+using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Menaces;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -17,7 +18,7 @@ namespace SpaceAlert.Model.Jeu
         /// <value>
         /// The identifier.
         /// </value>
-        [Key, ForeignKey("MenaceInZone")]
+        [Key]
         public int Id { get; set; }
 
         /// <summary>
@@ -35,13 +36,37 @@ namespace SpaceAlert.Model.Jeu
         public Menace Menace { get; set; }
 
         /// <summary>
-        /// Gets or sets the menace in zone.
+        /// Gets or sets the game identifier.
         /// </summary>
         /// <value>
-        /// The menace in zone.
+        /// The game identifier.
         /// </value>
-        [Required]
-        public virtual MenaceInZone MenaceInZone { get; set; }
+        [ForeignKey("Game")]
+        public int GameId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the game.
+        /// </summary>
+        /// <value>
+        /// The game.
+        /// </value>
+        public virtual Game Game { get; set; }
+
+        /// <summary>
+        /// Gets or sets the zone.
+        /// </summary>
+        /// <value>
+        /// The zone.
+        /// </value>
+        public Zone Zone { get; set; }
+
+        /// <summary>
+        /// Gets or sets the evenement.
+        /// </summary>
+        /// <value>
+        /// The evenement.
+        /// </value>
+        public TimeSpan AnnonceEvenement { get; set; }
 
         /// <summary>
         /// Gets or sets the status.

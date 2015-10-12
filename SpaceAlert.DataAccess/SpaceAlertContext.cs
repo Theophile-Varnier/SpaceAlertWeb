@@ -27,8 +27,6 @@ namespace SpaceAlert.DataAccess
 
         public DbSet<Personnage> Personnages { get; set; }
 
-        public DbSet<MenaceInZone> MenacesInZones { get; set; }
-
         public DbSet<InGameMenace> Menaces { get; set; }
 
         public DbSet<ActionJoueur> Actions { get; set; }

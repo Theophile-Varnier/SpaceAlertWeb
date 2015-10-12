@@ -14,7 +14,7 @@ namespace SpaceAlert.Business.Factories
         /// <param name="game">Le contexte de la partie</param>
         /// <param name="source">L'événement à partir duquel est générée la menace</param>
         /// <returns></returns>
-        public static MenaceInZone CreateMenace(GameContext game, EvenementMenace source)
+        public static InGameMenace CreateMenace(GameContext game, EvenementMenace source)
         {
             Menace selectedMenace = SpaceAlertData.Menace(source.MenaceName);
             InGameMenace menace = new InGameMenace
@@ -26,6 +26,10 @@ namespace SpaceAlert.Business.Factories
                 CurrentSpeed = selectedMenace.Speed,
                 Position = 0,
                 TourArrive = source.TourArrive,
+                GameId = game.Game.Id,
+                Game = game.Game,
+                Zone = source.Zone,
+                AnnonceEvenement = source.Annonce,
                 DegatsSubis = 0
             };
             switch (source.Type)
@@ -42,15 +46,7 @@ namespace SpaceAlert.Business.Factories
                     // do the default action
                     break;
             }
-            MenaceInZone res = new MenaceInZone
-            {
-                Menace = menace,
-                GameId = game.Game.Id,
-                Game = game.Game,
-                Zone = source.Zone,
-                AnnonceEvenement = source.Annonce
-            };
-            return res;
+            return menace;
         }
     }
 }

@@ -19,7 +19,7 @@ namespace SpaceAlert.Business.Factories
                 DateCreation = DateTime.Now,
                 DateFin = DateTime.Now,
                 Vaisseau = SpaceAlertData.GetObject<Vaisseau>("Vaisseau"),
-                MenacesExternes = new List<MenaceInZone>(),
+                MenacesExternes = new List<InGameMenace>(),
                 NbJoueurs = nbJoueurs,
                 Joueurs = new List<Joueur>()
             };
