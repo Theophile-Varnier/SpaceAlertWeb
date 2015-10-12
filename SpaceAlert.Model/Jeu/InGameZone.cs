@@ -58,8 +58,17 @@ namespace SpaceAlert.Model.Jeu
         public int RampeIndice { get; set; }
 
         /// <summary>
+        /// Gets or sets the rampe.
+        /// </summary>
+        /// <value>
+        /// The rampe.
+        /// </value>
+        [NotMapped]
+        public Rampe Rampe { get; set; }
+
+        /// <summary>
         /// Le nombre de dégâts subis par la zone
         /// </summary>
-        public int Degats { get; set; }
+        public DegatsVaisseau Degats { get; set; }
     }
 }

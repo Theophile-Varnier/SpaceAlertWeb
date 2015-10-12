@@ -443,9 +443,9 @@ namespace SpaceAlert.Business
             // On retire les points dûs aux dégâts sur les zones
             foreach (InGameZone zone in game.Game.Vaisseau.Zones)
             {
-                pointsDeVictoire -= zone.Degats;
+                pointsDeVictoire -= zone.Degats.FlagsCount();
             }
-            pointsDeVictoire -= game.Game.Vaisseau.Zones.Max(z => z.Degats);
+            pointsDeVictoire -= game.Game.Vaisseau.Zones.Max(z => z.Degats.FlagsCount());
 
             // On retire les points des joueurs assommés
             pointsDeVictoire -= 2 * game.Game.Joueurs.Count(j => j.Status == StatusJoueur.Assomme);
@@ -464,7 +464,7 @@ namespace SpaceAlert.Business
         {
             GameContext game = GetGame(gameId);
 
-            game.Game.Win = game.Game.Vaisseau.Zones.All(z => z.Degats < 6);
+            game.Game.Win = game.Game.Vaisseau.Zones.All(z => !z.Degats.HasFlag(DegatsVaisseau.All));
 
             game.Statut = StatutPartie.Termine;
 

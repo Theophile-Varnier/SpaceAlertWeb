@@ -45,6 +45,39 @@ namespace SpaceAlert.Model.Helpers
         }
 
         /// <summary>
+        /// Counts the flags set in an enum value
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
+        public static int FlagsCount(this Enum value)
+        {
+            int val = (int)(object)value;
+            int count = 0;
+
+            while (val > 0)
+            {
+                if ((val & 1) != 0)
+                {
+                    count++;
+                }
+                val = val >> 1;
+            }
+            return count;
+        }
+
+        /// <summary>
+        /// Randoms the value.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static T RandomEnumValue<T>() where T: struct, IConvertible
+        {
+            Array values = Enum.GetValues(typeof(T));
+            Random rand = new Random();
+            return (T) values.GetValue(rand.Next(values.Length));
+        }
+
+        /// <summary>
         /// Récupère un élément aléatoire dans une liste
         /// </summary>
         /// <typeparam name="T">Le type d'éléments de la liste</typeparam>

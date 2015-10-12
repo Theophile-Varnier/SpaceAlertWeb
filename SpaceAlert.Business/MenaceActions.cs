@@ -1,4 +1,5 @@
-﻿using SpaceAlert.Model.Helpers.Enums;
+﻿using SpaceAlert.Model.Helpers;
+using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Jeu;
 using SpaceAlert.Model.Plateau;
 using System;
@@ -186,7 +187,23 @@ namespace SpaceAlert.Business
 
             if (degatsRestants > 0)
             {
-                target.Zones.Single(z => z.Zone == from).Degats += degatsRestants;
+                // On vérifie que la zone n'est pas déjà au max de dégâts
+                if (!target.Zones.Single(z => z.Zone == from).Degats.Is(DegatsVaisseau.All))
+                {
+                    // On ajoute  les nouveaux dégâts à la zone attaquée
+                    for (int i = 0; i < degatsRestants; i++)
+                    {
+                        DegatsVaisseau degat;
+                        do
+                        {
+                            // On récupère un dégât random
+                            degat = Extensions.RandomEnumValue<DegatsVaisseau>();
+
+                        } while (target.Zones.Single(z => z.Zone == from).Degats.HasFlag(degat) || degat.Is(DegatsVaisseau.All));
+
+                        target.Zones.Single(z => z.Zone == from).Degats |= degat;
+                    }
+                }
                 target.Zones.Single(z => z.Zone == from).Salles.Single(s => s.Position.Pont == Pont.Haut).EnergieCourante = 0;
             }
             else
