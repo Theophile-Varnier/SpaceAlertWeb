@@ -70,11 +70,11 @@ namespace SpaceAlert.Model.Helpers
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static T RandomEnumValue<T>() where T: struct, IConvertible
+        public static T RandomEnumValue<T>() where T : struct, IConvertible
         {
             Array values = Enum.GetValues(typeof(T));
             Random rand = new Random();
-            return (T) values.GetValue(rand.Next(values.Length));
+            return (T)values.GetValue(rand.Next(values.Length));
         }
 
         /// <summary>

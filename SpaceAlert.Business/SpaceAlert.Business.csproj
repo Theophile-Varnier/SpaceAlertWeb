@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="AbstractService.cs" />
     <Compile Include="AccountService.cs" />
+    <Compile Include="Config\IConfigurationManager.cs" />
     <Compile Include="Exceptions\MembreNonExistantException.cs" />
     <Compile Include="Exceptions\MotDePasseInvalideException.cs" />
     <Compile Include="Exceptions\PartiePleineException.cs" />
@@ -77,47 +78,47 @@
     <Compile Include="SpaceAlertData.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Config\Menaces\Blanches\Normales\E1-01.xml" />
-    <EmbeddedResource Include="Config\Menaces\Blanches\Normales\E1-02.xml" />
-    <EmbeddedResource Include="Config\Menaces\Blanches\Normales\E1-03.xml" />
-    <EmbeddedResource Include="Config\Menaces\Blanches\Normales\E1-04.xml" />
-    <EmbeddedResource Include="Config\Menaces\Blanches\Normales\E1-05.xml" />
-    <EmbeddedResource Include="Config\Menaces\Blanches\Normales\E1-06.xml" />
-    <EmbeddedResource Include="Config\Menaces\Blanches\Normales\E1-07.xml" />
-    <EmbeddedResource Include="Config\Menaces\Blanches\Normales\E1-08.xml" />
-    <EmbeddedResource Include="Config\Menaces\Blanches\Normales\E1-09.xml" />
-    <EmbeddedResource Include="Config\Menaces\Blanches\Normales\E1-10.xml" />
-    <EmbeddedResource Include="Config\Menaces\Blanches\Serieuses\SE1-01.xml" />
-    <EmbeddedResource Include="Config\Menaces\Blanches\Serieuses\SE1-02.xml" />
-    <EmbeddedResource Include="Config\Menaces\Blanches\Serieuses\SE1-03.xml" />
-    <EmbeddedResource Include="Config\Menaces\Blanches\Serieuses\SE1-04.xml" />
-    <EmbeddedResource Include="Config\Menaces\Blanches\Serieuses\SE1-05.xml" />
-    <EmbeddedResource Include="Config\Menaces\Blanches\Serieuses\SE1-06.xml" />
-    <EmbeddedResource Include="Config\Menaces\Blanches\Serieuses\SE1-07.xml" />
-    <EmbeddedResource Include="Config\Menaces\Blanches\Serieuses\SE1-08.xml" />
-    <EmbeddedResource Include="Config\Menaces\Jaunes\Normales\E2-01.xml" />
-    <EmbeddedResource Include="Config\Menaces\Jaunes\Normales\E2-02.xml" />
-    <EmbeddedResource Include="Config\Menaces\Jaunes\Normales\E2-03.xml" />
-    <EmbeddedResource Include="Config\Menaces\Jaunes\Normales\E2-04.xml" />
-    <EmbeddedResource Include="Config\Menaces\Jaunes\Normales\E2-05.xml" />
-    <EmbeddedResource Include="Config\Menaces\Jaunes\Normales\E2-06.xml" />
-    <EmbeddedResource Include="Config\Menaces\Jaunes\Normales\E2-07.xml" />
-    <EmbeddedResource Include="Config\Menaces\Jaunes\Serieuses\SE2-01.xml" />
-    <EmbeddedResource Include="Config\Menaces\Jaunes\Serieuses\SE2-02.xml" />
-    <EmbeddedResource Include="Config\Menaces\Jaunes\Serieuses\SE2-03.xml" />
-    <EmbeddedResource Include="Config\Menaces\Jaunes\Serieuses\SE2-04.xml" />
-    <EmbeddedResource Include="Config\Menaces\Jaunes\Serieuses\SE2-05.xml" />
-    <EmbeddedResource Include="Config\Menaces\Jaunes\Serieuses\SE2-06.xml" />
-    <EmbeddedResource Include="Config\Menaces\MenaceActions.xml" />
-    <EmbeddedResource Include="Config\Missions\Tutos\Tuto1.xml" />
-    <EmbeddedResource Include="Config\vaisseau.xml">
+    <EmbeddedResource Include="Spring\Menaces\Blanches\Normales\E1-01.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Blanches\Normales\E1-02.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Blanches\Normales\E1-03.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Blanches\Normales\E1-04.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Blanches\Normales\E1-05.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Blanches\Normales\E1-06.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Blanches\Normales\E1-07.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Blanches\Normales\E1-08.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Blanches\Normales\E1-09.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Blanches\Normales\E1-10.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Blanches\Serieuses\SE1-01.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Blanches\Serieuses\SE1-02.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Blanches\Serieuses\SE1-03.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Blanches\Serieuses\SE1-04.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Blanches\Serieuses\SE1-05.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Blanches\Serieuses\SE1-06.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Blanches\Serieuses\SE1-07.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Blanches\Serieuses\SE1-08.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Jaunes\Normales\E2-01.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Jaunes\Normales\E2-02.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Jaunes\Normales\E2-03.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Jaunes\Normales\E2-04.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Jaunes\Normales\E2-05.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Jaunes\Normales\E2-06.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Jaunes\Normales\E2-07.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Jaunes\Serieuses\SE2-01.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Jaunes\Serieuses\SE2-02.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Jaunes\Serieuses\SE2-03.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Jaunes\Serieuses\SE2-04.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Jaunes\Serieuses\SE2-05.xml" />
+    <EmbeddedResource Include="Spring\Menaces\Jaunes\Serieuses\SE2-06.xml" />
+    <EmbeddedResource Include="Spring\Menaces\MenaceActions.xml" />
+    <EmbeddedResource Include="Spring\Missions\Tutos\Tuto1.xml" />
+    <EmbeddedResource Include="Spring\vaisseau.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Config\Menaces\Rouges\Normales\" />
-    <Folder Include="Config\Menaces\Rouges\Serieuses\" />
-    <Folder Include="Config\Missions\Doubles\" />
+    <Folder Include="Spring\Menaces\Rouges\Normales\" />
+    <Folder Include="Spring\Menaces\Rouges\Serieuses\" />
+    <Folder Include="Spring\Missions\Doubles\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -134,10 +135,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Config\JoueurAction.xml" />
-    <EmbeddedResource Include="Config\Rampes\Rampes.xml" />
-    <EmbeddedResource Include="Config\Missions\Simples\Test.xml" />
-    <EmbeddedResource Include="Config\cartes.xml">
+    <Content Include="Spring\JoueurAction.xml" />
+    <EmbeddedResource Include="Spring\Rampes\Rampes.xml" />
+    <EmbeddedResource Include="Spring\Missions\Simples\Test.xml" />
+    <EmbeddedResource Include="Spring\cartes.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Content Include="Exceptions\sql\CREATION_TABLE.sql" />
