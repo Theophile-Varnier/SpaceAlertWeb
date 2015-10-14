@@ -59,6 +59,7 @@
     <Compile Include="Helpers\Enums\DegatsVaisseau.cs" />
     <Compile Include="Helpers\Enums\MenaceStatus.cs" />
     <Compile Include="Helpers\Enums\PresenceRobots.cs" />
+    <Compile Include="Helpers\Enums\SpecialAction.cs" />
     <Compile Include="Helpers\Enums\StatusJoueur.cs" />
     <Compile Include="Helpers\Enums\TypeAction.cs" />
     <Compile Include="Helpers\Enums\NiveauMaitrise.cs" />

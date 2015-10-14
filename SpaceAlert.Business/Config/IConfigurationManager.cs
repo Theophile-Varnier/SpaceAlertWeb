@@ -1,14 +1,16 @@
-﻿using SpaceAlert.Model.Jeu;
+﻿using SpaceAlert.Model.Helpers.Enums;
+using SpaceAlert.Model.Jeu;
+using SpaceAlert.Model.Stats;
 
 namespace SpaceAlert.Business.Config
 {
-    public interface IConfigurationManager
+    public interface IGameInitializer
     {
         /// <summary>
         /// Gets the configuration.
         /// </summary>
         /// <returns></returns>
-        GameConfig GetConfig();
+        GameContext InitGame(TypeMission typeMission, int nbJoueurs, bool blanches, bool jaunes, bool rouges, Personnage captain);
 
         /// <summary>
         /// Initializes the mission.

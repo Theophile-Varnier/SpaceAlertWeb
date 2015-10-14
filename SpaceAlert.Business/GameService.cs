@@ -12,6 +12,7 @@ using System.Data.Entity;
 using System.Linq;
 using SpaceAlert.Model.Site;
 using SpaceAlert.Model.Stats;
+using SpaceAlert.Business.Config;
 
 namespace SpaceAlert.Business
 {
@@ -43,8 +44,8 @@ namespace SpaceAlert.Business
             {
                 throw new UserAlreadyInGameException();
             }
-
-            GameContext res = GameFactory.CreateGame(typeMission, nbJoueurs, blanches, jaunes, rouges, unitOfWork.PersonnageProvider.Get(captain.Key, captain.Value));
+            IGameInitializer configManager = new DefaultConfigurationManager();
+            GameContext res = configManager.InitGame(typeMission, nbJoueurs, blanches, jaunes, rouges, unitOfWork.PersonnageProvider.Get(captain.Key, captain.Value));
 
             res.Game.Joueurs[0].Couleur = GetNextColor(res, res.Game.Joueurs[0].Personnage.Nom);
             //membre.CurrentGame = res.Id;

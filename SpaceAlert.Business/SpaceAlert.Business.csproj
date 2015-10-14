@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="AbstractService.cs" />
     <Compile Include="AccountService.cs" />
+    <Compile Include="Config\DefaultConfigurationManager.cs" />
     <Compile Include="Config\IConfigurationManager.cs" />
     <Compile Include="Exceptions\MembreNonExistantException.cs" />
     <Compile Include="Exceptions\MotDePasseInvalideException.cs" />
