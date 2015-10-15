@@ -1,6 +1,4 @@
-﻿using SpaceAlert.Model.Helpers.Enums;
-using SpaceAlert.Model.Jeu;
-using SpaceAlert.Model.Stats;
+﻿using SpaceAlert.Model.Jeu;
 
 namespace SpaceAlert.Business.Config
 {
@@ -10,7 +8,7 @@ namespace SpaceAlert.Business.Config
         /// Gets the configuration.
         /// </summary>
         /// <returns></returns>
-        GameContext InitGame(TypeMission typeMission, int nbJoueurs, bool blanches, bool jaunes, bool rouges, Personnage captain);
+        GameConfig GetConfig(GameContext game);
 
         /// <summary>
         /// Initializes the mission.

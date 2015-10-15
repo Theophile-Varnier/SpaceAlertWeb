@@ -1,12 +1,5 @@
-﻿using SpaceAlert.Business.Factories;
-using SpaceAlert.Model.Helpers.Enums;
-using SpaceAlert.Model.Jeu;
-using SpaceAlert.Model.Stats;
+﻿using SpaceAlert.Model.Jeu;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpaceAlert.Business.Config
 {
@@ -17,10 +10,9 @@ namespace SpaceAlert.Business.Config
         /// </summary>
         /// <param name="game">The game.</param>
         /// <returns></returns>
-        public GameContext InitGame(TypeMission typeMission, int nbJoueurs, bool blanches, bool jaunes, bool rouges, Personnage captain)
+        public GameConfig GetConfig(GameContext game)
         {
-            GameContext res = GameFactory.CreateGame(typeMission, nbJoueurs, blanches, jaunes, rouges, captain);
-            return res;
+            return SpaceAlertData.GetObject<GameConfig>(game.Game.TypeMission.ToString());
         }
 
         /// <summary>

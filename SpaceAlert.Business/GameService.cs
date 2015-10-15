@@ -45,7 +45,7 @@ namespace SpaceAlert.Business
                 throw new UserAlreadyInGameException();
             }
             IGameInitializer configManager = new DefaultConfigurationManager();
-            GameContext res = configManager.InitGame(typeMission, nbJoueurs, blanches, jaunes, rouges, unitOfWork.PersonnageProvider.Get(captain.Key, captain.Value));
+            GameContext res = GameFactory.CreateGame(typeMission, nbJoueurs, blanches, jaunes, rouges, unitOfWork.PersonnageProvider.Get(captain.Key, captain.Value));
 
             res.Game.Joueurs[0].Couleur = GetNextColor(res, res.Game.Joueurs[0].Personnage.Nom);
             //membre.CurrentGame = res.Id;

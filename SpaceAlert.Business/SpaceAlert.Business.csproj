@@ -136,6 +136,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Spring\Config\Simple.xml" />
     <Content Include="Spring\JoueurAction.xml" />
     <EmbeddedResource Include="Spring\Rampes\Rampes.xml" />
     <EmbeddedResource Include="Spring\Missions\Simples\Test.xml" />
