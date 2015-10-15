@@ -60,5 +60,13 @@ namespace SpaceAlert.Model.Jeu
         /// Indique si des roquettes ont été tirées ce tour-ci
         /// </summary>
         public bool RoquettesNextTurn { get; set; }
+
+        /// <summary>
+        /// Gets or sets the configuration.
+        /// </summary>
+        /// <value>
+        /// The configuration.
+        /// </value>
+        public GameConfig Config { get; set; }
     }
 }

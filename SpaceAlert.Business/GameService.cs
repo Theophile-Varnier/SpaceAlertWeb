@@ -46,7 +46,7 @@ namespace SpaceAlert.Business
             }
             IGameInitializer configManager = new DefaultConfigurationManager();
             GameContext res = GameFactory.CreateGame(typeMission, nbJoueurs, blanches, jaunes, rouges, unitOfWork.PersonnageProvider.Get(captain.Key, captain.Value));
-
+            res.Config = configManager.GetConfig(res);
             res.Game.Joueurs[0].Couleur = GetNextColor(res, res.Game.Joueurs[0].Personnage.Nom);
             //membre.CurrentGame = res.Id;
             InitialiserRampes(res);
