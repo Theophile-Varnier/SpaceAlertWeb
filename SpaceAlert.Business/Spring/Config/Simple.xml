@@ -1,14 +1,14 @@
 ﻿<objects xmlns="http://www.springframework.net">
   <object id="Simple" type="SpaceAlert.Model.Jeu.GameConfig">
-    <property name="AllowedActions" value="A | B | C | Robots" />
-    <property name="AllowedActionsC" value="Robots | Roquettes | Maintenance | Hublot | Intercepteurs" />
-    <property name="AllowedThreats" value="MenaceExterne | MenaceExterneSerieuse | MenaceInterne | MenaceInterSerieuse" />
+    <property name="AllowedActions" value="A, B, C, Robots" />
+    <property name="AllowedActionsC" value="Robots, Roquettes, Maintenance, Hublot, Intercepteurs" />
+    <property name="AllowedThreats" value="MenaceExterne, MenaceExterneSerieuse, MenaceInterne, MenaceInterneSerieuse" />
     <property name="ShipDamages" value="True"/>
     <property name="CardsPerPhase">
       <dictionary key-type="int">
-        <entry key="1" value="4"/>
-        <entry key="2" value="4"/>
-        <entry key="3" value="4"/>
+        <entry key="1" value="5"/>
+        <entry key="2" value="5"/>
+        <entry key="3" value="5"/>
       </dictionary>
     </property>
   </object>

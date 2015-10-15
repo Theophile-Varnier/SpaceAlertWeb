@@ -122,7 +122,8 @@ namespace SpaceAlert.Business
             switch (actionToResolve.GenreAction)
             {
                 case GenreAction.Action:
-                    ResolveAction((TypeAction)actionToResolve.Value, joueur);
+                    TypeAction action = (TypeAction)actionToResolve.Value;
+                    ResolveAction(action, joueur);
                     break;
                 case GenreAction.Mouvement:
                     if (joueur.Status == StatusJoueur.EnJeu)
@@ -143,7 +144,14 @@ namespace SpaceAlert.Business
         /// <param name="source">Le joueur qui effectue l'action</param>
         private void ResolveAction(TypeAction action, Joueur source)
         {
+            // On vérifie que l'action est autorisée dans la partie en cours
+            if (!game.Config.AllowedActions.HasFlag(action))
+            {
+                return;
+            }
+
             Salle currentSalle = game.Game.Vaisseau.Salle(source.CurrentSalle);
+
             switch (action)
             {
                 case TypeAction.A:
@@ -178,6 +186,12 @@ namespace SpaceAlert.Business
         private void ResolveCAction(Joueur source)
         {
             Salle playerSalle = game.Game.Vaisseau.Salle(source.CurrentSalle);
+
+            // On vérifie que l'action est autorisée dans la partie actuelle
+            if (!game.Config.AllowedActionsC.HasFlag(playerSalle.ActionC))
+            {
+                return;
+            }
             switch (playerSalle.ActionC)
             {
                 case ActionC.Robots:

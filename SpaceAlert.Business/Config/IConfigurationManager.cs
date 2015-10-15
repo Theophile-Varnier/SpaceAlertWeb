@@ -2,7 +2,7 @@
 
 namespace SpaceAlert.Business.Config
 {
-    public interface IGameInitializer
+    public interface IConfigurationManager
     {
         /// <summary>
         /// Gets the configuration.
@@ -14,6 +14,6 @@ namespace SpaceAlert.Business.Config
         /// Initializes the mission.
         /// </summary>
         /// <returns></returns>
-        Mission InitMission();
+        void InitMission(GameContext game);
     }
 }

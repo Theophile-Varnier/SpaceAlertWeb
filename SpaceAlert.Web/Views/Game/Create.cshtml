@@ -25,6 +25,10 @@
                         @Html.ValidationMessageFor(model => model.Game.TypeMission)
                     </div>
                     <div class="form-group">
+                        @Html.LabelFor(model => model.TutoName, "Tutoriel")
+                        @Html.DropDownListFor(model => model.TutoName, new SelectList(Model.AvailableTutorials))
+                    </div>
+                    <div class="form-group">
                         @Html.LabelFor(model => model.Game.NbJoueurs, "Nombre de joueurs")
                         @Html.DropDownListFor(model => model.Game.NbJoueurs, new SelectList(new List<int> { 5, 4, 3, 2, 1 }), new { @class = "form-control", required = "" })
                         @Html.ValidationMessageFor(model => model.Game.NbJoueurs)

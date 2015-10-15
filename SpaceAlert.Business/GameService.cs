@@ -44,7 +44,7 @@ namespace SpaceAlert.Business
             {
                 throw new UserAlreadyInGameException();
             }
-            IGameInitializer configManager = new DefaultConfigurationManager();
+            IConfigurationManager configManager = getManager();
             GameContext res = GameFactory.CreateGame(typeMission, nbJoueurs, blanches, jaunes, rouges, unitOfWork.PersonnageProvider.Get(captain.Key, captain.Value));
             res.Config = configManager.GetConfig(res);
             res.Game.Joueurs[0].Couleur = GetNextColor(res, res.Game.Joueurs[0].Personnage.Nom);
@@ -57,25 +57,9 @@ namespace SpaceAlert.Business
             return res.Id;
         }
 
-        /// <summary>
-        /// Initializes the mission.
-        /// </summary>
-        /// <param name="game">The game.</param>
-        private void InitialiserMission(GameContext game)
+        private IConfigurationManager getManager()
         {
-            Dictionary<string, Mission> allMissions = SpaceAlertData.GetAll<Mission>();
-
-            KeyValuePair<string, Mission> val = allMissions.Where(m => m.Value.TypeMission == game.Game.TypeMission).GetNextRandom();
-            game.Game.MissionId = val.Key;
-            game.Game.Mission = val.Value;
-            Dictionary<string, Menace> availableMenaces = SpaceAlertData.GetAll<Menace>().Where(kvp => game.Game.Difficulte.HasFlag(kvp.Value.Couleur)).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
-            foreach (EvenementMenace evenement in game.Game.Mission.Evenements.OfType<EvenementMenace>())
-            {
-                KeyValuePair<string, Menace> selectedMenace = availableMenaces.GetNextRandom(kvp => kvp.Value.Type == evenement.Type);
-                availableMenaces.Remove(selectedMenace.Key);
-                evenement.MenaceName = selectedMenace.Key;
-                game.Game.MenacesExternes.Add(MenaceFactory.CreateMenace(game, evenement));
-            }
+            return new DefaultConfigurationManager();
         }
 
         /// <summary>
@@ -95,13 +79,23 @@ namespace SpaceAlert.Business
         }
 
         /// <summary>
+        /// Gets the available tutorials.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<string> GetAvailableTutorials()
+        {
+            return SpaceAlertData.GetAll<Mission>().Where(m => m.Value.TypeMission == TypeMission.Tutoriel).Select(m => m.Key);
+        }
+
+        /// <summary>
         /// Démarrer une partie
         /// </summary>
         /// <param name="game"></param>
         /// <returns>L'id de la partie qui a été commencée</returns>
         public GameContext DemarrerGame(GameContext game)
         {
-            InitialiserMission(game);
+            IConfigurationManager configManager = getManager();
+            configManager.InitMission(game);
             game.Statut = StatutPartie.Jeu;
             game.TourEnCours = 1;
 

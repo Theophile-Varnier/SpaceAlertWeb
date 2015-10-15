@@ -40,6 +40,7 @@ namespace SpaceAlert.Web.Controllers
         {
             GameCreationViewModel viewModel = new GameCreationViewModel();
             Membre currentMember = serviceProvider.AccountService.RecupererMembre(User.Identity.Name);
+            viewModel.AvailableTutorials = serviceProvider.GameService.GetAvailableTutorials();
             viewModel.Player = new PlayerViewModel
             {
                 AvailableCharacters = currentMember.Personnages.Select(p => p.Nom)
