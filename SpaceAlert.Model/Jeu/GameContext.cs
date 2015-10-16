@@ -1,6 +1,4 @@
 ﻿using SpaceAlert.Model.Helpers.Enums;
-using SpaceAlert.Model.Menaces;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -27,6 +25,14 @@ namespace SpaceAlert.Model.Jeu
         /// Le tour actuel
         /// </summary>
         public int TourEnCours { get; set; }
+
+        /// <summary>
+        /// Gets or sets the current phase.
+        /// </summary>
+        /// <value>
+        /// The current phase.
+        /// </value>
+        public int CurrentPhase { get; set; }
 
         /// <summary>
         /// Gets or sets the deck.

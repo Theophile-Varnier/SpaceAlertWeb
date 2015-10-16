@@ -20,6 +20,14 @@
         });
     });
 
+    $("#Game_TypeMission").change(function () {
+        if ($("#Game_TypeMission").val() == "Tutoriel") {
+            $("#TutoName").removeClass("hidden");
+        } else {
+            $("#TutoName").addClass("hidden");
+        }
+    });
+
     $("#addCharacter").on("click", function (e) {
         $("#wait").removeClass("hidden");
         if ($("#newChar").val()) {

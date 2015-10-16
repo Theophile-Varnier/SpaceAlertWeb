@@ -1,18 +1,17 @@
-﻿using SpaceAlert.Business.Exceptions;
+﻿using SpaceAlert.Business.Config;
+using SpaceAlert.Business.Exceptions;
 using SpaceAlert.Business.Factories;
 using SpaceAlert.DataAccess;
 using SpaceAlert.Model.Helpers;
 using SpaceAlert.Model.Helpers.Enums;
 using SpaceAlert.Model.Jeu;
-using SpaceAlert.Model.Jeu.Evenements;
 using SpaceAlert.Model.Menaces;
+using SpaceAlert.Model.Site;
+using SpaceAlert.Model.Stats;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using SpaceAlert.Model.Site;
-using SpaceAlert.Model.Stats;
-using SpaceAlert.Business.Config;
 
 namespace SpaceAlert.Business
 {
@@ -98,6 +97,7 @@ namespace SpaceAlert.Business
             configManager.InitMission(game);
             game.Statut = StatutPartie.Jeu;
             game.TourEnCours = 1;
+            game.CurrentPhase = 1;
 
             foreach (Joueur joueur in game.Game.Joueurs)
             {
