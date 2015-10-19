@@ -22,9 +22,9 @@
 
     $("#Game_TypeMission").change(function () {
         if ($("#Game_TypeMission").val() == "Tutoriel") {
-            $("#TutoName").removeClass("hidden");
+            $("#tutoForm").removeClass("hidden");
         } else {
-            $("#TutoName").addClass("hidden");
+            $("#tutoForm").addClass("hidden");
         }
     });
 
